@@ -9,7 +9,7 @@
 <body>
 	
 <?php
-	echo Witamy
+	echo "Witamy"
 ?>
 
 </body>
