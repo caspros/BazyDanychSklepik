@@ -9,9 +9,10 @@
 <body>
 	<h1>To jest nasza strona główna</h1>
 	<br/><br/>
-	<h2>Testowa nazwa xD</h2>
+	<h2>TTestowa nazwa xD</h2>
 	<br/><br/>
 	<h3>Kolejna testowa nazwa xDD</h3>
+	<h3>Test pingwin</h3>
 
 <?php
 	echo "Witamy<br/>";
