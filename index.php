@@ -10,6 +10,7 @@
 	
 <?php
 	echo "Witamy";
+	echo "xD";
 	echo "Może teraz zadziała";
 ?>
 
