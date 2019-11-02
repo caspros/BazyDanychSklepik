@@ -7,19 +7,36 @@
 </head>
 
 <body>
-	<h1>To jest nasza strona główna</h1>
-	<br/><br/>
-	<h2>Testowa nazwa xD</h2>
-	<br/><br/>
-	<h3>Kolejna testowa nazwa xDD</h3>
-
+	<header>
+		<h2>To jest nasza strona główna</h2>
+		<br/>
+		<img src="images/logo.png" alt="logo">
+		<br/>
+		<ul id = "menu">
+			<li><a href="#">Promocje</a></li>
+			<li><a href="#">Oferty dnia</a></li>
+			<li><a href="#">Koszyk</a></li>
+			<li><a href="#">Konto</a>
+				<ul>
+					<li><a href="#">Ustawienia</a></li>
+					<li><a href="#">Znajomi</a></li>
+					<li><a href="#">Wyloguj</a></li>
+				</ul>
+			
+			</li>
+		</ul>
+	</header>
+	<section>
 <?php
-	echo "Witamy<br/>";
-	echo "To jest test po zmianie";
+	echo "<br/>Witamy<br/>";
+	echo "To jest nasza główna strona po zmianie";
 	echo "<br/>Tutaj dodalem cos w xamppie";
-	echo "robimy cos w main-site";
+	echo "<br/>Trobimy cos w main-site";
 ?>
+	</section>
+	<footer>
+		<p>Kliknij aby zobaczyć <a href="index.php">Stronę główną</a></p>
+	</footer>
 
-	Kliknij aby zobaczyć profil <a href="profile.php">Nagie fotki</a>
 </body>
 </html>
