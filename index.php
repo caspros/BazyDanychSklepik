@@ -16,7 +16,10 @@
 <?php
 	echo "Witamy<br/>";
 	echo "To jest test po zmianie";
+	echo "<br/>Tutaj dodalem cos w xamppie";
+	echo "robimy cos w main-site";
 ?>
 
+	Kliknij aby zobaczyć profil <a href="profile.php">Nagie fotki</a>
 </body>
 </html>
