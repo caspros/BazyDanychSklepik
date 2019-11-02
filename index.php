@@ -16,6 +16,8 @@
 	echo "Może teraz zadziała";
 
 	echo "To jest test"
+
+	echo "Teraz robimy strone glowna"
 ?>
 
 </body>
