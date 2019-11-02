@@ -11,6 +11,7 @@
 <?php
 	echo "Witamy";
 	echo "xD";
+	echo "xD";
 	echo "Może teraz zadziała";
 ?>
 
