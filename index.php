@@ -16,8 +16,6 @@
 <?php
 	echo "Witamy<br/>";
 	echo "To jest test po zmianie";
-	echo "<br/>Tutaj dodalem cos w xamppie";
-	echo "robimy cos w main-site";
 ?>
 
 </body>
