@@ -14,6 +14,8 @@
 	echo "xD";
 
 	echo "Może teraz zadziała";
+
+	echo "To jest test"
 ?>
 
 </body>
