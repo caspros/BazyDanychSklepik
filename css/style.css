@@ -5,6 +5,7 @@
      box-sizing: border-box; /* IE */
 }
 
+/* SEKCJA CSS DO <div> -----------------*/
 #container {
 
 }
@@ -26,12 +27,37 @@
 	text-align: center;
 	background-color: grey;
 }
+ 
+/* ELEMENTY STRONY -----------------*/
+h1 {
+	text-align: center;
+	height: 20 px;
+}
+
+h2 {
+	text-align: center;
+	height: 15 px;
+}
+
+p {
+	height: 10 px;
+}
+
+a {
+	color: red;
+	height: 8 px;
+}
+
+img {
+	background-color: grey;
+}
 
 ul {
 	margin: 30px 0 30px 0;
 	padding: 0;
 }
 
+/* MENU -----------------*/
 #menu li {
 	display: inline;
 	list-style: none;
@@ -76,28 +102,4 @@ ul {
 #menu a#current {
 	margin: 5px 0 0 0;
 	background: rgba(85,137,48,1);
-}
-
-h1 {
-	text-align: center;
-	height: 20 px;
-
-}
-
-h2 {
-	text-align: center;
-	height: 15 px;
-}
-
-p {
-	height: 10 px;
-}
-
-a {
-	color: red;
-	height: 8 px;
-}
-
-img {
-	background-color: grey;
 }
