@@ -20,5 +20,6 @@
 	echo "robimy cos w main-site";
 ?>
 
+	Kliknij aby zobaczyć profil <a href="profile.php">Nagie fotki</a>
 </body>
 </html>
