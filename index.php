@@ -9,15 +9,9 @@
 <body>
 	
 <?php
-	echo "Witamy";
-
-	echo "xD";
-
-	echo "Może teraz zadziała";
-
-	echo "To jest test"
-
-	echo "Teraz robimy strone glowna"
+	echo "Witamy<br/>";
+	echo "To jest test po zmianie";
+	echo "<br/>Tutaj dodalem cos w xamppie"
 ?>
 
 </body>
