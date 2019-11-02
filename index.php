@@ -9,6 +9,7 @@
 <body>
 	<h1>To jest nasza strona główna</h1>
 	<br/><br/>
+	<h2>Testowa nazwa xD</h2>
 
 <?php
 	echo "Witamy<br/>";
