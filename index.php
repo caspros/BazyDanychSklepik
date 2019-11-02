@@ -10,7 +10,7 @@
 	<header>
 		<h2>To jest nasza strona główna</h2>
 		<br/>
-		<img src="logo.png" alt="logo">
+		<img src="images/logo.png" alt="logo">
 		<br/>
 		<ul id = "menu">
 			<li><a href="#">Promocje</a></li>
