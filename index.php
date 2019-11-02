@@ -9,8 +9,8 @@
 <body>
 	
 <?php
-	echo "Witamy"
-	echo "To jest test po zmianie"
+	echo "Witamy";
+	echo "To jest test po zmianie";
 ?>
 
 </body>
