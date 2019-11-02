@@ -10,6 +10,7 @@
 	
 <?php
 	echo "Witamy"
+	echo "To jest test po zmianie"
 ?>
 
 </body>
