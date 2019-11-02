@@ -9,8 +9,13 @@
 <body>
 	
 <?php
-	echo "Witamy"
-	echo "To jest test po zmianie"
+<<<<<<< HEAD
+	echo "Witamy<br/>";
+	echo "To jest test po zmianie";
+=======
+	echo "Witamy";
+	echo "Może teraz zadziała";
+>>>>>>> ee55ca4f9d1cb24f280afe07b23551bd48effe53
 ?>
 
 </body>
