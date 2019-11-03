@@ -7,7 +7,17 @@
 
 /* SEKCJA CSS DO <div> -----------------*/
 #container {
+	width: 100%;
 
+}
+
+#nav {
+	width: 100%;
+	padding: 10px 0;
+	background-color: #FFFFFF;
+	text-align: center;
+	border-top: 1px solid #d2d4d6;
+	border-bottom: 1px solid #d2d4d6;
 }
 
 #header {
@@ -15,7 +25,11 @@
 }
 
 #main {
-	text-align: center;
+	padding-top: 10px;
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: justify;
 	font-style: italic;
 }
 
@@ -25,10 +39,20 @@
 
 #footer {
 	text-align: center;
-	background-color: grey;
+	background-color: #3A4E58;
+	padding: 30px;
 }
  
+
 /* ELEMENTY STRONY -----------------*/
+body {
+	background-color: #ECEFF1;
+	color: #000000;
+	font-family: 'Noto Sans', sans-serif;
+	font-size: 20px;
+	margin: 0 !important;
+}
+
 h1 {
 	text-align: center;
 	height: 20 px;
@@ -48,13 +72,31 @@ a {
 	height: 8 px;
 }
 
-img {
-	background-color: grey;
-}
-
 ul {
 	margin: 30px 0 30px 0;
 	padding: 0;
+}
+
+ol {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	font-size: 18px;
+	height: 35px;
+	line-height: 200%;
+	display: inline-block!important;
+}
+
+ol a{
+	color: #000000;
+	text-decoration: none;
+	display: block;
+}
+
+ol > li{
+	float: left;
+	width: 150px;
+	height: 40px;
 }
 
 /* MENU -----------------*/
@@ -102,4 +144,58 @@ ul {
 #menu a#current {
 	margin: 5px 0 0 0;
 	background: rgba(85,137,48,1);
+}
+
+/* STICKY MENU */
+.sticky {
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 100;
+}
+
+.nav_img {
+	position: relative;
+	right: 200px;
+	padding-top: 6px;
+	width: 80%;
+	height: 70%;
+	background-color: white;
+}
+
+
+.search_button {
+	margin-left: 10px;
+	float: left;
+	background-color: #FF5A00;
+	color: white;
+	border: none;
+	padding: 5px;
+	text-align: center;
+  	text-decoration: none;
+  	font-size: 16px;
+}
+
+.search_button:hover{
+	background-color: #ff8800;
+}
+
+.search_input{
+	width: 320px;
+}
+
+.form_inline{
+	position: absolute;
+  	align-items: center;
+  	display: flex;
+  }
+
+.koszyk{
+	margin-left: 290px;
+}
+
+.profil{
+	position: relative;
+	left: 200px;
 }
