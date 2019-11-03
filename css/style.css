@@ -1,65 +1,62 @@
-header{
+/* rendering well on different browsers */
+* {
+     -moz-box-sizing: border-box; /* Firexfox */
+     -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
+     box-sizing: border-box; /* IE */
+}
+
+/* SEKCJA CSS DO <div> -----------------*/
+#container {
+	width: 100%;
+
+}
+
+#nav {
+	width: 100%;
+	padding: 10px 0;
+	background-color: #FFFFFF;
+	text-align: center;
+	border-top: 1px solid #d2d4d6;
+	border-bottom: 1px solid #d2d4d6;
+}
+
+#header {
 	text-align: center;
 }
 
-ul {
-margin: 30px 0 30px 0;
-padding: 0;
+#main {
+	padding-top: 10px;
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: justify;
+	font-style: italic;
 }
 
-#menu li {
-display: inline;
-list-style: none;
+#sidebar {
+
 }
 
-#menu li a {
-margin: 0 5px 0 0;
-padding: 5px 20px 5px 20px;
-text-align: center;
-white-space: nowrap;
-line-height: 50px;
-font-size: 20px;
-color: rgba(66,48,1,1);
-border-radius: 5px;
-border: 1px solid rgba(105,181,50,1);
-background: rgba(122,199,67,1);
-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3), 0 2px 3px rgba(0,0,0,0.70);
+#footer {
+	text-align: center;
+	background-color: #3A4E58;
+	padding: 30px;
 }
+ 
 
-#meny li li a {
-	margin: 5px 0 0 10px;
-	padding: 5px 10px 5px 0;
-	border: 1px solid rgba(0,0,0,1);
-	background: rgba(138,198,94,1);
+/* ELEMENTY STRONY -----------------*/
+body {
+	background-color: #ECEFF1;
+	color: #000000;
+	font-family: 'Noto Sans', sans-serif;
+	font-size: 20px;
+	margin: 0 !important;
 }
-
-#menu li a:hover {
-cursor: pointer;
-background: rgba(178,232,139,1);
-color: rgba(0,0,0,1);
-}
-
-#menu a:link, #menu a:visited {
-color: rgba(255,255,255,1);
-text-decoration: none;
-}
-
-#menu a:active {
-color: rgba(250,191,12,1);
-}
-
-#menu a#current {
-	margin: 5px 0 0 0;
-	background: rgba(85,137,48,1);
-}
-
 
 h1 {
 	text-align: center;
 	height: 20 px;
-
 }
-
 
 h2 {
 	text-align: center;
@@ -75,16 +72,130 @@ a {
 	height: 8 px;
 }
 
-section {
-	text-align: center;
-	font-style: italic;
-	
+ul {
+	margin: 30px 0 30px 0;
+	padding: 0;
 }
 
-footer {
-	text-align: center;
-	background-color: grey;
+ol {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	font-size: 18px;
+	height: 35px;
+	line-height: 200%;
+	display: inline-block!important;
 }
-img {
-	background-color: grey;
+
+ol a{
+	color: #000000;
+	text-decoration: none;
+	display: block;
+}
+
+ol > li{
+	float: left;
+	width: 150px;
+	height: 40px;
+}
+
+/* MENU -----------------*/
+#menu li {
+	display: inline;
+	list-style: none;
+}
+
+#menu li a {
+	margin: 0 5px 0 0;
+	padding: 5px 20px 5px 20px;
+	text-align: center;
+	white-space: nowrap;
+	line-height: 50px;
+	font-size: 20px;
+	color: rgba(66,48,1,1);
+	border-radius: 5px;
+	border: 1px solid rgba(105,181,50,1);
+	background: rgba(122,199,67,1);
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3), 0 2px 3px rgba(0,0,0,0.70);
+}
+
+#meny li li a {
+	margin: 5px 0 0 10px;
+	padding: 5px 10px 5px 0;
+	border: 1px solid rgba(0,0,0,1);
+	background: rgba(138,198,94,1);
+}
+
+#menu li a:hover {
+	cursor: pointer;
+	background: rgba(178,232,139,1);
+	color: rgba(0,0,0,1);
+}
+
+#menu a:link, #menu a:visited {
+	color: rgba(255,255,255,1);
+	text-decoration: none;
+}
+
+#menu a:active {
+	color: rgba(250,191,12,1);
+}
+
+#menu a#current {
+	margin: 5px 0 0 0;
+	background: rgba(85,137,48,1);
+}
+
+/* STICKY MENU */
+.sticky {
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 100;
+}
+
+.nav_img {
+	position: relative;
+	right: 200px;
+	padding-top: 6px;
+	width: 80%;
+	height: 70%;
+	background-color: white;
+}
+
+
+.search_button {
+	margin-left: 10px;
+	float: left;
+	background-color: #FF5A00;
+	color: white;
+	border: none;
+	padding: 5px;
+	text-align: center;
+  	text-decoration: none;
+  	font-size: 16px;
+}
+
+.search_button:hover{
+	background-color: #ff8800;
+}
+
+.search_input{
+	width: 320px;
+}
+
+.form_inline{
+	position: absolute;
+  	align-items: center;
+  	display: flex;
+  }
+
+.koszyk{
+	margin-left: 290px;
+}
+
+.profil{
+	position: relative;
+	left: 200px;
 }
