@@ -15,6 +15,7 @@
 	<div id="container"> 
 	<!-- GŁÓWNY CONTAINER -->
 
+		<!-- STICKY MENU -->
 		<div id="nav">
 
 			<ol>
@@ -24,7 +25,18 @@
 				<li><a href="#"><input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt..."></a></li>
 				<li><a href="#"><input style="display: inline;" type="submit" name="search_button" class="search_button" value="SZUKAJ"></a></li></form>
 				<li><a href="#"><span class="koszyk"><i class="fas fa-shopping-cart"></i></span></a></li>
-				<li><a href="#"><span class="profil">Profil BENO</span></a></li>
+
+				<!--- DROPDOWN MENU PROFILE -->
+				<div class="dropdown">
+					<span id="myBtn" class="dropbtn">Profil BENO <div id="p1"><i class="fas fa-angle-down"></i></div></span>
+	  				<div id="myDropdown" class="dropdown-content">
+		    			<a href="#">Moje zamówienia</a>
+						<a href="#">Oceń produkt</a>
+						<a href="#">Ustawienia</a>
+						<a href="#">Wyloguj</a>
+	  				</div>
+				</div>
+
 			</ol>
 
 		</div>
@@ -73,9 +85,11 @@
 			
 	</div>
 
+	
+
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-	<!-- STICKY MENU -->
+	<!-- STICKY MENU JS-->
 	<script>
  
 	    $(document).ready(function() {
@@ -98,6 +112,26 @@
 	    });
 	    });
      
+	</script>
+
+	<!-- DROPDOWN MENU PROFILE JS-->
+	<script>
+		document.getElementById("myBtn").onclick = function() {funkcja()};
+
+		function funkcja() {
+  		document.getElementById("myDropdown").classList.toggle("show");
+		}
+
+		$( document ).ready(function() {
+		 $('.dropbtn').click(function(){ 
+		 	$(this).parent().find('.dropdown').toggleClass('active'); 
+		 	if($(this).find('i.fas').hasClass('fa-angle-down')) { 
+		 		$(this).find('i.fas').removeClass('fa-angle-down').addClass('fa-angle-up');
+		 		} else if($(this).find('i.fas').hasClass('fa-angle-up')) { 
+		 			$(this).find('i.fas').removeClass('fa-angle-up').addClass('fa-angle-down'); 
+		 		} 
+		 	}) 
+			})();
 	</script>
 
 </body>
