@@ -42,17 +42,13 @@
 		</div>
 
 		<!-- NAGŁÓWEK -->
-		<div id="header">
-		
-			<br/>
-			<ul id = "menu">
-				<li><a href="#">Promocje</a></li>
-				<li><a href="#">Oferty dnia</a></li>
-				<li><a href="#">Forum</a></li>
-				<li><a href="#">Znajomi</a></li>
-			</ul>
-				
-
+		<div id="menu">
+			<ul>
+				  <li><a href="#">Promocje</a></li>
+				  <li><a href="#">Oferty dnia</a></li>
+				  <li><a href="#">Forum</a></li>
+				  <li><a href="#">Znajomi</a></li>
+			</ul> 	
 		</div>
 
 		<!-- MIĘSO ARMATNIE -->
