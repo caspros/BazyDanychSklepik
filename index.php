@@ -43,11 +43,20 @@
 
 		<!-- NAGŁÓWEK -->
 		<div id="menu">
-			<ul>
+			<ul>	
+					<div class="dropdown_kat">
+				  <li><div id="myBtn_kat" class="dropbtn_kat">Kategorie</div></li>
+				  		<div id="myDropdown_kat" class="dropdown-content_kat">
+			    			<a href="#">Koszulki</a>
+							<a href="#">Spodnie</a>
+							<a href="#">Kubki</a>
+							<a href="#">Długopisy</a>
+	  					</div>
+	  				</div>
+	  				
 				  <li><a href="#">Promocje</a></li>
 				  <li><a href="#">Oferty dnia</a></li>
-				  <li><a href="#">Forum</a></li>
-				  <li><a href="#">Znajomi</a></li>
+				  <li><a href="#">FAQ</a></li>
 			</ul> 	
 		</div>
 
@@ -124,6 +133,14 @@
 		 		} 
 		 	}) 
 			})();
+	</script>
+
+	<script>
+		document.getElementById("myBtn_kat").onclick = function() {funkcja1()};
+
+		function funkcja1() {
+  		document.getElementById("myDropdown_kat").classList.toggle("show1");
+		}
 	</script>
 
 </body>
