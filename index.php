@@ -12,9 +12,9 @@
 </head>
 
 <body>
-	<div id="container"> 
 	<!-- GŁÓWNY CONTAINER -->
-
+	<div id="container"> 
+	
 		<!-- STICKY MENU -->
 		<div id="nav">
 
@@ -41,27 +41,27 @@
 
 		</div>
 
-
-		<div id="header">
 		<!-- NAGŁÓWEK -->
-			<br/>
-			<ul id = "menu">
-				<li><a href="#">Promocje</a></li>
-				<li><a href="#">Oferty dnia</a></li>
-				<li><a href="#">Koszyk</a></li>
-				<li><a href="#">Konto</a>
-					<ul>
-						<li><a href="#">Ustawienia</a></li>
-						<li><a href="#">Znajomi</a></li>
-						<li><a href="#">Wyloguj</a></li>
-					</ul>
-				
-				</li>
-			</ul>
+		<div id="menu">
+			<ul>	
+					<div class="dropdown_kat">
+				  <li><div id="myBtn_kat" class="dropbtn_kat">Kategorie</div></li>
+				  		<div id="myDropdown_kat" class="dropdown-content_kat">
+			    			<a href="#">Koszulki</a>
+							<a href="#">Spodnie</a>
+							<a href="#">Kubki</a>
+							<a href="#">Długopisy</a>
+	  					</div>
+	  				</div>
+	  				
+				  <li><a href="#">Promocje</a></li>
+				  <li><a href="#">Oferty dnia</a></li>
+				  <li><a href="#">FAQ</a></li>
+			</ul> 	
 		</div>
 
-		<div id="main">
 		<!-- MIĘSO ARMATNIE -->
+		<div id="main">
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur risus neque, porttitor eu malesuada a, pulvinar quis quam. Cras sed mi sed tellus finibus posuere. Etiam purus urna, pharetra nec malesuada eu, vehicula ut sem. Donec bibendum ultrices erat quis malesuada. Sed sit amet lectus ut odio tempus dignissim id sit amet quam. Nulla elit erat, imperdiet nec tempus eu, consectetur in quam. Pellentesque in posuere arcu, et imperdiet lorem. Vestibulum faucibus mollis lacus, et maximus arcu fermentum nec. In hac habitasse platea dictumst. Maecenas ut mi tellus. Fusce euismod mollis risus, blandit blandit ex.</p>
 
 		<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
@@ -78,8 +78,9 @@
 
 		</div>
 
-		<div id="footer">
 		<!-- STOPKA -->
+		<div id="footer">
+		
 			Korzystanie z serwisu oznacza akceptację <a href="#">regulaminu</a>
 		</div>
 			
@@ -132,6 +133,14 @@
 		 		} 
 		 	}) 
 			})();
+	</script>
+
+	<script>
+		document.getElementById("myBtn_kat").onclick = function() {funkcja1()};
+
+		function funkcja1() {
+  		document.getElementById("myDropdown_kat").classList.toggle("show1");
+		}
 	</script>
 
 </body>
