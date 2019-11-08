@@ -2,7 +2,7 @@
 
 	session_start();
 	
-	if ((!isset($_POST['login'])) || (!isset($_POST['haslo'])))
+	if ((!isset($_POST['email'])) || (!isset($_POST['haslo'])))
 	{
 		header('Location: index.php');
 		exit();
@@ -18,27 +18,22 @@
 	}
 	else
 	{
-		$login = $_POST['login'];
+		$email = $_POST['email'];
 		$haslo = $_POST['haslo'];
-		
-		$login = htmlentities($login, ENT_QUOTES, "UTF-8");
-	
-		if ($rezultat = @$polaczenie->query(
-		sprintf("SELECT * FROM uzytkownicy WHERE user='%s'",
-		mysqli_real_escape_string($polaczenie,$login))))
+
+		$sql = "SELECT * FROM klienci WHERE email = '$email'";
+
+		if ($rezultat = @$polaczenie->query($sql))
 		{
 			$ilu_userow = $rezultat->num_rows;
 			if($ilu_userow>0)
 			{
 				$wiersz = $rezultat->fetch_assoc();
 				
-				if (password_verify($haslo, $wiersz['pass']))
+				if (md5($haslo) == $wiersz['haslo'])
 				{
 					$_SESSION['zalogowany'] = true;
-					$_SESSION['id'] = $wiersz['id'];
-					$_SESSION['user'] = $wiersz['user'];
-					
-					
+					$_SESSION['imie'] = $wiersz['Imie'];
 					unset($_SESSION['blad']);
 					$rezultat->free_result();
 					header('Location: index.php');

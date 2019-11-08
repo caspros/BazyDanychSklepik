@@ -7,23 +7,37 @@ if (isset($_POST['email']))
 	//udała sie walidacja
 	$wszystko_OK=true;
 	
-	//poprawnosc nicka
-	$nick = $_POST['nick'];
-	
-	//dlugosc nicku
-	if((strlen($nick)<5) || (strlen($nick)>20))
+	//poprawnosc imienia
+	$imie = $_POST['imie'];
+	$sprawdz = '/^[A-ZŁŚ]{1}+[a-ząęółśżźćń]+$/';
+	if(!(preg_match($sprawdz, $imie)))
 	{
 		$wszystko_OK=false;
-		$_SESSION['e_nick']="Nick musi miec dlugosc od 5 do 20 znaków";
+		$_SESSION['e_imie']="Podaj poprawne imie";
 	}
-	
-	if (ctype_alnum($nick)==false)
+
+	if(empty($_POST['imie']))
 	{
 		$wszystko_OK=false;
-		$_SESSION['e_nick']="Nick musi składać sie tylko z liter i cyfr";
+		$_SESSION['e_imie']="Musisz wypełnić wszystkie pola";
+	}
+
+	//poprawnosc nazwiska
+	$nazwisko = $_POST['nazwisko'];
+	if(!(preg_match($sprawdz, $nazwisko)))
+	{
+		$wszystko_OK=false;
+		$_SESSION['e_nazwisko']="Podaj poprawne nazwisko";
+	}
+
+	if(empty($_POST['nazwisko']))
+	{
+		$wszystko_OK=false;
+		$_SESSION['e_nazwisko']="Musisz wypełnić wszystkie pola";
 	}
 	
-	//poprawnosc nicka
+
+	//poprawnosc emailu
 	$email = $_POST['email'];
 	$emailB = filter_var($email, FILTER_SANITIZE_EMAIL);
 	
@@ -75,7 +89,7 @@ if (isset($_POST['email']))
 		else
 		{
 			//czy email juz istnieje
-			$rezultat = $polaczenie->query("SELECT id FROM uzytkownicy WHERE email='$email'");
+			$rezultat = $polaczenie->query("SELECT id_klienci FROM klienci WHERE 'email'='$email'");
 			
 			if(!$rezultat) throw new Exception($polaczenie->error);
 			
@@ -86,24 +100,14 @@ if (isset($_POST['email']))
 				$_SESSION['e_email']="Ten adres email jest już używany";
 			}
 			
-			//czy nick juz istnieje
-			$rezultat = $polaczenie->query("SELECT id FROM uzytkownicy WHERE user='$nick'");
 			
-			if(!$rezultat) throw new Exception($polaczenie->error);
-			
-			$ile_takich_nikow = $rezultat->num_rows;
-			if($ile_takich_nikow>0)
-			{
-				$wszystko_OK=false;
-				$_SESSION['e_nick']="Ten nick jest już używany";
-			}
 		if($wszystko_OK==true)
 		{
 			//wszystko dobrze user dodany
-			if($polaczenie->query("INSERT INTO uzytkownicy VALUES (NULL, '$nick', '$haslo_hash', '$email', 100, 100, 100, 14)"))
+			if($polaczenie->query("INSERT INTO klienci(Imie, Nazwisko, haslo, email) VALUES ('$imie', '$nazwisko' ,'$haslo_hash','$email')"))
 			{
 				$_SESSION['udanarejestracja']=true;
-				header('Location: witam.php');
+				header('Location: witamy.php');
 			}
 			else
 			{
@@ -125,12 +129,16 @@ if (isset($_POST['email']))
 }
 
 ?>
+
 <!DOCTYPE html>
 <head lang="pl">
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<title> Zakładanie konta </title>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
-	<link rel="stylesheet" href="style.css" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<style>
 		.error
 		{
@@ -141,19 +149,9 @@ if (isset($_POST['email']))
 	</style>
 </head>
 <body>
-<div id=container">
+<div id="container">
 	<form method="post">
-	
-	Nick: <br /> <input type="text" name="nick" /><br />
-	
-	<?php
-		if (isset($_SESSION['e_nick']))
-		{
-			echo '<div class="error">'.$_SESSION['e_nick'].'</div>';
-			unset($_SESSION['e_nick']);
-		}
-	?>
-	
+
 	E-mail: <br /> <input type="text" name="email" /><br />
 	
 	<?php
@@ -175,11 +173,30 @@ if (isset($_POST['email']))
 	?>
 	
 	Powtórz hasło: <br /> <input type="password" name="haslo2" /><br />
+
+	Imię: <br /> <input type="text" name="imie" /><br />
 	
+	<?php
+		if (isset($_SESSION['e_imie']))
+		{
+			echo '<div class="error">'.$_SESSION['e_imie'].'</div>';
+			unset($_SESSION['e_imie']);
+		}
+	?>
+
+	Nazwisko: <br /> <input type="text" name="nazwisko" /><br />
+	
+	<?php
+		if (isset($_SESSION['e_nazwisko']))
+		{
+			echo '<div class="error">'.$_SESSION['e_nazwisko'].'</div>';
+			unset($_SESSION['e_nazwisko']);
+		}
+	?>
+
 	<label>
 	<input type="checkbox" name="regulamin" /> Akceptuje regulamin
 	</label>
-	
 	<?php
 		if (isset($_SESSION['e_regulamin']))
 		{
@@ -187,6 +204,7 @@ if (isset($_POST['email']))
 			unset($_SESSION['e_regulamin']);
 		}
 	?>
+	<br>
 	
 	<div class="g-recaptcha" data-sitekey="6LcT1F4UAAAAAGhKBCSu8JukWJgqkha5AXA-HL6k"></div>
 	

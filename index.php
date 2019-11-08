@@ -1,3 +1,15 @@
+<?php
+
+	session_start();
+	
+	if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
+	{
+		header('Location: gra.php');
+		exit();
+	}
+
+?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 
@@ -33,7 +45,7 @@
 		    			<a href="#">Moje zamówienia</a>
 						<a href="#">Oceń produkt</a>
 						<a href="#">Ustawienia</a>
-						<a href="#">Wyloguj</a>
+						<a href="logowanie.php">Zaloguj</a>
 	  				</div>
 				</div>
 
@@ -92,6 +104,14 @@
 		$conn->close();
 		?>
 
+		<br><br>
+
+		<?php
+			if (isset($_SESSION['imie']))
+			{
+				echo '<div class="error">'.$_SESSION['Imie'].'</div>';
+			}
+		?>
 
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur risus neque, porttitor eu malesuada a, pulvinar quis quam. Cras sed mi sed tellus finibus posuere. Etiam purus urna, pharetra nec malesuada eu, vehicula ut sem. Donec bibendum ultrices erat quis malesuada. Sed sit amet lectus ut odio tempus dignissim id sit amet quam. Nulla elit erat, imperdiet nec tempus eu, consectetur in quam. Pellentesque in posuere arcu, et imperdiet lorem. Vestibulum faucibus mollis lacus, et maximus arcu fermentum nec. In hac habitasse platea dictumst. Maecenas ut mi tellus. Fusce euismod mollis risus, blandit blandit ex.</p>
 

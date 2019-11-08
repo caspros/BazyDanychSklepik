@@ -1,2 +1,2 @@
 # BazyDanychSklepik
-Backup projektu
+projekt_bazy_danych_sklepik
