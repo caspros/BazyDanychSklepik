@@ -94,9 +94,7 @@
 						?>
 		  			</div>
 				</div>
-
 			</ol>
-
 		</div>
 
 		<!-- MENU -->
@@ -170,74 +168,26 @@
 
 		<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
 
-		<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
-
-		<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
-
-		<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
-
-		<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
-		</div>
-
 		<!-- STOPKA -->
 		<div id="footer">
-			Korzystanie z serwisu oznacza akceptację <a href="#">regulaminu</a>
-		</div>
-			
+			Korzystanie z serwisu oznacza akceptację
+			<a href="#">
+				regulaminu
+			</a>
+		</div>		
 	</div>
 
-	
-
+	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 	<!-- STICKY MENU JS-->
-	<script>
-	    $(document).ready(function() {
-		    var NavY = $('#nav').offset().top;
-		      
-		    var stickyNav = function(){
-			    var ScrollY = $(window).scrollTop();
-			           
-			    if (ScrollY > NavY) { 
-			        $('#nav').addClass('sticky');
-			    } else {
-			        $('#nav').removeClass('sticky'); 
-			    }
-		    };
-		      
-		    stickyNav();	
+	<script src="js/sticky_menu.js"></script>
 
-		    $(window).scroll(function() {
-		        stickyNav();
-		    });
-	    });  
-	</script>
+	<!-- STICKY MENU WITAJ ZALOGUJ SIĘ JS-->
+	<script src="js/dropdown_sticky.js"></script>
 
-	<!-- DROPDOWN MENU PROFILE JS-->
-	<script>
-		document.getElementById("myBtn").onclick = function() {funkcja()};
-		function funkcja() {
-  			document.getElementById("myDropdown").classList.toggle("show");
-		}
-
-		$( document ).ready(function() {
-			$('.dropbtn').click(function(){ 
-			 	$(this).parent().find('.dropdown').toggleClass('active'); 
-			 	if($(this).find('i.fas').hasClass('fa-angle-down')) { 
-			 		$(this).find('i.fas').removeClass('fa-angle-down').addClass('fa-angle-up');
-			 		} else if($(this).find('i.fas').hasClass('fa-angle-up')) { 
-			 			$(this).find('i.fas').removeClass('fa-angle-up').addClass('fa-angle-down'); 
-			 		} 
-		 	}) 
-		})();
-	</script>
-
-	<script>
-		document.getElementById("myBtn_kat").onclick = function() {funkcja1()};
-		function funkcja1() {
-  			document.getElementById("myDropdown_kat").classList.toggle("show1");
-		}
-	</script>
+	<!-- KATEGORIE DROPDOWN JS-->
+	<script src="js/dropdown_kategorie.js"></script>
 
 </body>
 </html>
