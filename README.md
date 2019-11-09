@@ -6,5 +6,5 @@
 
 * Następnie na pasku klikamy Import, następnie klikamy "Browse" i wybieramy "sklep.sql" z folderu repozytorium.
 
-*Odznaczamy "Enable foreign key checks" i klikamy "Go"
+* Odznaczamy "Enable foreign key checks" i klikamy "Go"
 Import bazy danych powinien sie zakończyć sukcesem.
