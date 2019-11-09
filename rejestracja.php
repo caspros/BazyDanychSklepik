@@ -64,7 +64,7 @@ if (isset($_POST['email']))
 		$_SESSION['e_haslo']="Podane hasła różnią się";
 	}
 	
-	$haslo_hash = password_hash($haslo1, PASSWORD_DEFAULT);
+	$haslo_hash = md5($haslo1);
 	
 	// akceptacja regulaminu
 	if(!isset($_POST['regulamin']))
@@ -99,13 +99,18 @@ if (isset($_POST['email']))
 				$wszystko_OK=false;
 				$_SESSION['e_email']="Ten adres email jest już używany";
 			}
-			
-			
+	
+
 		if($wszystko_OK==true)
 		{
 			//wszystko dobrze user dodany
 			if($polaczenie->query("INSERT INTO klienci(Imie, Nazwisko, haslo, email) VALUES ('$imie', '$nazwisko' ,'$haslo_hash','$email')"))
 			{
+				unset($_POST['imie']);
+				unset($_POST['nazwisko']);
+				unset($_POST['haslo1']);
+				unset($_POST['haslo2']);
+				unset($_POST['email']);
 				$_SESSION['udanarejestracja']=true;
 				header('Location: witamy.php');
 			}

@@ -3,9 +3,16 @@
 	session_start();
 	
 	if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
-	{
-		header('Location: test.php');
+	{	
+		header('Location: index.php');
 		exit();
+	}
+
+	if (isset($_SESSION['wyloguj']))
+	{
+		unset($_SESSION['wyloguj']);
+		session_unset();
+		header('Location: index.php');
 	}
 
 ?>
