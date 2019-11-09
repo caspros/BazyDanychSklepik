@@ -1,3 +1,15 @@
+<?php
+
+	session_start();
+	
+	if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
+	{
+		header('Location: gra.php');
+		exit();
+	}
+
+?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 
@@ -33,7 +45,7 @@
 		    			<a href="#">Moje zamówienia</a>
 						<a href="#">Oceń produkt</a>
 						<a href="#">Ustawienia</a>
-						<a href="#">Wyloguj</a>
+						<a href="logowanie.php">Zaloguj</a>
 	  				</div>
 				</div>
 
@@ -62,6 +74,45 @@
 
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
+
+		<?php
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			$dbname = "sklep";
+
+		// Create connection
+				$conn = new mysqli($servername, $username, $password, $dbname);
+				$conn -> query("SET NAMES 'utf8'");
+		// Check connection
+		if ($conn->connect_error) {
+		    die("Nie połączono z bazą danych: " . $conn->connect_error);
+		}
+		echo "Połączono z bazą danych";
+
+				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar FROM produkty";
+				$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+		    // output data of each row
+		    while($row = $result->fetch_assoc()) {
+		        echo "<br>Nazwa produktu: " . $row["nazwa"]. "<br>Opis produktu: " . $row["opis"]."<br>Opinia klientow: ". $row["opinie_klientow"]."<br>Cena [PLN]: ". $row["cena"]."<br>Dostępna ilość: ". $row["dostepna_ilosc"]."<br>Producent: ". $row["producent"]."<br>Rozmiar: ". $row["rozmiar"];
+		    }
+		} else {
+		    echo "0 results";
+		}
+		$conn->close();
+		?>
+
+		<br><br>
+
+		<?php
+			if (isset($_SESSION['imie']))
+			{
+				echo '<div class="error">'.$_SESSION['Imie'].'</div>';
+			}
+		?>
+
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur risus neque, porttitor eu malesuada a, pulvinar quis quam. Cras sed mi sed tellus finibus posuere. Etiam purus urna, pharetra nec malesuada eu, vehicula ut sem. Donec bibendum ultrices erat quis malesuada. Sed sit amet lectus ut odio tempus dignissim id sit amet quam. Nulla elit erat, imperdiet nec tempus eu, consectetur in quam. Pellentesque in posuere arcu, et imperdiet lorem. Vestibulum faucibus mollis lacus, et maximus arcu fermentum nec. In hac habitasse platea dictumst. Maecenas ut mi tellus. Fusce euismod mollis risus, blandit blandit ex.</p>
 
 		<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
