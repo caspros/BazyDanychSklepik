@@ -21,9 +21,11 @@
 	
 <?php
 
-	echo "<p>Witaj ".$_SESSION['Imie'];
+	echo "<p>Witaj ".$_SESSION['imie'];
 	
 ?>
+
+<div class="opcja"><a class="link1" href="wyloguj.php" />Wyloguj</a></div>
 
 </body>
 </html>
