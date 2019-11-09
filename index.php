@@ -1,11 +1,13 @@
 <?php
-
 	session_start();
 	
 	if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
 	{
-		header('Location: gra.php');
-		exit();
+		$_SESSION['wyloguj'] = "Wyloguj";
+		unset($_SESSION['zaloguj']);
+	} else{
+		$_SESSION['zaloguj'] = "Zaloguj";
+		unset($_SESSION['wyloguj']);
 	}
 
 ?>
@@ -40,12 +42,28 @@
 
 				<!--- DROPDOWN MENU PROFILE -->
 				<div class="dropdown">
-					<span id="myBtn" class="dropbtn">Profil BENO <div id="p1"><i class="fas fa-angle-down"></i></div></span>
+					<span id="myBtn" class="dropbtn">Witaj, 
+						<?php 
+						if (isset($_SESSION['wyloguj'])) 
+							{
+								echo $_SESSION['imie'];
+							}else{
+								echo "zaloguj się";
+							}
+						?> 
+						<div id="p1"><i class="fas fa-angle-down"></i></div></span>
 	  				<div id="myDropdown" class="dropdown-content">
 		    			<a href="#">Moje zamówienia</a>
 						<a href="#">Oceń produkt</a>
 						<a href="#">Ustawienia</a>
-						<a href="logowanie.php">Zaloguj</a>
+						<?php
+							if (isset($_SESSION['zaloguj']))
+							{
+								echo '<a href="logowanie.php">'.$_SESSION['zaloguj'].'</a>';
+							} else{
+								echo '<a href="wyloguj.php">'.$_SESSION['wyloguj'].'</a>';
+							}
+						?>
 	  				</div>
 				</div>
 
@@ -105,13 +123,6 @@
 		?>
 
 		<br><br>
-
-		<?php
-			if (isset($_SESSION['imie']))
-			{
-				echo '<div class="error">'.$_SESSION['Imie'].'</div>';
-			}
-		?>
 
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur risus neque, porttitor eu malesuada a, pulvinar quis quam. Cras sed mi sed tellus finibus posuere. Etiam purus urna, pharetra nec malesuada eu, vehicula ut sem. Donec bibendum ultrices erat quis malesuada. Sed sit amet lectus ut odio tempus dignissim id sit amet quam. Nulla elit erat, imperdiet nec tempus eu, consectetur in quam. Pellentesque in posuere arcu, et imperdiet lorem. Vestibulum faucibus mollis lacus, et maximus arcu fermentum nec. In hac habitasse platea dictumst. Maecenas ut mi tellus. Fusce euismod mollis risus, blandit blandit ex.</p>
 

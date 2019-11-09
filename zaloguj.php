@@ -12,12 +12,7 @@
 
 	$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
 	
-	if ($polaczenie->connect_errno!=0)
-	{
-		echo "Error: ".$polaczenie->connect_errno;
-	}
-	else
-	{
+
 		$email = $_POST['email'];
 		$haslo = $_POST['haslo'];
 
@@ -30,30 +25,28 @@
 			{
 				$wiersz = $rezultat->fetch_assoc();
 				
-				if (md5($haslo) == $wiersz['haslo'])
+				if ((md5($haslo)) == ($wiersz['haslo']))
 				{
 					$_SESSION['zalogowany'] = true;
 					$_SESSION['imie'] = $wiersz['Imie'];
-					unset($_SESSION['blad']);
 					$rezultat->free_result();
+					unset($_SESSION['blad']);
 					header('Location: index.php');
 				}
 				else 
 				{
-					$_SESSION['blad'] = '<span style="color:red">1Nieprawidłowy login lub hasło!1</span>';
-					header('Location: index.php');
+					$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy email lub hasło!</span>';
+					header('Location: logowanie.php');
 				}
 				
 			} else {
 				
-				$_SESSION['blad'] = '<span style="color:red">2Nieprawidłowy login lub hasło!</span>';
-				header('Location: index.php');
-				
+				$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy email lub hasło!</span>';
+				header('Location: logowanie.php');
 			}
 			
 		}
 		
 		$polaczenie->close();
-	}
 	
 ?>

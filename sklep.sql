@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 08 Lis 2019, 18:53
+-- Czas generowania: 09 Lis 2019, 17:34
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -76,7 +76,9 @@ CREATE TABLE `klienci` (
 --
 
 INSERT INTO `klienci` (`id_klienci`, `Imie`, `Nazwisko`, `haslo`, `email`, `id_adres`) VALUES
-(1, 'Benek', 'Admin', '$2y$10$PptpQr2zIZq64oz2Ry5dje0RYG5i.F1WDcGCKV', 'admin1@gmail.com', NULL);
+(5, 'Benek', 'Benek', '76678ce4ef2dc607104cf9955b502443', 'benek1@o2.pl', NULL),
+(6, 'Test', 'Tescik', 'cc03e747a6afbbcbf8be7668acfebee5', 'test@gmail.com', NULL),
+(7, 'Admin', 'Adminowski', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -237,7 +239,7 @@ ALTER TABLE `kategorie`
 -- AUTO_INCREMENT dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
-  MODIFY `id_klienci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_klienci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT dla tabeli `oferta_dnia`
