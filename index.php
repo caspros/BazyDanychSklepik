@@ -26,73 +26,73 @@
 
 <body>
 	<!-- STICKY MENU -->
-		<div id="nav">
-			<ol>
-				<!-- logo alledrogo -->
+	<div id="sticky_menu">
+		<ol>
+			<!-- logo alledrogo -->
+			<li>
+				<a href="#">
+					<img src="images/logo.png" alt="logo" class="nav_img">
+				</a>
+			</li>
+
+			<!-- wyszukiwanie -->
+			<form form action="#" method="get" class="form_inline">
 				<li>
 					<a href="#">
-						<img src="images/logo.png" alt="logo" class="nav_img">
+						<input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt...">
 					</a>
 				</li>
 
-				<!-- wyszukiwanie -->
-				<form form action="#" method="get" class="form_inline">
-					<li>
-						<a href="#">
-							<input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt...">
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<input style="display: inline;" type="submit" name="search_button" class="search_button" value="SZUKAJ">
-						</a>
-					</li>
-				</form>
-
-				<!-- koszyk -->
 				<li>
 					<a href="#">
-						<span class="koszyk">
-							<i class="fas fa-shopping-cart"></i>
-						</span>
+						<input style="display: inline;" type="submit" name="search_button" class="search_button" value="SZUKAJ">
 					</a>
 				</li>
+			</form>
 
-				<!-- DROPDOWN BUTTON -->
-				<div class="dropdown">
-					<span id="myBtn" class="dropbtn">Witaj, 
-						<?php 
-						if (isset($_SESSION['wyloguj']))
-							{
-								echo $_SESSION['imie'];
-							} else {
-								echo "zaloguj się";
-							}
-						?> 
-
-						<div id="p1">
-							<i class="fas fa-angle-down"></i>
-						</div>
+			<!-- koszyk -->
+			<li>
+				<a href="#">
+					<span class="koszyk">
+						<i class="fas fa-shopping-cart"></i>
 					</span>
+				</a>
+			</li>
 
-					<!-- DROPDOWN CONTENT -->
-		  			<div id="myDropdown" class="dropdown-content">
-			    		<a href="#">Moje zamówienia</a>
-						<a href="#">Oceń produkt</a>
-						<a href="#">Ustawienia</a>
-						<?php
-							if (isset($_SESSION['zaloguj']))
-							{
-								echo '<a href="logowanie.php">'.$_SESSION['zaloguj'].'</a>';
-							} else{
-								echo '<a href="wyloguj.php">'.$_SESSION['wyloguj'].'</a>';
-							}
-						?>
-		  			</div>
-				</div>
-			</ol>
-		</div>
+			<!-- DROPDOWN BUTTON -->
+			<div class="dropdown">
+				<span id="myBtn" class="dropbtn">Witaj, 
+					<?php 
+					if (isset($_SESSION['wyloguj']))
+						{
+							echo $_SESSION['imie'];
+						} else {
+							echo "zaloguj się";
+						}
+					?> 
+
+					<div id="p1">
+						<i class="fas fa-angle-down"></i>
+					</div>
+				</span>
+
+				<!-- DROPDOWN CONTENT -->
+	  			<div id="myDropdown" class="dropdown-content">
+		    		<a href="#">Moje zamówienia</a>
+					<a href="#">Oceń produkt</a>
+					<a href="#">Ustawienia</a>
+					<?php
+						if (isset($_SESSION['zaloguj']))
+						{
+							echo '<a href="logowanie.php">'.$_SESSION['zaloguj'].'</a>';
+						} else{
+							echo '<a href="wyloguj.php">'.$_SESSION['wyloguj'].'</a>';
+						}
+					?>
+	  			</div>
+			</div>
+		</ol>
+	</div>
 
 	<!-- MENU -->
 	<div id="menu">

@@ -155,8 +155,8 @@ if (isset($_POST['email']))
 </head>
 <body>
 
-	<!-- logo alledrogo -->
-<div id="nav">
+<!-- logo alledrogo -->
+<div id="sticky_menu">
 	<ol>
 			
 		<li>

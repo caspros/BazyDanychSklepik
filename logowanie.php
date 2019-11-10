@@ -34,7 +34,7 @@
 	<div id="container">
 
 		<!-- logo alledrogo -->
-		<div id="nav">
+		<div id="sticky_menu">
 			<ol>
 				
 				<li>
