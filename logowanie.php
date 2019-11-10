@@ -30,25 +30,42 @@
 </head>
 
 <body>
-	<form action="zaloguj.php" method="post">
-		Email:<br>
-		<input type="text" name="email"><br>
-		Hasło:<br>
-		<input type="password" name="haslo"><br>
-	 
-		<button type="submit">Zaloguj</button>
-	</form>
+	<!-- GŁÓWNY CONTAINER -->
+	<div id="container">
 
-	<?php
-		if(isset($_SESSION['blad']))	echo $_SESSION['blad'];
-	?>
+		<!-- logo alledrogo -->
+		<div id="nav">
+			<ol>
+				
+				<li>
+					<a href="#">
+						<img src="images/logo.png" alt="logo" class="nav_img">
+					</a>
+				</li>
+			</ol>
+		</div>
 
-	<div class="main_logowanie">
-		<a href="rejestracja.php">
-			<br>Nie posiadasz konta? Zarejestruj się!<br>
-		</a>
+		<div class="main">
+			<form action="zaloguj.php" method="post">
+			Email:<br>
+			<input type="text" name="email"><br>
+			Hasło:<br>
+			<input type="password" name="haslo"><br>
+		 
+			<button type="submit">Zaloguj</button>
+			</form>
+
+			<?php
+				if(isset($_SESSION['blad']))	echo $_SESSION['blad'];
+			?>
+
+			<div class="main_logowanie">
+				<a href="rejestracja.php">
+					<br>Nie posiadasz konta? Zarejestruj się!<br>
+				</a>
+			</div>
+		</div>
 	</div>
-
 </body>
 
 </html>

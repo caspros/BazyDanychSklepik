@@ -154,6 +154,19 @@ if (isset($_POST['email']))
 	</style>
 </head>
 <body>
+
+	<!-- logo alledrogo -->
+<div id="nav">
+	<ol>
+			
+		<li>
+			<a href="#">
+				<img src="images/logo.png" alt="logo" class="nav_img">
+			</a>
+		</li>
+	</ol>
+</div>
+
 <div id="container">
 	<form method="post">
 
