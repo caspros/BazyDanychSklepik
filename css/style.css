@@ -1,17 +1,18 @@
 /* rendering well on different browsers */
-* {
-     -moz-box-sizing: border-box; /* Firexfox */
+* {     -moz-box-sizing: border-box; /* Firexfox */
      -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
      box-sizing: border-box; /* IE */
 }
 
 /* SEKCJA CSS DO <div> -----------------*/
 #container {
-	width: 100%;
-
+	background: #FFFFFF;
+	margin: 2.5% auto;
+	width: 95%;
+	padding: 1rem;
 }
 
-#nav {
+#sticky_menu {
 	width: 100%;
 	padding: 10px 0;
 	background-color: #FFFFFF;
@@ -26,7 +27,7 @@ text-align: center;
 
 #main {
 	padding-top: 10px;
-	width: 1000px;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: justify;
@@ -38,8 +39,10 @@ text-align: center;
 }
 
 #footer {
+	color: white;
+	width: 100%;
 	text-align: center;
-	background-color: #FFFFFF;
+	background-color: #444;
 	padding: 30px;
 }
 
@@ -97,190 +100,3 @@ ol > li{
 	width: 150px;
 	height: 40px;
 }
-
-/* NOWE MENU */
-#menu ul {
-  z-index: 1;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #444;
-}
-
-#menu li {
-  float: left;
-  position: relative;
-  left: 30%;
-}
-
-#menu li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-#menu li a:hover {
-  background-color: #111;
-}
-
-/* STICKY MENU */
-.sticky {
-	width: 100%;
-	position: fixed;
-	left: 0;
-	top: 0;
-	z-index: 100;
-}
-
-.nav_img {
-	position: relative;
-	right: 200px;
-	padding-top: 6px;
-	width: 80%;
-	height: 70%;
-	background-color: white;
-}
-
-
-.search_button {
-	margin-left: 10px;
-	float: left;
-	background-color: #FF5A00;
-	color: white;
-	border: none;
-	padding: 5px;
-	text-align: center;
-  	text-decoration: none;
-  	font-size: 16px;
-}
-
-.search_button:hover{
-	background-color: #ff8800;
-}
-
-.search_input{
-	width: 320px;
-}
-
-.form_inline{
-	position: absolute;
-  	align-items: center;
-  	display: flex;
-  }
-
-.koszyk{
-	margin-left: 290px;
-	padding: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-.koszyk:hover{
-	background-color: #f1f1f1;
-}
-
-
-/* DROPDOWN MENU PROFILE */
-.profil{
-	position: relative;
-	left: 200px;
-}
-
-
-
-#dropmenu{
-	display: none;
-	position: relative;
-	left: 200px;
-	margin: 0px;
-	padding: 0px;
-}
-
-
-.dropbtn {
-  background-color: #ffffff;
-  color: black;
-  padding: 8px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #f1f1f1;
-}
-
-.dropdown {
-  position: relative;
-  left: 200px;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.show {
-	display:block;
-}
-
-#p1{
-	 display: inline-block;
-}
-
-
-/* DROPDOWN MENU KATEGORIES */
-.dropbtn_kat {
-  background-color: #444;
-  color: white;
-  padding: 14px 16px;
-  border: none;
-  cursor: pointer;
-  height: 50px;
-  text-align: center;
-}
-
-.dropbtn_kat:hover, .dropbtn:focus {
-  background-color: #111;
-}
-
-.dropdown-content_kat {
-  display: none;
-  position: absolute;
-  left: 360px;
-  top: 107px;
-  background-color: #444;
-  min-width: 160px;
-  overflow: auto;
-  text-align: center;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content_kat a {
-  color: white;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  background-color: #4d4d4d;
-}
-
-.dropdown-content_kat a:hover {background-color: #111}
-
-.show1 {display:block;}
