@@ -30,24 +30,24 @@
 </head>
 
 <body>
+	<form action="zaloguj.php" method="post">
+		Email:<br>
+		<input type="text" name="email"><br>
+		Hasło:<br>
+		<input type="password" name="haslo"><br>
+	 
+		<button type="submit">Zaloguj</button>
+	</form>
 
+	<?php
+		if(isset($_SESSION['blad']))	echo $_SESSION['blad'];
+	?>
 
-<form action="zaloguj.php" method="post">
-	Email:<br>
-	<input type="text" name="email"><br>
-	Hasło:<br>
-	<input type="password" name="haslo"><br>
- 
-	<button type="submit">Zaloguj</button>
-</form>
-
-<?php
-	if(isset($_SESSION['blad']))	echo $_SESSION['blad'];
-?>
-
-<div class="main_logowanie">
-	<a href="rejestracja.php"><br>Nie posiadasz konta? Zarejestruj się!<br></a>
-</div>
+	<div class="main_logowanie">
+		<a href="rejestracja.php">
+			<br>Nie posiadasz konta? Zarejestruj się!<br>
+		</a>
+	</div>
 
 </body>
 
