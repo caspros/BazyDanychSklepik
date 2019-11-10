@@ -25,10 +25,7 @@
 </head>
 
 <body>
-	<!-- GŁÓWNY CONTAINER -->
-	<div id="container"> 
-
-		<!-- STICKY MENU -->
+	<!-- STICKY MENU -->
 		<div id="nav">
 			<ol>
 				<!-- logo alledrogo -->
@@ -97,29 +94,32 @@
 			</ol>
 		</div>
 
-		<!-- MENU -->
-		<div id="menu">
-			<ul>	
-				<!-- DROPDOWN KATEGORIE -->
-				<div class="dropdown_kat">
-					<li>
-						<div id="myBtn_kat" class="dropbtn_kat">
-							Kategorie
-						</div>
-					</li>
-					<div id="myDropdown_kat" class="dropdown-content_kat">
-				    	<a href="#">Koszulki</a>
-						<a href="#">Spodnie</a>
-						<a href="#">Kubki</a>
-						<a href="#">Długopisy</a>
-		  			</div>
+	<!-- MENU -->
+	<div id="menu">
+		<ul>	
+			<!-- DROPDOWN KATEGORIE -->
+			<div class="dropdown_kat">
+				<li>
+					<div id="myBtn_kat" class="dropbtn_kat">
+						Kategorie
+					</div>
+				</li>
+				<div id="myDropdown_kat" class="dropdown-content_kat">
+			    	<a href="#">Koszulki</a>
+					<a href="#">Spodnie</a>
+					<a href="#">Kubki</a>
+					<a href="#">Długopisy</a>
 	  			</div>
+			</div>
 
 				<li><a href="#">Promocje</a></li>
 				<li><a href="#">Oferty dnia</a></li>
 				<li><a href="#">FAQ</a></li>
 			</ul> 	
 		</div>
+			
+	<!-- GŁÓWNY CONTAINER -->
+	<div id="container">
 
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
@@ -175,14 +175,14 @@
 		<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
 
 		<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
-		
-		<div id="footer">
-			Korzystanie z serwisu oznacza akceptację
-			<a href="#">
-				regulaminu
-			</a>
-		</div>		
 	</div>
+
+	<div id="footer">
+		Korzystanie z serwisu oznacza akceptację
+		<a href="#">
+			regulaminu
+		</a>
+	</div>	
 
 	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
