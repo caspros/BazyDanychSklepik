@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 if (isset($_POST['email']))
@@ -36,7 +35,6 @@ if (isset($_POST['email']))
 		$_SESSION['e_nazwisko']="Musisz wypełnić wszystkie pola";
 	}
 	
-
 	//poprawnosc emailu
 	$email = $_POST['email'];
 	$emailB = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -73,11 +71,8 @@ if (isset($_POST['email']))
 		$_SESSION['e_regulamin']="Nie zapoznaleś sie z regulaminem. Przeczytaj go!";
 	}
 	
-
-	
 	require_once "connect.php";
 	mysqli_report(MYSQLI_REPORT_STRICT);
-	
 	
 	try
 	{
@@ -100,7 +95,6 @@ if (isset($_POST['email']))
 				$_SESSION['e_email']="Ten adres email jest już używany";
 			}
 	
-
 		if($wszystko_OK==true)
 		{
 			//wszystko dobrze user dodany
@@ -118,19 +112,16 @@ if (isset($_POST['email']))
 			{
 				throw new Exception($polaczenie->error);
 			}
-		}
-			
+		}		
 			$polaczenie->close();
 		}
 	}
+
 	catch(Exception $e)
 	{
 		echo '<span style="color:red;">Błąd serwera! Zarejestruj sie później!</span>';
 		echo'<br /> Informacja deweloperska: ' .$e;
 	}
-	
-	
-	
 }
 
 ?>
