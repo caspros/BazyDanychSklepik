@@ -1,14 +1,15 @@
 /* rendering well on different browsers */
-* {
-     -moz-box-sizing: border-box; /* Firexfox */
+* {     -moz-box-sizing: border-box; /* Firexfox */
      -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
      box-sizing: border-box; /* IE */
 }
 
 /* SEKCJA CSS DO <div> -----------------*/
 #container {
-	width: 100%;
-
+	background: #FFFFFF;
+	margin: 2.5% auto;
+	width: 95%;
+	padding: 1rem;
 }
 
 #sticky_menu {
@@ -26,7 +27,7 @@ text-align: center;
 
 #main {
 	padding-top: 10px;
-	width: 1000px;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: justify;
@@ -38,8 +39,10 @@ text-align: center;
 }
 
 #footer {
+	color: white;
+	width: 100%;
 	text-align: center;
-	background-color: #FFFFFF;
+	background-color: #444;
 	padding: 30px;
 }
 

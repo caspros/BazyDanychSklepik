@@ -29,28 +29,27 @@
 	<title>Alledrogo</title>
 </head>
 
-<body>
+<body>	
+	<!-- logo alledrogo -->
+	<div id="sticky_menu">
+		<ol>
+			<li>
+				<a href="#">
+					<img src="images/logo.png" alt="logo" class="nav_img">
+				</a>
+			</li>
+		</ol>
+	</div>
+
 	<!-- GŁÓWNY CONTAINER -->
 	<div id="container">
-
-		<!-- logo alledrogo -->
-		<div id="sticky_menu">
-			<ol>
-				
-				<li>
-					<a href="#">
-						<img src="images/logo.png" alt="logo" class="nav_img">
-					</a>
-				</li>
-			</ol>
-		</div>
-
 		<div class="main">
+
 			<form action="zaloguj.php" method="post">
 			Email:<br>
-			<input type="text" name="email"><br>
+			<input type="text" name="email"><br><br>
 			Hasło:<br>
-			<input type="password" name="haslo"><br>
+			<input type="password" name="haslo"><br><br>
 		 
 			<button type="submit">Zaloguj</button>
 			</form>
@@ -64,8 +63,15 @@
 					<br>Nie posiadasz konta? Zarejestruj się!<br>
 				</a>
 			</div>
+			
 		</div>
 	</div>
+
+	<!-- STÓPKA -->
+	<div id="footer">
+		Copyright &copy; 2018 
+	</div>
+
 </body>
 
 </html>

@@ -153,24 +153,24 @@ if (isset($_POST['email']))
 		}
 	</style>
 </head>
+
 <body>
+	<!-- logo alledrogo -->
+	<div id="sticky_menu">
+		<ol>
+				
+			<li>
+				<a href="#">
+					<img src="images/logo.png" alt="logo" class="nav_img">
+				</a>
+			</li>
+		</ol>
+	</div>
 
-<!-- logo alledrogo -->
-<div id="sticky_menu">
-	<ol>
-			
-		<li>
-			<a href="#">
-				<img src="images/logo.png" alt="logo" class="nav_img">
-			</a>
-		</li>
-	</ol>
-</div>
-
-<div id="container">
+	<div id="container">
 	<form method="post">
 
-	E-mail: <br /> <input type="text" name="email" /><br />
+	E-mail: <br/> <input type="text" name="email" /><br/><br>
 	
 	<?php
 		if (isset($_SESSION['e_email']))
@@ -180,7 +180,7 @@ if (isset($_POST['email']))
 		}
 	?>
 	
-	Hasło: <br /> <input type="password" name="haslo1" /><br />
+	Hasło: <br/> <input type="password" name="haslo1" /><br/><br>
 	
 	<?php
 		if (isset($_SESSION['e_haslo']))
@@ -190,9 +190,9 @@ if (isset($_POST['email']))
 		}
 	?>
 	
-	Powtórz hasło: <br /> <input type="password" name="haslo2" /><br />
+	Powtórz hasło: <br/> <input type="password" name="haslo2" /><br/><br>
 
-	Imię: <br /> <input type="text" name="imie" /><br />
+	Imię: <br/> <input type="text" name="imie" /><br/><br>
 	
 	<?php
 		if (isset($_SESSION['e_imie']))
@@ -202,7 +202,7 @@ if (isset($_POST['email']))
 		}
 	?>
 
-	Nazwisko: <br /> <input type="text" name="nazwisko" /><br />
+	Nazwisko: <br/> <input type="text" name="nazwisko" /><br/><br>
 	
 	<?php
 		if (isset($_SESSION['e_nazwisko']))
@@ -213,8 +213,9 @@ if (isset($_POST['email']))
 	?>
 
 	<label>
-	<input type="checkbox" name="regulamin" /> Akceptuje regulamin
-	</label>
+		<input type="checkbox" name="regulamin" /> Akceptuje regulamin
+	</label><br/> 
+
 	<?php
 		if (isset($_SESSION['e_regulamin']))
 		{
@@ -240,6 +241,11 @@ if (isset($_POST['email']))
 	
 	</form>
 	</div>
-	<div id="footer"> Copyright &copy; 2018 </div>
+	
+	<!-- STÓPKA -->
+	<div id="footer">
+		Copyright &copy; 2018 
+	</div>
+
 </body>
 </html>
