@@ -100,3 +100,53 @@ ol > li{
 	width: 150px;
 	height: 40px;
 }
+
+/* Div categories -----------------*/
+
+.kat{
+	color: #FF5A00;
+}
+
+#categories{
+	background-color: #FFFFFF;
+	text-align: center;
+	border: 1px solid #541412;
+	width: 15%;
+	float: left;
+	line-height: 15px;
+}
+
+#categories a{
+	display: block;
+	height: 18px;
+	text-decoration: none;
+	color: black;
+}
+
+#categories a:hover{
+	background-color: #ECEFF1; 
+	color: red;
+}
+
+/* Div daily_offer -----------------*/
+
+.daily_offers{
+	width: 85%;
+	margin: auto;
+	border: 5px solid black;
+	overflow: hidden;
+}
+
+.slider{
+	display: flex;
+	width: 100%;
+	
+}
+
+/* Div promo -----------------*/
+
+#promo{
+	margin: 10px;
+	padding: 10px;
+	clear: both;
+}

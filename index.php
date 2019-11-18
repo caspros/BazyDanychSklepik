@@ -138,13 +138,13 @@
 				if ($conn -> connect_error) {
 				    die("Nie połączono z bazą danych: " . $conn -> connect_error);
 				}
-				echo "Połączono z bazą danych";
+				//echo "Połączono z bazą danych";
 
 				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar FROM produkty";
 				$result = $conn -> query($sql);
 
 			// Output data of each row
-				if ($result -> num_rows > 0) {
+			/*	if ($result -> num_rows > 0) {
 			 		while($row = $result -> fetch_assoc()) {
 			       		echo "<br>Nazwa produktu: "	.$row["nazwa"]. 
 			       			"<br>Opis produktu: "	.$row["opis"].
@@ -158,12 +158,49 @@
 				    echo "No results";
 				}
 
-				$conn -> close();
-			?>
+				$conn -> close();*/
+			?> 
 
-			<br><br>
+			<div id="categories">
+				<br>
+				<span class="kat">Kategorie:</span>
+				<br><br>
+				<a href="#">Koszulki</a><br>
+				<a href="#">Spodnie</a><br>
+				<a href="#">Kubki</a><br>
+				<a href="#">Długopisy</a><br>
+				<a href="#">Bluzy</a><br>
+				<a href="#">Naklejki</a><br>
+				<a href="#">Ramki</a><br>
+				<a href="#">RTV</a><br>
+				<a href="#">AGD</a><br>
+				<a href="#">Alkohol</a><br>
+				<a href="#">Zabawki</a><br>
 
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur risus neque, porttitor eu malesuada a, pulvinar quis quam. Cras sed mi sed tellus finibus posuere. Etiam purus urna, pharetra nec malesuada eu, vehicula ut sem. Donec bibendum ultrices erat quis malesuada. Sed sit amet lectus ut odio tempus dignissim id sit amet quam. Nulla elit erat, imperdiet nec tempus eu, consectetur in quam. Pellentesque in posuere arcu, et imperdiet lorem. Vestibulum faucibus mollis lacus, et maximus arcu fermentum nec. In hac habitasse platea dictumst. Maecenas ut mi tellus. Fusce euismod mollis risus, blandit blandit ex.</p>
+			</div>
+
+			<div class="daily_offers">
+
+				<div class="slider">
+
+					<img src="images/promocja_swieta.png" id="lastClone" alt="">
+					<img src="images/black_friday.png" alt="">
+					<img src="images/darmowa_dostawa.png" alt="">
+					<img src="images/promocja_swieta.png" alt="">
+					<img src="images/black_friday.png" id="firstClone" alt="">
+				
+				</div>
+			</div>
+
+			<button id="prevBtn">Prev</button>
+			<button id="nextBtn">Next</button>
+
+			<br>
+			<div id="promo">
+				
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur risus neque, porttitor eu malesuada a, pulvinar quis quam. Cras sed mi sed tellus finibus posuere. Etiam purus urna, pharetra nec malesuada eu, vehicula ut sem. Donec bibendum ultrices erat quis malesuada. Sed sit amet lectus ut odio tempus dignissim id sit amet quam. Nulla elit erat, imperdiet nec tempus eu, consectetur in quam. Pellentesque in posuere arcu, et imperdiet lorem. Vestibulum faucibus mollis lacus, et maximus arcu fermentum nec. In hac habitasse platea dictumst. Maecenas ut mi tellus. Fusce euismod mollis risus, blandit blandit ex.
+
+			</div>
 
 			<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
 
@@ -186,6 +223,7 @@
 		<script src="js/dropdown_sticky.js"></script>
 		<!-- KATEGORIE DROPDOWN JS-->
 		<script src="js/dropdown_kategorie.js"></script>
+
 	</div>
 
 	<div id="footer">
@@ -195,5 +233,9 @@
 		</a>
 	</div>	
 
+
+
+	<!-- SLIDER JS-->
+		<script src="js/slider.js"></script>
 </body>
 </html>
