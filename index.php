@@ -180,10 +180,11 @@
 			</div>
 
 			<div class="daily_offers">
-
+			<i class="fas fa-arrow-left" id="prevBtn"></i>
+			<i class="fas fa-arrow-right" id="nextBtn"></i>
 				<div class="slider">
 
-					<img src="images/promocja_swieta.png" id="lastClone" alt="">
+					<a href="profil.php"><img src="images/promocja_swieta.png" id="lastClone" alt=""></a>
 					<img src="images/black_friday.png" alt="">
 					<img src="images/darmowa_dostawa.png" alt="">
 					<img src="images/rabat_rtv.png" alt="">
@@ -192,9 +193,6 @@
 				
 				</div>
 			</div>
-
-			<button id="prevBtn">Prev</button>
-			<button id="nextBtn">Next</button>
 
 			<br>
 			<div id="promo">
