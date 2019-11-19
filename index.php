@@ -184,7 +184,7 @@
 			<i class="fas fa-arrow-right" id="nextBtn"></i>
 				<div class="slider">
 
-					<a href="profil.php"><img src="images/promocja_swieta.png" id="lastClone" alt=""></a>
+					<img src="images/promocja_swieta.png" id="lastClone" alt="">
 					<img src="images/black_friday.png" alt="">
 					<img src="images/darmowa_dostawa.png" alt="">
 					<img src="images/rabat_rtv.png" alt="">
@@ -196,6 +196,8 @@
 
 			<br>
 			<div id="promo">
+
+				<a href="promo1.php"><img src="images/promocja_swieta.png" id="lastClone" alt=""></a>
 				
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur risus neque, porttitor eu malesuada a, pulvinar quis quam. Cras sed mi sed tellus finibus posuere. Etiam purus urna, pharetra nec malesuada eu, vehicula ut sem. Donec bibendum ultrices erat quis malesuada. Sed sit amet lectus ut odio tempus dignissim id sit amet quam. Nulla elit erat, imperdiet nec tempus eu, consectetur in quam. Pellentesque in posuere arcu, et imperdiet lorem. Vestibulum faucibus mollis lacus, et maximus arcu fermentum nec. In hac habitasse platea dictumst. Maecenas ut mi tellus. Fusce euismod mollis risus, blandit blandit ex.
 
