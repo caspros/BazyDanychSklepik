@@ -186,6 +186,7 @@
 					<img src="images/promocja_swieta.png" id="lastClone" alt="">
 					<img src="images/black_friday.png" alt="">
 					<img src="images/darmowa_dostawa.png" alt="">
+					<img src="images/rabat_rtv.png" alt="">
 					<img src="images/promocja_swieta.png" alt="">
 					<img src="images/black_friday.png" id="firstClone" alt="">
 				
