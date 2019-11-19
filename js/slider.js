@@ -15,13 +15,14 @@ slider.style.transform = 'translateX(' + (-size * counter) + 'px)';
 //Button listeners
 
 nextBtn.addEventListener('click', ()=>{
-
+	if (counter >= sliderImages.length - 1) return;
 	slider.style.transition = "transform 0.4s ease-in-out";
 	counter++;
 	slider.style.transform = 'translateX(' + (-size * counter) + 'px)';
 });
 
 prevBtn.addEventListener('click', ()=>{
+	if (counter <= 0) return;
 	slider.style.transition = "transform 0.4s ease-in-out";
 	counter--;
 	slider.style.transform = 'translateX(' + (-size * counter) + 'px)';
@@ -34,7 +35,7 @@ slider.addEventListener('transitionend', ()=>{
 		slider.style.transform = 'translateX(' + (-size * counter) + 'px)';
 
 	}
-	if(sliderImages[counter].id === 'lastClone') {
+	if(sliderImages[counter].id === 'firstClone') {
 		slider.style.transition = "none";
 		counter = sliderImages.length - counter;
 		slider.style.transform = 'translateX(' + (-size * counter) + 'px)';
