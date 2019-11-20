@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 09 Lis 2019, 17:34
+-- Czas generowania: 20 Lis 2019, 18:08
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -109,6 +109,7 @@ CREATE TABLE `produkty` (
   `producent` varchar(45) NOT NULL,
   `oceny` enum('1','2','3','4','5') DEFAULT NULL,
   `rozmiar` varchar(5) NOT NULL,
+  `zdjecie` varchar(50) NOT NULL DEFAULT 'default_product.png',
   `id_kategorie` int(11) NOT NULL,
   `id_klienci` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -117,8 +118,8 @@ CREATE TABLE `produkty` (
 -- Zrzut danych tabeli `produkty`
 --
 
-INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena`, `dostepna_ilosc`, `producent`, `oceny`, `rozmiar`, `id_kategorie`, `id_klienci`) VALUES
-(8, 'Koszulka Mike Tyson', 'Koszulka zrobiona z pomysłem', '4', '50.00', 5, 'BenoCORP', NULL, 'XL', 1, NULL);
+INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena`, `dostepna_ilosc`, `producent`, `oceny`, `rozmiar`, `zdjecie`, `id_kategorie`, `id_klienci`) VALUES
+(8, 'Koszulka Mike Tyson', 'Koszulka zrobiona z pomysłem', '4', '50.00', 5, 'BenoCORP', NULL, 'XL', 'default_product.png', 1, NULL);
 
 -- --------------------------------------------------------
 

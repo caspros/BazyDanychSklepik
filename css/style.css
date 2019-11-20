@@ -175,12 +175,12 @@ ol > li{
 
 .product{
 	position: relative;
-	left: 7%;
+	left: 5%;
 	text-align: center;
-	padding: 10px;
-	margin: 10px;
-	min-width: 200px;
-	min-height: 200px;
+	padding: 1px;
+	margin: 8px;
+	min-width: 190px;
+	min-height: 190px;
 	border: solid 2px black;
 	float: left;
 }

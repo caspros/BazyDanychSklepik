@@ -140,7 +140,7 @@
 				}
 				//echo "Połączono z bazą danych";
 
-				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar FROM produkty";
+				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty";
 				$result = $conn -> query($sql);
 
 			// Output data of each row
@@ -205,8 +205,21 @@
 			<!-- PRODUKTY NA GŁÓWNEJ -->
 			<div id="products">
 				<br>
-				<div class="product">PRODUKT1</div>
-				<div class="product">PRODUKT2</div>
+				<div class="product">
+					<?php
+						if ($result -> num_rows > 0) {
+				 		while($row = $result -> fetch_assoc()) {
+				       		echo '<img src="images/'.$row["zdjecie"].'" width="90" height="90" alt="default_product.png"><br>'.$row["nazwa"]."<br>".$row["cena"]." PLN<br>Rozmiar: ".$row["rozmiar"];
+						}
+					} else {
+					    echo "No results";
+						}
+					$conn -> close();
+					?>
+				</div>
+				<div class="product">
+					PRODUKT2
+				</div>
 				<div class="product">PRODUKT3</div>
 				<div class="product">PRODUKT4</div>
 				<div class="product">PRODUKT5</div>
