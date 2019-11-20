@@ -131,16 +131,36 @@ ol > li{
 /* Div daily_offer -----------------*/
 
 .daily_offers{
-	width: 85%;
+	width: 80%;
 	margin: auto;
-	border: 5px solid black;
+	border: 3px solid #ECEFF1;
 	overflow: hidden;
+	position: relative;
 }
 
 .slider{
 	display: flex;
 	width: 100%;
-	
+}
+
+#prevBtn{
+	position: absolute;
+	top: 50%;
+	z-index: 10;
+	left: 2%;
+	font-size: 30px;
+	color: #FF5A00;
+	cursor: pointer;
+}
+
+#nextBtn{
+	position: absolute;
+	top: 50%;
+	z-index: 10;
+	right: 2%;
+	font-size: 30px;
+	color: #FF5A00;
+	cursor: pointer;
 }
 
 /* Div promo -----------------*/
