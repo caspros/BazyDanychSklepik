@@ -161,6 +161,7 @@
 				$conn -> close();*/
 			?> 
 
+			<!-- KATEGORIE -->
 			<div id="categories">
 				<br>
 				<span class="kat">Kategorie:</span>
@@ -178,7 +179,11 @@
 				<a href="#">Zabawki</a><br>
 
 			</div>
+
 			<br><br>
+
+
+			<!-- SLIDER Z OFERTAMI -->
 			<div class="daily_offers">
 			<i class="fas fa-arrow-left" id="prevBtn"></i>
 			<i class="fas fa-arrow-right" id="nextBtn"></i>
@@ -195,6 +200,21 @@
 			</div>
 
 			<br>
+
+
+			<!-- PRODUKTY NA GŁÓWNEJ -->
+			<div id="products">
+				<br>
+				<div class="product">PRODUKT1</div>
+				<div class="product">PRODUKT2</div>
+				<div class="product">PRODUKT3</div>
+				<div class="product">PRODUKT4</div>
+				<div class="product">PRODUKT5</div>
+
+			</div>
+
+
+
 			<div id="promo">
 
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur risus neque, porttitor eu malesuada a, pulvinar quis quam. Cras sed mi sed tellus finibus posuere. Etiam purus urna, pharetra nec malesuada eu, vehicula ut sem. Donec bibendum ultrices erat quis malesuada. Sed sit amet lectus ut odio tempus dignissim id sit amet quam. Nulla elit erat, imperdiet nec tempus eu, consectetur in quam. Pellentesque in posuere arcu, et imperdiet lorem. Vestibulum faucibus mollis lacus, et maximus arcu fermentum nec. In hac habitasse platea dictumst. Maecenas ut mi tellus. Fusce euismod mollis risus, blandit blandit ex.
