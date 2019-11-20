@@ -152,7 +152,7 @@ if (isset($_POST['email']))
 		<ol>
 				
 			<li>
-				<a href="#">
+				<a href="index.php">
 					<img src="images/logo.png" alt="logo" class="nav_img">
 				</a>
 			</li>
