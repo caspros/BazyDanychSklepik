@@ -4,6 +4,12 @@
      box-sizing: border-box; /* IE */
 }
 
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 /* SEKCJA CSS DO <div> -----------------*/
 #container {
 	background: #FFFFFF;
