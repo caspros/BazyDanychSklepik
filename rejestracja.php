@@ -249,7 +249,7 @@ if (isset($_POST['email']))
 	
 	</form>
 	</div>
-	
+	</div>
 												<!-- STÓPKA -->
 	<div id="footer">
 		Copyright &copy; 2019
