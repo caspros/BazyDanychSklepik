@@ -160,78 +160,79 @@ if (isset($_POST['email']))
 	</div>
 
 	<div id="container">
-	<form method="post">
+		<div class="main">
+			<form method="post">
+			E-mail: <br/> <input type="text" name="email" /><br/><br>
+			
+			<?php
+				if (isset($_SESSION['e_email']))
+				{
+					echo '<div class="error">'.$_SESSION['e_email'].'</div>';
+					unset($_SESSION['e_email']);
+				}
+			?>
+			
+			Hasło: <br/> <input type="password" name="haslo1" /><br/><br>
+			
+			<?php
+				if (isset($_SESSION['e_haslo']))
+				{
+					echo '<div class="error">'.$_SESSION['e_haslo'].'</div>';
+					unset($_SESSION['e_haslo']);
+				}
+			?>
+			
+			Powtórz hasło: <br/> <input type="password" name="haslo2" /><br/><br>
 
-	E-mail: <br/> <input type="text" name="email" /><br/><br>
-	
-	<?php
-		if (isset($_SESSION['e_email']))
-		{
-			echo '<div class="error">'.$_SESSION['e_email'].'</div>';
-			unset($_SESSION['e_email']);
-		}
-	?>
-	
-	Hasło: <br/> <input type="password" name="haslo1" /><br/><br>
-	
-	<?php
-		if (isset($_SESSION['e_haslo']))
-		{
-			echo '<div class="error">'.$_SESSION['e_haslo'].'</div>';
-			unset($_SESSION['e_haslo']);
-		}
-	?>
-	
-	Powtórz hasło: <br/> <input type="password" name="haslo2" /><br/><br>
+			Imię: <br/> <input type="text" name="imie" /><br/><br>
+			
+			<?php
+				if (isset($_SESSION['e_imie']))
+				{
+					echo '<div class="error">'.$_SESSION['e_imie'].'</div>';
+					unset($_SESSION['e_imie']);
+				}
+			?>
 
-	Imię: <br/> <input type="text" name="imie" /><br/><br>
-	
-	<?php
-		if (isset($_SESSION['e_imie']))
-		{
-			echo '<div class="error">'.$_SESSION['e_imie'].'</div>';
-			unset($_SESSION['e_imie']);
-		}
-	?>
+			Nazwisko: <br/> <input type="text" name="nazwisko" /><br/><br>
+			
+			<?php
+				if (isset($_SESSION['e_nazwisko']))
+				{
+					echo '<div class="error">'.$_SESSION['e_nazwisko'].'</div>';
+					unset($_SESSION['e_nazwisko']);
+				}
+			?>
 
-	Nazwisko: <br/> <input type="text" name="nazwisko" /><br/><br>
-	
-	<?php
-		if (isset($_SESSION['e_nazwisko']))
-		{
-			echo '<div class="error">'.$_SESSION['e_nazwisko'].'</div>';
-			unset($_SESSION['e_nazwisko']);
-		}
-	?>
+			<label>
+				<input type="checkbox" name="regulamin" /> Akceptuje regulamin
+			</label><br/> 
 
-	<label>
-		<input type="checkbox" name="regulamin" /> Akceptuje regulamin
-	</label><br/> 
-
-	<?php
-		if (isset($_SESSION['e_regulamin']))
-		{
-			echo '<div class="error">'.$_SESSION['e_regulamin'].'</div>';
-			unset($_SESSION['e_regulamin']);
-		}
-	?>
-	<br>
-	
-	<div class="g-recaptcha" data-sitekey="6LcT1F4UAAAAAGhKBCSu8JukWJgqkha5AXA-HL6k"></div>
-	
-	<?php
-		if (isset($_SESSION['e_bot']))
-		{
-			echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
-			unset($_SESSION['e_bot']);
-		}
-	?>
-	
-	<br />
-	
-	<input type="submit" value="Zarejestruj się"/>
-	
-	</form>
+			<?php
+				if (isset($_SESSION['e_regulamin']))
+				{
+					echo '<div class="error">'.$_SESSION['e_regulamin'].'</div>';
+					unset($_SESSION['e_regulamin']);
+				}
+			?>
+			<br>
+			
+			<div class="g-recaptcha" class="main" data-sitekey="6LcT1F4UAAAAAGhKBCSu8JukWJgqkha5AXA-HL6k"></div>
+			
+			<?php
+				if (isset($_SESSION['e_bot']))
+				{
+					echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
+					unset($_SESSION['e_bot']);
+				}
+			?>
+			
+			<br />
+			
+			<input type="submit" value="Zarejestruj się"/>
+			
+			</form>
+		</div>
 	</div>
 	
 	<!-- STÓPKA -->
