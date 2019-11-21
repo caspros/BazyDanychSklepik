@@ -96,28 +96,7 @@
 	</div>
 
 	<!-- MENU -->
-	<div id="menu">
-		<ul>	
-			<!-- DROPDOWN KATEGORIE -->
-			<div class="dropdown_kat">
-				<li>
-					<div id="myBtn_kat" class="dropbtn_kat">
-						Kategorie
-					</div>
-				</li>
-				<div id="myDropdown_kat" class="dropdown-content_kat">
-			    	<a href="#">Koszulki</a>
-					<a href="#">Spodnie</a>
-					<a href="#">Kubki</a>
-					<a href="#">Długopisy</a>
-	  			</div>
-			</div>
-
-				<li><a href="#offers1">Promocje</a></li>
-				<li><a href="#products">Oferty dnia</a></li>
-				<li><a href="#">FAQ</a></li>
-			</ul> 	
-		</div>
+	
 			
 	<!-- GŁÓWNY CONTAINER -->
 	<div id="container">
@@ -138,11 +117,9 @@
 				if ($conn -> connect_error) {
 				    die("Nie połączono z bazą danych: " . $conn -> connect_error);
 				}
-				//echo "Połączono z bazą danych";
 
 				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty";
 				$result = $conn -> query($sql);
-
 
 					//Function to show product on main site
 					function Show_product($id)
@@ -191,6 +168,7 @@
 			<!-- KATEGORIE -->
 			<div id="categories">
 				<br>
+
 				<span class="kat"><b>Kategorie:</b></span>
 				<br><br>
 				<a href="#">Koszulki</a><br>
@@ -208,7 +186,6 @@
 			</div>
 
 			<br>
-
 
 			<!-- SLIDER Z OFERTAMI -->
 			<div class="daily_offers" id="offers1">
@@ -242,15 +219,39 @@
 
 			</div>
 
+			<div id="why_us">
+				<br><br>
+				<h1>Dlaczego warto nam zaufać?</h1>
+
+				<div class="why_us_content">
+					<h3>Gwarancja jakości</h3>
+					<br>
+					Nasze produkty są bardzo dobre jakościowo, wykonane z dbałością o każdy szczegół. Podczas produkcji działamy zgodnie z ekologią. Robiąc u nas zakupy masz pewność, że zamówione produkty będą Ci służyły bardzo długo.
+					<br><br>
+					<img src="images/quality.png" alt="jakosc" height="35%" width="35%">
+				</div>
+				<div class="why_us_content">
+					<h3>Darmowe zwroty do 14 dni</h3>
+					<br>
+					Nasza strona oferuje możliwość zwrotu zakupionego produktu do 14 dni od momentu otrzymania towaru bez potrzeby podania przyczyny zwrotu! Zwrot jest całkowicie darmowy, przesyłkę zwrotną pokrywamy my!
+					<br><br>
+					<img src="images/zwrot.png" alt="zwrot" height="35%" width="45%">
+				</div>
+				<div class="why_us_content">
+					<h3>Opinie klientów</h3>
+					<br>
+					Jeśli jeszcze masz wątpliwości, zajrzyj do opinii naszych klientów, którzy zakupili już nasze produkty. Obiektywne opinie z pewnością pomogą Ci w podjęciu decyzji o opłacalności danych produktów. Dzięki opiniom jesteśmy w stanie dla Was stale ulepszać nasze produkty.
+					<br><br>
+					<img src="images/opinie.png" alt="zwrot" height="30%" width="75%">
+				</div>
 
 
-			<div id="promo">
-
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur risus neque, porttitor eu malesuada a, pulvinar quis quam. Cras sed mi sed tellus finibus posuere. Etiam purus urna, pharetra nec malesuada eu, vehicula ut sem. Donec bibendum ultrices erat quis malesuada. Sed sit amet lectus ut odio tempus dignissim id sit amet quam. Nulla elit erat, imperdiet nec tempus eu, consectetur in quam. Pellentesque in posuere arcu, et imperdiet lorem. Vestibulum faucibus mollis lacus, et maximus arcu fermentum nec. In hac habitasse platea dictumst. Maecenas ut mi tellus. Fusce euismod mollis risus, blandit blandit ex.
 
 			</div>
 
-			<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
+
+			<div id="promo">
+			<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p></div>
 
 			<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
 
