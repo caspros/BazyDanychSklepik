@@ -4,8 +4,14 @@
      box-sizing: border-box; /* IE */
 }
 
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 /* SEKCJA CSS DO <div> -----------------*/
-section {
+#container {
 	background: #FFFFFF;
 	margin: 2.5% auto;
 	width: 95%;

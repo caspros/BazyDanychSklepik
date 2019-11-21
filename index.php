@@ -96,7 +96,7 @@
 	</div>
 	
 	<!-- GŁÓWNY CONTAINER -->
-	<section>
+	<div id="container">
 
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
@@ -268,7 +268,7 @@
 		<!-- STICKY MENU WITAJ ZALOGUJ SIĘ JS-->
 		<script src="js/dropdown_sticky.js"></script>
 
-	</section>
+	</div>
 
 	<div id="footer">
 		Korzystanie z serwisu oznacza akceptację
