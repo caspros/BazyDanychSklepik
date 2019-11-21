@@ -94,10 +94,7 @@
 			</div>
 		</ol>
 	</div>
-
-	<!-- MENU -->
 	
-			
 	<!-- GŁÓWNY CONTAINER -->
 	<div id="container">
 
@@ -169,25 +166,6 @@
 								}
 							} else { echo "No results"; }
 					}
-
-
-
-			// Output data of each row
-			/*	if ($result -> num_rows > 0) {
-			 		while($row = $result -> fetch_assoc()) {
-			       		echo "<br>Nazwa produktu: "	.$row["nazwa"]. 
-			       			"<br>Opis produktu: "	.$row["opis"].
-			       			"<br>Opinia klientow: "	.$row["opinie_klientow"].
-			       			"<br>Cena [PLN]: "		.$row["cena"].
-			       			"<br>Dostępna ilość: "	.$row["dostepna_ilosc"].
-			       			"<br>Producent: "		.$row["producent"].
-			       			"<br>Rozmiar: "			.$row["rozmiar"];
-					}
-				} else {
-				    echo "No results";
-				}
-
-				$conn -> close();*/
 			?> 
 
 			<!-- KATEGORIE -->
@@ -272,11 +250,7 @@
 					<br><br>
 					<img src="images/opinie.png" alt="zwrot" height="30%" width="75%">
 				</div>
-
-
-
 			</div>
-
 
 			<div id="comentaries">
 				<?php
@@ -285,7 +259,6 @@
 					Show_opinion(4);
 				?> 
 			</div>
-
 		</div>
 
 		<!-- JQUERY -->
@@ -294,8 +267,6 @@
 		<script src="js/sticky_menu.js"></script>
 		<!-- STICKY MENU WITAJ ZALOGUJ SIĘ JS-->
 		<script src="js/dropdown_sticky.js"></script>
-		<!-- KATEGORIE DROPDOWN JS-->
-		<script src="js/dropdown_kategorie.js"></script>
 
 	</div>
 
@@ -305,8 +276,6 @@
 			regulaminu
 		</a>
 	</div>	
-
-
 
 	<!-- SLIDER JS-->
 		<script src="js/slider.js"></script>
