@@ -53,7 +53,7 @@ if (isset($_POST['email']))
 	if((strlen($haslo1)<5) || (strlen($haslo1)>20))
 	{
 		$wszystko_OK=false;
-		$_SESSION['e_haslo']="Haslo musi miec dlugosc od 5 do 20 znaków";
+		$_SESSION['e_haslo']="Hasło musi mieć długość od 5 do 20 znaków";
 	}
 	
 	if($haslo1!=$haslo2)
@@ -130,11 +130,17 @@ if (isset($_POST['email']))
 <head lang="pl">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title> Zakładanie konta </title>
+	<title> Zarejestruj się! </title>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<link rel="stylesheet" href="css/rejestracja.css">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<style>
 		.error
@@ -159,85 +165,94 @@ if (isset($_POST['email']))
 		</ol>
 	</div>
 
+	<!--Główny Container----->
+	<div class="login-popup-wrap new_login_popup"> 
 	<div id="container">
-		<div class="main">
-			<form method="post">
-			E-mail: <br/> <input type="text" name="email" /><br/><br>
-			
-			<?php
-				if (isset($_SESSION['e_email']))
-				{
-					echo '<div class="error">'.$_SESSION['e_email'].'</div>';
-					unset($_SESSION['e_email']);
-				}
-			?>
-			
-			Hasło: <br/> <input type="password" name="haslo1" /><br/><br>
-			
-			<?php
-				if (isset($_SESSION['e_haslo']))
-				{
-					echo '<div class="error">'.$_SESSION['e_haslo'].'</div>';
-					unset($_SESSION['e_haslo']);
-				}
-			?>
-			
-			Powtórz hasło: <br/> <input type="password" name="haslo2" /><br/><br>
-
-			Imię: <br/> <input type="text" name="imie" /><br/><br>
-			
-			<?php
-				if (isset($_SESSION['e_imie']))
-				{
-					echo '<div class="error">'.$_SESSION['e_imie'].'</div>';
-					unset($_SESSION['e_imie']);
-				}
-			?>
-
-			Nazwisko: <br/> <input type="text" name="nazwisko" /><br/><br>
-			
-			<?php
-				if (isset($_SESSION['e_nazwisko']))
-				{
-					echo '<div class="error">'.$_SESSION['e_nazwisko'].'</div>';
-					unset($_SESSION['e_nazwisko']);
-				}
-			?>
-
-			<label>
-				<input type="checkbox" name="regulamin" /> Akceptuje regulamin
-			</label><br/> 
-
-			<?php
-				if (isset($_SESSION['e_regulamin']))
-				{
-					echo '<div class="error">'.$_SESSION['e_regulamin'].'</div>';
-					unset($_SESSION['e_regulamin']);
-				}
-			?>
-			<br>
-			
-			<div class="g-recaptcha" class="main" data-sitekey="6LcT1F4UAAAAAGhKBCSu8JukWJgqkha5AXA-HL6k"></div>
-			
-			<?php
-				if (isset($_SESSION['e_bot']))
-				{
-					echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
-					unset($_SESSION['e_bot']);
-				}
-			?>
-			
-			<br />
-			
-			<input type="submit" value="Zarejestruj się"/>
-			
-			</form>
+		<form method="post">
+		<div class="login-popup-heading text-center">
+            <h4><i class="fa fa-lock" aria-hidden="true"></i> Rejestracja </h4>                        
+        </div>
+		<div class="form-group">        
+			Imię: <br/> <input type="text" class="form-control name="imie" /><br/>
 		</div>
+		<?php
+			if (isset($_SESSION['e_imie']))
+			{
+				echo '<div class="error">'.$_SESSION['e_imie'].'</div>';
+				unset($_SESSION['e_imie']);
+			}
+		?>
+
+	<div class="form-group">
+		Nazwisko: <br/> <input type="text" class="form-control name="nazwisko" /><br/>
+	</div>
+	<?php
+		if (isset($_SESSION['e_nazwisko']))
+		{
+			echo '<div class="error">'.$_SESSION['e_nazwisko'].'</div>';
+			unset($_SESSION['e_nazwisko']);
+		}
+	?>
+	
+	<div class="form-group">
+		E-mail: <br/> <input type="text" class="form-control name="email" /><br/>
+	</div>
+	<?php
+		if (isset($_SESSION['e_email']))
+		{
+			echo '<div class="error">'.$_SESSION['e_email'].'</div>';
+			unset($_SESSION['e_email']);
+		}
+	?>
+	
+	<div class="form-group">	
+		Hasło: <br/> <input type="password" class="form-control name="haslo1" /><br/>
+	</div>
+	<?php
+		if (isset($_SESSION['e_haslo']))
+		{
+			echo '<div class="error">'.$_SESSION['e_haslo'].'</div>';
+			unset($_SESSION['e_haslo']);
+		}
+	?>
+	
+	<div class="form-group">	
+		Powtórz hasło: <br/> <input type="password" class="form-control name="haslo2" /><br/>
 	</div>
 	
-	<!-- STÓPKA -->
+	<label>
+		<input type="checkbox" name="regulamin" /> Akceptuje regulamin
+	</label><br/> 
+
+	<?php
+		if (isset($_SESSION['e_regulamin']))
+		{
+			echo '<div class="error">'.$_SESSION['e_regulamin'].'</div>';
+			unset($_SESSION['e_regulamin']);
+		}
+	?>
+	<br>
+	
+	<div id="captcha" class="g-recaptcha" data-sitekey="6LcT1F4UAAAAAGhKBCSu8JukWJgqkha5AXA-HL6k"></div>
+	
+	<?php
+		if (isset($_SESSION['e_bot']))
+		{
+			echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
+			unset($_SESSION['e_bot']);
+		}
+	?>
+	
+	<br />
+	
+	<button type="submit" class="btn btn-default login-popup-btn" name="submit" value="1">Zarejestruj</button>
+	
+	</form>
+	</div>
+	
+												<!-- STÓPKA -->
 	<div id="footer">
-		Copyright &copy; 2018 
+		Copyright &copy; 2019
 	</div>
 
 </body>
