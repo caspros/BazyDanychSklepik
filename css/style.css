@@ -56,8 +56,10 @@ body {
 }
 
 h1 {
+	font-style: normal;
 	text-align: center;
 	height: 20 px;
+	color: #FF5A00;
 }
 
 h2 {
@@ -217,4 +219,31 @@ ol > li{
 .g-recaptcha{
 	position: relative;
 	left: 42%;
+}
+
+/*why_us --------------------- */
+
+#why_us{
+	clear: both;
+}
+
+.why_us_content{
+	position: relative;
+	left: 12%;
+	font-style: normal;
+	text-align: center;
+	border: 2px solid #FF5A00;
+	border-radius: 30px;
+	padding: 7px;
+	margin: 25px;
+	width: 415px;
+	height: 415px;
+	float: left;
+	background-color: #fcfeff;
+	transition-duration: 0.4s;
+}
+
+.why_us_content:hover{
+	transition-duration: 0.4s;
+	transform: scale(1.05,1.05);
 }
