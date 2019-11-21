@@ -270,6 +270,14 @@
 
 	</div>
 
+    <div id="centeredmenu">
+	   <ul>
+	      <li><a href="#">FAQ</a></li>
+	      <li><a href="#">Kontakt</a></li>
+	      <li><a href="#">Regulamin</a></li>
+	   </ul>
+	</div>
+
 	<div id="footer">
 		Korzystanie z serwisu oznacza akceptację
 		<a href="#">
