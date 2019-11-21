@@ -163,10 +163,9 @@ ol > li{
 	cursor: pointer;
 }
 
-/* Div products -----------------*/
+/* Products main site-----------------*/
 
 #products{
-
 	text-align: center;
  	width: 90%;
  	background-color: #grey;
@@ -181,8 +180,16 @@ ol > li{
 	margin: 8px;
 	min-width: 190px;
 	min-height: 190px;
-	border: solid 2px black;
+	border: solid 1px #FF5A00;
 	float: left;
+	font-size: 13px;
+	font-style: normal;
+	background-color: #ECEFF1;
+}
+
+.product:hover{
+	background-color: #c8cbcc;
+	cursor: pointer;
 }
 
 

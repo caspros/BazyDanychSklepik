@@ -143,6 +143,35 @@
 				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty";
 				$result = $conn -> query($sql);
 
+					function Show_product($id)
+					{	
+						$servername = "localhost";
+						$username = "root";
+						$password = "";
+						$dbname = "sklep";
+
+						// Create connection
+							$conn = new mysqli($servername, $username, $password, $dbname);
+							$conn -> query("SET NAMES 'utf8'");
+
+						// Check connection
+							if ($conn -> connect_error) {
+							    die("Nie połączono z bazą danych: " . $conn -> connect_error);
+							}
+
+						$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty = $id";
+						$result = $conn -> query($sql);
+							if ($result -> num_rows > 0) {
+					 		while($row = $result -> fetch_assoc()) {
+					       		echo '<img src="images/'.$row["zdjecie"].'" width="150" height="150" alt="default_product.png"><br>'.$row["nazwa"]." ".$row["rozmiar"].'<br><span style="color:#FF5A00"><b>KUP TERAZ: '.$row["cena"]." PLN</b></span>";
+							}
+						} else {
+						    echo "No results";
+							}
+					}
+
+
+
 			// Output data of each row
 			/*	if ($result -> num_rows > 0) {
 			 		while($row = $result -> fetch_assoc()) {
@@ -205,24 +234,36 @@
 			<!-- PRODUKTY NA GŁÓWNEJ -->
 			<div id="products">
 				<br>
+
 				<div class="product">
 					<?php
-						if ($result -> num_rows > 0) {
-				 		while($row = $result -> fetch_assoc()) {
-				       		echo '<img src="images/'.$row["zdjecie"].'" width="90" height="90" alt="default_product.png"><br>'.$row["nazwa"]."<br>".$row["cena"]." PLN<br>Rozmiar: ".$row["rozmiar"];
-						}
-					} else {
-					    echo "No results";
-						}
-					$conn -> close();
+						Show_product(12);
 					?>
 				</div>
+
 				<div class="product">
-					PRODUKT2
+					<?php
+						Show_product(14);
+					?>
 				</div>
-				<div class="product">PRODUKT3</div>
-				<div class="product">PRODUKT4</div>
-				<div class="product">PRODUKT5</div>
+
+				<div class="product">
+					<?php
+						Show_product(8);
+					?>
+				</div>
+
+				<div class="product">
+					<?php
+						Show_product(15);
+					?>
+				</div>
+
+				<div class="product">
+					<?php
+						Show_product(16);
+					?>
+				</div>
 
 			</div>
 
