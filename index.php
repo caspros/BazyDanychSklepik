@@ -113,8 +113,8 @@
 	  			</div>
 			</div>
 
-				<li><a href="#">Promocje</a></li>
-				<li><a href="#">Oferty dnia</a></li>
+				<li><a href="#offers1">Promocje</a></li>
+				<li><a href="#products">Oferty dnia</a></li>
 				<li><a href="#">FAQ</a></li>
 			</ul> 	
 		</div>
@@ -143,6 +143,8 @@
 				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty";
 				$result = $conn -> query($sql);
 
+
+					//Function to show product on main site
 					function Show_product($id)
 					{	
 						$servername = "localhost";
@@ -150,24 +152,20 @@
 						$password = "";
 						$dbname = "sklep";
 
-						// Create connection
-							$conn = new mysqli($servername, $username, $password, $dbname);
-							$conn -> query("SET NAMES 'utf8'");
+						$conn = new mysqli($servername, $username, $password, $dbname);
+						$conn -> query("SET NAMES 'utf8'");
 
-						// Check connection
-							if ($conn -> connect_error) {
-							    die("Nie połączono z bazą danych: " . $conn -> connect_error);
-							}
+						if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
 
 						$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty = $id";
 						$result = $conn -> query($sql);
-							if ($result -> num_rows > 0) {
-					 		while($row = $result -> fetch_assoc()) {
-					       		echo '<img src="images/'.$row["zdjecie"].'" width="150" height="150" alt="default_product.png"><br>'.$row["nazwa"]." ".$row["rozmiar"].'<br><span style="color:#FF5A00"><b>KUP TERAZ: '.$row["cena"]." PLN</b></span>";
-							}
-						} else {
-						    echo "No results";
-							}
+							if ($result -> num_rows > 0)
+							{
+						 		while($row = $result -> fetch_assoc())
+						 		{
+						       		echo '<img src="images/products/'.$row["zdjecie"].'" width="150" height="150" alt="product.png"><br>'.$row["nazwa"]." ".$row["rozmiar"].'<br><span style="color:#FF5A00"><b>KUP TERAZ: '.$row["cena"]." PLN</b></span>";
+								}
+							} else { echo "No results"; }
 					}
 
 
@@ -193,7 +191,7 @@
 			<!-- KATEGORIE -->
 			<div id="categories">
 				<br>
-				<span class="kat">Kategorie:</span>
+				<span class="kat"><b>Kategorie:</b></span>
 				<br><br>
 				<a href="#">Koszulki</a><br>
 				<a href="#">Spodnie</a><br>
@@ -209,61 +207,38 @@
 
 			</div>
 
-			<br><br>
+			<br>
 
 
 			<!-- SLIDER Z OFERTAMI -->
-			<div class="daily_offers">
+			<div class="daily_offers" id="offers1">
 			<i class="fas fa-arrow-left" id="prevBtn"></i>
 			<i class="fas fa-arrow-right" id="nextBtn"></i>
 				<div class="slider">
 
-					<img src="images/promocja_swieta.png" id="lastClone" alt="">
-					<img src="images/black_friday.png" alt="">
-					<img src="images/darmowa_dostawa.png" alt="">
-					<img src="images/rabat_rtv.png" alt="">
-					<img src="images/promocja_swieta.png" alt="">
-					<img src="images/black_friday.png" id="firstClone" alt="">
+					<img src="images/banners/promocja_swieta.png" id="lastClone" alt="" height="100%" width="100%">
+					<img src="images/banners/black_friday.png" alt="" height="100%" width="100%">
+					<img src="images/banners/darmowa_dostawa.png" alt="" height="100%" width="100%">
+					<img src="images/banners/rabat_rtv.png" alt="" height="100%" width="100%">
+					<img src="images/banners/promocja_swieta.png" alt="" height="100%" width="100%">
+					<img src="images/banners/black_friday.png" id="firstClone" alt="" height="100%" width="100%">
 				
 				</div>
 			</div>
 
-			<br>
+			<br><br>
 
 
 			<!-- PRODUKTY NA GŁÓWNEJ -->
 			<div id="products">
 				<br>
 
-				<div class="product">
-					<?php
-						Show_product(12);
-					?>
-				</div>
-
-				<div class="product">
-					<?php
-						Show_product(14);
-					?>
-				</div>
-
-				<div class="product">
-					<?php
-						Show_product(8);
-					?>
-				</div>
-
-				<div class="product">
-					<?php
-						Show_product(15);
-					?>
-				</div>
-
-				<div class="product">
-					<?php
-						Show_product(16);
-					?>
-				</div>
+				<div class="product"><?php Show_product(12);?></div>
+				<div class="product"><?php Show_product(14);?></div>
+				<div class="product"><?php Show_product(8);?></div>
+				<div class="product"><?php Show_product(15);?></div>
+				<div class="product"><?php Show_product(16);?></div>
+				<div class="product"><?php Show_product(17);?></div>
 
 			</div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 21 Lis 2019, 13:21
+-- Czas generowania: 21 Lis 2019, 14:36
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -58,7 +58,13 @@ INSERT INTO `kategorie` (`id_kategorie`, `kategoria`) VALUES
 (2, 'Spodnie'),
 (3, 'Kubki'),
 (4, 'Długopisy'),
-(5, 'Bluzy');
+(5, 'Bluzy'),
+(6, 'Naklejki'),
+(7, 'Ramki'),
+(8, 'RTV'),
+(9, 'AGD'),
+(10, 'Alkohol'),
+(11, 'Zabawki');
 
 -- --------------------------------------------------------
 
@@ -125,9 +131,10 @@ CREATE TABLE `produkty` (
 INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena`, `dostepna_ilosc`, `producent`, `oceny`, `rozmiar`, `zdjecie`, `id_kategorie`, `id_klienci`) VALUES
 (8, 'Koszulka Mike Tyson', 'Koszulka zrobiona z pomysłem', '4', '50.00', 5, 'BenoCORP', NULL, 'XL', 'koszulka_mike.png', 1, NULL),
 (12, 'Spodnie Jeans Master', 'Wykonane z najlepszej jakości materiału Jeans, idealnie dopasowują się do ciała', '5', '100.00', 5, 'Jeans&Jeans', NULL, 'M', 'jeans_m.png', 2, NULL),
-(14, 'Kubek Studenta', 'Kubek wykonany z porcelany z nadrukowanym napisem, który odźwierciedla brutalną rzeczywistość studentów', '5', '30.00', 10, 'KubekKuba', NULL, '-', 'kubek_student1.png', 3, NULL),
-(15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 150, 'DługiPisak sp. Z o.o', NULL, '-', 'dlugopis_1.png', 4, NULL),
-(16, 'Bluza z ziemniakiem', 'Bluza wykonana z tworzywa sztucznego, idealna aby wyróżnić się z tłumu', '3', '70.00', 10, 'Bluzex sp. Z o.o', NULL, 'L', 'bluza_1.png', 5, NULL);
+(14, 'Kubek Studenta', 'Kubek wykonany z porcelany z nadrukowanym napisem, który odźwierciedla brutalną rzeczywistość studentów', '5', '30.00', 10, 'KubekKuba', NULL, '', 'kubek_student1.png', 3, NULL),
+(15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 150, 'DługiPisak sp. Z o.o', NULL, '', 'dlugopis_1.png', 4, NULL),
+(16, 'Bluza z ziemniakiem', 'Bluza wykonana z tworzywa sztucznego, idealna aby wyróżnić się z tłumu', '3', '70.00', 10, 'Bluzex sp. Z o.o', NULL, 'L', 'bluza_1.png', 5, NULL),
+(17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 10, 'Naklejkownia sp. Z o.o', NULL, '', 'naklejka_1.png', 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -242,7 +249,7 @@ ALTER TABLE `adres`
 -- AUTO_INCREMENT dla tabeli `kategorie`
 --
 ALTER TABLE `kategorie`
-  MODIFY `id_kategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_kategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT dla tabeli `klienci`
@@ -260,7 +267,7 @@ ALTER TABLE `oferta_dnia`
 -- AUTO_INCREMENT dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT dla tabeli `promocje`
