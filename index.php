@@ -299,6 +299,16 @@
 
 	</div>
 
+
+	<!-- MENU -->
+	<div id="nav" class="clearfix">
+		<ul id="nav">	
+				<li><a href="#offers1">Promocje</a></li>
+				<li><a href="#products">Oferty dnia</a></li>
+				<li><a href="#">FAQ</a></li>
+		</ul> 	
+	</div>
+	
 	<div id="footer">
 		Korzystanie z serwisu oznacza akceptację
 		<a href="#">
