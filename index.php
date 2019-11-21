@@ -207,22 +207,69 @@
 				<br>
 				<div class="product">
 					<?php
+					$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty = 12";
+					$result = $conn -> query($sql);
 						if ($result -> num_rows > 0) {
 				 		while($row = $result -> fetch_assoc()) {
-				       		echo '<img src="images/'.$row["zdjecie"].'" width="90" height="90" alt="default_product.png"><br>'.$row["nazwa"]."<br>".$row["cena"]." PLN<br>Rozmiar: ".$row["rozmiar"];
+				       		echo '<img src="images/'.$row["zdjecie"].'" width="150" height="150" alt="default_product.png"><br>'.$row["nazwa"]."<br>Rozmiar: ".$row["rozmiar"].' <span style="color:#FF5A00"><b>'.$row["cena"]." PLN</b></span>";
 						}
 					} else {
 					    echo "No results";
 						}
-					$conn -> close();
 					?>
 				</div>
 				<div class="product">
-					PRODUKT2
+					<?php
+					$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty = 14";
+					$result = $conn -> query($sql);
+						if ($result -> num_rows > 0) {
+				 		while($row = $result -> fetch_assoc()) {
+				       		echo '<img src="images/'.$row["zdjecie"].'" width="150" height="150" alt="default_product.png"><br>'.$row["nazwa"]."<br>".' <span style="color:#FF5A00"><b>'.$row["cena"]." PLN</b></span>";
+						}
+					} else {
+					    echo "No results";
+						}
+					?>
 				</div>
-				<div class="product">PRODUKT3</div>
-				<div class="product">PRODUKT4</div>
-				<div class="product">PRODUKT5</div>
+				<div class="product">
+					<?php
+					$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty = 8";
+					$result = $conn -> query($sql);
+						if ($result -> num_rows > 0) {
+				 		while($row = $result -> fetch_assoc()) {
+				       		echo '<img src="images/'.$row["zdjecie"].'" width="150" height="150" alt="default_product.png"><br>'.$row["nazwa"]."<br>Rozmiar: ".$row["rozmiar"].' <span style="color:#FF5A00"><b>'.$row["cena"]." PLN</b></span>";
+						}
+					} else {
+					    echo "No results";
+						}
+					?>
+				</div>
+				<div class="product">
+					<?php
+					$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty = 15";
+					$result = $conn -> query($sql);
+						if ($result -> num_rows > 0) {
+				 		while($row = $result -> fetch_assoc()) {
+				       		echo '<img src="images/'.$row["zdjecie"].'" width="150" height="150" alt="default_product.png"><br>'.$row["nazwa"]."<br>".' <span style="color:#FF5A00"><b>'.$row["cena"]." PLN</b></span>";
+						}
+					} else {
+					    echo "No results";
+						}
+					?>					
+				</div>
+				<div class="product">
+					<?php
+					$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty = 16";
+					$result = $conn -> query($sql);
+						if ($result -> num_rows > 0) {
+				 		while($row = $result -> fetch_assoc()) {
+				       		echo '<img src="images/'.$row["zdjecie"].'" width="150" height="150" alt="default_product.png"><br>'.$row["nazwa"]."<br>Rozmiar: ".$row["rozmiar"].' <span style="color:#FF5A00"><b>'.$row["cena"]." PLN</b></span>";
+						}
+					} else {
+					    echo "No results";
+						}
+					?>
+				</div>
 
 			</div>
 
