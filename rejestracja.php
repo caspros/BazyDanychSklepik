@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 if (isset($_POST['email']))
@@ -36,7 +35,6 @@ if (isset($_POST['email']))
 		$_SESSION['e_nazwisko']="Musisz wypełnić wszystkie pola";
 	}
 	
-
 	//poprawnosc emailu
 	$email = $_POST['email'];
 	$emailB = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -73,11 +71,8 @@ if (isset($_POST['email']))
 		$_SESSION['e_regulamin']="Nie zapoznaleś sie z regulaminem. Przeczytaj go!";
 	}
 	
-
-	
 	require_once "connect.php";
 	mysqli_report(MYSQLI_REPORT_STRICT);
-	
 	
 	try
 	{
@@ -100,7 +95,6 @@ if (isset($_POST['email']))
 				$_SESSION['e_email']="Ten adres email jest już używany";
 			}
 	
-
 		if($wszystko_OK==true)
 		{
 			//wszystko dobrze user dodany
@@ -118,19 +112,16 @@ if (isset($_POST['email']))
 			{
 				throw new Exception($polaczenie->error);
 			}
-		}
-			
+		}		
 			$polaczenie->close();
 		}
 	}
+
 	catch(Exception $e)
 	{
 		echo '<span style="color:red;">Błąd serwera! Zarejestruj sie później!</span>';
 		echo'<br /> Informacja deweloperska: ' .$e;
 	}
-	
-	
-	
 }
 
 ?>
@@ -143,6 +134,7 @@ if (isset($_POST['email']))
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<style>
 		.error
@@ -153,80 +145,100 @@ if (isset($_POST['email']))
 		}
 	</style>
 </head>
+
 <body>
-<div id="container">
-	<form method="post">
-
-	E-mail: <br /> <input type="text" name="email" /><br />
-	
-	<?php
-		if (isset($_SESSION['e_email']))
-		{
-			echo '<div class="error">'.$_SESSION['e_email'].'</div>';
-			unset($_SESSION['e_email']);
-		}
-	?>
-	
-	Hasło: <br /> <input type="password" name="haslo1" /><br />
-	
-	<?php
-		if (isset($_SESSION['e_haslo']))
-		{
-			echo '<div class="error">'.$_SESSION['e_haslo'].'</div>';
-			unset($_SESSION['e_haslo']);
-		}
-	?>
-	
-	Powtórz hasło: <br /> <input type="password" name="haslo2" /><br />
-
-	Imię: <br /> <input type="text" name="imie" /><br />
-	
-	<?php
-		if (isset($_SESSION['e_imie']))
-		{
-			echo '<div class="error">'.$_SESSION['e_imie'].'</div>';
-			unset($_SESSION['e_imie']);
-		}
-	?>
-
-	Nazwisko: <br /> <input type="text" name="nazwisko" /><br />
-	
-	<?php
-		if (isset($_SESSION['e_nazwisko']))
-		{
-			echo '<div class="error">'.$_SESSION['e_nazwisko'].'</div>';
-			unset($_SESSION['e_nazwisko']);
-		}
-	?>
-
-	<label>
-	<input type="checkbox" name="regulamin" /> Akceptuje regulamin
-	</label>
-	<?php
-		if (isset($_SESSION['e_regulamin']))
-		{
-			echo '<div class="error">'.$_SESSION['e_regulamin'].'</div>';
-			unset($_SESSION['e_regulamin']);
-		}
-	?>
-	<br>
-	
-	<div class="g-recaptcha" data-sitekey="6LcT1F4UAAAAAGhKBCSu8JukWJgqkha5AXA-HL6k"></div>
-	
-	<?php
-		if (isset($_SESSION['e_bot']))
-		{
-			echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
-			unset($_SESSION['e_bot']);
-		}
-	?>
-	
-	<br />
-	
-	<input type="submit" value="Zarejestruj się"/>
-	
-	</form>
+	<!-- logo alledrogo -->
+	<div id="sticky_menu">
+		<ol>
+				
+			<li>
+				<a href="index.php">
+					<img src="images/logo.png" alt="logo" class="nav_img">
+				</a>
+			</li>
+		</ol>
 	</div>
-	<div id="footer"> Copyright &copy; 2018 </div>
+
+	<div id="container">
+		<div class="main">
+			<form method="post">
+			E-mail: <br/> <input type="text" name="email" /><br/><br>
+			
+			<?php
+				if (isset($_SESSION['e_email']))
+				{
+					echo '<div class="error">'.$_SESSION['e_email'].'</div>';
+					unset($_SESSION['e_email']);
+				}
+			?>
+			
+			Hasło: <br/> <input type="password" name="haslo1" /><br/><br>
+			
+			<?php
+				if (isset($_SESSION['e_haslo']))
+				{
+					echo '<div class="error">'.$_SESSION['e_haslo'].'</div>';
+					unset($_SESSION['e_haslo']);
+				}
+			?>
+			
+			Powtórz hasło: <br/> <input type="password" name="haslo2" /><br/><br>
+
+			Imię: <br/> <input type="text" name="imie" /><br/><br>
+			
+			<?php
+				if (isset($_SESSION['e_imie']))
+				{
+					echo '<div class="error">'.$_SESSION['e_imie'].'</div>';
+					unset($_SESSION['e_imie']);
+				}
+			?>
+
+			Nazwisko: <br/> <input type="text" name="nazwisko" /><br/><br>
+			
+			<?php
+				if (isset($_SESSION['e_nazwisko']))
+				{
+					echo '<div class="error">'.$_SESSION['e_nazwisko'].'</div>';
+					unset($_SESSION['e_nazwisko']);
+				}
+			?>
+
+			<label>
+				<input type="checkbox" name="regulamin" /> Akceptuje regulamin
+			</label><br/> 
+
+			<?php
+				if (isset($_SESSION['e_regulamin']))
+				{
+					echo '<div class="error">'.$_SESSION['e_regulamin'].'</div>';
+					unset($_SESSION['e_regulamin']);
+				}
+			?>
+			<br>
+			
+			<div class="g-recaptcha" class="main" data-sitekey="6LcT1F4UAAAAAGhKBCSu8JukWJgqkha5AXA-HL6k"></div>
+			
+			<?php
+				if (isset($_SESSION['e_bot']))
+				{
+					echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
+					unset($_SESSION['e_bot']);
+				}
+			?>
+			
+			<br />
+			
+			<input type="submit" value="Zarejestruj się"/>
+			
+			</form>
+		</div>
+	</div>
+	
+	<!-- STÓPKA -->
+	<div id="footer">
+		Copyright &copy; 2018 
+	</div>
+
 </body>
 </html>
