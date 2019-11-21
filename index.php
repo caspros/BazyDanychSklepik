@@ -203,8 +203,9 @@
 				</div>
 			</div>
 
-			<br><br>
 
+			<br><br><br>
+			<h1>WYRÓŻNIONE PRODUKTY:</h1>
 
 			<!-- PRODUKTY NA GŁÓWNEJ -->
 			<div id="products">
