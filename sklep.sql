@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 21 Lis 2019, 14:36
+-- Czas generowania: 21 Lis 2019, 21:09
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -102,6 +102,29 @@ CREATE TABLE `oferta_dnia` (
   `cena_w_dniu` decimal(10,2) NOT NULL,
   `id_produkty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `opinie`
+--
+
+CREATE TABLE `opinie` (
+  `id_opinie` int(11) NOT NULL,
+  `id_produkty` int(11) NOT NULL,
+  `id_klienci` int(11) NOT NULL,
+  `gwiazdka` int(11) DEFAULT NULL,
+  `opinia` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `opinie`
+--
+
+INSERT INTO `opinie` (`id_opinie`, `id_produkty`, `id_klienci`, `gwiazdka`, `opinia`) VALUES
+(2, 8, 5, 5, 'Ta koszulka jest super, chodzę w niej codziennie! Jakość wykonania przerosła moje najśmielsze oczekiwania! Jak najbardziej polecam :)'),
+(4, 14, 7, 5, 'Kupiłem Kubek dla synka i był bardzo zadowolony! Bardzo szybka dostawa, polecam sklep alledrogo :D'),
+(5, 16, 6, 5, 'Nigdzie nie mogłem znaleźć bluzy z ziemniakiem, aż nagle natknąłem się na aukcje w sklepie alledrogo! Bluza doszła i jest świetna!');
 
 -- --------------------------------------------------------
 
@@ -206,6 +229,14 @@ ALTER TABLE `oferta_dnia`
   ADD KEY `fk_oferta_dnia_produkty1_idx` (`id_produkty`);
 
 --
+-- Indeksy dla tabeli `opinie`
+--
+ALTER TABLE `opinie`
+  ADD PRIMARY KEY (`id_opinie`),
+  ADD KEY `id_klienci` (`id_klienci`),
+  ADD KEY `id_produkty` (`id_produkty`) USING BTREE;
+
+--
 -- Indeksy dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
@@ -264,6 +295,12 @@ ALTER TABLE `oferta_dnia`
   MODIFY `id_oferta_dnia` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT dla tabeli `opinie`
+--
+ALTER TABLE `opinie`
+  MODIFY `id_opinie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
@@ -302,6 +339,13 @@ ALTER TABLE `klienci`
 --
 ALTER TABLE `oferta_dnia`
   ADD CONSTRAINT `fk_oferta_dnia_produkty1` FOREIGN KEY (`id_produkty`) REFERENCES `mydb`.`produkty` (`id_produkty`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ograniczenia dla tabeli `opinie`
+--
+ALTER TABLE `opinie`
+  ADD CONSTRAINT `opinie_ibfk_1` FOREIGN KEY (`id_produkty`) REFERENCES `produkty` (`id_produkty`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `opinie_ibfk_2` FOREIGN KEY (`id_klienci`) REFERENCES `klient` (`id_klienci`) ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `produkty`

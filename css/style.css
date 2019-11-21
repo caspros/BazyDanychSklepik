@@ -207,7 +207,9 @@ ol > li{
 
 /* Div promo -----------------*/
 
-#promo{
+#comentaries{
+	border: 3px solid grey;
+	
 	margin: 10px;
 	padding: 10px;
 	clear: both;
