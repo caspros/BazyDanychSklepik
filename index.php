@@ -303,9 +303,9 @@
 	<!-- MENU -->
 	<div id="nav" class="clearfix">
 		<ul id="nav">	
-				<li><a href="#offers1">Promocje</a></li>
-				<li><a href="#products">Oferty dnia</a></li>
 				<li><a href="#">FAQ</a></li>
+				<li><a href="#offers1">Kontakt</a></li>
+				<li><a href="#products">Regulamin</a></li>
 		</ul> 	
 	</div>
 	
