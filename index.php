@@ -119,7 +119,9 @@
 				}
 
 				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty";
+				$sql1 = "SELECT * FROM opinie";
 				$result = $conn -> query($sql);
+				$result1 = $conn -> query($sql1);
 
 					//Function to show product on main site
 					function Show_product($id)
@@ -141,6 +143,29 @@
 						 		while($row = $result -> fetch_assoc())
 						 		{
 						       		echo '<img src="images/products/'.$row["zdjecie"].'" width="150" height="150" alt="product.png"><br>'.$row["nazwa"]." ".$row["rozmiar"].'<br><span style="color:#FF5A00"><b>KUP TERAZ: '.$row["cena"]." PLN</b></span>";
+								}
+							} else { echo "No results"; }
+					}
+
+					function Show_opinion($id)
+					{	
+						$servername = "localhost";
+						$username = "root";
+						$password = "";
+						$dbname = "sklep";
+
+						$conn = new mysqli($servername, $username, $password, $dbname);
+						$conn -> query("SET NAMES 'utf8'");
+
+						if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+
+						$sql = "SELECT id_opinie, id_produkty, id_klienci, gwiazdka, opinia FROM opinie WHERE id_opinie = $id";
+						$result = $conn -> query($sql);
+							if ($result -> num_rows > 0)
+							{
+						 		while($row = $result -> fetch_assoc())
+						 		{
+						       		echo '<img src="images/ocena.png"> Komentarz po zakupie: "'.$row["opinia"];
 								}
 							} else { echo "No results"; }
 					}
@@ -231,6 +256,7 @@
 					<br><br>
 					<img src="images/quality.png" alt="jakosc" height="35%" width="35%">
 				</div>
+
 				<div class="why_us_content">
 					<h3>Darmowe zwroty do 14 dni</h3>
 					<br>
@@ -238,6 +264,7 @@
 					<br><br>
 					<img src="images/zwrot.png" alt="zwrot" height="35%" width="45%">
 				</div>
+
 				<div class="why_us_content">
 					<h3>Opinie klientów</h3>
 					<br>
@@ -251,18 +278,14 @@
 			</div>
 
 
-			<div id="promo">
-			<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p></div>
+			<div id="comentaries">
+				<?php
+					Show_opinion(5);
+					Show_opinion(2);
+					Show_opinion(4);
+				?> 
+			</div>
 
-			<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
-
-			<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
-
-			<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
-
-			<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
-
-			<p>Aenean vitae risus velit. Curabitur placerat, nibh a vulputate fermentum, eros leo finibus mauris, ullamcorper tempor enim dui ultricies sapien. Nunc commodo dapibus mi quis ultricies. Phasellus ornare dolor eget tortor placerat, commodo dictum velit sollicitudin. Sed non hendrerit odio, sed ornare ligula. Donec mattis quis erat nec imperdiet. Pellentesque vehicula sagittis scelerisque.</p>
 		</div>
 
 		<!-- JQUERY -->
