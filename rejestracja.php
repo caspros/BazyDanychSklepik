@@ -139,7 +139,6 @@ if (isset($_POST['email']))
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<style>
@@ -173,7 +172,7 @@ if (isset($_POST['email']))
             <h4><i class="fa fa-lock" aria-hidden="true"></i> Rejestracja </h4>                        
         </div>
 		<div class="form-group">        
-			Imię: <br/> <input type="text" class="form-control name="imie" /><br/>
+			Imię: <br/> <input type="text" class="form-control" name="imie" />
 		</div>
 		<?php
 			if (isset($_SESSION['e_imie']))
@@ -182,9 +181,9 @@ if (isset($_POST['email']))
 				unset($_SESSION['e_imie']);
 			}
 		?>
-
+	<br>
 	<div class="form-group">
-		Nazwisko: <br/> <input type="text" class="form-control name="nazwisko" /><br/>
+		Nazwisko: <br/> <input type="text" class="form-control" name="nazwisko" />
 	</div>
 	<?php
 		if (isset($_SESSION['e_nazwisko']))
@@ -193,9 +192,9 @@ if (isset($_POST['email']))
 			unset($_SESSION['e_nazwisko']);
 		}
 	?>
-	
+	<br>
 	<div class="form-group">
-		E-mail: <br/> <input type="text" class="form-control name="email" /><br/>
+		E-mail: <br/> <input type="text" class="form-control" name="email" />
 	</div>
 	<?php
 		if (isset($_SESSION['e_email']))
@@ -204,9 +203,9 @@ if (isset($_POST['email']))
 			unset($_SESSION['e_email']);
 		}
 	?>
-	
+	<br>
 	<div class="form-group">	
-		Hasło: <br/> <input type="password" class="form-control name="haslo1" /><br/>
+		Hasło: <br/> <input type="password" class="form-control" name="haslo1" />
 	</div>
 	<?php
 		if (isset($_SESSION['e_haslo']))
@@ -215,9 +214,9 @@ if (isset($_POST['email']))
 			unset($_SESSION['e_haslo']);
 		}
 	?>
-	
+	<br>
 	<div class="form-group">	
-		Powtórz hasło: <br/> <input type="password" class="form-control name="haslo2" /><br/>
+		Powtórz hasło: <br/> <input type="password" class="form-control" name="haslo2" />
 	</div>
 	
 	<label>
@@ -232,18 +231,6 @@ if (isset($_POST['email']))
 		}
 	?>
 	<br>
-	
-	<div id="captcha" class="g-recaptcha" data-sitekey="6LcT1F4UAAAAAGhKBCSu8JukWJgqkha5AXA-HL6k"></div>
-	
-	<?php
-		if (isset($_SESSION['e_bot']))
-		{
-			echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
-			unset($_SESSION['e_bot']);
-		}
-	?>
-	
-	<br />
 	
 	<button type="submit" class="btn btn-default login-popup-btn" name="submit" value="1">Zarejestruj</button>
 	
