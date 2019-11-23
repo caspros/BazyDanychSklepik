@@ -81,7 +81,7 @@
 
 				<!-- DROPDOWN CONTENT -->
 	  			<div id="myDropdown" class="dropdown-content">
-		    		<a href="#">Moje zamówienia</a>
+		    		<a href="zamowienia.php">Moje zamówienia</a>
 					<a href="#">Oceń produkt</a>
 					<a href="#">Ustawienia</a>
 					<?php
@@ -125,8 +125,50 @@
 			</div>
 
 			<div id="orders">
+				
+
+				<?php
+					if($_SESSION['uprawnienia']==1)
+					{
+						echo '<form id="adm_panel" method="POST">
+						<b>Admin Panel</b><br><br>
+						Id zamówienia: <input type="text" name="id_zam"/><br><br>
+						<input type="hidden" name="paid" value="0" />
+						<label><input type="checkbox" name="paid" value="1">Zapłacono</label>
+						<input type="hidden" name="sent" value="0" />
+						<label><input type="checkbox" name="sent" value="1">Wysłano</label><br><br>
+						Data wysłania: <input type="date" name="data_wysl"/>
+						<input type="submit" name="change_status">
+						</form>
+						<br>';
+
+						if(isset($_POST['id_zam']))
+						{
+							$id_zam=$_POST['id_zam'];
+							$status=$_POST['paid'];
+							$data=$_POST['data_wysl'];
+							$status_wysyl=$_POST['sent'];
+							require_once "connect.php";
+							$conn = new mysqli($servername, $username, $password, $dbname);
+							$conn -> query("SET NAMES 'utf8'");
+							if ($conn -> connect_error) {die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+							$sql = "UPDATE zamowienia SET zaplacono=$status WHERE id_zamowienia=$id_zam";
+							$result = $conn -> query($sql);
+							if($status_wysyl)
+							{
+								$sql = "UPDATE zamowienia SET data_wyslania='$data' WHERE id_zamowienia=$id_zam";
+								$result = $conn -> query($sql);
+							}
+							else
+							{
+								$sql = "UPDATE zamowienia SET data_wyslania='0000-00-00' WHERE id_zamowienia=$id_zam";
+								$result = $conn -> query($sql);
+							}
+						}
+					}
+				?>
+
 				<h3 id="title3">Moje zamówienia</h3>
-				<br>
 				<?php
 					Show_orders($id_klienci);
 				?>
@@ -134,12 +176,11 @@
 			</div>
 
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<h1>WYRÓŻNIONE PRODUKTY:</h1>
-
+				<h1>WYRÓŻNIONE PRODUKTY:</h1>
 			<!-- PRODUKTY NA GŁÓWNEJ -->
 			<div id="products">
+				
 				<br>
-
 				<div class="product"><?php Show_product(12);?></div>
 				<div class="product"><?php Show_product(14);?></div>
 				<div class="product"><?php Show_product(8);?></div>
@@ -186,6 +227,10 @@
 	function Show_orders($id)
 	{
 		require_once "connect.php";
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "sklep";
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		$conn -> query("SET NAMES 'utf8'");
 
@@ -195,7 +240,18 @@
 		}
 
 		$id_klienci = $_SESSION['id_klienci'];
-		$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania FROM zamowienia z, klienci k WHERE z.id_klienci = $id_klienci GROUP BY z.id_zamowienia";
+
+		$sql_adm="SELECT uprawnienia FROM klienci WHERE id_klienci = $id_klienci";
+		$result_adm = $conn -> query($sql_adm);
+		$row_adm = $result_adm -> fetch_assoc();
+		if($row_adm['uprawnienia'])
+		{
+			$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania FROM zamowienia z, klienci k GROUP BY z.id_zamowienia";
+		} 
+		else
+		{
+			$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania FROM zamowienia z, klienci k WHERE z.id_klienci = $id_klienci GROUP BY z.id_zamowienia";
+		}
 		$result = $conn -> query($sql);
 		if(mysqli_num_rows($result)==0)
 		{
@@ -220,7 +276,7 @@
 								echo 'Oczekiwanie na zapłatę</td>';
 							} else {echo'Zapłacono</td>';};
 							echo '<td>';
-							if($row['data_wyslania']=="0000-00-00 00:00:00")
+							if($row['data_wyslania']=="0000-00-00")
 							{
 								if($row['zaplacono']==0)
 								{

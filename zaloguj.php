@@ -30,6 +30,7 @@
 				$_SESSION['imie'] = $wiersz['Imie'];
 				$_SESSION['email'] = $wiersz['email'];
 				$_SESSION['id_klienci'] = $wiersz['id_klienci'];
+				$_SESSION['uprawnienia'] = $wiersz['uprawnienia'];
 				$rezultat -> free_result();
 				unset($_SESSION['blad']);
 				header('Location: index.php');

@@ -44,8 +44,27 @@
 }
 
 
+/* 
+#nav {
+width:750px;
+margin:0 auto;
+list-style:none;
+}
+
+#nav li {
+float:left;
+}
+
+#nav a {
+display:block;
+text-align:center;
+width:150px;
+text-decoration:none; 
+}
+*/
+
 /* NOWE MENU KATEGORIE*/
-#menu ul {
+#nav ul {
   z-index: 1;
   list-style-type: none;
   margin: 0;
@@ -54,13 +73,13 @@
   background-color: #444;
 }
 
-#menu li {
+#nav li {
   float: left;
   position: relative;
   left: 30%;
 }
 
-#menu li a {
+#nav li a {
   display: block;
   color: white;
   text-align: center;
@@ -68,7 +87,7 @@
   text-decoration: none;
 }
 
-#menu li a:hover {
+#nav li a:hover {
   background-color: #111;
 }
 
