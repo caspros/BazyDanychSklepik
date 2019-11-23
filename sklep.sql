@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 23 Lis 2019, 16:09
+-- Czas generowania: 23 Lis 2019, 22:24
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -145,7 +145,7 @@ CREATE TABLE `produkty` (
   `dostepna_ilosc` int(11) NOT NULL,
   `producent` varchar(45) NOT NULL,
   `oceny` enum('1','2','3','4','5') DEFAULT NULL,
-  `rozmiar` varchar(5) NOT NULL,
+  `rozmiar` varchar(100) DEFAULT NULL,
   `zdjecie` varchar(50) NOT NULL DEFAULT 'default_product.png',
   `id_kategorie` int(11) NOT NULL,
   `id_klienci` int(11) DEFAULT NULL
@@ -158,10 +158,10 @@ CREATE TABLE `produkty` (
 INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena`, `dostepna_ilosc`, `producent`, `oceny`, `rozmiar`, `zdjecie`, `id_kategorie`, `id_klienci`) VALUES
 (8, 'Koszulka Mike Tyson', 'Koszulka zrobiona z pomysłem', '4', '50.00', 5, 'BenoCORP', NULL, 'XL', 'koszulka_mike.png', 1, NULL),
 (12, 'Spodnie Jeans Master', 'Wykonane z najlepszej jakości materiału Jeans, idealnie dopasowują się do ciała', '5', '100.00', 5, 'Jeans&Jeans', NULL, 'M', 'jeans_m.png', 2, NULL),
-(14, 'Kubek Studenta', 'Kubek wykonany z porcelany z nadrukowanym napisem, który odźwierciedla brutalną rzeczywistość studentów', '5', '30.00', 10, 'KubekKuba', NULL, '', 'kubek_student1.png', 3, NULL),
-(15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 150, 'DługiPisak sp. Z o.o', NULL, '', 'dlugopis_1.png', 4, NULL),
+(14, 'Kubek Studenta', 'Kubek wykonany z porcelany z nadrukowanym napisem, który odźwierciedla brutalną rzeczywistość studentów', '5', '30.00', 10, 'KubekKuba', NULL, NULL, 'kubek_student1.png', 3, NULL),
+(15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 150, 'DługiPisak sp. Z o.o', NULL, NULL, 'dlugopis_1.png', 4, NULL),
 (16, 'Bluza z ziemniakiem', 'Bluza wykonana z tworzywa sztucznego, idealna aby wyróżnić się z tłumu', '3', '70.00', 10, 'Bluzex sp. Z o.o', NULL, 'L', 'bluza_1.png', 5, NULL),
-(17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 10, 'Naklejkownia sp. Z o.o', NULL, '', 'naklejka_1.png', 6, NULL);
+(17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 10, 'Naklejkownia sp. Z o.o', NULL, '100cm x 150cm', 'naklejka_1.png', 6, NULL);
 
 -- --------------------------------------------------------
 
