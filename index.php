@@ -80,7 +80,7 @@
 	  			<div id="myDropdown" class="dropdown-content">
 		    		<a href="zamowienia.php">Moje zamówienia</a>
 					<a href="#">Oceń produkt</a>
-					<a href="#">Ustawienia</a>
+					<a href="profil.php">Ustawienia</a>
 					<?php
 						if (isset($_SESSION['zaloguj']))
 						{
@@ -147,12 +147,12 @@
 			<div id="products">
 				<br>
 
-				<div class="product"><?php Show_product(12);?></div>
-				<div class="product"><?php Show_product(14);?></div>
-				<div class="product"><?php Show_product(8);?></div>
-				<div class="product"><?php Show_product(15);?></div>
-				<div class="product"><?php Show_product(16);?></div>
-				<div class="product"><?php Show_product(17);?></div>
+				<a href="produkt.php?id_produkty=12"><div class="product"><?php Show_product(12);?></div></a>
+				<a href="produkt.php?id_produkty=14"><div class="product"><?php Show_product(14);?></div></a>
+				<a href="produkt.php?id_produkty=8"><div class="product"><?php Show_product(8);?></div></a>
+				<a href="produkt.php?id_produkty=15"><div class="product"><?php Show_product(15);?></div></a>
+				<a href="produkt.php?id_produkty=16"><div class="product"><?php Show_product(16);?></div></a>
+				<a href="produkt.php?id_produkty=17"><div class="product"><?php Show_product(17);?></div></a>
 
 			</div>
 
