@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 23 Lis 2019, 11:36
+-- Czas generowania: 23 Lis 2019, 16:09
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -78,20 +78,21 @@ CREATE TABLE `klienci` (
   `Nazwisko` varchar(45) NOT NULL,
   `haslo` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `id_adres` int(11) DEFAULT NULL
+  `id_adres` int(11) DEFAULT NULL,
+  `uprawnienia` tinyint(3) NOT NULL DEFAULT '0' COMMENT '0 - klient, 1 - administrator'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `klienci`
 --
 
-INSERT INTO `klienci` (`id_klienci`, `Imie`, `Nazwisko`, `haslo`, `email`, `id_adres`) VALUES
-(5, 'Benek', 'Benek', '76678ce4ef2dc607104cf9955b502443', 'benek1@o2.pl', NULL),
-(6, 'Test', 'Tescik', 'cc03e747a6afbbcbf8be7668acfebee5', 'test@gmail.com', NULL),
-(7, 'Admin', 'Adminowski', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', NULL),
-(8, 'Baltazar', 'KrÃ³l', 'f17f4b3e8e709cd3c89a6dbd949d7171', 'baltazar@123.pl', NULL),
-(9, 'Robcio', 'Robertos', '6058d199135afa99b8446f246e7b5cec', 'robertos@o2.pl', NULL),
-(10, 'Graf', 'Graf', '2c01010b99ef591baef2d11237937e54', 'Graf@Graf.pl', NULL);
+INSERT INTO `klienci` (`id_klienci`, `Imie`, `Nazwisko`, `haslo`, `email`, `id_adres`, `uprawnienia`) VALUES
+(5, 'Benek', 'Benek', '76678ce4ef2dc607104cf9955b502443', 'benek1@o2.pl', NULL, 0),
+(6, 'Test', 'Tescik', 'cc03e747a6afbbcbf8be7668acfebee5', 'test@gmail.com', NULL, 0),
+(7, 'Admin', 'Adminowski', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', NULL, 1),
+(8, 'Baltazar', 'KrÃ³l', 'f17f4b3e8e709cd3c89a6dbd949d7171', 'baltazar@123.pl', NULL, 0),
+(9, 'Robcio', 'Robertos', '6058d199135afa99b8446f246e7b5cec', 'robertos@o2.pl', NULL, 0),
+(10, 'Graf', 'Graf', '2c01010b99ef591baef2d11237937e54', 'Graf@Graf.pl', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -183,7 +184,7 @@ CREATE TABLE `promocje` (
 CREATE TABLE `zamowienia` (
   `id_zamowienia` int(11) NOT NULL,
   `data_zlozenia` datetime NOT NULL,
-  `data_wyslania` datetime NOT NULL,
+  `data_wyslania` date NOT NULL,
   `zaplacono` tinyint(4) NOT NULL,
   `id_klienci` int(11) NOT NULL,
   `id_zamowienie_produkty` int(11) NOT NULL
@@ -194,8 +195,9 @@ CREATE TABLE `zamowienia` (
 --
 
 INSERT INTO `zamowienia` (`id_zamowienia`, `data_zlozenia`, `data_wyslania`, `zaplacono`, `id_klienci`, `id_zamowienie_produkty`) VALUES
-(2, '2019-11-22 19:40:50', '0000-00-00 00:00:00', 0, 5, 1),
-(3, '2019-11-22 19:44:50', '0000-00-00 00:00:00', 1, 5, 2);
+(2, '2019-11-22 19:40:50', '0000-00-00', 0, 5, 1),
+(3, '2019-11-22 19:44:50', '2019-11-23', 1, 5, 2),
+(4, '2019-11-23 13:30:35', '2019-11-11', 1, 9, 3);
 
 -- --------------------------------------------------------
 
@@ -335,7 +337,7 @@ ALTER TABLE `promocje`
 -- AUTO_INCREMENT dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienie_produkty`
