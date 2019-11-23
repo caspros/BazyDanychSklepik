@@ -80,7 +80,7 @@
 	  			<div id="myDropdown" class="dropdown-content">
 		    		<a href="zamowienia.php">Moje zamówienia</a>
 					<a href="#">Oceń produkt</a>
-					<a href="#">Ustawienia</a>
+					<a href="profil.php">Ustawienia</a>
 					<?php
 						if (isset($_SESSION['zaloguj']))
 						{
