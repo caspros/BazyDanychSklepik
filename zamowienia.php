@@ -1,12 +1,15 @@
 <?php
 	session_start();
+
 	if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
 	{
+		$id_klienci = $_SESSION['id_klienci'];
 		$_SESSION['wyloguj'] = "Wyloguj";
 		unset($_SESSION['zaloguj']);
 	} else {
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
+		header('Location: index.php');
 	}
 ?>
 
@@ -21,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Alledrogo</title>
+	<title>Moje zamówienia</title>
 </head>
 
 <body>
@@ -78,7 +81,7 @@
 
 				<!-- DROPDOWN CONTENT -->
 	  			<div id="myDropdown" class="dropdown-content">
-		    		<a href="zamowienia.php">Moje zamówienia</a>
+		    		<a href="#">Moje zamówienia</a>
 					<a href="#">Oceń produkt</a>
 					<a href="#">Ustawienia</a>
 					<?php
@@ -121,26 +124,16 @@
 
 			</div>
 
-			<br>
+			<div id="orders">
+				<h3 id="title3">Moje zamówienia</h3>
+				<br>
+				<?php
+					Show_orders($id_klienci);
+				?>
 
-			<!-- SLIDER Z OFERTAMI -->
-			<div class="daily_offers" id="offers1">
-			<i class="fas fa-arrow-left" id="prevBtn"></i>
-			<i class="fas fa-arrow-right" id="nextBtn"></i>
-				<div class="slider">
-
-					<img src="images/banners/promocja_swieta.png" id="lastClone" alt="" height="100%" width="100%">
-					<img src="images/banners/black_friday.png" alt="" height="100%" width="100%">
-					<img src="images/banners/darmowa_dostawa.png" alt="" height="100%" width="100%">
-					<img src="images/banners/rabat_rtv.png" alt="" height="100%" width="100%">
-					<img src="images/banners/promocja_swieta.png" alt="" height="100%" width="100%">
-					<img src="images/banners/black_friday.png" id="firstClone" alt="" height="100%" width="100%">
-				
-				</div>
 			</div>
 
-
-			<br><br><br>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<h1>WYRÓŻNIONE PRODUKTY:</h1>
 
 			<!-- PRODUKTY NA GŁÓWNEJ -->
@@ -155,43 +148,7 @@
 				<div class="product"><?php Show_product(17);?></div>
 
 			</div>
-
-			<div id="why_us">
-				<br><br>
-				<h1>Dlaczego warto nam zaufać?</h1>
-
-				<div class="why_us_content">
-					<h3>Gwarancja jakości</h3>
-					<br>
-					Nasze produkty są bardzo dobre jakościowo, wykonane z dbałością o każdy szczegół. Podczas produkcji działamy zgodnie z ekologią. Robiąc u nas zakupy masz pewność, że zamówione produkty będą Ci służyły bardzo długo.
-					<br><br>
-					<img src="images/quality.png" alt="jakosc" height="35%" width="35%">
-				</div>
-
-				<div class="why_us_content">
-					<h3>Darmowe zwroty do 14 dni</h3>
-					<br>
-					Nasza strona oferuje możliwość zwrotu zakupionego produktu do 14 dni od momentu otrzymania towaru bez potrzeby podania przyczyny zwrotu! Zwrot jest całkowicie darmowy, przesyłkę zwrotną pokrywamy my!
-					<br><br>
-					<img src="images/zwrot.png" alt="zwrot" height="35%" width="45%">
-				</div>
-
-				<div class="why_us_content">
-					<h3>Opinie klientów</h3>
-					<br>
-					Jeśli jeszcze masz wątpliwości, zajrzyj do opinii naszych klientów, którzy zakupili już nasze produkty. Obiektywne opinie z pewnością pomogą Ci w podjęciu decyzji o opłacalności danych produktów. Dzięki opiniom jesteśmy w stanie dla Was stale ulepszać nasze produkty.
-					<br><br>
-					<img src="images/opinie.png" alt="zwrot" height="30%" width="75%">
-				</div>
-			</div>
-
-			<div id="comentaries">
-				<?php
-					Show_opinion(5);
-					Show_opinion(2);
-					Show_opinion(4);
-				?> 
-			</div>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</div>
 
 		
@@ -206,16 +163,6 @@
 	   </ul>
 	</div>
 
-
-	<!-- MENU -->
-	<div id="nav" class="clearfix">
-		<ul id="nav">	
-				<li><a href="#">FAQ</a></li>
-				<li><a href="#offers1">Kontakt</a></li>
-				<li><a href="#products">Regulamin</a></li>
-		</ul> 	
-	</div>
-	
 	<div id="footer">
 		Korzystanie z serwisu oznacza akceptację
 		<a href="#">
@@ -223,18 +170,74 @@
 		</a>
 	</div>	
 
-	<!-- JQUERY -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<!-- STICKY MENU JS-->
-	<script src="js/sticky_menu.js"></script>
-	<!-- STICKY MENU WITAJ ZALOGUJ SIĘ JS-->
-	<script src="js/dropdown_sticky.js"></script>
-	<!-- SLIDER JS-->
-	<script src="js/slider.js"></script>
-	
+		<!-- JQUERY -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<!-- STICKY MENU JS-->
+		<script src="js/sticky_menu.js"></script>
+		<!-- STICKY MENU WITAJ ZALOGUJ SIĘ JS-->
+		<script src="js/dropdown_sticky.js"></script>
+		<!-- SLIDER JS-->
+		<script src="js/slider.js"></script>
 </body>
 </html>
 
+<!--- PHP DO SHOW_ORDERS --->
+<?php
+	function Show_orders($id)
+	{
+		require_once "connect.php";
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn -> query("SET NAMES 'utf8'");
+
+		// Check connection
+		if ($conn -> connect_error) {
+		    die("Nie połączono z bazą danych: " . $conn -> connect_error);
+		}
+
+		$id_klienci = $_SESSION['id_klienci'];
+		$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania FROM zamowienia z, klienci k WHERE z.id_klienci = $id_klienci GROUP BY z.id_zamowienia";
+		$result = $conn -> query($sql);
+		if(mysqli_num_rows($result)==0)
+		{
+			echo '<span class="no_orders">Brak zamówień</span>';
+		} 
+		else {
+				echo '<table class="order_table">
+						<tr>
+							<th>Id zamówienia</th>
+							<th>Data zamówienia</th>
+							<th>Status płatności</th>
+							<th>Data wysłania</th>
+						</tr>';
+				while($row = $result -> fetch_assoc())
+				{
+					echo '<tr>
+							<td>'.$row['id_zamowienia'].'</td>
+							<td>'.$row['data_zlozenia'].'</td>
+							<td>';
+							if($row['zaplacono']==0)
+							{
+								echo 'Oczekiwanie na zapłatę</td>';
+							} else {echo'Zapłacono</td>';};
+							echo '<td>';
+							if($row['data_wyslania']=="0000-00-00 00:00:00")
+							{
+								if($row['zaplacono']==0)
+								{
+									echo 'Oczekiwanie na zapłatę';
+								} else {
+									echo 'Zamówienie gotowe do wysłania';
+								}
+							}else echo $row['data_wyslania'];
+							echo '</td>
+						</tr>';						
+				}
+				echo '</table>';
+			}
+	}
+?>
+
+<!--- PHP DO SHOW_PRODUCT --->
 <?php
 	$servername = "localhost";
 	$username = "root";
@@ -271,29 +274,6 @@
 	 		while($row = $result -> fetch_assoc())
 	 		{
 	       		echo '<img src="images/products/'.$row["zdjecie"].'" width="150" height="150" alt="product.png"><br>'.$row["nazwa"]." ".$row["rozmiar"].'<br><span style="color:#FF5A00"><b>KUP TERAZ: '.$row["cena"]." PLN</b></span>";
-			}
-		} else { echo "No results"; }
-	}
-	
-	
-	function Show_opinion($id)
-	{	
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "sklep";
-		require_once "connect.php";
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		$conn -> query("SET NAMES 'utf8'");
-
-		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-		$sql = "SELECT id_opinie, id_produkty, id_klienci, gwiazdka, opinia FROM opinie WHERE id_opinie = $id";
-		$result = $conn -> query($sql);
-		if ($result -> num_rows > 0)
-		{
-	 		while($row = $result -> fetch_assoc())
-	 		{
-	       		echo '<img src="images/ocena.png"> Komentarz po zakupie: "'.$row["opinia"];
 			}
 		} else { echo "No results"; }
 	}

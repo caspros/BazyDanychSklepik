@@ -49,8 +49,9 @@ text-align: center;
 	width: 100%;
 	text-align: center;
 	background-color: #444;
-	padding: 30px;
+	padding: 2rem 2rem 2rem 2rem;
 }
+
 
 /* ELEMENTY STRONY -----------------*/
 body {
@@ -258,4 +259,47 @@ ol > li{
 .why_us_content:hover{
 	transition-duration: 0.4s;
 	transform: scale(1.05,1.05);
+}
+
+/* Zamowienia.php */
+
+table, th, td{
+	border: 1px solid black;
+	padding: 10px;
+}
+
+th{
+	background-color: #FF5A00;
+}
+
+table {
+	
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#title3{
+	font-style: normal;
+	text-align: center;
+}
+
+#orders{
+	float: left;
+	width: 70%;
+	margin: 20px;
+	margin-left: 80px;
+	padding: 20px;
+}
+
+.order_table{
+	text-align: center;
+	font-style: normal;
+	border: 1px solid black;
+}
+
+.no_orders{
+	position: relative;
+	left: 43%;
+	text-align: center;
+
 }

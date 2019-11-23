@@ -10,7 +10,7 @@
 
 	require_once "connect.php";
 
-	$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
+	$polaczenie = @new mysqli($servername, $username, $password, $dbname);
 	
 	$email = $_POST['email'];
 	$haslo = $_POST['haslo'];
@@ -28,6 +28,8 @@
 			{
 				$_SESSION['zalogowany'] = true;
 				$_SESSION['imie'] = $wiersz['Imie'];
+				$_SESSION['email'] = $wiersz['email'];
+				$_SESSION['id_klienci'] = $wiersz['id_klienci'];
 				$rezultat -> free_result();
 				unset($_SESSION['blad']);
 				header('Location: index.php');

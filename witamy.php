@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if ((isset($_SESSION['udanarejestracja'])) && ($_SESSION['udanarejestracja']==true))
+	{
+		unset($_SESSION['udanarejestracja']);
+	} else {
+		header('Location: index.php');
+	}
+
+?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
