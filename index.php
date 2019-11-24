@@ -107,17 +107,17 @@
 
 				<span class="kat"><b>Kategorie:</b></span>
 				<br><br>
-				<a href="#">Koszulki</a><br>
-				<a href="#">Spodnie</a><br>
-				<a href="#">Kubki</a><br>
-				<a href="#">Długopisy</a><br>
-				<a href="#">Bluzy</a><br>
-				<a href="#">Naklejki</a><br>
-				<a href="#">Ramki</a><br>
-				<a href="#">RTV</a><br>
-				<a href="#">AGD</a><br>
-				<a href="#">Alkohol</a><br>
-				<a href="#">Zabawki</a><br>
+				<a href="kategoria.php?id_kategorie=1">Koszulki</a><br>
+				<a href="kategoria.php?id_kategorie=2">Spodnie</a><br>
+				<a href="kategoria.php?id_kategorie=3">Kubki</a><br>
+				<a href="kategoria.php?id_kategorie=4">Długopisy</a><br>
+				<a href="kategoria.php?id_kategorie=5">Bluzy</a><br>
+				<a href="kategoria.php?id_kategorie=6">Naklejki</a><br>
+				<a href="kategoria.php?id_kategorie=7">Ramki</a><br>
+				<a href="kategoria.php?id_kategorie=8">RTV</a><br>
+				<a href="kategoria.php?id_kategorie=9">AGD</a><br>
+				<a href="kategoria.php?id_kategorie=10">Alkohol</a><br>
+				<a href="kategoria.php?id_kategorie=11">Zabawki</a><br>
 
 			</div>
 
