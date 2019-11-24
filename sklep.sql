@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 23 Lis 2019, 22:24
+-- Czas generowania: 24 Lis 2019, 20:25
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -161,7 +161,8 @@ INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena
 (14, 'Kubek Studenta', 'Kubek wykonany z porcelany z nadrukowanym napisem, który odźwierciedla brutalną rzeczywistość studentów', '5', '30.00', 10, 'KubekKuba', NULL, NULL, 'kubek_student1.png', 3, NULL),
 (15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 150, 'DługiPisak sp. Z o.o', NULL, NULL, 'dlugopis_1.png', 4, NULL),
 (16, 'Bluza z ziemniakiem', 'Bluza wykonana z tworzywa sztucznego, idealna aby wyróżnić się z tłumu', '3', '70.00', 10, 'Bluzex sp. Z o.o', NULL, 'L', 'bluza_1.png', 5, NULL),
-(17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 10, 'Naklejkownia sp. Z o.o', NULL, '100cm x 150cm', 'naklejka_1.png', 6, NULL);
+(17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 10, 'Naklejkownia sp. Z o.o', NULL, '100cm x 150cm', 'naklejka_1.png', 6, NULL),
+(18, 'Koszulka biała KONSTYTUCJA', 'Biała koszulka doskonałej jakości z nadrukowanym napisem KONSTYTUCJA. Ulubiona koszulka Lecha Wałęsy', '5', '75.00', 100, 'LechWałęsaCompany', NULL, 'M', 'koszulka_otua.png', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -325,7 +326,7 @@ ALTER TABLE `opinie`
 -- AUTO_INCREMENT dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT dla tabeli `promocje`
