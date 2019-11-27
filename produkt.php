@@ -136,19 +136,21 @@
 					if ($result -> num_rows > 0)
 					{
 				 		while($row = $result -> fetch_assoc())
-				 		{
-				       		echo '<div id="produkt_big"><img src="images/products/'
-				       		.$row["zdjecie"].'" width="500" height="500" alt="product.png"><br><b>'
-				       		.$row["nazwa"]
-				       		.'</b><br><br>Specyfikacja produktu<br><br><div id="dane">Rozmiar: ';
-				       		if(is_null($row["rozmiar"]))
-				       		{
-				       			echo 'Nie dotyczy';
-				       		}else echo $row["rozmiar"];
-				       		echo '<br>Producent: '.$row["producent"].
-				       		'</div><br><br>Opis produktu: <br>'.$row["opis"].
-				       		'<br><br><input type="number" id="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
-				       		'<br><br><button id="kup_teraz"><span style="color:white"><b>KUP TERAZ: '.$row["cena"]." PLN</b></span></button></div>";
+				 		{	
+				 			setcookie("MyCookie", $row["cena"]);
+				       		echo '<div id="produkt_big"><img src="images/products/'.$row["zdjecie"].'" width="500" height="500" alt="product.png"><br><b>'
+						       		.$row["nazwa"].'</b><br><br>Specyfikacja produktu<br><br>
+						       		<div id="dane">Rozmiar: ';
+							       		if(is_null($row["rozmiar"]))
+							       		{
+							       			echo 'Nie dotyczy';
+							       		}else echo $row["rozmiar"];
+							       		echo '<br>Producent: '.$row["producent"].
+						       		'</div>
+						       		<br><br>Opis produktu: <br>'.$row["opis"].
+						       		'<br><br><input type="number" id="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
+						       		'<br><br><button id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"]."</span> PLN</b></span></button>
+				       			</div>";
 						}
 					} else { echo "No results"; }
 				}
@@ -159,6 +161,9 @@
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+			<span id="current1">5</span><br>
+			<input type="number" id="n1" value="5" />
+			
 		</div>
 	</div>
 
@@ -177,6 +182,7 @@
 		</a>
 	</div>	
 
+	<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
 	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<!-- STICKY MENU JS-->
@@ -187,19 +193,16 @@
 	<script src="js/slider.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-	<!-- TU BĘDĘ JESZCZE POPRAWIAŁ
-
-	<script>
-	jQuery(function($) {
-	  $('#cena').text($('#ile_sztuk').val());
-
-	  $('#ile_sztuk').on('input', function() {
-	    $('#cena').text($('#ile_sztuk').val()*50);
-	  });
-	});
+	<!-- PRICE CHANGING WHILE INCREASE AMOUT OF PRODUCT-->
+	<script type="text/javascript">
+			var cookies = document.cookie.split(";").
+   			map(function(el){ return el.split("="); }).
+    		reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
+			
+				$('#ile_sztuk').on('change paste', function () {
+				    $("#current").html($(this).val()*cookies["MyCookie"])   
+				});
 	</script>
-		-->
-	
 </body>
 </html>
 
