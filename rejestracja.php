@@ -76,7 +76,7 @@ if (isset($_POST['email']))
 	
 	try
 	{
-		$polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
+		$polaczenie = new mysqli($servername, $username, $password, $dbname);
 		if($polaczenie->connect_errno!=0)
 		{
 			throw new Exception(mysqli_connect_errno());
