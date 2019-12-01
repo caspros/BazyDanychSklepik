@@ -8,6 +8,91 @@
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
 	}
+	//poprawność miasta
+	$miasto = $_POST['miasto'];
+	if(!(preg_match($sprawdz, $miasto)))
+	{
+		$wszystko_OK=false;
+		$_SESSION['e_miasto']="Podaj poprawną miejscowość";
+	}
+
+	if(empty($_POST['miasto']))
+	{
+		$wszystko_OK=false;
+		$_SESSION['e_miasto']="Musisz wypełnić wszystkie pola";
+	}
+	//poprawność ulicy
+	$ulica = $_POST['ulica'];
+	if(!(preg_match($sprawdz, $ulica)))
+	{
+		$wszystko_OK=false;
+		$_SESSION['e_ulica']="Podaj poprawną ulice";
+	}
+
+	if(empty($_POST['ulica']))
+	{
+		$wszystko_OK=false;
+		$_SESSION['e_ulica']="Musisz wypełnić wszystkie pola";
+	}
+	//poprawność numeru domu
+	$nr = $_POST['nr'];
+	if(!(preg_match($sprawdz, $nr)))
+	{
+		$wszystko_OK=false;
+		$_SESSION['e_nr']="Podaj poprawny numer domu";
+	}
+
+	if(empty($_POST['nr']))
+	{
+		$wszystko_OK=false;
+		$_SESSION['e_nr']="Musisz wypełnić wszystkie pola";
+	}
+
+	//poprawność numeru domu
+	$nrm = $_POST['nrm'];
+	if(!(preg_match($sprawdz, $nrm)))
+	{
+		$wszystko_OK=false;
+		$_SESSION['e_nrm']="Podaj poprawny numer mieszkania";
+	}
+	//poprawność kodu pocztowego
+	$zipcode = $_POST['zipcode'];
+	if(!(preg_match($sprawdz, $zipcode)))
+	{
+		$wszystko_OK=false;
+		$_SESSION['e_zipcode']="Podaj poprawny kod pocztowy";
+	}
+
+	if(empty($_POST['zipcode']))
+	{
+		$wszystko_OK=false;
+		$_SESSION['e_zipcode']="Musisz wypełnić wszystkie pola";
+	}
+
+	if($wszystko_OK==true)
+		{
+			//wszystko dobrze dane zapisane
+			if($polaczenie->query("INSERT INTO klienci(Miasto, Ulica, nr, nrm, zipcode) VALUES ('$miasto', '$ulica' ,'$nr','$nrm','$zipcode')"))
+			{
+				unset($_POST['miasto']);
+				unset($_POST['ulica']);
+				unset($_POST['nr']);
+				unset($_POST['nrm']);
+				unset($_POST['zipcode']);
+				$_SESSION['udanedanezamieszkania']=true;
+				header('Location: witamy.php');
+			}
+			else
+			{
+				throw new Exception($polaczenie->error);
+			}
+		}		
+			$polaczenie->close();
+		}
+	}
+
+	catch(Exception $e)
+
 ?>
 
 <!DOCTYPE HTML>
@@ -98,10 +183,74 @@
 	<div id="container">
 
 		<!-- MIĘSO ARMATNIE -->
-		<div id="main">
-			TUTAJ BĘDZIE FORMULARZ DO UZUPEŁNIENIA DANYCH ADRESOWYCH ITP.
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<div id="main">
+			<div class="login-popup-wrap new_login_popup"> 
+	<div id="container">
+		<form method="post">
+		<div class="login-popup-heading text-center">
+            <h4><i class="fa fa-lock" aria-hidden="true"></i> Dane do wysyłki </h4>                        
+        </div>
+		<div class="form-group">        
+			Miasto: <br/> <input type="text" class="form-control" name="miasto" />
+		</div>
+		<?php
+			if (isset($_SESSION['e_miasto']))
+			{
+				echo '<div class="error">'.$_SESSION['e_miasto'].'</div>';
+				unset($_SESSION['e_miasto']);
+			}
+		?>
+	<br>
+	<div class="form-group">
+		Ulica: <br/> <input type="text" class="form-control" name="ulica" />
+	</div>
+	<?php
+		if (isset($_SESSION['e_ulica']))
+		{
+			echo '<div class="error">'.$_SESSION['e_ulica'].'</div>';
+			unset($_SESSION['e_ulica']);
+		}
+	?>
+	<br>
+	<div class="form-group">
+		Numer domu: <br/> <input type="text" class="form-control" name="nr" />
+	</div>
+	<?php
+		if (isset($_SESSION['e_nr']))
+		{
+			echo '<div class="error">'.$_SESSION['e_nr'].'</div>';
+			unset($_SESSION['e_email']);
+		}
+	?>
+	<br>
+	<div class="form-group">	
+		Numer mieszkania: <br/> <input type="text" class="form-control" name="nrm" />
+	</div>
+	<?php
+		if (isset($_SESSION['e_nrm']))
+		{
+			echo '<div class="error">'.$_SESSION['e_nrm'].'</div>';
+			unset($_SESSION['e_nrm']);
+		}
+	?>
+	<br>
+	<div class="form-group">	
+		Kod pocztowy: <br/> <input type="text" class="form-control" name="zipcode" />
+	</div>
+	<?php
+		if (isset($_SESSION['e_zipcode']))
+		{
+			echo '<div class="error">'.$_SESSION['e_zipcode'].'</div>';
+			unset($_SESSION['e_zipcode']);
+		}
+	?>
+	<br>
+	
+	<button type="submit" class="btn btn-default login-popup-btn" name="submit" value="1">Zapisz</button>
+	
+	</form>
+	</div>
+	</div>
 			
 		</div>
 	</div>
