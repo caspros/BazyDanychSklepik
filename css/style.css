@@ -40,10 +40,6 @@ text-align: center;
 	font-style: italic;
 }
 
-#sidebar {
-
-}
-
 #footer {
 	color: white;
 	width: 100%;
@@ -124,6 +120,7 @@ ol > li{
 	width: 12%;
 	float: left;
 	line-height: 15px;
+	height: inherit;
 }
 
 #categories a{
@@ -320,6 +317,7 @@ table {
 /* Produkt.php */
 
 #container_produkt {
+	height: 2000px;
 	background: #FFFFFF;
 	margin: 2.5% auto;
 	width: 95%;

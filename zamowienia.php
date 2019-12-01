@@ -130,7 +130,7 @@
 				<?php
 					if($_SESSION['uprawnienia']==1)
 					{
-						echo '<form id="adm_panel" method="POST">
+						echo '<a href="addProduct.php">Dodaj produkt!</a><br><form id="adm_panel" method="POST">
 						<b>Admin Panel</b><br><br>
 						Id zamówienia: <input type="text" name="id_zam"/><br><br>
 						<input type="hidden" name="paid" value="0" />
