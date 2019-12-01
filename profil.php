@@ -8,6 +8,7 @@
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
 	}
+
 	//poprawność miasta
 	$miasto = $_POST['miasto'];
 	if(!(preg_match($sprawdz, $miasto)))
@@ -85,13 +86,11 @@
 			else
 			{
 				throw new Exception($polaczenie->error);
-			}
-		}		
+			}		
 			$polaczenie->close();
 		}
-	}
 
-	catch(Exception $e)
+
 
 ?>
 
