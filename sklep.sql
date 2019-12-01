@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 24 Lis 2019, 20:25
+-- Czas generowania: 02 Gru 2019, 00:40
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -162,7 +162,9 @@ INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena
 (15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 150, 'DługiPisak sp. Z o.o', NULL, NULL, 'dlugopis_1.png', 4, NULL),
 (16, 'Bluza z ziemniakiem', 'Bluza wykonana z tworzywa sztucznego, idealna aby wyróżnić się z tłumu', '3', '70.00', 10, 'Bluzex sp. Z o.o', NULL, 'L', 'bluza_1.png', 5, NULL),
 (17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 10, 'Naklejkownia sp. Z o.o', NULL, '100cm x 150cm', 'naklejka_1.png', 6, NULL),
-(18, 'Koszulka biała KONSTYTUCJA', 'Biała koszulka doskonałej jakości z nadrukowanym napisem KONSTYTUCJA. Ulubiona koszulka Lecha Wałęsy', '5', '75.00', 100, 'LechWałęsaCompany', NULL, 'M', 'koszulka_otua.png', 1, NULL);
+(18, 'Koszulka biała KONSTYTUCJA', 'Biała koszulka doskonałej jakości z nadrukowanym napisem KONSTYTUCJA. Ulubiona koszulka Lecha Wałęsy', '5', '75.00', 100, 'LechWałęsaCompany', NULL, 'M', 'koszulka_otua.png', 1, NULL),
+(51, 'Ramka na zdjęcie', 'Zawieszki i fleksy sprowadzamy od włoskiego producenta. Metale te, są najwyższej jakości – nie wyginają się i nie wyłamują. Będą Ci służyć przez lata bez potrzeby wymiany!', NULL, '19.50', 50, 'RamkiToHajs', NULL, '10x15', 'ramka_15_10.png', 7, NULL),
+(52, 'Koszulka DESTYLACJA', 'Oryginalna koszulka męska DESTYLACJA z krótkim rękawem firmy S&S. Wykonana z najwyższej jakości bawełny, zapewniającej komfort i wygodę użytkowania.', NULL, '77.50', 50, 'S&S', NULL, 'M', 'koszulka_destylacja.png', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -196,7 +198,7 @@ CREATE TABLE `zamowienia` (
 --
 
 INSERT INTO `zamowienia` (`id_zamowienia`, `data_zlozenia`, `data_wyslania`, `zaplacono`, `id_klienci`, `id_zamowienie_produkty`) VALUES
-(2, '2019-11-22 19:40:50', '0000-00-00', 0, 5, 1),
+(2, '2019-11-22 19:40:50', '3123-12-12', 1, 5, 1),
 (3, '2019-11-22 19:44:50', '2019-11-23', 1, 5, 2),
 (4, '2019-11-23 13:30:35', '2019-11-11', 1, 9, 3);
 
@@ -326,7 +328,7 @@ ALTER TABLE `opinie`
 -- AUTO_INCREMENT dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT dla tabeli `promocje`
