@@ -1,0 +1,32 @@
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta charset="UTF-8">
+	<title>Dodaj produkt</title>
+</head>
+<body>
+	<form action="dodaj.php" method="post">
+	
+			Nazwa:<input type="text" name="nazwa">
+	
+			Opis:<textarea name="opis" cols="50" rows="10"></textarea>
+		
+			Cena:<input type="number" name="cena">
+		
+			Dostępna ilość:<input type="number" name="dostepna_ilosc">
+	
+			Producent:<input type="text" name="producent">
+
+			Rozmiar:<input type="text" name="rozmiar">
+		
+			Zdjęcie:<input type="file" name="zdjecie">
+	
+		<input type=submit value="Dodaj">
+		
+	</form>
+</body>
+</html>
