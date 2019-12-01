@@ -9,7 +9,6 @@
 		unset($_SESSION['wyloguj']);
 	}
 
-
 	//poprawność miasta
 	$miasto = $_POST['miasto'];
 	if(!(preg_match($sprawdz, $miasto)))
@@ -90,6 +89,8 @@
 			}		
 			$polaczenie->close();
 		}
+
+
 
 ?>
 
