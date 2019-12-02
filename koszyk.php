@@ -19,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
 	<title>Alledrogo</title>
@@ -52,7 +53,7 @@
 
 			<!-- koszyk -->
 			<li>
-				<a href="koszyk.php">
+				<a href="#">
 					<span class="koszyk">
 						<i class="fas fa-shopping-cart"></i>
 					</span>
@@ -95,14 +96,8 @@
 	</div>
 	
 	<!-- GŁÓWNY CONTAINER -->
-	<div id="container">
-
-		<!-- MIĘSO ARMATNIE -->
-		<div id="main">
-			
-
-			<!-- KATEGORIE -->
-			<div id="categories">
+	<div id="container_produkt">
+		<div id="categories">
 				<br>
 
 				<span class="kat"><b>Kategorie:</b></span>
@@ -119,83 +114,17 @@
 				<a href="kategoria.php?id_kategorie=10">Alkohol</a><br>
 				<a href="kategoria.php?id_kategorie=11">Zabawki</a><br>
 
-			</div>
-
-			<br>
-
-			<!-- SLIDER Z OFERTAMI -->
-			<div class="daily_offers" id="offers1">
-			<i class="fas fa-arrow-left" id="prevBtn"></i>
-			<i class="fas fa-arrow-right" id="nextBtn"></i>
-				<div class="slider">
-
-					<img src="images/banners/promocja_swieta.png" id="lastClone" alt="" height="100%" width="100%">
-					<img src="images/banners/black_friday.png" alt="" height="100%" width="100%">
-					<img src="images/banners/darmowa_dostawa.png" alt="" height="100%" width="100%">
-					<img src="images/banners/rabat_rtv.png" alt="" height="100%" width="100%">
-					<img src="images/banners/promocja_swieta.png" alt="" height="100%" width="100%">
-					<img src="images/banners/black_friday.png" id="firstClone" alt="" height="100%" width="100%">
-				
-				</div>
-			</div>
-
-
-			<br><br><br>
-			<h1>WYRÓŻNIONE PRODUKTY:</h1>
-
-			<!-- PRODUKTY NA GŁÓWNEJ -->
-			<div id="products">
-				<br>
-
-				<a href="produkt.php?id_produkty=12"><div class="product"><?php Show_product(12);?></div></a>
-				<a href="produkt.php?id_produkty=14"><div class="product"><?php Show_product(14);?></div></a>
-				<a href="produkt.php?id_produkty=8"><div class="product"><?php Show_product(8);?></div></a>
-				<a href="produkt.php?id_produkty=15"><div class="product"><?php Show_product(15);?></div></a>
-				<a href="produkt.php?id_produkty=16"><div class="product"><?php Show_product(16);?></div></a>
-				<a href="produkt.php?id_produkty=17"><div class="product"><?php Show_product(17);?></div></a>
-
-			</div>
-
-			<div id="why_us">
-				<br><br>
-				<h1>Dlaczego warto nam zaufać?</h1>
-
-				<div class="why_us_content">
-					<h3>Gwarancja jakości</h3>
-					<br>
-					Nasze produkty są bardzo dobre jakościowo, wykonane z dbałością o każdy szczegół. Podczas produkcji działamy zgodnie z ekologią. Robiąc u nas zakupy masz pewność, że zamówione produkty będą Ci służyły bardzo długo.
-					<br><br>
-					<img src="images/quality.png" alt="jakosc" height="35%" width="35%">
-				</div>
-
-				<div class="why_us_content">
-					<h3>Darmowe zwroty do 14 dni</h3>
-					<br>
-					Nasza strona oferuje możliwość zwrotu zakupionego produktu do 14 dni od momentu otrzymania towaru bez potrzeby podania przyczyny zwrotu! Zwrot jest całkowicie darmowy, przesyłkę zwrotną pokrywamy my!
-					<br><br>
-					<img src="images/zwrot.png" alt="zwrot" height="35%" width="45%">
-				</div>
-
-				<div class="why_us_content">
-					<h3>Opinie klientów</h3>
-					<br>
-					Jeśli jeszcze masz wątpliwości, zajrzyj do opinii naszych klientów, którzy zakupili już nasze produkty. Obiektywne opinie z pewnością pomogą Ci w podjęciu decyzji o opłacalności danych produktów. Dzięki opiniom jesteśmy w stanie dla Was stale ulepszać nasze produkty.
-					<br><br>
-					<img src="images/opinie.png" alt="zwrot" height="30%" width="75%">
-				</div>
-			</div>
-
-			<div id="comentaries">
-				<?php
-					Show_opinion(5);
-					Show_opinion(2);
-					Show_opinion(4);
-				?> 
-			</div>
 		</div>
 
-		
+		<!-- MIĘSO ARMATNIE -->
+		<div id="koszyk_container">
+			<?php
+				Show_cart();
+			?>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+		</div>
 	</div>
 
     <div id="centeredmenu">
@@ -221,11 +150,15 @@
 	<script src="js/dropdown_sticky.js"></script>
 	<!-- SLIDER JS-->
 	<script src="js/slider.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	
 </body>
 </html>
 
+
 <?php
+	$id_klienci = $_SESSION['id_klienci'];
+
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
@@ -238,14 +171,10 @@
 		    die("Nie połączono z bazą danych: " . $conn -> connect_error);
 		}
 
-	$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty";
-	$sql1 = "SELECT * FROM opinie";
-	$result = $conn -> query($sql);
-	$result1 = $conn -> query($sql1);
-
-	//Function to show product on main site
-	function Show_product($id)
+	//Function to show products in categories
+	function Show_cart()
 	{	
+		$id_klienci = $_SESSION['id_klienci'];
 		$servername = "localhost";
 		$username = "root";
 		$password = "";
@@ -253,38 +182,77 @@
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		$conn -> query("SET NAMES 'utf8'");
 		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-
-		$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty = $id";
+		$sql = "SELECT * FROM koszyk WHERE id_klienci=$id_klienci";
 		$result = $conn -> query($sql);
+		echo '<h1>Twój koszyk</h1>';
+		//Czy jest koszyk
 		if ($result -> num_rows > 0)
 		{
 	 		while($row = $result -> fetch_assoc())
-	 		{
-	       		echo '<img src="images/products/'.$row["zdjecie"].'" width="150" height="150" alt="product.png"><br>'.$row["nazwa"]." ".$row["rozmiar"].'<br><span style="color:#FF5A00"><b>KUP TERAZ: '.$row["cena"]." PLN</b></span>";
+	 		{	
+	 			$id_kosz = $row['id_koszyk'];
+	 			$id_zam = $row['id_zamowienie_produkty'];
+	 			$sql1 = "SELECT id_zamowienie_produkty, ile_sztuk, id_produkty FROM zamowienie_produkty WHERE id_zamowienie_produkty=$id_zam";
+	 			$result1 = $conn -> query($sql1);
+	 			//Czy jest zamowienie_produkty
+	 			if ($result1 -> num_rows > 0)
+				{
+	 				while($row1 = $result1 -> fetch_assoc())
+	 				{
+	 					$id_prod = $row1['id_produkty'];
+	 					$sql2 = "SELECT id_produkty, nazwa, cena, zdjecie FROM produkty WHERE id_produkty=$id_prod";
+	 					$result2 = $conn -> query($sql2);
+	 					//Czy sa produkty z zamowienia
+			 			if ($result2 -> num_rows > 0)
+						{
+			 				while($row2 = $result2 -> fetch_assoc())
+			 				{
+			 					echo '<a href="produkt.php?id_produkty='.$row2["id_produkty"].'" id="product_link">
+						       		<div class="koszyk">
+						       			<table id="koszyk_t">
+						       				<tr>
+						       					<td><div id="zdjecie"><img src="images/products/'.$row2["zdjecie"].'" width="100" height="100" alt="product.png"></div></td>
+								       			<td><div class="nazwa"><b>'.$row2["nazwa"].'</b></div></td>
+									       		<td>Id produktu: '.$row1['id_produkty'].'</td>
+									       		<td>Ile sztuk: '.$row1['ile_sztuk'].'</td>
+									       		<td colspan="2"><div id="cena">Cena: '.$row["kwota"].' PLN</b></div></td>
+									       		<td><form action="#" method="post">
+									       			<input type="hidden" name="id_k" value="'.$row["id_koszyk"].'" />
+									       			<input type="submit" name="delete" value="Usuń"></button>
+									       		</form></td>
+								       		</tr>
+							       		</table>
+						       		</div>
+			       				<a>';
+			       			}
+			       		}
+	 				}
+	 			}
+				
+	       		
 			}
-		} else { echo "No results"; }
+		} else { echo "Brak produktów w koszyku"; }
 	}
-	
-	
-	function Show_opinion($id)
-	{	
+
+	if(isset($_POST['id_k'])) {
+		$id = $_POST['id_k'];
+		$sql_d= "DELETE FROM koszyk WHERE id_koszyk = '$id'";
+		$result = $conn -> query($sql_d);
+		echo "<meta http-equiv='refresh' content='0'>";
+	}
+
+
+	function DeletePosition()
+	{
+		$id_klienci = $_SESSION['id_klienci'];
 		$servername = "localhost";
 		$username = "root";
 		$password = "";
 		$dbname = "sklep";
-		require_once "connect.php";
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		$conn -> query("SET NAMES 'utf8'");
-
 		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-		$sql = "SELECT id_opinie, id_produkty, id_klienci, gwiazdka, opinia FROM opinie WHERE id_opinie = $id";
+		$sql = "DELETE * FROM koszyk WHERE id_koszyk=$id_kosz";
 		$result = $conn -> query($sql);
-		if ($result -> num_rows > 0)
-		{
-	 		while($row = $result -> fetch_assoc())
-	 		{
-	       		echo '<img src="images/ocena.png"> Komentarz po zakupie: "'.$row["opinia"];
-			}
-		} else { echo "No results"; }
 	}
-?> 
+?>

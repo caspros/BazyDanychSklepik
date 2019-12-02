@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 02 Gru 2019, 00:40
+-- Czas generowania: 02 Gru 2019, 13:54
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -93,6 +93,27 @@ INSERT INTO `klienci` (`id_klienci`, `Imie`, `Nazwisko`, `haslo`, `email`, `id_a
 (8, 'Baltazar', 'KrÃ³l', 'f17f4b3e8e709cd3c89a6dbd949d7171', 'baltazar@123.pl', NULL, 0),
 (9, 'Robcio', 'Robertos', '6058d199135afa99b8446f246e7b5cec', 'robertos@o2.pl', NULL, 0),
 (10, 'Graf', 'Graf', '2c01010b99ef591baef2d11237937e54', 'Graf@Graf.pl', NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `koszyk`
+--
+
+CREATE TABLE `koszyk` (
+  `id_koszyk` int(11) NOT NULL,
+  `kwota` int(11) NOT NULL,
+  `id_zamowienie_produkty` int(11) NOT NULL,
+  `id_klienci` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `koszyk`
+--
+
+INSERT INTO `koszyk` (`id_koszyk`, `kwota`, `id_zamowienie_produkty`, `id_klienci`) VALUES
+(1, 60, 1, 5),
+(4, 50, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -246,6 +267,14 @@ ALTER TABLE `klienci`
   ADD KEY `fk_klienci_adres_idx` (`id_adres`);
 
 --
+-- Indeksy dla tabeli `koszyk`
+--
+ALTER TABLE `koszyk`
+  ADD PRIMARY KEY (`id_koszyk`),
+  ADD KEY `id_klienci` (`id_klienci`),
+  ADD KEY `id_zamowienie_produkty` (`id_zamowienie_produkty`);
+
+--
 -- Indeksy dla tabeli `oferta_dnia`
 --
 ALTER TABLE `oferta_dnia`
@@ -313,6 +342,12 @@ ALTER TABLE `klienci`
   MODIFY `id_klienci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT dla tabeli `koszyk`
+--
+ALTER TABLE `koszyk`
+  MODIFY `id_koszyk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT dla tabeli `oferta_dnia`
 --
 ALTER TABLE `oferta_dnia`
@@ -357,6 +392,13 @@ ALTER TABLE `zamowienie_produkty`
 --
 ALTER TABLE `klienci`
   ADD CONSTRAINT `fk_klienci_adres` FOREIGN KEY (`id_adres`) REFERENCES `mydb`.`adres` (`id_adres`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ograniczenia dla tabeli `koszyk`
+--
+ALTER TABLE `koszyk`
+  ADD CONSTRAINT `koszyk_ibfk_1` FOREIGN KEY (`id_klienci`) REFERENCES `klienci` (`id_klienci`),
+  ADD CONSTRAINT `koszyk_ibfk_2` FOREIGN KEY (`id_zamowienie_produkty`) REFERENCES `zamowienie_produkty` (`id_zamowienie_produkty`);
 
 --
 -- Ograniczenia dla tabeli `oferta_dnia`
