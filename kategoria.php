@@ -118,65 +118,6 @@
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
 			<?php
-				$servername = "localhost";
-				$username = "root";
-				$password = "";
-				$dbname = "sklep";
-				// Create connection
-				$conn = new mysqli($servername, $username, $password, $dbname);
-				$conn -> query("SET NAMES 'utf8'");
-				// Check connection
-				if ($conn -> connect_error) {
-					    die("Nie połączono z bazą danych: " . $conn -> connect_error);
-					}
-
-				//Function to show product on main site
-				function Show_products()
-				{	
-					$id_kategorie = $_GET['id_kategorie'];
-					$servername = "localhost";
-					$username = "root";
-					$password = "";
-					$dbname = "sklep";
-					$conn = new mysqli($servername, $username, $password, $dbname);
-					$conn -> query("SET NAMES 'utf8'");
-					if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-
-					$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_kategorie=$id_kategorie";
-					$sql1 = "SELECT id_kategorie, kategoria FROM kategorie WHERE id_kategorie=$id_kategorie";
-					$result = $conn -> query($sql);
-					$result1 = $conn -> query($sql1);
-					$row1 = $result1 -> fetch_assoc();
-					echo '<h1>'.$row1['kategoria'].'</h1>';
-					if ($result -> num_rows > 0)
-					{
-				 		while($row = $result -> fetch_assoc())
-				 		{
-				       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
-						       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
-						       		<div class="zawartosc">
-						       			<table id="tabela">
-								       		<tr>
-								       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
-								       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
-								       		</tr>
-								       		<tr>
-									       		<td><div class="rozmiar">Rozmiar: ';
-									       		if(is_null($row["rozmiar"]))
-									       		{
-									       			echo 'Nie dotyczy';
-									       		}else echo $row["rozmiar"];
-									       		echo '</div></td>
-									       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
-									       		<td><span style="color:green;font-style:normal;">Dostawa: 15 PLN</span></td>
-								       		</tr>
-							       		</table>
-						       		</div>
-				       			</div><a>';
-						}
-					} else { echo "No results"; }
-				}
-
 				Show_products();
 			?>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -209,22 +150,68 @@
 	<!-- SLIDER JS-->
 	<script src="js/slider.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<!-- TU BĘDĘ JESZCZE POPRAWIAŁ
-
-	<script>
-	jQuery(function($) {
-	  $('#cena').text($('#ile_sztuk').val());
-
-	  $('#ile_sztuk').on('input', function() {
-	    $('#cena').text($('#ile_sztuk').val()*50);
-	  });
-	});
-	</script>
-		-->
 	
 </body>
 </html>
 
 
+<?php
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "sklep";
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	$conn -> query("SET NAMES 'utf8'");
+	// Check connection
+	if ($conn -> connect_error) {
+		    die("Nie połączono z bazą danych: " . $conn -> connect_error);
+		}
 
+	//Function to show products in categories
+	function Show_products()
+	{	
+		$id_kategorie = $_GET['id_kategorie'];
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "sklep";
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn -> query("SET NAMES 'utf8'");
+		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+
+		$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_kategorie=$id_kategorie";
+		$sql1 = "SELECT id_kategorie, kategoria FROM kategorie WHERE id_kategorie=$id_kategorie";
+		$result = $conn -> query($sql);
+		$result1 = $conn -> query($sql1);
+		$row1 = $result1 -> fetch_assoc();
+		echo '<h1>'.$row1['kategoria'].'</h1>';
+		if ($result -> num_rows > 0)
+		{
+	 		while($row = $result -> fetch_assoc())
+	 		{
+	       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
+			       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
+			       		<div class="zawartosc">
+			       			<table id="tabela">
+					       		<tr>
+					       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
+					       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
+					       		</tr>
+					       		<tr>
+						       		<td><div class="rozmiar">Rozmiar: ';
+						       		if(is_null($row["rozmiar"]))
+						       		{
+						       			echo 'Nie dotyczy';
+						       		}else echo $row["rozmiar"];
+						       		echo '</div></td>
+						       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+						       		<td><span style="color:green;font-style:normal;">Dostawa: 15 PLN</span></td>
+					       		</tr>
+				       		</table>
+			       		</div>
+	       			</div><a>';
+			}
+		} else { echo "Brak produktów w podanej kategorii"; }
+	}
+?>
