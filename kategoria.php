@@ -21,7 +21,7 @@
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Alledrogo</title>
+	<title>Kategorie</title>
 </head>
 
 <body>
@@ -52,7 +52,7 @@
 
 			<!-- koszyk -->
 			<li>
-				<a href="#">
+				<a href="koszyk.php">
 					<span class="koszyk">
 						<i class="fas fa-shopping-cart"></i>
 					</span>

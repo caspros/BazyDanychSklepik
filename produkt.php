@@ -21,7 +21,7 @@
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Alledrogo</title>
+	<title>Produkt</title>
 </head>
 
 <body>
@@ -52,7 +52,7 @@
 
 			<!-- koszyk -->
 			<li>
-				<a href="#">
+				<a href="koszyk.php">
 					<span class="koszyk">
 						<i class="fas fa-shopping-cart"></i>
 					</span>
@@ -99,8 +99,7 @@
 
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
-			<?php
-
+			<?php 
 				$id_produktu = $_GET['id_produkty'];
 				$servername = "localhost";
 				$username = "root";
@@ -116,53 +115,10 @@
 
 				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty=$id_produktu";
 				$result = $conn -> query($sql);
-
-				
-
-				//Function to show product on main site
-				function Show_product($id)
-				{	
-					$id_produktu = $_GET['id_produkty'];
-					$servername = "localhost";
-					$username = "root";
-					$password = "";
-					$dbname = "sklep";
-					$conn = new mysqli($servername, $username, $password, $dbname);
-					$conn -> query("SET NAMES 'utf8'");
-					if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-
-					$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty=$id_produktu";
-					$result = $conn -> query($sql);
-					if ($result -> num_rows > 0)
-					{
-				 		while($row = $result -> fetch_assoc())
-				 		{	
-				 			setcookie("MyCookie", $row["cena"]);
-				       		echo '<div id="produkt_big"><img src="images/products/'.$row["zdjecie"].'" width="500" height="500" alt="product.png"><br><b>'
-						       		.$row["nazwa"].'</b><br><br>Specyfikacja produktu<br><br>
-						       		<div id="dane">Rozmiar: ';
-							       		if(is_null($row["rozmiar"]))
-							       		{
-							       			echo 'Nie dotyczy';
-							       		}else echo $row["rozmiar"];
-							       		echo '<br>Producent: '.$row["producent"].
-						       		'</div>
-						       		<br><br>Opis produktu: <br>'.$row["opis"].
-						       		'<br><br><input type="number" id="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
-						       		'<br><br><button id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"]."</span> PLN</b></span></button>
-				       			</div>";
-						}
-					} else { echo "No results"; }
-				}
-
-
 				Show_product($id_produktu);
 			?>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-			<span id="current1">5</span><br>
-			<input type="number" id="n1" value="5" />
 			
 		</div>
 	</div>
@@ -203,8 +159,53 @@
 				    $("#current").html($(this).val()*cookies["MyCookie"])   
 				});
 	</script>
+
+
+<?php
+	//Function to show product on main site
+	function Show_product($id)
+	{	
+		$id_produktu = $_GET['id_produkty'];
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "sklep";
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn -> query("SET NAMES 'utf8'");
+		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+
+		$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty=$id_produktu";
+		$result = $conn -> query($sql);
+		if ($result -> num_rows > 0)
+		{
+	 		while($row = $result -> fetch_assoc())
+	 		{	
+	 			$_SESSION['cena']=$row["cena"];
+	 			$_SESSION['produkt']=$row["id_produkty"];
+	 			setcookie("MyCookie", $row["cena"]);
+	       		echo '<div id="produkt_big"><img src="images/products/'.$row["zdjecie"].'" width="500" height="500" alt="product.png"><br><b>'
+			       		.$row["nazwa"].'</b><br><br>Specyfikacja produktu<br><br>
+			       		<div id="dane">Rozmiar: ';
+				       		if(is_null($row["rozmiar"]))
+				       		{
+				       			echo 'Nie dotyczy';
+				       		}else echo $row["rozmiar"];
+				       		echo '<br>Producent: '.$row["producent"].
+			       		'</div>
+			       		<br><br>Opis produktu: <br>'.$row["opis"].
+			       		'<br><br><form action="koszyk.php" method="post"><input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
+			       		'<input type="hidden" name="koszyk1"/><br><br><button type="submit" id="zloz_zam_btn"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button>
+			       		</form>
+	       			</div>';
+			}
+		} else { echo "No results"; }
+	}
+
+	
+				
+?>
+
 </body>
 </html>
-
 
 

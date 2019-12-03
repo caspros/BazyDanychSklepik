@@ -337,14 +337,13 @@ table {
 
 #kup_teraz{
 	margin-left: 10px;
-	font-size: 45px;
+	font-size: 29px;
 	background-color: #FF5A00;
 	color: white;
 	border: none;
 	padding: 10px;
 	text-align: center;
   	text-decoration: none;
-  	font-size: 16px;
 }
 
 #kup_teraz:hover{
@@ -417,4 +416,26 @@ table {
 
 #product_link{
 	color: black;
+}
+
+
+/* Profil.php */
+
+#container_dane{
+	text-align: center;
+}
+
+#ustaw_dane_btn{
+    margin-left: 10px;
+    font-size: 25px;
+    background-color: #FF5A00;
+    color: white;
+    border: none;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#ustaw_dane_btn:hover{
+    background-color: #ff8800;
 }
