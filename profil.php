@@ -104,13 +104,28 @@
 <html lang="pl">
 
 <head>
-	<meta charset="utf-8"/>
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title> Zarejestruj się! </title>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<link rel="stylesheet" href="css/rejestracja.css">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
-	<link href="fontawesome/css/all.css" rel="stylesheet">
+	<style>
+		.error
+		{
+			color:red;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
 	<title>Dane profilu</title>
 </head>
 
@@ -192,9 +207,10 @@
 				<div id="container_dane">
 					<form method="post">
 						<div class="login-popup-heading text-center">
-					    	<h4><i class="fa fa-lock" aria-hidden="true"></i> Dane do wysyłki </h4>                        
+					    	<h4><i class="fa fa-lock" aria-hidden="true"></i> Dane do wysyłki </h4>
 					    </div>
 						<div class="form-group">
+							<br>
 							Ulica: <br/> <input type="text" class="form-control" name="ulica" />
 						</div>
 						<?php
@@ -204,7 +220,7 @@
 								unset($_SESSION['e_ulica']);
 							}
 						?>
-						<br>
+					
 						<div class="form-group">
 							Numer domu/lokalu: <br/> <input type="text" class="form-control" name="nr" />
 						</div>
@@ -215,7 +231,7 @@
 								unset($_SESSION['e_nr']);
 							}
 						?>
-						<br>
+				
 						<div class="form-group">	
 							Kod pocztowy: <br/> <input type="text" class="form-control" name="zipcode" />
 						</div>
@@ -226,7 +242,7 @@
 								unset($_SESSION['e_zipcode']);
 							}
 						?>
-						<br>
+					
 						<div class="form-group">        
 								Miasto: <br/> <input type="text" class="form-control" name="miasto" />
 							</div>
@@ -237,7 +253,7 @@
 									unset($_SESSION['e_miasto']);
 								}
 							?>
-						<br>
+					
 						<input type="hidden" name="ustawiono"/>
 						<button type="submit" class="btn btn-default login-popup-btn " id="ustaw_dane_btn" name="submit" value="1">Zapisz</button>
 					</form>
