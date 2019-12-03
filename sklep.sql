@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 02 Gru 2019, 13:54
+-- Czas generowania: 03 Gru 2019, 20:36
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -102,18 +102,21 @@ INSERT INTO `klienci` (`id_klienci`, `Imie`, `Nazwisko`, `haslo`, `email`, `id_a
 
 CREATE TABLE `koszyk` (
   `id_koszyk` int(11) NOT NULL,
-  `kwota` int(11) NOT NULL,
-  `id_zamowienie_produkty` int(11) NOT NULL,
-  `id_klienci` int(11) NOT NULL
+  `ilosc` int(11) NOT NULL,
+  `cena` int(11) NOT NULL,
+  `id_produkty` int(11) NOT NULL,
+  `id_klienci` int(11) NOT NULL,
+  `zlozono` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `koszyk`
 --
 
-INSERT INTO `koszyk` (`id_koszyk`, `kwota`, `id_zamowienie_produkty`, `id_klienci`) VALUES
-(1, 60, 1, 5),
-(4, 50, 2, 5);
+INSERT INTO `koszyk` (`id_koszyk`, `ilosc`, `cena`, `id_produkty`, `id_klienci`, `zlozono`) VALUES
+(1, 2, 50, 8, 5, 0),
+(2, 5, 25, 14, 5, 0),
+(14, 2, 75, 18, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -211,17 +214,18 @@ CREATE TABLE `zamowienia` (
   `data_wyslania` date NOT NULL,
   `zaplacono` tinyint(4) NOT NULL,
   `id_klienci` int(11) NOT NULL,
-  `id_zamowienie_produkty` int(11) NOT NULL
+  `id_zamowienie_produkty` int(11) NOT NULL,
+  `suma` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `zamowienia`
 --
 
-INSERT INTO `zamowienia` (`id_zamowienia`, `data_zlozenia`, `data_wyslania`, `zaplacono`, `id_klienci`, `id_zamowienie_produkty`) VALUES
-(2, '2019-11-22 19:40:50', '3123-12-12', 1, 5, 1),
-(3, '2019-11-22 19:44:50', '2019-11-23', 1, 5, 2),
-(4, '2019-11-23 13:30:35', '2019-11-11', 1, 9, 3);
+INSERT INTO `zamowienia` (`id_zamowienia`, `data_zlozenia`, `data_wyslania`, `zaplacono`, `id_klienci`, `id_zamowienie_produkty`, `suma`) VALUES
+(2, '2019-11-22 19:40:50', '3123-12-12', 1, 5, 1, 0),
+(3, '2019-11-22 19:44:50', '2019-11-23', 1, 5, 2, 0),
+(4, '2019-11-23 13:30:35', '2019-11-11', 1, 9, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -271,8 +275,8 @@ ALTER TABLE `klienci`
 --
 ALTER TABLE `koszyk`
   ADD PRIMARY KEY (`id_koszyk`),
-  ADD KEY `id_klienci` (`id_klienci`),
-  ADD KEY `id_zamowienie_produkty` (`id_zamowienie_produkty`);
+  ADD KEY `FK_Klient` (`id_klienci`),
+  ADD KEY `FK_Produkt` (`id_produkty`);
 
 --
 -- Indeksy dla tabeli `oferta_dnia`
@@ -345,7 +349,7 @@ ALTER TABLE `klienci`
 -- AUTO_INCREMENT dla tabeli `koszyk`
 --
 ALTER TABLE `koszyk`
-  MODIFY `id_koszyk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_koszyk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT dla tabeli `oferta_dnia`
@@ -397,8 +401,8 @@ ALTER TABLE `klienci`
 -- Ograniczenia dla tabeli `koszyk`
 --
 ALTER TABLE `koszyk`
-  ADD CONSTRAINT `koszyk_ibfk_1` FOREIGN KEY (`id_klienci`) REFERENCES `klienci` (`id_klienci`),
-  ADD CONSTRAINT `koszyk_ibfk_2` FOREIGN KEY (`id_zamowienie_produkty`) REFERENCES `zamowienie_produkty` (`id_zamowienie_produkty`);
+  ADD CONSTRAINT `FK_Klient` FOREIGN KEY (`id_klienci`) REFERENCES `klienci` (`id_klienci`),
+  ADD CONSTRAINT `FK_Produkt` FOREIGN KEY (`id_produkty`) REFERENCES `produkty` (`id_produkty`);
 
 --
 -- Ograniczenia dla tabeli `oferta_dnia`
