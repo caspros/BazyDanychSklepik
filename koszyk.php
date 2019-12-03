@@ -8,6 +8,25 @@
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
 	}
+
+	if(isset($_POST['koszyk1']))
+	{
+		$id_k= $_SESSION['id_klienci'];
+		$cena = $_SESSION['cena'];
+		$id = $_SESSION['produkt'];
+		$ile = $_POST['ile_sztuk'];
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "sklep";
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn -> query("SET NAMES 'utf8'");
+		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+		$sql_t = "SET FOREIGN_KEY_CHECKS = 0";
+		$result = $conn -> query($sql_t);
+		$sql = "INSERT INTO koszyk(ilosc, cena, id_produkty, id_klienci) VALUES ('$ile', '$cena', '$id', '$id_k')";
+		$result = $conn -> query($sql);
+	}
 ?>
 
 <!DOCTYPE HTML>
@@ -22,7 +41,7 @@
 	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Alledrogo</title>
+	<title>Twój koszyk</title>
 </head>
 
 <body>
@@ -174,6 +193,7 @@
 	//Function to show products in categories
 	function Show_cart()
 	{	
+		$suma = 0;
 		$id_klienci = $_SESSION['id_klienci'];
 		$servername = "localhost";
 		$username = "root";
@@ -191,52 +211,57 @@
 	 		while($row = $result -> fetch_assoc())
 	 		{	
 	 			$id_kosz = $row['id_koszyk'];
-	 			$id_zam = $row['id_zamowienie_produkty'];
-	 			$sql1 = "SELECT id_zamowienie_produkty, ile_sztuk, id_produkty FROM zamowienie_produkty WHERE id_zamowienie_produkty=$id_zam";
+	 			$id_prod = $row['id_produkty'];
+	 			$sql1 = "SELECT id_produkty, nazwa, cena, zdjecie FROM produkty WHERE id_produkty=$id_prod";
 	 			$result1 = $conn -> query($sql1);
 	 			//Czy jest zamowienie_produkty
 	 			if ($result1 -> num_rows > 0)
 				{
 	 				while($row1 = $result1 -> fetch_assoc())
 	 				{
-	 					$id_prod = $row1['id_produkty'];
-	 					$sql2 = "SELECT id_produkty, nazwa, cena, zdjecie FROM produkty WHERE id_produkty=$id_prod";
-	 					$result2 = $conn -> query($sql2);
-	 					//Czy sa produkty z zamowienia
-			 			if ($result2 -> num_rows > 0)
-						{
-			 				while($row2 = $result2 -> fetch_assoc())
-			 				{
-			 					echo '<a href="produkt.php?id_produkty='.$row2["id_produkty"].'" id="product_link">
-						       		<div class="koszyk">
-						       			<table id="koszyk_t">
-						       				<tr>
-						       					<td><div id="zdjecie"><img src="images/products/'.$row2["zdjecie"].'" width="100" height="100" alt="product.png"></div></td>
-								       			<td><div class="nazwa"><b>'.$row2["nazwa"].'</b></div></td>
-									       		<td>Id produktu: '.$row1['id_produkty'].'</td>
-									       		<td>Ile sztuk: '.$row1['ile_sztuk'].'</td>
-									       		<td colspan="2"><div id="cena">Cena: '.$row["kwota"].' PLN</b></div></td>
-									       		<td><form action="#" method="post">
-									       			<input type="hidden" name="id_k" value="'.$row["id_koszyk"].'" />
-									       			<input type="submit" name="delete" value="Usuń"></button>
-									       		</form></td>
-								       		</tr>
-							       		</table>
-						       		</div>
-			       				<a>';
-			       			}
-			       		}
+	 					$suma += $row["cena"]*$row["ilosc"];
+	 					echo '<a href="produkt.php?id_produkty='.$row1["id_produkty"].'" id="product_link">
+				       		<div class="koszyk">
+				       			<table id="koszyk_t">
+				       				<tr>
+				       					<td><div id="zdjecie"><img src="images/products/'.$row1["zdjecie"].'" width="100" height="100" alt="product.png"></div></td>
+						       			<td><div class="nazwa"><b>'.$row1["nazwa"].'</b></div></td>
+							       		<td>Id produktu: '.$row1['id_produkty'].'</td>
+							       		<td>Ile sztuk: '.$row['ilosc'].'</td>
+							       		<td colspan="2"><div id="cena">Cena: '.$row["cena"]*$row["ilosc"].' PLN</b></div></td>
+							       		<td><form action="#" method="post">
+							       			<input type="hidden" name="id_k" value="'.$row["id_koszyk"].'" />
+							       			<input type="submit" name="delete" value="Usuń">
+							       		</form></td>
+						       		</tr>
+					       		</table>
+				       		</div>
+	       				<a>';	
 	 				}
 	 			}
 				
 	       		
 			}
 		} else { echo "Brak produktów w koszyku"; }
+		echo '<br>
+		<div id="podsumowanie">Kwota całkowita: '.$suma.' PLN<br><br>
+		<form action="koszyk.php" method="post">
+			<input type="hidden" name="suma" value="'.$suma.'" />
+			<input type="submit" id="kup_teraz" name="zloz_zam" value="Złóż zamówienie">
+		</form>
+		</div>';
 	}
 
 	if(isset($_POST['id_k'])) {
 		$id = $_POST['id_k'];
 		$sql_d= "DELETE FROM koszyk WHERE id_koszyk = '$id'";
+		$result = $conn -> query($sql_d);
+		echo "<meta http-equiv='refresh' content='0'>";
+	}
+
+	if(isset($_POST['suma'])) {
+		$suma1 = $_POST['suma'];
+		$sql_suma = "DELETE FROM koszyk WHERE id_koszyk = '$id'";
 		$result = $conn -> query($sql_d);
 		echo "<meta http-equiv='refresh' content='0'>";
 	}
