@@ -8,11 +8,43 @@
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
 	}
+	$id_klienci = $_SESSION['id_klienci'];
 
 	
 
-	if(isset($_POST['ustawiono']))
+	//Testowe do wyswietlania z bazy danych w polach
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "sklep";
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	$conn -> query("SET NAMES 'utf8'");
+	if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+	$sql = "SELECT * FROM adres WHERE id_klienci='$id_klienci'";
+	if($result = @$conn->query($sql))
 	{
+		$row = $result -> fetch_assoc();
+		$u = $row['ulica'];
+		$k = $row['kod_pocztowy'];
+		$m = $row['miasto'];
+		$d = $row['nr_domu'];
+		$l = $row['nr_lokalu'];
+
+		if($row['miasto']===NULL)
+		{
+			$u = " ";
+			$k = " ";
+			$m = " ";
+			$d = " ";
+			$l = " ";
+		}
+	}
+
+	//na razie poprawnosc zakomentowana, trzeba poprawić, bo nie działa
+	if(isset($_POST['ustawiono']))
+	{	
+		$wszystko_OK=true;
+		$sprawdz = '/^[A-ZŁŚ]{1}+[a-ząęółśżźćń]+$/';
 		//poprawność miasta
 		$miasto = $_POST['miasto'];
 		if(!(preg_match($sprawdz, $miasto)))
@@ -41,6 +73,7 @@
 			$_SESSION['e_ulica']="Musisz wypełnić wszystkie pola";
 		}
 		//poprawność numeru domu
+		$sprawdz = '/^[0-99999]*$/';
 		$nr = $_POST['nr'];
 		if(!(preg_match($sprawdz, $nr)))
 		{
@@ -61,7 +94,15 @@
 			$wszystko_OK=false;
 			$_SESSION['e_nrm']="Podaj poprawny numer mieszkania";
 		}
+
+		if(empty($_POST['nrm']))
+		{
+			$wszystko_OK=false;
+			$_SESSION['e_nrm']="Musisz wypełnić wszystkie pola";
+		}
+
 		//poprawność kodu pocztowego
+		$sprawdz = '/^[0-9]{2}-?[0-9]{3}$/Du';
 		$zipcode = $_POST['zipcode'];
 		if(!(preg_match($sprawdz, $zipcode)))
 		{
@@ -76,29 +117,33 @@
 		}
 
 		if($wszystko_OK==true)
+		{
+			
+			//wszystko dobrze dane zapisane
+			$sql = "UPDATE adres SET kod_pocztowy = '$zipcode', miasto = '$miasto', ulica = '$ulica', nr_domu = '$nr', nr_lokalu = '$nrm' WHERE id_klienci='$id_klienci'";
+			
+			if($conn->query($sql))
 			{
-				//wszystko dobrze dane zapisane
-				if($polaczenie->query("INSERT INTO klienci(Miasto, Ulica, nr, nrm, zipcode) VALUES ('$miasto', '$ulica' ,'$nr','$nrm','$zipcode')"))
-				{
-					unset($_POST['miasto']);
-					unset($_POST['ulica']);
-					unset($_POST['nr']);
-					unset($_POST['nrm']);
-					unset($_POST['zipcode']);
-					$_SESSION['udanedanezamieszkania']=true;
-					header('Location: witamy.php');
-				}
-				else
-				{
-					throw new Exception($polaczenie->error);
-				}		
-				$polaczenie->close();
+				unset($_POST['miasto']);
+				unset($_POST['ulica']);
+				unset($_POST['nr']);
+				unset($_POST['nrm']);
+				unset($_POST['zipcode']);
+				$_SESSION['udanedanezamieszkania']= "Twoje dane zostały zmienione!";
+				header( "refresh:2;url=profil.php" );
 			}
+			else
+			{
+				throw new Exception($conn->error);
+			}		
+			$conn->close();
 		}
 
-
+	}
 
 ?>
+
+
 
 <!DOCTYPE HTML>
 <html lang="pl">
@@ -188,14 +233,45 @@
 	<div id="container">
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
+			
 			<div class="login-popup-wrap new_login_popup"> 
 				<div id="container_dane">
-					<form method="post">
+					<?php
+						if (isset($_SESSION['udanedanezamieszkania']))
+						{
+							//echo "<meta http-equiv='refresh' content='0'>";
+							echo '<div class="error">'.$_SESSION['udanedanezamieszkania'].'</div>';
+							unset($_SESSION['udanedanezamieszkania']);
+						}
+
+						$sql = "SELECT * FROM adres WHERE id_klienci='$id_klienci'";
+						if(@$result = $conn->query($sql))
+						{
+
+							$row = $result -> fetch_assoc();
+							$u = $row['ulica'];
+							$k = $row['kod_pocztowy'];
+							$m = $row['miasto'];
+							$d = $row['nr_domu'];
+							$l = $row['nr_lokalu'];
+		
+							
+							if($row['miasto']===NULL)
+							{
+								$u = " ";
+								$k = " ";
+								$m = " ";
+								$d = " ";
+								$l = " ";
+							}											
+						}
+					?>
+					<form action="#" method="post">
 						<div class="login-popup-heading text-center">
 					    	<h4><i class="fa fa-lock" aria-hidden="true"></i> Dane do wysyłki </h4>                        
 					    </div>
 						<div class="form-group">
-							Ulica: <br/> <input type="text" class="form-control" name="ulica" />
+							Ulica: <br/> <input type="text" class="form-control" name="ulica" id="ulica" value="<?php echo $u;?>"/>
 						</div>
 						<?php
 							if (isset($_SESSION['e_ulica']))
@@ -206,7 +282,7 @@
 						?>
 						<br>
 						<div class="form-group">
-							Numer domu/lokalu: <br/> <input type="text" class="form-control" name="nr" />
+							Numer domu: <br/> <input type="text" class="form-control" name="nr" id="nr_domu" value="<?php echo $d;?>"/>
 						</div>
 						<?php
 							if (isset($_SESSION['e_nr']))
@@ -216,8 +292,19 @@
 							}
 						?>
 						<br>
+						<div class="form-group">
+							Numer mieszkania: <br/> <input type="text" class="form-control" name="nrm" id="nr_lokalu" value="<?php echo $l;?>"/>
+						</div>
+						<?php
+							if (isset($_SESSION['e_nrm']))
+							{
+								echo '<div class="error">'.$_SESSION['e_nrm'].'</div>';
+								unset($_SESSION['e_nrm']);
+							}
+						?>
+						<br>
 						<div class="form-group">	
-							Kod pocztowy: <br/> <input type="text" class="form-control" name="zipcode" />
+							Kod pocztowy: <br/> <input type="text" class="form-control" name="zipcode" id="kod_pocztowy" value="<?php echo $k;?>"/>
 						</div>
 						<?php
 							if (isset($_SESSION['e_zipcode']))
@@ -228,7 +315,7 @@
 						?>
 						<br>
 						<div class="form-group">        
-								Miasto: <br/> <input type="text" class="form-control" name="miasto" />
+								Miasto: <br/> <input type="text" class="form-control" name="miasto" id="miasto" value="<?php echo $m;?>"/>
 							</div>
 							<?php
 								if (isset($_SESSION['e_miasto']))
@@ -239,7 +326,7 @@
 							?>
 						<br>
 						<input type="hidden" name="ustawiono"/>
-						<button type="submit" class="btn btn-default login-popup-btn " id="ustaw_dane_btn" name="submit" value="1">Zapisz</button>
+						<button type="submit" class="btn btn-default login-popup-btn " id="ustaw_dane_btn" name="submit">Zapisz</button>
 					</form>
 				</div>
 			</div>		
@@ -272,3 +359,4 @@
 	
 </body>
 </html>
+

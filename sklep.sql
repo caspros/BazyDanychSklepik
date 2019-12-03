@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 03 Gru 2019, 20:36
+-- Czas generowania: 04 Gru 2019, 00:05
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -30,13 +30,29 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `adres` (
   `id_adres` int(11) NOT NULL,
-  `wojewodztwo` varchar(45) NOT NULL,
-  `kod_pocztowy` varchar(6) NOT NULL,
-  `miasto` varchar(45) NOT NULL,
-  `ulica` varchar(45) NOT NULL,
-  `nr_domu` int(11) NOT NULL,
-  `nr_lokalu` int(11) DEFAULT NULL
+  `kod_pocztowy` varchar(6) DEFAULT NULL,
+  `miasto` varchar(45) DEFAULT NULL,
+  `ulica` varchar(45) DEFAULT NULL,
+  `nr_domu` int(11) DEFAULT NULL,
+  `nr_lokalu` int(11) DEFAULT NULL,
+  `id_klienci` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `adres`
+--
+
+INSERT INTO `adres` (`id_adres`, `kod_pocztowy`, `miasto`, `ulica`, `nr_domu`, `nr_lokalu`, `id_klienci`) VALUES
+(1, '58-533', 'Mysłakowice', 'Nowa', 12, 123, 5),
+(2, NULL, NULL, NULL, NULL, NULL, 6),
+(3, '66-666', 'Piekło', 'Piekielna', 666, 6, 7),
+(4, NULL, NULL, NULL, NULL, NULL, 8),
+(5, NULL, NULL, NULL, NULL, NULL, 9),
+(6, NULL, NULL, NULL, NULL, NULL, 10),
+(8, NULL, NULL, NULL, NULL, NULL, 13),
+(9, NULL, NULL, NULL, NULL, NULL, 14),
+(10, NULL, NULL, NULL, NULL, NULL, 15),
+(11, '50-533', 'Warszawa', 'Fajnaa', 5, 15, 16);
 
 -- --------------------------------------------------------
 
@@ -87,12 +103,16 @@ CREATE TABLE `klienci` (
 --
 
 INSERT INTO `klienci` (`id_klienci`, `Imie`, `Nazwisko`, `haslo`, `email`, `id_adres`, `uprawnienia`) VALUES
-(5, 'Benek', 'Benek', '76678ce4ef2dc607104cf9955b502443', 'benek1@o2.pl', NULL, 0),
-(6, 'Test', 'Tescik', 'cc03e747a6afbbcbf8be7668acfebee5', 'test@gmail.com', NULL, 0),
-(7, 'Admin', 'Adminowski', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', NULL, 1),
-(8, 'Baltazar', 'KrÃ³l', 'f17f4b3e8e709cd3c89a6dbd949d7171', 'baltazar@123.pl', NULL, 0),
-(9, 'Robcio', 'Robertos', '6058d199135afa99b8446f246e7b5cec', 'robertos@o2.pl', NULL, 0),
-(10, 'Graf', 'Graf', '2c01010b99ef591baef2d11237937e54', 'Graf@Graf.pl', NULL, 0);
+(5, 'Benek', 'Benek', '76678ce4ef2dc607104cf9955b502443', 'benek1@o2.pl', 1, 0),
+(6, 'Test', 'Tescik', 'cc03e747a6afbbcbf8be7668acfebee5', 'test@gmail.com', 2, 0),
+(7, 'Admin', 'Adminowski', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', 3, 1),
+(8, 'Baltazar', 'KrÃ³l', 'f17f4b3e8e709cd3c89a6dbd949d7171', 'baltazar@123.pl', 4, 0),
+(9, 'Robcio', 'Robertos', '6058d199135afa99b8446f246e7b5cec', 'robertos@o2.pl', 5, 0),
+(10, 'Graf', 'Graf', '2c01010b99ef591baef2d11237937e54', 'Graf@Graf.pl', 6, 0),
+(13, 'Testownik', 'Testownik', 'e77ce99136875685f4ae312c4d45cf3b', 'testownik@gmail.com', 8, 0),
+(14, 'Macio', 'Macio', '4959fafb966d47348c32072ce6538d0b', 'macio@o2.pl', 9, 0),
+(15, 'Typek', 'Typek', 'b0a767234400dd537a97fe6c47b75172', 'typek@o2.pl', 10, 0),
+(16, 'Bartosz', 'Bartosz', 'c9006f26a2b48d3dd09eba5569244f6f', 'bartosz@o2.pl', 11, 0);
 
 -- --------------------------------------------------------
 
@@ -255,7 +275,8 @@ INSERT INTO `zamowienie_produkty` (`id_zamowienie_produkty`, `ile_sztuk`, `id_pr
 -- Indeksy dla tabeli `adres`
 --
 ALTER TABLE `adres`
-  ADD PRIMARY KEY (`id_adres`);
+  ADD PRIMARY KEY (`id_adres`),
+  ADD KEY `id_klienci` (`id_klienci`);
 
 --
 -- Indeksy dla tabeli `kategorie`
@@ -331,7 +352,7 @@ ALTER TABLE `zamowienie_produkty`
 -- AUTO_INCREMENT dla tabeli `adres`
 --
 ALTER TABLE `adres`
-  MODIFY `id_adres` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_adres` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT dla tabeli `kategorie`
@@ -343,7 +364,7 @@ ALTER TABLE `kategorie`
 -- AUTO_INCREMENT dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
-  MODIFY `id_klienci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_klienci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT dla tabeli `koszyk`
