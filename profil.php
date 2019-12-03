@@ -168,6 +168,13 @@
 			margin-top: 10px;
 			margin-bottom: 10px;
 		}
+
+		.udana
+		{
+			color:green;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
 	</style>
 	<title>Dane profilu</title>
 </head>
@@ -253,7 +260,7 @@
 						if (isset($_SESSION['udanedanezamieszkania']))
 						{
 							//echo "<meta http-equiv='refresh' content='0'>";
-							echo '<div class="error">'.$_SESSION['udanedanezamieszkania'].'</div>';
+							echo '<div class="udana">'.$_SESSION['udanedanezamieszkania'].'</div>';
 							unset($_SESSION['udanedanezamieszkania']);
 						}
 
