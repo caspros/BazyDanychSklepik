@@ -170,6 +170,7 @@ if (isset($_POST['email']))
 		<form method="post">
 		<div class="login-popup-heading text-center">
             <h4><i class="fa fa-lock" aria-hidden="true"></i> Rejestracja </h4>                        
+        <br>
         </div>
 		<div class="form-group">        
 			Imię: <br/> <input type="text" class="form-control" name="imie" />
@@ -181,7 +182,7 @@ if (isset($_POST['email']))
 				unset($_SESSION['e_imie']);
 			}
 		?>
-	<br>
+	
 	<div class="form-group">
 		Nazwisko: <br/> <input type="text" class="form-control" name="nazwisko" />
 	</div>
@@ -192,7 +193,7 @@ if (isset($_POST['email']))
 			unset($_SESSION['e_nazwisko']);
 		}
 	?>
-	<br>
+	
 	<div class="form-group">
 		E-mail: <br/> <input type="text" class="form-control" name="email" />
 	</div>
@@ -203,7 +204,7 @@ if (isset($_POST['email']))
 			unset($_SESSION['e_email']);
 		}
 	?>
-	<br>
+
 	<div class="form-group">	
 		Hasło: <br/> <input type="password" class="form-control" name="haslo1" />
 	</div>
@@ -214,7 +215,7 @@ if (isset($_POST['email']))
 			unset($_SESSION['e_haslo']);
 		}
 	?>
-	<br>
+	
 	<div class="form-group">	
 		Powtórz hasło: <br/> <input type="password" class="form-control" name="haslo2" />
 	</div>
