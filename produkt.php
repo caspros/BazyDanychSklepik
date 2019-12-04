@@ -166,10 +166,7 @@
 	function Show_product($id)
 	{	
 		$id_produktu = $_GET['id_produkty'];
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "sklep";
+		require_once "connect.php";
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		$conn -> query("SET NAMES 'utf8'");
 		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
@@ -194,7 +191,7 @@
 			       		'</div>
 			       		<br><br>Opis produktu: <br>'.$row["opis"].
 			       		'<br><br><form action="koszyk.php" method="post"><input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
-			       		'<input type="hidden" name="koszyk1"/><br><br><button type="submit" id="zloz_zam_btn"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button>
+			       		'<input type="hidden" name="koszyk1"/><br><br><button type="submit" id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button>
 			       		</form>
 	       			</div>';
 			}

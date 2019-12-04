@@ -7,8 +7,6 @@
 	} else {
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
-		header('Location: index.php');
-		exit();
 	}
 
 	if(isset($_POST['koszyk1']))
@@ -29,30 +27,6 @@
 		$sql = "INSERT INTO koszyk(ilosc, cena, id_produkty, id_klienci) VALUES ('$ile', '$cena', '$id', '$id_k')";
 		$result = $conn -> query($sql);
 	}
-
-	//Skladanie zamowienia
-	if(isset($_POST['suma'])) {
-		$suma1 = $_POST['suma'];
-		$id_klienci = $_SESSION['id_klienci'];
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "sklep";
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		$conn -> query("SET NAMES 'utf8'");
-		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-		$sql_t = "SET FOREIGN_KEY_CHECKS = 0";
-		$result = $conn -> query($sql_t);
-		if($suma1>0)
-		{
-			$sql_suma = "SELECT * FROM koszyk WHERE id_klienci = '$id_klienci'";
-			$result = $conn -> query($sql_suma);
-		} 
-		else
-		{ 
-			$_SESSION['pusty_koszyk'] = "Twój koszyk jest pusty! Dodaj produkty do koszyka.";
-		}
-	}
 ?>
 
 <!DOCTYPE HTML>
@@ -69,14 +43,6 @@
 	<link href="fontawesome/css/all.css" rel="stylesheet">
 	<title>Twój koszyk</title>
 </head>
-<style>
-	.error
-		{
-			color:red;
-			margin-top: 10px;
-			margin-bottom: 10px;
-		}
-</style>
 
 <body>
 	<!-- STICKY MENU -->
@@ -154,16 +120,9 @@
 
 		<!-- MIĘSO ARMATNIE -->
 		<div id="koszyk_container">
+			<h2>Adres do wysyłki: </h2><br>
 			<?php
-				Show_cart();
-			?>
-
-			<?php
-				if (isset($_SESSION['pusty_koszyk']))
-				{
-					echo '<div class="error">'.$_SESSION['pusty_koszyk'].'</div>';
-					unset($_SESSION['pusty_koszyk']);
-				}
+				Show_address();
 			?>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -201,97 +160,42 @@
 
 
 <?php
-	$id_klienci = $_SESSION['id_klienci'];
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "sklep";
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	$conn -> query("SET NAMES 'utf8'");
-	// Check connection
-	if ($conn -> connect_error) {
-		    die("Nie połączono z bazą danych: " . $conn -> connect_error);
-		}
-
-	//Function to show products in cart
-	function Show_cart()
-	{	
-		$suma = 0;
-		$id_klienci = $_SESSION['id_klienci'];
-		require_once "connect.php";
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		$conn -> query("SET NAMES 'utf8'");
-		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-		$sql = "SELECT * FROM koszyk WHERE id_klienci=$id_klienci";
-		$result = $conn -> query($sql);
-		echo '<h1>Twój koszyk</h1>';
-		//Czy jest koszyk
-		if ($result -> num_rows > 0)
-		{
-	 		while($row = $result -> fetch_assoc())
-	 		{	
-	 			$id_kosz = $row['id_koszyk'];
-	 			$id_prod = $row['id_produkty'];
-	 			$sql1 = "SELECT id_produkty, nazwa, cena, zdjecie FROM produkty WHERE id_produkty=$id_prod";
-	 			$result1 = $conn -> query($sql1);
-	 			//Czy jest zamowienie_produkty
-	 			if ($result1 -> num_rows > 0)
-				{
-	 				while($row1 = $result1 -> fetch_assoc())
-	 				{
-	 					$suma += $row["cena"]*$row["ilosc"];
-	 					echo '<a href="produkt.php?id_produkty='.$row1["id_produkty"].'" id="product_link">
-				       		<div class="koszyk">
-				       			<table id="koszyk_t">
-				       				<tr>
-				       					<td><div id="zdjecie"><img src="images/products/'.$row1["zdjecie"].'" width="100" height="100" alt="product.png"></div></td>
-						       			<td><div class="nazwa"><b>'.$row1["nazwa"].'</b></div></td>
-							       		<td>Id produktu: '.$row1['id_produkty'].'</td>
-							       		<td>Ile sztuk: '.$row['ilosc'].'</td>
-							       		<td colspan="2"><div id="cena">Cena: '.$row["cena"]*$row["ilosc"].' PLN</b></div></td>
-							       		<td><form action="#" method="post">
-							       			<input type="hidden" name="id_k" value="'.$row["id_koszyk"].'" />
-							       			<input type="submit" name="delete" value="Usuń">
-							       		</form></td>
-						       		</tr>
-					       		</table>
-				       		</div>
-	       				<a>';	
-	 				}
-	 			}
-				
-	       		
-			}
-		} else { echo "Brak produktów w koszyku"; }
-		echo '<br>
-		<div id="podsumowanie">Kwota całkowita: '.$suma.' PLN<br><br>
-		<form action="skladanie_zam.php" method="post">
-			<input type="hidden" name="suma" value="'.$suma.'" />
-			<input type="submit" id="kup_teraz" name="zloz_zam" value="Złóż zamówienie">
-		</form>
-		</div>';
-	}
-
-	//Usuwanie z koszyka
-	if(isset($_POST['id_k'])) {
-		$id = $_POST['id_k'];
-		$sql_d= "DELETE FROM koszyk WHERE id_koszyk = '$id'";
-		$result = $conn -> query($sql_d);
-		echo "<meta http-equiv='refresh' content='0'>";
-	}
-
 	
 
-
-	function DeletePosition()
-	{
+	//Function to show products in categories
+	function Show_address()
+	{	
 		$id_klienci = $_SESSION['id_klienci'];
-		require_once "connect.php";
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "sklep";
+		// Create connection
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		$conn -> query("SET NAMES 'utf8'");
-		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-		$sql = "DELETE * FROM koszyk WHERE id_koszyk=$id_kosz";
+		// Check connection
+		if ($conn -> connect_error) {
+			    die("Nie połączono z bazą danych: " . $conn -> connect_error);
+			}
+		$sql = "SELECT * FROM adres WHERE id_klienci= '$id_klienci'";
 		$result = $conn -> query($sql);
+		//Czy jest adres
+		if ($result -> num_rows > 0)
+		{
+			$row = $result -> fetch_assoc();
+			if($row['miasto']===NULL)
+			{
+				echo '<div id="adres">Aktualnie nie masz ustawionego adresu wysyłki.<br>
+				Ustaw swój adres w <a class="ustawienia_link" href="profil.php">Ustawieniach</a>
+				</div>';
+			}
+			else
+			{
+			echo '<div id="adres">Paczka zostanie wysłana na adres: <br><br><b>'.$row['kod_pocztowy'].' '.$row['miasto'].'<br>'.$row['ulica'].' '.$row['nr_domu'].'/'.$row['nr_lokalu'].'</b><br><br>
+			Jeśli chcesz aby paczka została wysłana na inny adres, zmień swój adres w <a class="ustawienia_link" href="profil.php">Ustawieniach</a>
+			</div>';
+			}
+			
+		}
 	}
 ?>

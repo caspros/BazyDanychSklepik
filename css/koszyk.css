@@ -39,3 +39,17 @@
 #zloz_zam_btn:hover{
     background-color: #ff8800;
 }
+
+.koszyk{
+    width: 90%;
+    position: relative;
+    right: 10%;
+}
+
+#container_koszyk {
+    height: 1800px;
+    background: #FFFFFF;
+    margin: 2.5% auto;
+    width: 90%;
+    padding: 1rem;
+}

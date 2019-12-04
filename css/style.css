@@ -439,3 +439,20 @@ table {
 #ustaw_dane_btn:hover{
     background-color: #ff8800;
 }
+
+/* Skladanie_zam.php */
+
+#adres{
+	font-size: 25px;
+	text-align: center;
+}
+
+.ustawienia_link{
+	color: #FF5A00;
+
+}
+
+.ustawienia_link:hover{
+	color: red;
+	background-color: #ECEFF1;
+}

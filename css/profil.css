@@ -27,8 +27,9 @@
 }
 
 a{
-     color: #ff0000;
-     font-size: 18px;
+    text-decoration: none;
+    color: #ff0000;
+    font-size: 18px;
 }
 
 #captcha{
