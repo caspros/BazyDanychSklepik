@@ -7,16 +7,15 @@
 	} else {
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
+		header('Location: index.php');
+		exit();
 	}
 	$id_klienci = $_SESSION['id_klienci'];
 
 	
 
 	//Testowe do wyswietlania z bazy danych w polach
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "sklep";
+	require_once "connect.php";
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	$conn -> query("SET NAMES 'utf8'");
 	if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
@@ -40,7 +39,6 @@
 		}
 	}
 
-	//na razie poprawnosc zakomentowana, trzeba poprawić, bo nie działa
 	if(isset($_POST['ustawiono']))
 	{	
 		$wszystko_OK=true;
@@ -154,8 +152,8 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<link rel="stylesheet" type="text/css" href="css/profil.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
-	<link rel="stylesheet" href="css/profil.css">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
