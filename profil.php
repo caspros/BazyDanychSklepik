@@ -31,11 +31,11 @@
 
 		if($row['miasto']===NULL)
 		{
-			$u = " ";
-			$k = " ";
-			$m = " ";
-			$d = " ";
-			$l = " ";
+			$u = "";
+			$k = "";
+			$m = "";
+			$d = "";
+			$l = "";
 		}
 	}
 
@@ -276,11 +276,11 @@
 							
 							if($row['miasto']===NULL)
 							{
-								$u = " ";
-								$k = " ";
-								$m = " ";
-								$d = " ";
-								$l = " ";
+								$u = "";
+								$k = "";
+								$m = "";
+								$d = "";
+								$l = "";
 							}											
 						}
 					?>
@@ -343,7 +343,7 @@
 								}
 							?>
 						<br>
-						<input type="hidden" name="ustawiono"/>
+						<input type="hidden" name="ustawiono" id="ustawiono"/>
 						<button type="submit" class="btn btn-default login-popup-btn " id="ustaw_dane_btn" name="submit">Zapisz</button>
 					</form>
 				</div>
