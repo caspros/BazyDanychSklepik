@@ -113,7 +113,7 @@
 					    die("Nie połączono z bazą danych: " . $conn -> connect_error);
 					}
 
-				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty=$id_produktu";
+				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_produkty=$id_produktu";
 				$result = $conn -> query($sql);
 				Show_product($id_produktu);
 			?>
@@ -156,10 +156,9 @@
     		reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
 			
 				$('#ile_sztuk').on('change paste', function () {
-				    $("#current").html($(this).val()*cookies["MyCookie"])   
-				});
+				    $("#current").html($(this).val()*cookies["MyCookie"]);
+				});      
 	</script>
-
 
 <?php
 	//Function to show product on main site
@@ -171,7 +170,7 @@
 		$conn -> query("SET NAMES 'utf8'");
 		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
 
-		$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_produkty=$id_produktu";
+		$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_produkty=$id_produktu";
 		$result = $conn -> query($sql);
 		if ($result -> num_rows > 0)
 		{
@@ -190,8 +189,10 @@
 				       		echo '<br>Producent: '.$row["producent"].
 			       		'</div>
 			       		<br><br>Opis produktu: <br>'.$row["opis"].
-			       		'<br><br><form action="koszyk.php" method="post"><input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
-			       		'<input type="hidden" name="koszyk1"/><br><br><button type="submit" id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button>
+			       		'<br><br><form action="koszyk.php" method="post"><input type="number" onchange="myFunction()" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
+			       		'<input type="hidden" name="koszyk1"/><br><br><button type="submit" id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button><br>
+			       			<span style="color:green;">+ Dostawa: <span id="dostawa">'.$row['dostawa'].'</span> PLN (do 5 sztuk w paczce)</span>
+			       			<p id="demo"></p>
 			       		</form>
 	       			</div>';
 			}
@@ -201,6 +202,26 @@
 	
 				
 ?>
+
+
+<script>
+//Funkcja na zliczanie dostawy 
+function myFunction()
+{
+	  var x = document.getElementById("ile_sztuk");
+	  var currentVal = x.value;
+	  if (currentVal % 5 == 1)
+	  {
+	    document.getElementById("dostawa").innerHTML = 12 + ((currentVal - 1) / 5) * 12;
+	    
+	  }
+
+	if (currentVal % 5 == 0)
+    {
+    	document.getElementById("dostawa").innerHTML = 12 + (((currentVal) / 5) -1) * 12;
+    }
+}
+</script>
 
 </body>
 </html>

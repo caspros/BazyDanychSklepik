@@ -38,7 +38,9 @@
 		$conn -> query($sql2);
 		if($conn -> query($sql) === TRUE)
 		{
-			echo "<h2>Produkt dodany</h2>";;
+			//header('Location: addProduct.php');
+			//exit();
+			echo "<h2>Produkt dodany</h2>";
 		}
 		else { echo "Error: " . $sql . "<br>" . $conn->error;}
 ?>

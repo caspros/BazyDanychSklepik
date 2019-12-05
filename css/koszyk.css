@@ -1,17 +1,12 @@
 #koszyk_container
 {
     width: 100%;
-    height: 1000px;
+    height: 2000px;
 }
 
 #koszyk_container a
 {
    text-decoration: none;
-}
-
-.koszyk:hover
-{
-
 }
 
 .koszyk_t

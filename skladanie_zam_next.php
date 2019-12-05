@@ -10,8 +10,6 @@
 		header('Location: index.php');
 		exit();
 	}
-
-	
 ?>
 
 <!DOCTYPE HTML>
@@ -26,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Twój koszyk</title>
+	<title>Suma zamówienia</title>
 </head>
 
 <body>
@@ -105,9 +103,9 @@
 
 		<!-- MIĘSO ARMATNIE -->
 		<div id="koszyk_container">
-			<h2>Adres do wysyłki: </h2><br>
+			<h2>Podsumowanie zamówienia: </h2><br>
 			<?php
-				Show_address();
+				Show_summary();
 			?>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -147,45 +145,46 @@
 <?php
 	
 
-	//Function to show products in categories
-	function Show_address()
+	//Function to show summary of order
+	function Show_summary()
 	{	
-		$id_klienci = $_SESSION['id_klienci'];
 		$suma = $_SESSION['suma'];
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "sklep";
-		// Create connection
+		$id_klienci = $_SESSION['id_klienci'];
+		require_once "connect.php";
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		$conn -> query("SET NAMES 'utf8'");
-		// Check connection
-		if ($conn -> connect_error) {
-			    die("Nie połączono z bazą danych: " . $conn -> connect_error);
-			}
-		$sql = "SELECT * FROM adres WHERE id_klienci= '$id_klienci'";
+		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+		$sql = "SELECT * FROM koszyk WHERE id_klienci=$id_klienci";
 		$result = $conn -> query($sql);
-		//Czy jest adres
+		echo '<h1>Twoje zamówienie</h1>';
+		//Czy jest koszyk
 		if ($result -> num_rows > 0)
 		{
-			$row = $result -> fetch_assoc();
-			if($row['miasto']===NULL)
-			{
-				echo '<div id="adres">Aktualnie nie masz ustawionego adresu wysyłki.<br>
-				Ustaw swój adres w <a class="ustawienia_link" href="profil.php">Ustawieniach</a>
-				</div>';
+			$wiersz = 1;
+	 		while($row = $result -> fetch_assoc())
+	 		{	
+	 			$id_kosz = $row['id_koszyk'];
+	 			$id_prod = $row['id_produkty'];
+	 			$sql1 = "SELECT id_produkty, nazwa, cena, zdjecie FROM produkty WHERE id_produkty=$id_prod";
+	 			$result1 = $conn -> query($sql1);
+	 			//Czy jest zamowienie_produkty
+	 			if ($result1 -> num_rows > 0)
+				{
+	 				while($row1 = $result1 -> fetch_assoc())
+	 				{
+	 					echo '<div id="podsumowanie_prod">'.$wiersz.'. '.$row1["nazwa"].' - ilość: '.$row['ilosc'].' cena: '.$row["cena"]*$row["ilosc"].' PLN ('.$row["cena"].'zł/szt)<br></div>';
+	 				}
+	 			}
+	 			$wiersz += 1;
 			}
-			else
-			{
-			echo '<div id="adres">Paczka zostanie wysłana na adres: <br><br><b>'.$row['kod_pocztowy'].' '.$row['miasto'].'<br>ul. '.$row['ulica'].' '.$row['nr_domu'].'/'.$row['nr_lokalu'].'</b><br><br>
-			Jeśli chcesz aby paczka została wysłana na inny adres, zmień swój adres w <a class="ustawienia_link" href="profil.php">Ustawieniach</a>
-			<br><br><br><br>
-			<form method="post" action="skladanie_zam_next.php">
-				<input type="hidden" id="next" name="next" value="'.$suma.'"/>
-				<button type="submit" id="dalej_btn">Dalej</button>
-			</form></div>';
-			}
-			
-		}
+		} else { echo "Brak produktów w koszyku"; }
+		echo '<br><br><br>
+		<div id="podsumowanie1"><b>Kwota całkowita zamówienia: '.$suma.' PLN</b><br><br>
+		<form action="zlozono.php" method="post">
+			<input type="hidden" name="suma" value="'.$suma.'" />
+			<input type="submit" id="kup_teraz" name="zlozono" value="Potwierdź zamówienie">
+		</form><br>
+			<div id="uwaga">Uwaga: Klikając przycisk "Potwierdź zamówienie" zobowiazujesz się do zapłacenia za zamówienie.</div>
+		</div>';
 	}
 ?>

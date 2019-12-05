@@ -55,7 +55,7 @@
 
 			<!-- koszyk -->
 			<li>
-				<a href="#">
+				<a href="koszyk.php">
 					<span class="koszyk">
 						<i class="fas fa-shopping-cart"></i>
 					</span>
@@ -103,34 +103,13 @@
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
 			
-
-			<!-- KATEGORIE -->
-			<div id="categories">
-				<br>
-
-				<span class="kat"><b>Kategorie:</b></span>
-				<br><br>
-				<a href="#">Koszulki</a><br>
-				<a href="#">Spodnie</a><br>
-				<a href="#">Kubki</a><br>
-				<a href="#">Długopisy</a><br>
-				<a href="#">Bluzy</a><br>
-				<a href="#">Naklejki</a><br>
-				<a href="#">Ramki</a><br>
-				<a href="#">RTV</a><br>
-				<a href="#">AGD</a><br>
-				<a href="#">Alkohol</a><br>
-				<a href="#">Zabawki</a><br>
-
-			</div>
-
 			<div id="orders">
 				
 
 				<?php
 					if($_SESSION['uprawnienia']==1)
 					{
-						echo '<a href="addProduct.php">Dodaj produkt!</a><br><form id="adm_panel" method="POST">
+						echo '<a id="dodaj_produkt" href="addProduct.php">Dodaj produkt!</a><br><br><br><form id="adm_panel" method="POST">
 						<b>Admin Panel</b><br><br>
 						Id zamówienia: <input type="text" name="id_zam"/><br><br>
 						<input type="hidden" name="paid" value="0" />
@@ -168,7 +147,8 @@
 					}
 				?>
 
-				<h3 id="title3">Moje zamówienia</h3>
+				<h1>Moje zamówienia</h1>
+				<br><br>
 				<?php
 					Show_orders($id_klienci);
 				?>
@@ -178,7 +158,7 @@
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 				<h1>WYRÓŻNIONE PRODUKTY:</h1>
 			<!-- PRODUKTY NA GŁÓWNEJ -->
-			<div id="products">
+			<div id="products_zam">
 				
 				<br>
 				<div class="product"><?php Show_product(12);?></div>
@@ -246,11 +226,11 @@
 		$row_adm = $result_adm -> fetch_assoc();
 		if($row_adm['uprawnienia'])
 		{
-			$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania FROM zamowienia z, klienci k GROUP BY z.id_zamowienia";
+			$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania, z.suma FROM zamowienia z, klienci k GROUP BY z.id_zamowienia";
 		} 
 		else
 		{
-			$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania FROM zamowienia z, klienci k WHERE z.id_klienci = $id_klienci GROUP BY z.id_zamowienia";
+			$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania, z.suma FROM zamowienia z, klienci k WHERE z.id_klienci = $id_klienci GROUP BY z.id_zamowienia";
 		}
 		$result = $conn -> query($sql);
 		if(mysqli_num_rows($result)==0)
@@ -262,6 +242,7 @@
 						<tr>
 							<th>Id zamówienia</th>
 							<th>Data zamówienia</th>
+							<th>Kwota zamówienia</th>
 							<th>Status płatności</th>
 							<th>Data wysłania</th>
 						</tr>';
@@ -270,6 +251,7 @@
 					echo '<tr>
 							<td>'.$row['id_zamowienia'].'</td>
 							<td>'.$row['data_zlozenia'].'</td>
+							<td>'.$row['suma'].' PLN</td>
 							<td>';
 							if($row['zaplacono']==0)
 							{
