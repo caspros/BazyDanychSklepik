@@ -283,15 +283,30 @@ table {
 
 #orders{
 	float: left;
-	width: 70%;
+	width: 85%;
 	margin: 20px;
 	margin-left: 80px;
 	padding: 20px;
 }
 
 .order_table{
+	border-collapse: collapse;
+	position: relative;
+	left: 5%;
 	text-align: center;
 	font-style: normal;
+	border: 1px solid black;
+}
+
+.order_table th{
+	background-color: #ba9e79;
+}
+
+.order_table table{
+	border-collapse: collapse;
+}
+
+.order_table th, td, table, tr{
 	border: 1px solid black;
 }
 
@@ -312,6 +327,24 @@ table {
 	font-style: normal;
 	text-align: center;
 	border: 1px solid black;
+}
+
+#products_zam{
+	position: relative;
+	left: 6%;
+	text-align: center;
+ 	width: 90%;
+ 	background-color: #grey;
+}
+
+#dodaj_produkt{
+	font-style: none;
+	position: relative;
+	left: 45%;
+	text-decoration: none;
+	font-size: 30px;
+	color: white;
+	background-color: #FF5A00;
 }
 
 /* Produkt.php */
@@ -455,4 +488,36 @@ table {
 .ustawienia_link:hover{
 	color: red;
 	background-color: #ECEFF1;
+}
+
+#dalej_btn{
+	width: 150px;
+	min-height: 40px;
+	margin-left: 10px;
+    font-size: 25px;
+    background-color: #FF5A00;
+    color: white;
+    border: none;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    padding-bottom: 5px;
+}
+
+#dalej_btn:hover{
+    background-color: #ff8800;
+}
+
+/* Skladanie_zam_next.php */
+
+#podsumowanie_prod{
+	text-align: center;
+}
+
+#podsumowanie1{
+	text-align: center;
+}
+
+#uwaga{
+	font-style: italic;
 }

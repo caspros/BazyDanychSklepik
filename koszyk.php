@@ -218,6 +218,7 @@
 	function Show_cart()
 	{	
 		$suma = 0;
+		$suma_dostawa = 0;
 		$id_klienci = $_SESSION['id_klienci'];
 		require_once "connect.php";
 		$conn = new mysqli($servername, $username, $password, $dbname);
@@ -233,7 +234,7 @@
 	 		{	
 	 			$id_kosz = $row['id_koszyk'];
 	 			$id_prod = $row['id_produkty'];
-	 			$sql1 = "SELECT id_produkty, nazwa, cena, zdjecie FROM produkty WHERE id_produkty=$id_prod";
+	 			$sql1 = "SELECT id_produkty, nazwa, cena, producent, zdjecie, dostawa FROM produkty WHERE id_produkty=$id_prod";
 	 			$result1 = $conn -> query($sql1);
 	 			//Czy jest zamowienie_produkty
 	 			if ($result1 -> num_rows > 0)
@@ -246,10 +247,44 @@
 				       			<table id="koszyk_t">
 				       				<tr>
 				       					<td><div id="zdjecie"><img src="images/products/'.$row1["zdjecie"].'" width="100" height="100" alt="product.png"></div></td>
-						       			<td><div class="nazwa"><b>'.$row1["nazwa"].'</b></div></td>
-							       		<td>Id produktu: '.$row1['id_produkty'].'</td>
-							       		<td>Ile sztuk: '.$row['ilosc'].'</td>
+						       			<td><div class="nazwa">'.$row['ilosc'].'x <b>'.$row1["nazwa"].'</b></div></td>
+							       		<td>Producent: '.$row1['producent'].'</td>
 							       		<td colspan="2"><div id="cena">Cena: '.$row["cena"]*$row["ilosc"].' PLN</b></div></td>
+							       		<td style="color:green;">Dostawa: ';
+							       		switch ($row['ilosc']%5)
+							       		{
+											case 0:
+											$dostawa = ($row["ilosc"] / 5 ) * 12;
+											$suma += $dostawa;
+											$suma_dostawa += $dostawa;
+											echo $dostawa;
+											break;
+											case 1:
+											$dostawa = 12 + (($row["ilosc"] - 1) / 5 ) * 12;
+											$suma += $dostawa;
+											$suma_dostawa += $dostawa;
+											echo $dostawa;
+											break;
+											case 2:
+											$dostawa = 12 + (($row["ilosc"] - 2) / 5 ) * 12;
+											$suma += $dostawa;
+											$suma_dostawa += $dostawa;
+											echo $dostawa;
+											break;
+											case 3:
+											$dostawa = 12 + (($row["ilosc"] - 3) / 5 ) * 12;
+											$suma += $dostawa;
+											$suma_dostawa += $dostawa;
+											echo $dostawa;
+											break;
+											case 4:
+											$dostawa = 12 + (($row["ilosc"] - 4) / 5 ) * 12;
+											$suma += $dostawa;
+											$suma_dostawa += $dostawa;
+											echo $dostawa;
+											break;
+										}
+							       		echo ' PLN</td>
 							       		<td><form action="#" method="post">
 							       			<input type="hidden" name="id_k" value="'.$row["id_koszyk"].'" />
 							       			<input type="submit" name="delete" value="Usuń">
@@ -261,11 +296,13 @@
 	 				}
 	 			}
 				
-	       		
+	       		$_SESSION['suma'] = $suma;
 			}
-		} else { echo "Brak produktów w koszyku"; }
+		} else { echo '<div class="error" style="text-align:center;">Brak produktów w koszyku</div>'; }
 		echo '<br>
-		<div id="podsumowanie">Kwota całkowita: '.$suma.' PLN<br><br>
+		<div id="podsumowanie">Kwota całkowita: '.$suma.' PLN<br>
+		<div id="dostawa1" style="color:green;">W tym dostawa: '.$suma_dostawa.' PLN
+		<br><br>
 		<form action="skladanie_zam.php" method="post">
 			<input type="hidden" name="suma" value="'.$suma.'" />
 			<input type="submit" id="kup_teraz" name="zloz_zam" value="Złóż zamówienie">
@@ -280,9 +317,6 @@
 		$result = $conn -> query($sql_d);
 		echo "<meta http-equiv='refresh' content='0'>";
 	}
-
-	
-
 
 	function DeletePosition()
 	{

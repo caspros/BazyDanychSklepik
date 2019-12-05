@@ -10,8 +10,6 @@
 		header('Location: index.php');
 		exit();
 	}
-
-	
 ?>
 
 <!DOCTYPE HTML>
@@ -26,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Twój koszyk</title>
+	<title>Zamówienie złożone!</title>
 </head>
 
 <body>
@@ -105,9 +103,9 @@
 
 		<!-- MIĘSO ARMATNIE -->
 		<div id="koszyk_container">
-			<h2>Adres do wysyłki: </h2><br>
+			<h2>Dziękujemy! Zamówienie zostało złożone!</h2><br>
 			<?php
-				Show_address();
+				Zloz_zamowienie();
 			?>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -145,47 +143,93 @@
 
 
 <?php
-	
-
-	//Function to show products in categories
-	function Show_address()
+	//Function to confirm order
+	function Zloz_zamowienie()
 	{	
-		$id_klienci = $_SESSION['id_klienci'];
 		$suma = $_SESSION['suma'];
+		$id_klienci = $_SESSION['id_klienci'];
 		$servername = "localhost";
 		$username = "root";
 		$password = "";
 		$dbname = "sklep";
-		// Create connection
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		$conn -> query("SET NAMES 'utf8'");
-		// Check connection
-		if ($conn -> connect_error) {
-			    die("Nie połączono z bazą danych: " . $conn -> connect_error);
-			}
-		$sql = "SELECT * FROM adres WHERE id_klienci= '$id_klienci'";
+		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+		$sql = "SELECT * FROM koszyk WHERE id_klienci=$id_klienci";
 		$result = $conn -> query($sql);
-		//Czy jest adres
+		//Czy jest koszyk
 		if ($result -> num_rows > 0)
 		{
-			$row = $result -> fetch_assoc();
-			if($row['miasto']===NULL)
-			{
-				echo '<div id="adres">Aktualnie nie masz ustawionego adresu wysyłki.<br>
-				Ustaw swój adres w <a class="ustawienia_link" href="profil.php">Ustawieniach</a>
-				</div>';
+	 		while($row = $result -> fetch_assoc())
+	 		{	
+	 			$id_kosz = $row['id_koszyk'];
+	 			$id_prod = $row['id_produkty'];
+
+	 			$sql1 = "SELECT id_produkty, nazwa, cena, zdjecie FROM produkty WHERE id_produkty=$id_prod";
+	 			$result1 = $conn -> query($sql1);
+	 			//Czy jest zamowienie_produkty
+	 			/*if ($result1 -> num_rows > 0)
+				{
+					//Zliczanie ceny zamowienia
+	 				while($row1 = $result1 -> fetch_assoc())
+	 				{
+	 					$suma += $row["cena"]*$row["ilosc"];
+	 					
+	 				}
+	 			}*/
 			}
-			else
-			{
-			echo '<div id="adres">Paczka zostanie wysłana na adres: <br><br><b>'.$row['kod_pocztowy'].' '.$row['miasto'].'<br>ul. '.$row['ulica'].' '.$row['nr_domu'].'/'.$row['nr_lokalu'].'</b><br><br>
-			Jeśli chcesz aby paczka została wysłana na inny adres, zmień swój adres w <a class="ustawienia_link" href="profil.php">Ustawieniach</a>
-			<br><br><br><br>
-			<form method="post" action="skladanie_zam_next.php">
-				<input type="hidden" id="next" name="next" value="'.$suma.'"/>
-				<button type="submit" id="dalej_btn">Dalej</button>
-			</form></div>';
-			}
-			
+		} else { echo "Brak produktów w koszyku"; }
+
+		//Dodanie rekordu w tabeli zamowienia
+		$data_zlozenia = date("Y-m-d H:i:s");
+		$sql_zamowienia = "INSERT INTO zamowienia(data_zlozenia, data_wyslania, zaplacono, id_klienci, suma) VALUES ('$data_zlozenia','0000-00-00', '0', '$id_klienci', '$suma')";
+		$sql_t = "SET FOREIGN_KEY_CHECKS = 0";
+		$result = $conn -> query($sql_t);
+		$result = $conn -> query($sql_zamowienia);
+		$sql = "SELECT id_zamowienia FROM zamowienia WHERE id_klienci=$id_klienci";
+		$result = $conn -> query($sql);
+		while($row = $result -> fetch_assoc())
+	 	{	
+	 		$id_zam = $row['id_zamowienia'];
+	 	}
+
+		$sql = "SELECT * FROM koszyk WHERE id_klienci=$id_klienci";
+		$result = $conn -> query($sql);
+		while($row = $result -> fetch_assoc())
+	 	{	
+ 			$id_kosz = $row['id_koszyk'];
+ 			$ilosc = $row['ilosc'];
+ 			$cena = $row['cena'];
+ 			$id_prod = $row['id_produkty'];
+
+ 			//Dodanie rekordu w tabeli zamowienie_produkty
+ 			$sql_zam_prod = "INSERT INTO zamowienie_produkty(ilosc, cena, id_produkty, id_klienci, id_zamowienia) VALUES ('$ilosc','$cena', '$id_prod', '$id_klienci', '$id_zam')";
+ 			$result1 = $conn -> query($sql_zam_prod);
+
+ 			//Usuniecie pozycji z koszyka
+			$sql_d= "DELETE FROM koszyk WHERE id_koszyk = '$id_kosz'";
+			$result1 = $conn -> query($sql_d);
+
+			//Zmniejszenie dostepnej ilosci produktow
+			$sql_ilosc1 = "SELECT dostepna_ilosc FROM produkty WHERE id_produkty='$id_prod'";
+			$result1 = $conn -> query($sql_ilosc1);
+			$row1 = $result1 -> fetch_assoc();
+			$nowa_ilosc = $row1['dostepna_ilosc'] - $ilosc;
+			$sql_ilosc = "UPDATE produkty SET dostepna_ilosc='$nowa_ilosc' WHERE id_produkty='$id_prod'";
+			$result1 = $conn -> query($sql_ilosc);
 		}
+
+
+
+		echo '<h1>Dane do przelewu:</h1>';
+		echo '<br>
+		<div id="podsumowanie1">
+			<b>BNP Paribas<br>
+			61 1090 1014 0000 0712 1981 2874<br><br>
+			Alledrogo sp. z o.o.<br>
+			ul. Przykładowa 15<br> 58-560 Jelenia Góra<br><br>
+			Tytuł przelewu: Zamowienie'.$id_zam.'<br>
+			Kwota przelewu: '.$suma.' PLN</b><br>';
+
 	}
 ?>

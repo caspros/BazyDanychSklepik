@@ -180,7 +180,7 @@
 		$conn -> query("SET NAMES 'utf8'");
 		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
 
-		$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie FROM produkty WHERE id_kategorie=$id_kategorie";
+		$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_kategorie=$id_kategorie";
 		$sql1 = "SELECT id_kategorie, kategoria FROM kategorie WHERE id_kategorie=$id_kategorie";
 		$result = $conn -> query($sql);
 		$result1 = $conn -> query($sql1);
@@ -206,7 +206,7 @@
 						       		}else echo $row["rozmiar"];
 						       		echo '</div></td>
 						       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
-						       		<td><span style="color:green;font-style:normal;">Dostawa: 15 PLN</span></td>
+						       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
 					       		</tr>
 				       		</table>
 			       		</div>
