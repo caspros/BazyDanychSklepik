@@ -35,10 +35,16 @@
     background-color: #ff8800;
 }
 
-.koszyk{
+.koszyk1{
+    padding: 2px;
+    margin: 2px;
     width: 90%;
     position: relative;
-    right: 10%;
+    left: 5%;
+}
+
+.koszyk1:hover{
+    background-color: #FF5A00;
 }
 
 #container_koszyk {
@@ -47,4 +53,10 @@
     margin: 2.5% auto;
     width: 90%;
     padding: 1rem;
+}
+
+#info
+{
+    text-align: center;
+    font-style: cursive;
 }

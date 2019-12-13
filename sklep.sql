@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 05 Gru 2019, 22:43
+-- Czas generowania: 13 Gru 2019, 13:23
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -53,7 +53,8 @@ INSERT INTO `adres` (`id_adres`, `kod_pocztowy`, `miasto`, `ulica`, `nr_domu`, `
 (9, NULL, NULL, NULL, NULL, NULL, 14),
 (10, NULL, NULL, NULL, NULL, NULL, 15),
 (11, '50-111', 'Warszawa', 'Fajna', 51, 152, 16),
-(12, NULL, NULL, NULL, NULL, NULL, 17);
+(12, '58-533', 'Mysłakowic', 'Nowa', 12, 23, 17),
+(13, '02-200', 'Komikowo', 'Komikowa', 151, 1, 18);
 
 -- --------------------------------------------------------
 
@@ -114,7 +115,8 @@ INSERT INTO `klienci` (`id_klienci`, `Imie`, `Nazwisko`, `haslo`, `email`, `id_a
 (14, 'Macio', 'Macio', '4959fafb966d47348c32072ce6538d0b', 'macio@o2.pl', 9, 0),
 (15, 'Typek', 'Typek', 'b0a767234400dd537a97fe6c47b75172', 'typek@o2.pl', 10, 0),
 (16, 'Bartosz', 'Bartosz', 'c9006f26a2b48d3dd09eba5569244f6f', 'bartosz@o2.pl', 11, 0),
-(17, 'Wariat', 'Wariat', '027ca5a0d6c257aa627d3a4a9ea6f2e5', 'wariat@o2.pl', 12, 0);
+(17, 'Wariat', 'Wariat', '027ca5a0d6c257aa627d3a4a9ea6f2e5', 'wariat@o2.pl', 12, 0),
+(18, 'Komik', 'Komik', '0bcb58d9edd19ebb002e5da7ac82ebd8', 'komik@o2.pl', 13, 0);
 
 -- --------------------------------------------------------
 
@@ -137,7 +139,9 @@ CREATE TABLE `koszyk` (
 
 INSERT INTO `koszyk` (`id_koszyk`, `ilosc`, `cena`, `id_produkty`, `id_klienci`, `zlozono`) VALUES
 (21, 1, 100, 12, 15, 0),
-(22, 4, 15, 15, 15, 0);
+(22, 4, 15, 15, 15, 0),
+(25, 1, 30, 14, 7, 0),
+(28, 1, 1350, 54, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -202,16 +206,17 @@ CREATE TABLE `produkty` (
 
 INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena`, `dostepna_ilosc`, `producent`, `oceny`, `rozmiar`, `zdjecie`, `id_kategorie`, `dostawa`) VALUES
 (8, 'Koszulka Mike Tyson', 'Koszulka zrobiona z pomysłem', '4', '50.00', 92, 'BenoCORP', NULL, 'XL', 'koszulka_mike.png', 1, 12),
-(12, 'Spodnie Jeans Master', 'Wykonane z najlepszej jakości materiału Jeans, idealnie dopasowują się do ciała', '5', '100.00', 81, 'Jeans&Jeans', NULL, 'M', 'jeans_m.png', 2, 12),
-(14, 'Kubek Studenta', 'Kubek wykonany z porcelany z nadrukowanym napisem, który odźwierciedla brutalną rzeczywistość studentów', '5', '30.00', 92, 'KubekKuba', NULL, NULL, 'kubek_student1.png', 3, 12),
-(15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 86, 'DługiPisak sp. Z o.o', NULL, NULL, 'dlugopis_1.png', 4, 12),
+(12, 'Spodnie Jeans Master', 'Wykonane z najlepszej jakości materiału Jeans, idealnie dopasowują się do ciała', '5', '100.00', 79, 'Jeans&Jeans', NULL, 'M', 'jeans_m.png', 2, 12),
+(14, 'Kubek Studenta', 'Kubek wykonany z porcelany z nadrukowanym napisem, który odźwierciedla brutalną rzeczywistość studentów', '5', '30.00', 88, 'KubekKuba', NULL, NULL, 'kubek_student1.png', 3, 10),
+(15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 86, 'DługiPisak sp. Z o.o', NULL, NULL, 'dlugopis_1.png', 4, 6),
 (16, 'Bluza z ziemniakiem', 'Bluza wykonana z tworzywa sztucznego, idealna aby wyróżnić się z tłumu', '3', '70.00', 92, 'Bluzex sp. Z o.o', NULL, 'L', 'bluza_1.png', 5, 12),
-(17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 92, 'Naklejkownia sp. Z o.o', NULL, '100cm x 150cm', 'naklejka_1.png', 6, 12),
+(17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 91, 'Naklejkownia sp. Z o.o', NULL, '100cm x 150cm', 'naklejka_1.png', 6, 15),
 (18, 'Koszulka biała KONSTYTUCJA', 'Biała koszulka doskonałej jakości z nadrukowanym napisem KONSTYTUCJA. Ulubiona koszulka Lecha Wałęsy', '5', '75.00', 92, 'LechWałęsaCompany', NULL, 'M', 'koszulka_otua.png', 1, 12),
 (51, 'Ramka na zdjęcie', 'Zawieszki i fleksy sprowadzamy od włoskiego producenta. Metale te, są najwyższej jakości – nie wyginają się i nie wyłamują. Będą Ci służyć przez lata bez potrzeby wymiany!', NULL, '19.50', 92, 'RamkiToHajs', NULL, '10x15', 'ramka_15_10.png', 7, 12),
 (52, 'Koszulka DESTYLACJA', 'Oryginalna koszulka męska DESTYLACJA z krótkim rękawem firmy S&S. Wykonana z najwyższej jakości bawełny, zapewniającej komfort i wygodę użytkowania.', NULL, '77.50', 92, 'S&S', NULL, 'M', 'koszulka_destylacja.png', 1, 12),
-(53, 'Whisky Jack Daniel\'s', 'Whisky Jack Daniel\'s to najpopularniejsza amerykańska whiskey produkowana od 1866 roku, kiedy to Jasper „Jack” Daniel zaufał swojej intuicji i postawił na stworzenie wysokiej jakości trunku. Jej unikalny smak zawdzięczany jest prawie dziesięcio- dniowej filtracji destylatu przez 3- metrową warstwę klonowego węgla drzewnego.', NULL, '100.00', 100, 'Jack Daniel\'s', NULL, '0,7L', 'whisky_jack.png', 10, 12),
-(54, 'Smart TV Samsung 55 cali', 'Jakość obrazu, która Cię poruszy, zapewniona przez pojedynczy chip, który zarządza kolorami, optymalizuje współczynnik kontrastu i nadzoruje HDR.', NULL, '1350.00', 5, 'Samsung', NULL, '55 cali', 'tv_samsung_55.png', 8, 12);
+(53, 'Whisky Jack Daniel\'s', 'Whisky Jack Daniel\'s to najpopularniejsza amerykańska whiskey produkowana od 1866 roku, kiedy to Jasper „Jack” Daniel zaufał swojej intuicji i postawił na stworzenie wysokiej jakości trunku. Jej unikalny smak zawdzięczany jest prawie dziesięcio- dniowej filtracji destylatu przez 3- metrową warstwę klonowego węgla drzewnego.', NULL, '100.00', 95, 'Jack Daniel\'s', NULL, '0,7L', 'whisky_jack.png', 10, 15),
+(54, 'Smart TV Samsung 55 cali', 'Jakość obrazu, która Cię poruszy, zapewniona przez pojedynczy chip, który zarządza kolorami, optymalizuje współczynnik kontrastu i nadzoruje HDR.', NULL, '1350.00', 5, 'Samsung', NULL, '55 cali', 'tv_samsung_55.png', 8, 30),
+(55, 'Smartfon Huawei Y5', 'Wyświetlacz: 5,45 cali\r\nAparat: 8 Mpix\r\nPamięć wewnętrzna [GB]: 16 GB\r\nBateria [mAh]: 3000', NULL, '299.00', 20, 'Huawei', NULL, '5,45 cali', 'huawei_1.png', 8, 15);
 
 -- --------------------------------------------------------
 
@@ -250,7 +255,8 @@ INSERT INTO `zamowienia` (`id_zamowienia`, `data_zlozenia`, `data_wyslania`, `za
 (7, '2019-12-05 20:06:51', '0000-00-00', 0, 5, 75),
 (8, '2019-12-05 22:18:42', '0000-00-00', 0, 7, 1550),
 (9, '2019-12-05 22:20:44', '2019-12-05', 1, 7, 588),
-(10, '2019-12-05 22:24:10', '0000-00-00', 0, 7, 1250);
+(10, '2019-12-05 22:24:10', '0000-00-00', 0, 7, 1250),
+(11, '2019-12-06 20:59:09', '0000-00-00', 0, 5, 928);
 
 -- --------------------------------------------------------
 
@@ -287,7 +293,11 @@ INSERT INTO `zamowienie_produkty` (`id_zamowienie_produkty`, `ilosc`, `cena`, `i
 (15, 3, 70, 16, 7, 9),
 (16, 2, 15, 15, 7, 9),
 (17, 6, 15, 15, 7, 10),
-(18, 11, 100, 12, 7, 10);
+(18, 11, 100, 12, 7, 10),
+(19, 5, 100, 53, 5, 11),
+(20, 4, 30, 14, 5, 11),
+(21, 2, 100, 12, 5, 11),
+(22, 1, 60, 17, 5, 11);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -374,7 +384,7 @@ ALTER TABLE `zamowienie_produkty`
 -- AUTO_INCREMENT dla tabeli `adres`
 --
 ALTER TABLE `adres`
-  MODIFY `id_adres` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_adres` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT dla tabeli `kategorie`
@@ -386,13 +396,13 @@ ALTER TABLE `kategorie`
 -- AUTO_INCREMENT dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
-  MODIFY `id_klienci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_klienci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT dla tabeli `koszyk`
 --
 ALTER TABLE `koszyk`
-  MODIFY `id_koszyk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_koszyk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT dla tabeli `oferta_dnia`
@@ -410,7 +420,7 @@ ALTER TABLE `opinie`
 -- AUTO_INCREMENT dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT dla tabeli `promocje`
@@ -422,13 +432,13 @@ ALTER TABLE `promocje`
 -- AUTO_INCREMENT dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienie_produkty`
 --
 ALTER TABLE `zamowienie_produkty`
-  MODIFY `id_zamowienie_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_zamowienie_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Ograniczenia dla zrzutów tabel
