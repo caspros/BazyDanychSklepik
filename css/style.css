@@ -504,3 +504,25 @@ table {
 	text-align: center;
 	color: green;
 }
+
+/* ocena_sklepu.php */
+
+#informacja1{
+	text-align: center;
+}
+
+#formularz{
+	position: relative;
+	left: 25%;
+	width: 50%;
+	text-align: center;
+}
+
+#koment{
+	position: relative;
+	right: 27%;
+}
+
+#dziekujemy{
+	text-align: center;
+}
