@@ -18,6 +18,7 @@
 	$nazwa='"'.$_POST['nazwa'].'"';
 	$opis = '"'.$_POST['opis'].'"';
 	$cena='"'.$_POST['cena'].'"';
+	$dostawa='"'.$_POST['dostawa'].'"';
 	$dostepna_ilosc='"'.$_POST['dostepna_ilosc'].'"'; 
 	$producent='"'.$_POST['producent'].'"'; 
 	$rozmiar='"'.$_POST['rozmiar'].'"'; 
@@ -33,7 +34,7 @@
 			    die("Nie połączono z bazą danych: " . $conn -> connect_error);
 			}
 
-		$sql = "INSERT INTO produkty(nazwa, opis, cena, dostepna_ilosc, producent, rozmiar, zdjecie, id_kategorie) VALUES ($nazwa, $opis, $cena, $dostepna_ilosc, $producent, $rozmiar, $filename1, $kategoria)";
+		$sql = "INSERT INTO produkty(nazwa, opis, cena, dostepna_ilosc, producent, rozmiar, zdjecie, id_kategorie, dostawa) VALUES ($nazwa, $opis, $cena, $dostepna_ilosc, $producent, $rozmiar, $filename1, $kategoria, $dostawa)";
 		$sql2 = "SET FOREIGN_KEY_CHECKS = 0";
 		$conn -> query($sql2);
 		if($conn -> query($sql) === TRUE)
