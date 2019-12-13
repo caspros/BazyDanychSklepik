@@ -132,8 +132,9 @@
 
 				<!-- DROPDOWN CONTENT -->
 	  			<div id="myDropdown" class="dropdown-content">
-		    		<a href="zamowienia.php">Moje zamówienia</a>
-					<a href="#">Oceń produkt</a>
+		    		<a href="zamowienia.php">Zamówienia</a>
+					<a href="ocena_produktu.php">Oceń produkt</a>
+					<a href="ocena_sklepu.php">Oceń sklep</a>
 					<a href="profil.php">Ustawienia</a>
 					<?php
 						if (isset($_SESSION['zaloguj']))
@@ -278,14 +279,14 @@
 	       	$_SESSION['suma'] = $suma;
 	       	$_SESSION['max_dostawa'] = $max_dostawa;
 			echo '<br>
-				<div id="podsumowanie">Kwota całkowita: '.$suma.' PLN<br>
-				<div id="dostawa1" style="color:green;">W tym dostawa: '.$max_dostawa.' PLN
-				<br><br>';
+				<div id="podsumowanie">
+				<div id="dostawa1" style="color:green;">Koszt dostawy: '.$max_dostawa.' PLN</div>
+				Kwota całkowita: '.$suma.' PLN<br><br>';
 	       		echo '<form action="skladanie_zam.php" method="post">
-				<input type="hidden" name="suma" value="'.$suma.'" />
-				<input type="hidden" name="max_dostawa" value="'.$max_dostawa.'" />
-				<input type="submit" id="kup_teraz" name="zloz_zam" value="Złóż zamówienie">
-				</form>
+						<input type="hidden" name="suma" value="'.$suma.'" />
+						<input type="hidden" name="max_dostawa" value="'.$max_dostawa.'" />
+						<input type="submit" id="kup_teraz" name="zloz_zam" value="Złóż zamówienie">
+					</form>
 				</div>';
 		} else { echo '<div class="error" style="text-align:center;">Brak produktów w koszyku</div>'; }
 		
