@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 13 Gru 2019, 13:23
+-- Czas generowania: 13 Gru 2019, 17:57
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -43,7 +43,7 @@ CREATE TABLE `adres` (
 --
 
 INSERT INTO `adres` (`id_adres`, `kod_pocztowy`, `miasto`, `ulica`, `nr_domu`, `nr_lokalu`, `id_klienci`) VALUES
-(1, '58-533', 'Mysłakowice', 'Nowa', 12, 12, 5),
+(1, '58-533', 'Mysłakowice', 'Nowa', 12, 123, 5),
 (2, NULL, NULL, NULL, NULL, NULL, 6),
 (3, '66-666', 'Piekło', 'Piekielna', 666, 65, 7),
 (4, NULL, NULL, NULL, NULL, NULL, 8),
@@ -164,7 +164,7 @@ CREATE TABLE `oferta_dnia` (
 
 CREATE TABLE `opinie` (
   `id_opinie` int(11) NOT NULL,
-  `id_produkty` int(11) NOT NULL,
+  `id_produkty` int(11) NOT NULL DEFAULT '0' COMMENT '0 - ocena sklepu',
   `id_klienci` int(11) NOT NULL,
   `gwiazdka` int(11) DEFAULT NULL,
   `opinia` text
@@ -177,7 +177,9 @@ CREATE TABLE `opinie` (
 INSERT INTO `opinie` (`id_opinie`, `id_produkty`, `id_klienci`, `gwiazdka`, `opinia`) VALUES
 (2, 8, 5, 5, 'Ta koszulka jest super, chodzę w niej codziennie! Jakość wykonania przerosła moje najśmielsze oczekiwania! Jak najbardziej polecam :)'),
 (4, 14, 7, 5, 'Kupiłem Kubek dla synka i był bardzo zadowolony! Bardzo szybka dostawa, polecam sklep alledrogo :D'),
-(5, 16, 6, 5, 'Nigdzie nie mogłem znaleźć bluzy z ziemniakiem, aż nagle natknąłem się na aukcje w sklepie alledrogo! Bluza doszła i jest świetna!');
+(5, 16, 6, 5, 'Nigdzie nie mogłem znaleźć bluzy z ziemniakiem, aż nagle natknąłem się na aukcje w sklepie alledrogo! Bluza doszła i jest świetna!'),
+(6, 0, 7, 1, 'Testowy komentarz o sklepie, jestem Adminem, to nie będę oceniał :)'),
+(7, 0, 5, 10, 'Najlepszy sklep jaki widziałem! Super ceny i szybka dostawa! Serdecznie polecam! :D ');
 
 -- --------------------------------------------------------
 
@@ -205,17 +207,17 @@ CREATE TABLE `produkty` (
 --
 
 INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena`, `dostepna_ilosc`, `producent`, `oceny`, `rozmiar`, `zdjecie`, `id_kategorie`, `dostawa`) VALUES
-(8, 'Koszulka Mike Tyson', 'Koszulka zrobiona z pomysłem', '4', '50.00', 92, 'BenoCORP', NULL, 'XL', 'koszulka_mike.png', 1, 12),
+(8, 'Koszulka Mike Tyson', 'Koszulka zrobiona z pomysłem', '4', '50.00', 89, 'BenoCORP', NULL, 'XL', 'koszulka_mike.png', 1, 12),
 (12, 'Spodnie Jeans Master', 'Wykonane z najlepszej jakości materiału Jeans, idealnie dopasowują się do ciała', '5', '100.00', 79, 'Jeans&Jeans', NULL, 'M', 'jeans_m.png', 2, 12),
 (14, 'Kubek Studenta', 'Kubek wykonany z porcelany z nadrukowanym napisem, który odźwierciedla brutalną rzeczywistość studentów', '5', '30.00', 88, 'KubekKuba', NULL, NULL, 'kubek_student1.png', 3, 10),
-(15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 86, 'DługiPisak sp. Z o.o', NULL, NULL, 'dlugopis_1.png', 4, 6),
+(15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 85, 'DługiPisak sp. Z o.o', NULL, NULL, 'dlugopis_1.png', 4, 6),
 (16, 'Bluza z ziemniakiem', 'Bluza wykonana z tworzywa sztucznego, idealna aby wyróżnić się z tłumu', '3', '70.00', 92, 'Bluzex sp. Z o.o', NULL, 'L', 'bluza_1.png', 5, 12),
 (17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 91, 'Naklejkownia sp. Z o.o', NULL, '100cm x 150cm', 'naklejka_1.png', 6, 15),
 (18, 'Koszulka biała KONSTYTUCJA', 'Biała koszulka doskonałej jakości z nadrukowanym napisem KONSTYTUCJA. Ulubiona koszulka Lecha Wałęsy', '5', '75.00', 92, 'LechWałęsaCompany', NULL, 'M', 'koszulka_otua.png', 1, 12),
 (51, 'Ramka na zdjęcie', 'Zawieszki i fleksy sprowadzamy od włoskiego producenta. Metale te, są najwyższej jakości – nie wyginają się i nie wyłamują. Będą Ci służyć przez lata bez potrzeby wymiany!', NULL, '19.50', 92, 'RamkiToHajs', NULL, '10x15', 'ramka_15_10.png', 7, 12),
 (52, 'Koszulka DESTYLACJA', 'Oryginalna koszulka męska DESTYLACJA z krótkim rękawem firmy S&S. Wykonana z najwyższej jakości bawełny, zapewniającej komfort i wygodę użytkowania.', NULL, '77.50', 92, 'S&S', NULL, 'M', 'koszulka_destylacja.png', 1, 12),
 (53, 'Whisky Jack Daniel\'s', 'Whisky Jack Daniel\'s to najpopularniejsza amerykańska whiskey produkowana od 1866 roku, kiedy to Jasper „Jack” Daniel zaufał swojej intuicji i postawił na stworzenie wysokiej jakości trunku. Jej unikalny smak zawdzięczany jest prawie dziesięcio- dniowej filtracji destylatu przez 3- metrową warstwę klonowego węgla drzewnego.', NULL, '100.00', 95, 'Jack Daniel\'s', NULL, '0,7L', 'whisky_jack.png', 10, 15),
-(54, 'Smart TV Samsung 55 cali', 'Jakość obrazu, która Cię poruszy, zapewniona przez pojedynczy chip, który zarządza kolorami, optymalizuje współczynnik kontrastu i nadzoruje HDR.', NULL, '1350.00', 5, 'Samsung', NULL, '55 cali', 'tv_samsung_55.png', 8, 30),
+(54, 'Smart TV Samsung 55 cali', 'Jakość obrazu, która Cię poruszy, zapewniona przez pojedynczy chip, który zarządza kolorami, optymalizuje współczynnik kontrastu i nadzoruje HDR.', NULL, '1350.00', 4, 'Samsung', NULL, '55 cali', 'tv_samsung_55.png', 8, 30),
 (55, 'Smartfon Huawei Y5', 'Wyświetlacz: 5,45 cali\r\nAparat: 8 Mpix\r\nPamięć wewnętrzna [GB]: 16 GB\r\nBateria [mAh]: 3000', NULL, '299.00', 20, 'Huawei', NULL, '5,45 cali', 'huawei_1.png', 8, 15);
 
 -- --------------------------------------------------------
@@ -256,7 +258,9 @@ INSERT INTO `zamowienia` (`id_zamowienia`, `data_zlozenia`, `data_wyslania`, `za
 (8, '2019-12-05 22:18:42', '0000-00-00', 0, 7, 1550),
 (9, '2019-12-05 22:20:44', '2019-12-05', 1, 7, 588),
 (10, '2019-12-05 22:24:10', '0000-00-00', 0, 7, 1250),
-(11, '2019-12-06 20:59:09', '0000-00-00', 0, 5, 928);
+(11, '2019-12-06 20:59:09', '0000-00-00', 0, 5, 928),
+(12, '2019-12-13 15:26:07', '0000-00-00', 0, 5, 77),
+(13, '2019-12-13 16:10:28', '0000-00-00', 0, 5, 1480);
 
 -- --------------------------------------------------------
 
@@ -297,7 +301,11 @@ INSERT INTO `zamowienie_produkty` (`id_zamowienie_produkty`, `ilosc`, `cena`, `i
 (19, 5, 100, 53, 5, 11),
 (20, 4, 30, 14, 5, 11),
 (21, 2, 100, 12, 5, 11),
-(22, 1, 60, 17, 5, 11);
+(22, 1, 60, 17, 5, 11),
+(23, 1, 50, 8, 5, 12),
+(24, 1, 15, 15, 5, 12),
+(25, 2, 50, 8, 5, 13),
+(26, 1, 1350, 54, 5, 13);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -402,7 +410,7 @@ ALTER TABLE `klienci`
 -- AUTO_INCREMENT dla tabeli `koszyk`
 --
 ALTER TABLE `koszyk`
-  MODIFY `id_koszyk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_koszyk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT dla tabeli `oferta_dnia`
@@ -414,7 +422,7 @@ ALTER TABLE `oferta_dnia`
 -- AUTO_INCREMENT dla tabeli `opinie`
 --
 ALTER TABLE `opinie`
-  MODIFY `id_opinie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_opinie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT dla tabeli `produkty`
@@ -432,13 +440,13 @@ ALTER TABLE `promocje`
 -- AUTO_INCREMENT dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienie_produkty`
 --
 ALTER TABLE `zamowienie_produkty`
-  MODIFY `id_zamowienie_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_zamowienie_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Ograniczenia dla zrzutów tabel
