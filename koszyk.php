@@ -228,12 +228,13 @@
 		$sql = "SELECT * FROM koszyk WHERE id_klienci=$id_klienci";
 		$result = $conn -> query($sql);
 		echo '<h1>Twój koszyk</h1>';
-		echo '<div id="info"> Kupując wiele produktów za przesyłkę płacisz tylko raz!</div><br><br>';
 		//Czy jest koszyk
 		if ($result -> num_rows > 0)
 		{
+			echo '<div id="info"> Kupując wiele produktów za przesyłkę płacisz tylko raz</div><br><br>';
 	 		while($row = $result -> fetch_assoc())
 	 		{	
+	 			
 	 			$id_kosz = $row['id_koszyk'];
 	 			$id_prod = $row['id_produkty'];
 	 			$sql1 = "SELECT id_produkty, nazwa, cena, producent, zdjecie, dostawa FROM produkty WHERE id_produkty=$id_prod";
@@ -270,16 +271,17 @@
 				$suma += $max_dostawa;
 	       		$_SESSION['suma'] = $suma;
 			}
+			echo '<br>
+				<div id="podsumowanie">Kwota całkowita: '.$suma.' PLN<br>
+				<div id="dostawa1" style="color:green;">W tym dostawa: '.$max_dostawa.' PLN
+				<br><br>';
+	       		echo '<form action="skladanie_zam.php" method="post">
+				<input type="hidden" name="suma" value="'.$suma.'" />
+				<input type="submit" id="kup_teraz" name="zloz_zam" value="Złóż zamówienie">
+				</form>
+				</div>';
 		} else { echo '<div class="error" style="text-align:center;">Brak produktów w koszyku</div>'; }
-		echo '<br>
-		<div id="podsumowanie">Kwota całkowita: '.$suma.' PLN<br>
-		<div id="dostawa1" style="color:green;">W tym dostawa: '.$max_dostawa.' PLN
-		<br><br>
-		<form action="skladanie_zam.php" method="post">
-			<input type="hidden" name="suma" value="'.$suma.'" />
-			<input type="submit" id="kup_teraz" name="zloz_zam" value="Złóż zamówienie">
-		</form>
-		</div>';
+		
 	}
 
 	//Usuwanie z koszyka
@@ -290,14 +292,14 @@
 		echo "<meta http-equiv='refresh' content='0'>";
 	}
 
-	function DeletePosition()
+	/*function Skresl_dostawe()
 	{
 		$id_klienci = $_SESSION['id_klienci'];
 		require_once "connect.php";
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		$conn -> query("SET NAMES 'utf8'");
 		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-		$sql = "DELETE * FROM koszyk WHERE id_koszyk=$id_kosz";
+		$sql = "SELECT * FROM koszyk WHERE id_klienci=$id_klienci";
 		$result = $conn -> query($sql);
-	}
+	}*/
 ?>
