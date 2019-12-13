@@ -132,8 +132,9 @@
 
 				<!-- DROPDOWN CONTENT -->
 	  			<div id="myDropdown" class="dropdown-content">
-		    		<a href="zamowienia.php">Moje zamówienia</a>
-					<a href="#">Oceń produkt</a>
+		    		<a href="zamowienia.php">Zamówienia</a>
+					<a href="ocena_produktu.php">Oceń produkt</a>
+					<a href="ocena_sklepu.php">Oceń sklep</a>
 					<a href="profil.php">Ustawienia</a>
 					<?php
 						if (isset($_SESSION['zaloguj']))
