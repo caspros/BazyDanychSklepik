@@ -62,9 +62,9 @@
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
-	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
 	<title>Twój koszyk</title>
@@ -219,6 +219,7 @@
 	{	
 		$suma = 0;
 		$suma_dostawa = 0;
+		$max_dostawa = 0;
 		$id_klienci = $_SESSION['id_klienci'];
 		require_once "connect.php";
 		$conn = new mysqli($servername, $username, $password, $dbname);
@@ -227,6 +228,7 @@
 		$sql = "SELECT * FROM koszyk WHERE id_klienci=$id_klienci";
 		$result = $conn -> query($sql);
 		echo '<h1>Twój koszyk</h1>';
+		echo '<div id="info"> Kupując wiele produktów za przesyłkę płacisz tylko raz!</div><br><br>';
 		//Czy jest koszyk
 		if ($result -> num_rows > 0)
 		{
@@ -242,50 +244,20 @@
 	 				while($row1 = $result1 -> fetch_assoc())
 	 				{
 	 					$suma += $row["cena"]*$row["ilosc"];
+	 					if ($max_dostawa < $row1['dostawa'])
+	 					{
+	 						$max_dostawa = $row1['dostawa'];
+	 					}
 	 					echo '<a href="produkt.php?id_produkty='.$row1["id_produkty"].'" id="product_link">
-				       		<div class="koszyk">
+				       		<div class="koszyk1">
 				       			<table id="koszyk_t">
 				       				<tr>
 				       					<td><div id="zdjecie"><img src="images/products/'.$row1["zdjecie"].'" width="100" height="100" alt="product.png"></div></td>
 						       			<td><div class="nazwa">'.$row['ilosc'].'x <b>'.$row1["nazwa"].'</b></div></td>
 							       		<td>Producent: '.$row1['producent'].'</td>
 							       		<td colspan="2"><div id="cena">Cena: '.$row["cena"]*$row["ilosc"].' PLN</b></div></td>
-							       		<td style="color:green;">Dostawa: ';
-							       		switch ($row['ilosc']%5)
-							       		{
-											case 0:
-											$dostawa = ($row["ilosc"] / 5 ) * 12;
-											$suma += $dostawa;
-											$suma_dostawa += $dostawa;
-											echo $dostawa;
-											break;
-											case 1:
-											$dostawa = 12 + (($row["ilosc"] - 1) / 5 ) * 12;
-											$suma += $dostawa;
-											$suma_dostawa += $dostawa;
-											echo $dostawa;
-											break;
-											case 2:
-											$dostawa = 12 + (($row["ilosc"] - 2) / 5 ) * 12;
-											$suma += $dostawa;
-											$suma_dostawa += $dostawa;
-											echo $dostawa;
-											break;
-											case 3:
-											$dostawa = 12 + (($row["ilosc"] - 3) / 5 ) * 12;
-											$suma += $dostawa;
-											$suma_dostawa += $dostawa;
-											echo $dostawa;
-											break;
-											case 4:
-											$dostawa = 12 + (($row["ilosc"] - 4) / 5 ) * 12;
-											$suma += $dostawa;
-											$suma_dostawa += $dostawa;
-											echo $dostawa;
-											break;
-										}
-							       		echo ' PLN</td>
-							       		<td><form action="#" method="post">
+							       		<td id="skreslenie" style="color:green;">Dostawa: '.$row1['dostawa'].' PLN</td>
+										<td><form action="#" method="post">
 							       			<input type="hidden" name="id_k" value="'.$row["id_koszyk"].'" />
 							       			<input type="submit" name="delete" value="Usuń">
 							       		</form></td>
@@ -295,13 +267,13 @@
 	       				<a>';	
 	 				}
 	 			}
-				
+				$suma += $max_dostawa;
 	       		$_SESSION['suma'] = $suma;
 			}
 		} else { echo '<div class="error" style="text-align:center;">Brak produktów w koszyku</div>'; }
 		echo '<br>
 		<div id="podsumowanie">Kwota całkowita: '.$suma.' PLN<br>
-		<div id="dostawa1" style="color:green;">W tym dostawa: '.$suma_dostawa.' PLN
+		<div id="dostawa1" style="color:green;">W tym dostawa: '.$max_dostawa.' PLN
 		<br><br>
 		<form action="skladanie_zam.php" method="post">
 			<input type="hidden" name="suma" value="'.$suma.'" />
