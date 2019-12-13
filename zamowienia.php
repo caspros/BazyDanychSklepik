@@ -147,7 +147,17 @@
 					}
 				?>
 
-				<h1>Moje zamówienia</h1>
+				<?php
+					if($_SESSION['uprawnienia']==0)
+					{
+						echo '<h1>Moje zamówienia</h1>';
+					}
+					else
+					{
+						echo '<h1>Zamówienia klientów</h1>';
+					}
+				?>
+
 				<br><br>
 				<?php
 					Show_orders($id_klienci);
@@ -156,17 +166,36 @@
 			</div>
 
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-				<h1>WYRÓŻNIONE PRODUKTY:</h1>
+				<?php
+					if($_SESSION['uprawnienia']==0)
+					{
+						echo '<h1>WYRÓŻNIONE PRODUKTY:</h1>';
+					}
+				?>
 			<!-- PRODUKTY NA GŁÓWNEJ -->
 			<div id="products_zam">
 				
 				<br>
-				<div class="product"><?php Show_product(12);?></div>
-				<div class="product"><?php Show_product(14);?></div>
-				<div class="product"><?php Show_product(8);?></div>
-				<div class="product"><?php Show_product(15);?></div>
-				<div class="product"><?php Show_product(16);?></div>
-				<div class="product"><?php Show_product(17);?></div>
+
+				<?php
+					if($_SESSION['uprawnienia']==0)
+					{
+						echo '<div class="product">';
+						Show_product(12);
+						echo '</div><div class="product">';
+						Show_product(14);
+						echo '</div><div class="product">';
+						Show_product(8);
+						echo '</div><div class="product">';
+						Show_product(15);
+						echo '</div><div class="product">';
+						Show_product(16);
+						echo '</div><div class="product">';
+						Show_product(17);
+						echo '</div>';
+
+					}
+				?>
 
 			</div>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

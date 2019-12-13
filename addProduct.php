@@ -129,6 +129,8 @@
 
 					Rozmiar:<input type="text" name="rozmiar"><br><br>
 
+					Cena dostawy:<input type="text" name="dostawa"><br><br>
+
 					Kategoria:
 					<select name="kategoria">
 						  <option value="1">Koszulki</option>
