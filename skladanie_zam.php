@@ -152,6 +152,7 @@
 	{	
 		$id_klienci = $_SESSION['id_klienci'];
 		$suma = $_SESSION['suma'];
+		$max_dostawa = $_SESSION['max_dostawa'];
 		$servername = "localhost";
 		$username = "root";
 		$password = "";
@@ -181,7 +182,8 @@
 			Jeśli chcesz aby paczka została wysłana na inny adres, zmień swój adres w <a class="ustawienia_link" href="profil.php">Ustawieniach</a>
 			<br><br><br><br>
 			<form method="post" action="skladanie_zam_next.php">
-				<input type="hidden" id="next" name="next" value="'.$suma.'"/>
+				<input type="hidden" name="next" value="'.$suma.'"/>
+				<input type="hidden" name="next1" value="'.$max_dostawa.'"/>
 				<button type="submit" id="dalej_btn">Dalej</button>
 			</form></div>';
 			}

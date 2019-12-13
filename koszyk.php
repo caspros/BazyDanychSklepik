@@ -257,7 +257,12 @@
 						       			<td><div class="nazwa">'.$row['ilosc'].'x <b>'.$row1["nazwa"].'</b></div></td>
 							       		<td>Producent: '.$row1['producent'].'</td>
 							       		<td colspan="2"><div id="cena">Cena: '.$row["cena"]*$row["ilosc"].' PLN</b></div></td>
-							       		<td id="skreslenie" style="color:green;">Dostawa: '.$row1['dostawa'].' PLN</td>
+							       		<td id="skreslenie" style="color:green;';
+							       		if($result -> num_rows > 1)	
+							       		{
+							       			echo 'text-decoration: line-through">';
+							       		}else { echo '">';}
+							       		echo 'Dostawa: '.$row1['dostawa'].' PLN</td>
 										<td><form action="#" method="post">
 							       			<input type="hidden" name="id_k" value="'.$row["id_koszyk"].'" />
 							       			<input type="submit" name="delete" value="Usuń">
@@ -268,15 +273,17 @@
 	       				<a>';	
 	 				}
 	 			}
-				$suma += $max_dostawa;
-	       		$_SESSION['suma'] = $suma;
 			}
+			$suma += $max_dostawa;
+	       	$_SESSION['suma'] = $suma;
+	       	$_SESSION['max_dostawa'] = $max_dostawa;
 			echo '<br>
 				<div id="podsumowanie">Kwota całkowita: '.$suma.' PLN<br>
 				<div id="dostawa1" style="color:green;">W tym dostawa: '.$max_dostawa.' PLN
 				<br><br>';
 	       		echo '<form action="skladanie_zam.php" method="post">
 				<input type="hidden" name="suma" value="'.$suma.'" />
+				<input type="hidden" name="max_dostawa" value="'.$max_dostawa.'" />
 				<input type="submit" id="kup_teraz" name="zloz_zam" value="Złóż zamówienie">
 				</form>
 				</div>';

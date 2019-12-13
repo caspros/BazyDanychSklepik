@@ -499,3 +499,8 @@ table {
 #uwaga{
 	font-style: italic;
 }
+
+#dostaw{
+	text-align: center;
+	color: green;
+}

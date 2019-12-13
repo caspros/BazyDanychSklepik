@@ -148,6 +148,7 @@
 	//Function to show summary of order
 	function Show_summary()
 	{	
+		$max_dostawa = $_SESSION['max_dostawa'];
 		$suma = $_SESSION['suma'];
 		$id_klienci = $_SESSION['id_klienci'];
 		require_once "connect.php";
@@ -178,7 +179,7 @@
 	 			$wiersz += 1;
 			}
 		} else { echo "Brak produktów w koszyku"; }
-		echo '<br><br><br>
+		echo '<br><div id="dostaw">Dostawa: '.$max_dostawa.' PLN</div><br><br>
 		<div id="podsumowanie1"><b>Kwota całkowita zamówienia: '.$suma.' PLN</b><br><br>
 		<form action="zlozono.php" method="post">
 			<input type="hidden" name="suma" value="'.$suma.'" />
