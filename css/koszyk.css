@@ -6,12 +6,15 @@
 
 #koszyk_container a
 {
-   text-decoration: none;
+    text-decoration: none;
 }
 
 .koszyk_t
 {
     border: none;
+    padding: 5px;
+    height: 100%;
+    float: left;
 }
 
 #podsumowanie{
@@ -36,6 +39,9 @@
 }
 
 .koszyk1{
+    text-align: center;
+    color: black;
+    background-color: #ECEFF1;
     padding: 2px;
     margin: 2px;
     width: 90%;
@@ -59,4 +65,46 @@
 {
     text-align: center;
     font-style: cursive;
+}
+
+table{
+    width: 100%;
+}
+
+table, tr, td, th{
+    border: none;
+    background-color: #ECEFF1;
+    border-collapse: collapse;
+}
+
+.nazwa{
+    font-style: normal;
+    font-size: 30px;
+}
+
+#cena{
+    font-style: normal;
+    font-size: 30px;
+    color: red;
+}
+
+#zdjecie{
+    float: left;
+    padding: 0px;
+    margin: 0px;
+}
+
+#kup_teraz{
+    margin-left: 10px;
+    font-size: 29px;
+    background-color: #FF5A00;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#kup_teraz:hover{
+    background-color: #ff8800;
 }

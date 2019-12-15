@@ -19,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<link rel="stylesheet" type="text/css" href="css/produkt.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
 	<title>Produkt</title>

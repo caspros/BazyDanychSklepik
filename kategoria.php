@@ -19,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<link rel="stylesheet" type="text/css" href="css/kategoria.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
 	<title>Kategorie</title>
@@ -98,23 +99,24 @@
 	<!-- GŁÓWNY CONTAINER -->
 	<div id="container_produkt">
 		<div id="categories">
-				<br>
+			<br>
 
-				<span class="kat"><b>Kategorie:</b></span>
-				<br><br>
-				<a href="kategoria.php?id_kategorie=1">Koszulki</a><br>
-				<a href="kategoria.php?id_kategorie=2">Spodnie</a><br>
-				<a href="kategoria.php?id_kategorie=3">Kubki</a><br>
-				<a href="kategoria.php?id_kategorie=4">Długopisy</a><br>
-				<a href="kategoria.php?id_kategorie=5">Bluzy</a><br>
-				<a href="kategoria.php?id_kategorie=6">Naklejki</a><br>
-				<a href="kategoria.php?id_kategorie=7">Ramki</a><br>
-				<a href="kategoria.php?id_kategorie=8">RTV</a><br>
-				<a href="kategoria.php?id_kategorie=9">AGD</a><br>
-				<a href="kategoria.php?id_kategorie=10">Alkohol</a><br>
-				<a href="kategoria.php?id_kategorie=11">Zabawki</a><br>
+			<span class="kat"><b>Kategorie:</b></span>
+			<br><br>
+			<a href="kategoria.php?id_kategorie=1">Koszulki</a><br>
+			<a href="kategoria.php?id_kategorie=2">Spodnie</a><br>
+			<a href="kategoria.php?id_kategorie=3">Kubki</a><br>
+			<a href="kategoria.php?id_kategorie=4">Długopisy</a><br>
+			<a href="kategoria.php?id_kategorie=5">Bluzy</a><br>
+			<a href="kategoria.php?id_kategorie=6">Naklejki</a><br>
+			<a href="kategoria.php?id_kategorie=7">Ramki</a><br>
+			<a href="kategoria.php?id_kategorie=8">RTV</a><br>
+			<a href="kategoria.php?id_kategorie=9">AGD</a><br>
+			<a href="kategoria.php?id_kategorie=10">Alkohol</a><br>
+			<a href="kategoria.php?id_kategorie=11">Zabawki</a><br>
+			<a href="kategoria.php?id_kategorie=0">Wszystko</a><br>
 
-			</div>
+		</div>
 
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
@@ -172,47 +174,105 @@
 	//Function to show products in categories
 	function Show_products()
 	{	
-		$id_kategorie = $_GET['id_kategorie'];
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "sklep";
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		$conn -> query("SET NAMES 'utf8'");
-		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-
-		$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_kategorie=$id_kategorie";
-		$sql1 = "SELECT id_kategorie, kategoria FROM kategorie WHERE id_kategorie=$id_kategorie";
-		$result = $conn -> query($sql);
-		$result1 = $conn -> query($sql1);
-		$row1 = $result1 -> fetch_assoc();
-		echo '<h1>'.$row1['kategoria'].'</h1>';
-		if ($result -> num_rows > 0)
+		if($_GET['id_kategorie']==0)
 		{
-	 		while($row = $result -> fetch_assoc())
-	 		{
-	       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
-			       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
-			       		<div class="zawartosc">
-			       			<table id="tabela">
-					       		<tr>
-					       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
-					       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
-					       		</tr>
-					       		<tr>
-						       		<td><div class="rozmiar">Rozmiar: ';
-						       		if(is_null($row["rozmiar"]))
-						       		{
-						       			echo 'Nie dotyczy';
-						       		}else echo $row["rozmiar"];
-						       		echo '</div></td>
-						       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
-						       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
-					       		</tr>
-				       		</table>
-			       		</div>
-	       			</div><a>';
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			$dbname = "sklep";
+			$conn = new mysqli($servername, $username, $password, $dbname);
+			$conn -> query("SET NAMES 'utf8'");
+			if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+
+			// ilośc wyswietlanych produktów na stronę
+			$amout = 5;
+			if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+			$start_from = ($page-1) * $amout;
+			echo '<h1>Wszystkie produkty</h1>';
+			$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty ORDER BY id_produkty ASC LIMIT $start_from, ".$amout;
+			$result = $conn -> query($sql);
+			if ($result -> num_rows > 0)
+			{
+		 		while($row = $result -> fetch_assoc())
+		 		{
+		       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
+				       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
+				       		<div class="zawartosc">
+				       			<table id="tabela">
+						       		<tr>
+						       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
+						       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
+						       		</tr>
+						       		<tr>
+							       		<td><div class="rozmiar">Rozmiar: ';
+							       		if(is_null($row["rozmiar"]))
+							       		{
+							       			echo 'Nie dotyczy';
+							       		}else echo $row["rozmiar"];
+							       		echo '</div></td>
+							       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+							       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
+						       		</tr>
+					       		</table>
+				       		</div>
+		       			</div><a>';
+				}
+			echo "<br><br><br><br>";
+			$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty";
+			$result5 = $conn->query($sql5);
+			$row5 = $result5 -> fetch_assoc();
+			$total_pages = ceil($row5["total"] / $amout);
+			for ($i=1; $i<=$total_pages; $i++)
+			{ 
+				echo "<div class='strona'><a href='kategoria.php?id_kategorie=0&page=".$i."'>".$i."</a></div>";
 			}
-		} else { echo "Brak produktów w podanej kategorii"; }
+
+			} else { echo "Brak produktów we wszystkich kategoriach"; }
+		}
+		else
+		{
+			$id_kategorie = $_GET['id_kategorie'];
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			$dbname = "sklep";
+			$conn = new mysqli($servername, $username, $password, $dbname);
+			$conn -> query("SET NAMES 'utf8'");
+			if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+
+			$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_kategorie=$id_kategorie";
+			$sql1 = "SELECT id_kategorie, kategoria FROM kategorie WHERE id_kategorie=$id_kategorie";
+			$result = $conn -> query($sql);
+			$result1 = $conn -> query($sql1);
+			$row1 = $result1 -> fetch_assoc();
+			echo '<h1>'.$row1['kategoria'].'</h1>';
+			if ($result -> num_rows > 0)
+			{
+		 		while($row = $result -> fetch_assoc())
+		 		{
+		       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
+				       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
+				       		<div class="zawartosc">
+				       			<table id="tabela">
+						       		<tr>
+						       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
+						       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
+						       		</tr>
+						       		<tr>
+							       		<td><div class="rozmiar">Rozmiar: ';
+							       		if(is_null($row["rozmiar"]))
+							       		{
+							       			echo 'Nie dotyczy';
+							       		}else echo $row["rozmiar"];
+							       		echo '</div></td>
+							       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+							       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
+						       		</tr>
+					       		</table>
+				       		</div>
+		       			</div><a>';
+				}
+			} else { echo "Brak produktów w podanej kategorii"; }
+		}
 	}
 ?>

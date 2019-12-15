@@ -101,7 +101,6 @@
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
 			
-
 			<!-- KATEGORIE -->
 			<div id="categories">
 				<br>
@@ -119,6 +118,7 @@
 				<a href="kategoria.php?id_kategorie=9">AGD</a><br>
 				<a href="kategoria.php?id_kategorie=10">Alkohol</a><br>
 				<a href="kategoria.php?id_kategorie=11">Zabawki</a><br>
+				<a href="kategoria.php?id_kategorie=0">Wszystko</a><br>
 
 			</div>
 

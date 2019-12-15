@@ -1,0 +1,93 @@
+/* Zamowienia.php - WYŚWIETLANA TABELA ZAMÓWIEŃ */
+
+table, th, td{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+th{
+    background-color: #FF5A00;
+}
+
+table {
+    
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+
+#title3{
+    font-style: normal;
+    text-align: center;
+}
+
+#container{
+    height: 1200px;
+}
+
+#orders{
+    float: left;
+    width: 85%;
+    margin: 20px;
+    margin-left: 80px;
+    padding: 20px;
+}
+
+.order_table{
+    border-collapse: collapse;
+    position: relative;
+    left: 5%;
+    text-align: center;
+    font-style: normal;
+    border: 1px solid black;
+}
+
+.order_table th{
+    background-color: #ba9e79;
+}
+
+.order_table table{
+    border-collapse: collapse;
+}
+
+.order_table th, td, table, tr{
+    border: 1px solid black;
+}
+
+.no_orders{
+    position: relative;
+    left: 43%;
+    text-align: center;
+}
+
+/* Zamowienia.php - WYŚWIETLANY PANEL ADMINA */
+
+#adm_panel{
+    background-color: #b0adac;
+    position: relative;
+    left: 20%;
+    width: 60%;
+    padding: 10px;
+    font-style: normal;
+    text-align: center;
+    border: 1px solid black;
+}
+
+#products_zam{
+    position: relative;
+    left: 6%;
+    text-align: center;
+    width: 90%;
+    background-color: #grey;
+}
+
+#dodaj_produkt{
+    font-style: none;
+    position: relative;
+    left: 45%;
+    text-decoration: none;
+    font-size: 30px;
+    color: white;
+    background-color: #FF5A00;
+}
