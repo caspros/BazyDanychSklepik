@@ -47,17 +47,13 @@
 			</li>
 
 			<!-- wyszukiwanie -->
-			<form form action="#" method="get" class="form_inline">
+			<form action="wyszukaj.php" method="get" class="form_inline">
 				<li>
-					<a href="#">
-						<input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt...">
-					</a>
+					<input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt...">
 				</li>
 
 				<li>
-					<a href="#">
-						<input style="display: inline;" type="submit" name="search_button" class="search_button" value="SZUKAJ">
-					</a>
+					<input style="display: inline;" type="submit" name="search_button" class="search_button" value="SZUKAJ">
 				</li>
 			</form>
 

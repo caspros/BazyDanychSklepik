@@ -19,10 +19,10 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
-	<link rel="stylesheet" type="text/css" href="css/produkt.css">
+	<link rel="stylesheet" type="text/css" href="css/kategoria.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Produkt</title>
+	<title>Kategorie</title>
 </head>
 
 <body>
@@ -94,30 +94,34 @@
 	
 	<!-- GŁÓWNY CONTAINER -->
 	<div id="container_produkt">
+		<div id="categories">
+			<br>
+
+			<span class="kat"><b>Kategorie:</b></span>
+			<br><br>
+			<a href="kategoria.php?id_kategorie=1">Koszulki</a><br>
+			<a href="kategoria.php?id_kategorie=2">Spodnie</a><br>
+			<a href="kategoria.php?id_kategorie=3">Kubki</a><br>
+			<a href="kategoria.php?id_kategorie=4">Długopisy</a><br>
+			<a href="kategoria.php?id_kategorie=5">Bluzy</a><br>
+			<a href="kategoria.php?id_kategorie=6">Naklejki</a><br>
+			<a href="kategoria.php?id_kategorie=7">Ramki</a><br>
+			<a href="kategoria.php?id_kategorie=8">RTV</a><br>
+			<a href="kategoria.php?id_kategorie=9">AGD</a><br>
+			<a href="kategoria.php?id_kategorie=10">Alkohol</a><br>
+			<a href="kategoria.php?id_kategorie=11">Zabawki</a><br>
+			<a href="kategoria.php?id_kategorie=0">Wszystko</a><br>
+
+		</div>
 
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
-			<?php 
-				$id_produktu = $_GET['id_produkty'];
-				$servername = "localhost";
-				$username = "root";
-				$password = "";
-				$dbname = "sklep";
-				// Create connection
-				$conn = new mysqli($servername, $username, $password, $dbname);
-				$conn -> query("SET NAMES 'utf8'");
-				// Check connection
-				if ($conn -> connect_error) {
-					    die("Nie połączono z bazą danych: " . $conn -> connect_error);
-					}
-
-				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_produkty=$id_produktu";
-				$result = $conn -> query($sql);
-				Show_product($id_produktu);
+			<?php
+				Searching();
 			?>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			
+
 		</div>
 	</div>
 
@@ -136,7 +140,6 @@
 		</a>
 	</div>	
 
-	<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
 	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<!-- STICKY MENU JS-->
@@ -146,84 +149,68 @@
 	<!-- SLIDER JS-->
 	<script src="js/slider.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<!-- PRICE CHANGING WHILE INCREASE AMOUT OF PRODUCT-->
-	<script type="text/javascript">
-			var cookies = document.cookie.split(";").
-   			map(function(el){ return el.split("="); }).
-    		reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
-			
-				$('#ile_sztuk').on('change paste', function () {
-				    $("#current").html($(this).val()*cookies["MyCookie"]);
-				});      
-	</script>
-
-<?php
-	//Function to show product on main site
-	function Show_product($id)
-	{	
-		$id_produktu = $_GET['id_produkty'];
-		require_once "connect.php";
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		$conn -> query("SET NAMES 'utf8'");
-		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-
-		$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_produkty=$id_produktu";
-		$result = $conn -> query($sql);
-		if ($result -> num_rows > 0)
-		{
-	 		while($row = $result -> fetch_assoc())
-	 		{	
-	 			$_SESSION['cena']=$row["cena"];
-	 			$_SESSION['produkt']=$row["id_produkty"];
-	 			setcookie("MyCookie", $row["cena"]);
-	       		echo '<div id="produkt_big"><img src="images/products/'.$row["zdjecie"].'" width="500" height="500" alt="product.png"><br><b>'
-			       		.$row["nazwa"].'</b><br><br>Specyfikacja produktu<br><br>
-			       		<div id="dane">Rozmiar: ';
-				       		if(is_null($row["rozmiar"]))
-				       		{
-				       			echo 'Nie dotyczy';
-				       		}else echo $row["rozmiar"];
-				       		echo '<br>Producent: '.$row["producent"].
-			       		'</div>
-			       		<br><br>Opis produktu: <br>'.$row["opis"].
-			       		'<br><br><form action="koszyk.php" method="post"><input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
-			       		'<input id="dostawa1" type="hidden" name="koszyk1" value='.$row['dostawa'].'/><br><br><button type="submit" id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button><br>
-			       			<span style="color:green;">+ Dostawa: <span id="dostawa">'.$row['dostawa'].'</span> PLN</span>
-			       		</form>
-	       			</div>';
-			}
-		} else { echo "No results"; }
-	}
-
 	
-				
-?>
-
-
-<script>
-	// do input dodac onchange="myFunction()
-//Funkcja na zliczanie dostawy 
-/*function myFunction()
-{
-	  var x = document.getElementById("ile_sztuk");
-	  //var dostawa = document.getElementById("dostawa1").value;
-
-	  var currentVal = x.value;
-	  if (currentVal % 5 == 1)
-	  {
-	    document.getElementById("dostawa").innerHTML = 12 + ((currentVal - 1) / 5) * 12;
-	    
-	  }
-
-	if (currentVal % 5 == 0)
-    {
-    	document.getElementById("dostawa").innerHTML = 12 + (((currentVal) / 5) -1) * 12;
-    }
-}*/
-</script>
-
 </body>
 </html>
 
 
+<?php
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "sklep";
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	$conn -> query("SET NAMES 'utf8'");
+	// Check connection
+	if ($conn -> connect_error) {
+		    die("Nie połączono z bazą danych: " . $conn -> connect_error);
+		}
+
+	//Function to show products in categories
+	function Searching()
+	{	
+		$szukane = $_GET['search_input'];
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "sklep";
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn -> query("SET NAMES 'utf8'");
+		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+
+		echo '<h1>Znalezione produkty</h1>';
+		$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE nazwa LIKE '%$szukane%'";
+		$result = $conn -> query($sql);
+		if ($result -> num_rows > 0)
+		{
+	 		while($row = $result -> fetch_assoc())
+	 		{
+	       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
+			       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
+			       		<div class="zawartosc">
+			       			<table id="tabela">
+					       		<tr>
+					       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
+					       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
+					       		</tr>
+					       		<tr>
+						       		<td><div class="rozmiar">Rozmiar: ';
+						       		if(is_null($row["rozmiar"]))
+						       		{
+						       			echo 'Nie dotyczy';
+						       		}else echo $row["rozmiar"];
+						       		echo '</div></td>
+						       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+						       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
+					       		</tr>
+				       		</table>
+			       		</div>
+	       			</div><a>';
+			}
+		echo "<br><br><br><br>";
+
+		} else { echo "Brak znalezionych produktów"; }
+	
+	}
+?>
