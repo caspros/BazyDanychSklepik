@@ -105,86 +105,23 @@
 	<!-- GŁÓWNY CONTAINER -->
 	<div id="container_koszyk">
 		
-		<h1>Oceń nas</h1>
-
-
-		<!-- MIĘSO ARMATNIE -->
+		<h1>Najczęściej zadawane pytania:</h1>
+		
 		<div id="koszyk_container">
 				<div id="informacja1">
-					Każda pozostawiona opinia klienta jest dla nas bardzo cenna. <br>
-					Dzięki Waszym opiniom stale możemy ulepszać jakość naszych usług.
+					<p><strong>Pytanie 1:</strong> Jestem tutaj nowy/(a), gdzie mogę stworzyć sobie konto?</p>
+					<p><strong>Odpowiedź 1:</strong>W prawym górnym rogu strony, znajduje się opcja nazwana "Witaj, zaloguj się". Jej kliknięcie spowoduje rozwinięcie menu, które posiada kilka opcji wyboru. Na samym dole listy wyboru znajduje się opcja nazwana "Zaloguj". Po jej wybraniu zostaniesz przeniesiony na nowe okno w którym widnieje formularz "Logowanie". Pod nim natomiast widnieje opcja "Nie posiadasz konta? Zarejestruj się!". Po kilknięciu na nią, zostajesz przeniesiony do formularza "Rejestracja", gdzie po podaniu Imienia, Nazwiska, Emailu, Hasła, akcpetacji regulaminu oraz przyciśnięciu guzika "Zarejestruj", utworzysz nowe konto w naszym serwisie. Otrzymasz komunikat o powodzeniu operacji i możliwość powrotu na stronę główną, gdzie możesz się już zalogować jako urzytkownik serwisu i korzystać z naszych bogatych ofert. W razie problemów z zalogowaniem, zalecamy przeczytanie Pytania Nr. 2. </p>
+					<p><strong>Pytanie 2:</strong> Jak się zalogować do Alledrogo?</p>
+					<p><strong>Odpowiedź 2:</strong> W prawym górnym rogu strony, znajduje się opcja nazwana "Witaj, zaloguj się". Jej kliknięcie spowoduje rozwinięcie menu, które posiada kilka opcji wyboru. Na samym dole listy wyboru znajduje się opcja nazwana "Zaloguj". Zostaniesz przeniesiony na nowe okno w którym widnieje formularz "Logowanie". Po wpisaniu swojego emaila, hasła i kliknięciu guzika "Zaloguj", strona przeładuje  się i powrócimy na stronę główną Alledrogo. Wówczas będziemy już zalogowani o czym świadczy nas opis w prawym górnym rogu strony "Witaj,"Twoja_nazwa_konta".</p>
+					<p><strong>Pytanie 3:</strong> Czy istnieje możliwość zmiany adresu dostawy?</p>
+					<p><strong>Odpowiedź 3:</strong> Oczywiście. Jako zalogowany urzytkownik serwisu Alledrogo, dysponujesz możliwością zmiany adresu na który przyjedzie dostawa. Znajduje się ono w Ustawieniach, które jest w ukryte menu wyboru "Witaj,"Twoja_nazwa_konta", które można znaleść w prawym górnym rogu strony. Po wybraniu zakładki "Ustawienia" pojawi sie formularz z naszymi danymi dostawy. Prosimy mieć na uwadze, aby podać dokładną lokalizacje dostawy, aby nie było problemów z brakiem dostawy.</p>
+					<p><strong>Pytanie 4:</strong> Gdzie mogę zobaczyć listę produktów, które dodałem/(am) do koszyka?</p>
+					<p><strong>Odpowiedź 4:</strong> Wszystkie produkty, które zostały dodane do koszyka, można zobaczyć po kliknięciu w ikonę koszyka w górnej części strony, koło wyszukiwarki produktów. Dla wygody naszych urzytkowników, możliwość wejścia w koszyk, jest dostępna z każdego miejsca naszej strony. Gdy jesteś przekonany/(na) o doborze wybranych produktów i chęci ich nabycia, kliknij przycisk "Załóż zamówienie".</p>
+					<p><strong>Pytanie 5:</strong> Chcę ocenić wasz serwis, jest taka możliwość?</p>
+					<p><strong>Odpowiedź 5:</strong> Naturalnie. Zalogowani użytkownicy mogą oceniać i zakupione produkty, jak i nasz sklep. Opcję służące do tego znajdują się w menu "Witaj, "Twoja_nazwa_konta". Po kliknięciu interesującej nasz opcji, pojawia się formularz oceny. Będziemy wdzięczni za opinie i komenarze. Najlepsze z nich wyświetlimy na stronie głównej.</p>
 				</div>
 			<br><br>
-
-			<?php
-				$servername = "localhost";
-				$username = "root";
-				$password = "";
-				$dbname = "sklep";
-				$conn = new mysqli($servername, $username, $password, $dbname);
-				$conn -> query("SET NAMES 'utf8'");
-				if ($conn -> connect_error) {die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-				$id_klienci = $_SESSION['id_klienci'];
-				$_SESSION['juz_oceniono'] = FALSE;
-				$sql = "SELECT * FROM opinie WHERE id_klienci=$id_klienci";
-				$result = $conn -> query($sql);
-				while($row = $result -> fetch_assoc())
-				{
-					if($row['id_produkty']==0)
-					{
-						$_SESSION['juz_oceniono'] = TRUE;
-					}
-				}
-
-				if((isset($_SESSION['juz_oceniono'])) && ($_SESSION['juz_oceniono']==TRUE))
-				{
-					$sql1 = "SELECT * FROM opinie WHERE id_klienci=$id_klienci and id_produkty=0";
-					$result1 = @$conn -> query($sql1);
-					if ($result -> num_rows > 0)
-					{
-						if($row1 = $result1 -> fetch_assoc())
-						{
-							echo '<h2>Już oceniłeś nasz sklep, dziękujemy!</h2><br>';
-							echo '<div id="dziekujemy">Twoja ocena: <b>'.$row1['gwiazdka'].'/10</b><br>';
-							echo 'Twoj komentarz: <b>'.$row1['opinia'].'</b></div>';
-						}
-					}
-				}
-				else
-				{
-					echo '<div id="formularz">
-							<form action="addingOcena.php" method="post">
-								Ocena: 
-								<select name="ocena">
-								  <option value="1">1</option>
-								  <option value="2">2</option>
-								  <option value="3">3</option>
-								  <option value="4">4</option>
-								  <option value="5">5</option>
-								  <option value="6">6</option>
-								  <option value="7">7</option>
-								  <option value="8">8</option>
-								  <option value="9">9</option>
-								  <option value="10">10</option>
-								</select>
-
-								<br><span id="koment">Komentarz:</span><br>
-								<textarea name="opis" cols="50" rows="3"></textarea><br><br>
-								<input name="submit" id="dalej_btn" type=submit value="Dodaj">
-							</form>
-						</div>';
-				}
-
-			?>
-
 			
-			
-
-
-
-			<br><br><br><br><br><br><br><br><br>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
 		</div>
 	</div>
 
@@ -201,7 +138,7 @@
 		<a href="regulamin.php">
 			regulaminu
 		</a>
-	</div>
+	</div>	
 
 	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
