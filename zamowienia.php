@@ -22,6 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<link rel="stylesheet" type="text/css" href="css/zamowienia.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
 	<title>Moje zamówienia</title>
@@ -39,23 +40,19 @@
 			</li>
 
 			<!-- wyszukiwanie -->
-			<form form action="#" method="get" class="form_inline">
+			<form action="wyszukaj.php" method="get" class="form_inline">
 				<li>
-					<a href="#">
-						<input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt...">
-					</a>
+					<input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt...">
 				</li>
 
 				<li>
-					<a href="#">
-						<input style="display: inline;" type="submit" name="search_button" class="search_button" value="SZUKAJ">
-					</a>
+					<input style="display: inline;" type="submit" name="search_button" class="search_button" value="SZUKAJ">
 				</li>
 			</form>
 
 			<!-- koszyk -->
 			<li>
-				<a href="#">
+				<a href="koszyk.php">
 					<span class="koszyk">
 						<i class="fas fa-shopping-cart"></i>
 					</span>
@@ -81,8 +78,9 @@
 
 				<!-- DROPDOWN CONTENT -->
 	  			<div id="myDropdown" class="dropdown-content">
-		    		<a href="zamowienia.php">Moje zamówienia</a>
-					<a href="#">Oceń produkt</a>
+		    		<a href="zamowienia.php">Zamówienia</a>
+					<a href="ocena_produktu.php">Oceń produkt</a>
+					<a href="ocena_sklepu.php">Oceń sklep</a>
 					<a href="profil.php">Ustawienia</a>
 					<?php
 						if (isset($_SESSION['zaloguj']))
@@ -103,34 +101,13 @@
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
 			
-
-			<!-- KATEGORIE -->
-			<div id="categories">
-				<br>
-
-				<span class="kat"><b>Kategorie:</b></span>
-				<br><br>
-				<a href="#">Koszulki</a><br>
-				<a href="#">Spodnie</a><br>
-				<a href="#">Kubki</a><br>
-				<a href="#">Długopisy</a><br>
-				<a href="#">Bluzy</a><br>
-				<a href="#">Naklejki</a><br>
-				<a href="#">Ramki</a><br>
-				<a href="#">RTV</a><br>
-				<a href="#">AGD</a><br>
-				<a href="#">Alkohol</a><br>
-				<a href="#">Zabawki</a><br>
-
-			</div>
-
 			<div id="orders">
 				
 
 				<?php
 					if($_SESSION['uprawnienia']==1)
 					{
-						echo '<a href="addProduct.php">Dodaj produkt!</a><br><form id="adm_panel" method="POST">
+						echo '<a id="dodaj_produkt" href="addProduct.php">Dodaj produkt!</a><br><br><br><form id="adm_panel" method="POST">
 						<b>Admin Panel</b><br><br>
 						Id zamówienia: <input type="text" name="id_zam"/><br><br>
 						<input type="hidden" name="paid" value="0" />
@@ -168,7 +145,18 @@
 					}
 				?>
 
-				<h3 id="title3">Moje zamówienia</h3>
+				<?php
+					if($_SESSION['uprawnienia']==0)
+					{
+						echo '<h1>Moje zamówienia</h1>';
+					}
+					else
+					{
+						echo '<h1>Zamówienia klientów</h1>';
+					}
+				?>
+
+				<br><br>
 				<?php
 					Show_orders($id_klienci);
 				?>
@@ -176,17 +164,36 @@
 			</div>
 
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-				<h1>WYRÓŻNIONE PRODUKTY:</h1>
+				<?php
+					if($_SESSION['uprawnienia']==0)
+					{
+						echo '<h1>WYRÓŻNIONE PRODUKTY:</h1>';
+					}
+				?>
 			<!-- PRODUKTY NA GŁÓWNEJ -->
-			<div id="products">
+			<div id="products_zam">
 				
 				<br>
-				<div class="product"><?php Show_product(12);?></div>
-				<div class="product"><?php Show_product(14);?></div>
-				<div class="product"><?php Show_product(8);?></div>
-				<div class="product"><?php Show_product(15);?></div>
-				<div class="product"><?php Show_product(16);?></div>
-				<div class="product"><?php Show_product(17);?></div>
+
+				<?php
+					if($_SESSION['uprawnienia']==0)
+					{
+						echo '<div class="product">';
+						Show_product(12);
+						echo '</div><div class="product">';
+						Show_product(14);
+						echo '</div><div class="product">';
+						Show_product(8);
+						echo '</div><div class="product">';
+						Show_product(15);
+						echo '</div><div class="product">';
+						Show_product(16);
+						echo '</div><div class="product">';
+						Show_product(17);
+						echo '</div>';
+
+					}
+				?>
 
 			</div>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -198,15 +205,15 @@
 
     <div id="centeredmenu">
 	   <ul>
-	      <li><a href="#">FAQ</a></li>
-	      <li><a href="#">Kontakt</a></li>
-	      <li><a href="#">Regulamin</a></li>
+	      <li><a href="FAQ.php">FAQ</a></li>
+	      <li><a href="kontakt.php">Kontakt</a></li>
+	      <li><a href="regulamin.php">Regulamin</a></li>
 	   </ul>
 	</div>
 
 	<div id="footer">
 		Korzystanie z serwisu oznacza akceptację
-		<a href="#">
+		<a href="regulamin.php">
 			regulaminu
 		</a>
 	</div>	
@@ -246,11 +253,11 @@
 		$row_adm = $result_adm -> fetch_assoc();
 		if($row_adm['uprawnienia'])
 		{
-			$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania FROM zamowienia z, klienci k GROUP BY z.id_zamowienia";
+			$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania, z.suma FROM zamowienia z, klienci k GROUP BY z.id_zamowienia";
 		} 
 		else
 		{
-			$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania FROM zamowienia z, klienci k WHERE z.id_klienci = $id_klienci GROUP BY z.id_zamowienia";
+			$sql = "SELECT z.id_zamowienia, z.data_zlozenia, z.zaplacono, z.data_wyslania, z.suma FROM zamowienia z, klienci k WHERE z.id_klienci = $id_klienci GROUP BY z.id_zamowienia";
 		}
 		$result = $conn -> query($sql);
 		if(mysqli_num_rows($result)==0)
@@ -262,6 +269,7 @@
 						<tr>
 							<th>Id zamówienia</th>
 							<th>Data zamówienia</th>
+							<th>Kwota zamówienia</th>
 							<th>Status płatności</th>
 							<th>Data wysłania</th>
 						</tr>';
@@ -270,6 +278,7 @@
 					echo '<tr>
 							<td>'.$row['id_zamowienia'].'</td>
 							<td>'.$row['data_zlozenia'].'</td>
+							<td>'.$row['suma'].' PLN</td>
 							<td>';
 							if($row['zaplacono']==0)
 							{

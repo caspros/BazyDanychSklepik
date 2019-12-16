@@ -1,13 +1,13 @@
 $(document).ready(function() {
-	var NavY = $('#nav').offset().top;
+	var NavY = $('#sticky_menu').offset().top;
 			      
 	var stickyNav = function(){
 		var ScrollY = $(window).scrollTop();
 					           
 		if (ScrollY > NavY) { 
-			$('#nav').addClass('sticky');
+			$('#sticky_menu').addClass('sticky');
 		} else {
-			$('#nav').removeClass('sticky'); 
+			$('#sticky_menu').removeClass('sticky'); 
 		}
 	};
 			      

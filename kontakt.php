@@ -4,12 +4,6 @@
 	{
 		$_SESSION['wyloguj'] = "Wyloguj";
 		unset($_SESSION['zaloguj']);
-		if((isset($_SESSION['uprawnienia'])) && ($_SESSION['uprawnienia']==0))
-		{
-			header('Location: index.php');
-			exit();
-		}
-
 	} else {
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
@@ -18,10 +12,6 @@
 	}
 ?>
 
-
-	
-
-
 <!DOCTYPE HTML>
 <html lang="pl">
 
@@ -29,14 +19,21 @@
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
-	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
-	<link rel="stylesheet" type="text/css" href="css/add_product.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Dodaj produkt</title>
+	<title>Ocena sklepu</title>
 </head>
+<style>
+	.error
+		{
+			color:red;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+</style>
 
 <body>
 	<!-- STICKY MENU -->
@@ -108,48 +105,23 @@
 	<!-- GŁÓWNY CONTAINER -->
 	<div id="container_koszyk">
 		
-
-		<!-- MIĘSO ARMATNIE -->
-		<div class="login-popup-wrap new_login_popup">
-			
-			<form action="addingProduct.php" method="post" enctype="multipart/form-data">
-				<div class="login-popup-heading text-center">
-					Nazwa:<input type="text" name="nazwa"><br><br>
-			
-					Opis:<br><textarea name="opis" cols="20" rows="5"></textarea><br><br>
-				
-					Cena:<input type="text" name="cena"><br><br>
-				
-					Dostępna ilość:<input type="text" name="dostepna_ilosc"><br><br>
-			
-					Producent:<input type="text" name="producent"><br><br>
-
-					Rozmiar:<input type="text" name="rozmiar"><br><br>
-
-					Cena dostawy:<input type="text" name="dostawa"><br><br>
-
-					Kategoria:
-					<select name="kategoria">
-						  <option value="1">Koszulki</option>
-						  <option value="2">Spodnie</option>
-						  <option value="3">Kubki</option>
-						  <option value="4">Długopisy</option>
-						  <option value="5">Bluzy</option>
-						  <option value="6">Naklejki</option>
-						  <option value="7">Ramki</option>
-						  <option value="8">RTV</option>
-						  <option value="9">AGD</option>
-						  <option value="10">Alkohol</option>
-						  <option value="11">Zabawki</option>
-					</select><br><br>
-
-			   			Wybierz zdjęcie do dodania: <br><input type="file" name="myfile"><br><br>
-					<input name="submit" class="btn btn-default login-popup-btn" type=submit value="Dodaj">
+		<h1>Członkowie projektu</h1>
+		
+		<div id="koszyk_container">
+				<div id="informacja1">
+					<p><strong>Kierownik projektu:</strong></p>
+					<p>Kacper Śledzik</p>
+					<p><strong>Członkowie projektu:</strong></p>
+					<p>Marcin Fedor</p>
+					<p>Armand Gadecki</p>
+					<p>Mariusz Granda</p>
+					<p>Juliusz Jakubiec</p>
+					<p>Aleksander Szuba</p>
 				</div>
-			</form>
+			<br><br>
+			
 		</div>
 	</div>
-
     <div id="centeredmenu">
 	   <ul>
 	      <li><a href="FAQ.php">FAQ</a></li>
@@ -163,7 +135,7 @@
 		<a href="regulamin.php">
 			regulaminu
 		</a>
-	</div>	
+	</div>
 
 	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -177,4 +149,3 @@
 	
 </body>
 </html>
-

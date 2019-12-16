@@ -77,6 +77,9 @@ if (isset($_POST['email']))
 	try
 	{
 		$polaczenie = new mysqli($servername, $username, $password, $dbname);
+		$polaczenie -> query("SET NAMES 'utf8'");
+		$sql2 = "SET FOREIGN_KEY_CHECKS = 0";
+		$polaczenie -> query($sql2);
 		if($polaczenie->connect_errno!=0)
 		{
 			throw new Exception(mysqli_connect_errno());
@@ -100,6 +103,17 @@ if (isset($_POST['email']))
 			//wszystko dobrze user dodany
 			if($polaczenie->query("INSERT INTO klienci(Imie, Nazwisko, haslo, email) VALUES ('$imie', '$nazwisko' ,'$haslo_hash','$email')"))
 			{
+				$sql_temp = "SELECT id_klienci FROM klienci WHERE email='$email'";
+				$rezultat = $polaczenie->query($sql_temp);
+				$row = $rezultat->fetch_assoc();
+				$id_k = $row['id_klienci'];
+				$id_adres = $id_k - 5;
+				$sql2 = "SET FOREIGN_KEY_CHECKS = 0";
+				$sql = "UPDATE klienci SET id_adres='$id_adres' WHERE email='$email'";
+				$polaczenie->query($sql2);
+				$polaczenie->query($sql);
+				$sql = "INSERT INTO adres(id_klienci) VALUES ('$id_k')";
+				$polaczenie->query($sql);
 				unset($_POST['imie']);
 				unset($_POST['nazwisko']);
 				unset($_POST['haslo1']);
@@ -170,6 +184,7 @@ if (isset($_POST['email']))
 		<form method="post">
 		<div class="login-popup-heading text-center">
             <h4><i class="fa fa-lock" aria-hidden="true"></i> Rejestracja </h4>                        
+        <br>
         </div>
 		<div class="form-group">        
 			Imię: <br/> <input type="text" class="form-control" name="imie" />
@@ -181,7 +196,7 @@ if (isset($_POST['email']))
 				unset($_SESSION['e_imie']);
 			}
 		?>
-	<br>
+	
 	<div class="form-group">
 		Nazwisko: <br/> <input type="text" class="form-control" name="nazwisko" />
 	</div>
@@ -192,7 +207,7 @@ if (isset($_POST['email']))
 			unset($_SESSION['e_nazwisko']);
 		}
 	?>
-	<br>
+	
 	<div class="form-group">
 		E-mail: <br/> <input type="text" class="form-control" name="email" />
 	</div>
@@ -203,7 +218,7 @@ if (isset($_POST['email']))
 			unset($_SESSION['e_email']);
 		}
 	?>
-	<br>
+
 	<div class="form-group">	
 		Hasło: <br/> <input type="password" class="form-control" name="haslo1" />
 	</div>
@@ -214,7 +229,7 @@ if (isset($_POST['email']))
 			unset($_SESSION['e_haslo']);
 		}
 	?>
-	<br>
+	
 	<div class="form-group">	
 		Powtórz hasło: <br/> <input type="password" class="form-control" name="haslo2" />
 	</div>

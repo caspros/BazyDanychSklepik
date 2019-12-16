@@ -7,93 +7,141 @@
 	} else {
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
+		header('Location: index.php');
+		exit();
 	}
-	//poprawność miasta
-	$miasto = $_POST['miasto'];
-	if(!(preg_match($sprawdz, $miasto)))
-	{
-		$wszystko_OK=false;
-		$_SESSION['e_miasto']="Podaj poprawną miejscowość";
-	}
+	$id_klienci = $_SESSION['id_klienci'];
 
-	if(empty($_POST['miasto']))
-	{
-		$wszystko_OK=false;
-		$_SESSION['e_miasto']="Musisz wypełnić wszystkie pola";
-	}
-	//poprawność ulicy
-	$ulica = $_POST['ulica'];
-	if(!(preg_match($sprawdz, $ulica)))
-	{
-		$wszystko_OK=false;
-		$_SESSION['e_ulica']="Podaj poprawną ulice";
-	}
+	
 
-	if(empty($_POST['ulica']))
+	//Testowe do wyswietlania z bazy danych w polach
+	require_once "connect.php";
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	$conn -> query("SET NAMES 'utf8'");
+	if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+	$sql = "SELECT * FROM adres WHERE id_klienci='$id_klienci'";
+	if($result = @$conn->query($sql))
 	{
-		$wszystko_OK=false;
-		$_SESSION['e_ulica']="Musisz wypełnić wszystkie pola";
-	}
-	//poprawność numeru domu
-	$nr = $_POST['nr'];
-	if(!(preg_match($sprawdz, $nr)))
-	{
-		$wszystko_OK=false;
-		$_SESSION['e_nr']="Podaj poprawny numer domu";
-	}
+		$row = $result -> fetch_assoc();
+		$u = $row['ulica'];
+		$k = $row['kod_pocztowy'];
+		$m = $row['miasto'];
+		$d = $row['nr_domu'];
+		$l = $row['nr_lokalu'];
 
-	if(empty($_POST['nr']))
-	{
-		$wszystko_OK=false;
-		$_SESSION['e_nr']="Musisz wypełnić wszystkie pola";
-	}
-
-	//poprawność numeru domu
-	$nrm = $_POST['nrm'];
-	if(!(preg_match($sprawdz, $nrm)))
-	{
-		$wszystko_OK=false;
-		$_SESSION['e_nrm']="Podaj poprawny numer mieszkania";
-	}
-	//poprawność kodu pocztowego
-	$zipcode = $_POST['zipcode'];
-	if(!(preg_match($sprawdz, $zipcode)))
-	{
-		$wszystko_OK=false;
-		$_SESSION['e_zipcode']="Podaj poprawny kod pocztowy";
-	}
-
-	if(empty($_POST['zipcode']))
-	{
-		$wszystko_OK=false;
-		$_SESSION['e_zipcode']="Musisz wypełnić wszystkie pola";
-	}
-
-	if($wszystko_OK==true)
+		if($row['miasto']===NULL)
 		{
+			$u = "";
+			$k = "";
+			$m = "";
+			$d = "";
+			$l = "";
+		}
+	}
+
+	if(isset($_POST['ustawiono']))
+	{	
+		$wszystko_OK=true;
+		$sprawdz = '/^[A-ZŁŚ]{1}+[a-ząęółśżźćń]+$/';
+		//poprawność miasta
+		$miasto = $_POST['miasto'];
+		if(!(preg_match($sprawdz, $miasto)))
+		{
+			$wszystko_OK=false;
+			$_SESSION['e_miasto']="Podaj poprawną miejscowość";
+		}
+
+		if(empty($_POST['miasto']))
+		{
+			$wszystko_OK=false;
+			$_SESSION['e_miasto']="Musisz wypełnić wszystkie pola";
+		}
+
+		//poprawność ulicy
+		$ulica = $_POST['ulica'];
+		if(!(preg_match($sprawdz, $ulica)))
+		{
+			$wszystko_OK=false;
+			$_SESSION['e_ulica']="Podaj poprawną ulice";
+		}
+
+		if(empty($_POST['ulica']))
+		{
+			$wszystko_OK=false;
+			$_SESSION['e_ulica']="Musisz wypełnić wszystkie pola";
+		}
+		//poprawność numeru domu
+		$sprawdz = '/^[0-99999]*$/';
+		$nr = $_POST['nr'];
+		if(!(preg_match($sprawdz, $nr)))
+		{
+			$wszystko_OK=false;
+			$_SESSION['e_nr']="Podaj poprawny numer domu";
+		}
+
+		if(empty($_POST['nr']))
+		{
+			$wszystko_OK=false;
+			$_SESSION['e_nr']="Musisz wypełnić wszystkie pola";
+		}
+
+		//poprawność numeru domu
+		$nrm = $_POST['nrm'];
+		if(!(preg_match($sprawdz, $nrm)))
+		{
+			$wszystko_OK=false;
+			$_SESSION['e_nrm']="Podaj poprawny numer mieszkania";
+		}
+
+		if(empty($_POST['nrm']))
+		{
+			$wszystko_OK=false;
+			$_SESSION['e_nrm']="Musisz wypełnić wszystkie pola";
+		}
+
+		//poprawność kodu pocztowego
+		$sprawdz = '/^[0-9]{2}-?[0-9]{3}$/Du';
+		$zipcode = $_POST['zipcode'];
+		if(!(preg_match($sprawdz, $zipcode)))
+		{
+			$wszystko_OK=false;
+			$_SESSION['e_zipcode']="Podaj poprawny kod pocztowy";
+		}
+
+		if(empty($_POST['zipcode']))
+		{
+			$wszystko_OK=false;
+			$_SESSION['e_zipcode']="Musisz wypełnić wszystkie pola";
+		}
+
+		if($wszystko_OK==true)
+		{
+			
 			//wszystko dobrze dane zapisane
-			if($polaczenie->query("INSERT INTO klienci(Miasto, Ulica, nr, nrm, zipcode) VALUES ('$miasto', '$ulica' ,'$nr','$nrm','$zipcode')"))
+			$sql = "UPDATE adres SET kod_pocztowy = '$zipcode', miasto = '$miasto', ulica = '$ulica', nr_domu = '$nr', nr_lokalu = '$nrm' WHERE id_klienci='$id_klienci'";
+			
+			if($conn->query($sql))
 			{
 				unset($_POST['miasto']);
 				unset($_POST['ulica']);
 				unset($_POST['nr']);
 				unset($_POST['nrm']);
 				unset($_POST['zipcode']);
-				$_SESSION['udanedanezamieszkania']=true;
-				header('Location: witamy.php');
+				$_SESSION['udanedanezamieszkania']= "Twoje dane zostały zmienione!";
+				header( "refresh:2;url=profil.php" );
 			}
 			else
 			{
-				throw new Exception($polaczenie->error);
-			}
-		}		
-			$polaczenie->close();
+				throw new Exception($conn->error);
+			}		
+			$conn->close();
 		}
+
 	}
 
-	catch(Exception $e)
-
 ?>
+
+
 
 <!DOCTYPE HTML>
 <html lang="pl">
@@ -103,10 +151,30 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/profil.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Alledrogo</title>
+	<style>
+		.error
+		{
+			color:red;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+
+		.udana
+		{
+			color:green;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+	</style>
+	<title>Dane profilu</title>
 </head>
 
 <body>
@@ -121,23 +189,19 @@
 			</li>
 
 			<!-- wyszukiwanie -->
-			<form form action="#" method="get" class="form_inline">
+			<form action="wyszukaj.php" method="get" class="form_inline">
 				<li>
-					<a href="#">
-						<input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt...">
-					</a>
+					<input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt...">
 				</li>
 
 				<li>
-					<a href="#">
-						<input style="display: inline;" type="submit" name="search_button" class="search_button" value="SZUKAJ">
-					</a>
+					<input style="display: inline;" type="submit" name="search_button" class="search_button" value="SZUKAJ">
 				</li>
 			</form>
 
 			<!-- koszyk -->
 			<li>
-				<a href="#">
+				<a href="koszyk.php">
 					<span class="koszyk">
 						<i class="fas fa-shopping-cart"></i>
 					</span>
@@ -163,8 +227,9 @@
 
 				<!-- DROPDOWN CONTENT -->
 	  			<div id="myDropdown" class="dropdown-content">
-		    		<a href="zamowienia.php">Moje zamówienia</a>
-					<a href="#">Oceń produkt</a>
+		    		<a href="zamowienia.php">Zamówienia</a>
+					<a href="ocena_produktu.php">Oceń produkt</a>
+					<a href="ocena_sklepu.php">Oceń sklep</a>
 					<a href="profil.php">Ustawienia</a>
 					<?php
 						if (isset($_SESSION['zaloguj']))
@@ -181,91 +246,119 @@
 	
 	<!-- GŁÓWNY CONTAINER -->
 	<div id="container">
-
 		<!-- MIĘSO ARMATNIE -->
-			<div id="main">
-			<div class="login-popup-wrap new_login_popup"> 
-	<div id="container">
-		<form method="post">
-		<div class="login-popup-heading text-center">
-            <h4><i class="fa fa-lock" aria-hidden="true"></i> Dane do wysyłki </h4>                        
-        </div>
-		<div class="form-group">        
-			Miasto: <br/> <input type="text" class="form-control" name="miasto" />
-		</div>
-		<?php
-			if (isset($_SESSION['e_miasto']))
-			{
-				echo '<div class="error">'.$_SESSION['e_miasto'].'</div>';
-				unset($_SESSION['e_miasto']);
-			}
-		?>
-	<br>
-	<div class="form-group">
-		Ulica: <br/> <input type="text" class="form-control" name="ulica" />
-	</div>
-	<?php
-		if (isset($_SESSION['e_ulica']))
-		{
-			echo '<div class="error">'.$_SESSION['e_ulica'].'</div>';
-			unset($_SESSION['e_ulica']);
-		}
-	?>
-	<br>
-	<div class="form-group">
-		Numer domu: <br/> <input type="text" class="form-control" name="nr" />
-	</div>
-	<?php
-		if (isset($_SESSION['e_nr']))
-		{
-			echo '<div class="error">'.$_SESSION['e_nr'].'</div>';
-			unset($_SESSION['e_email']);
-		}
-	?>
-	<br>
-	<div class="form-group">	
-		Numer mieszkania: <br/> <input type="text" class="form-control" name="nrm" />
-	</div>
-	<?php
-		if (isset($_SESSION['e_nrm']))
-		{
-			echo '<div class="error">'.$_SESSION['e_nrm'].'</div>';
-			unset($_SESSION['e_nrm']);
-		}
-	?>
-	<br>
-	<div class="form-group">	
-		Kod pocztowy: <br/> <input type="text" class="form-control" name="zipcode" />
-	</div>
-	<?php
-		if (isset($_SESSION['e_zipcode']))
-		{
-			echo '<div class="error">'.$_SESSION['e_zipcode'].'</div>';
-			unset($_SESSION['e_zipcode']);
-		}
-	?>
-	<br>
-	
-	<button type="submit" class="btn btn-default login-popup-btn" name="submit" value="1">Zapisz</button>
-	
-	</form>
-	</div>
-	</div>
+		<div id="main">
 			
+			<div class="login-popup-wrap new_login_popup"> 
+				<div id="container_dane">
+					<?php
+						if (isset($_SESSION['udanedanezamieszkania']))
+						{
+							//echo "<meta http-equiv='refresh' content='0'>";
+							echo '<div class="udana">'.$_SESSION['udanedanezamieszkania'].'</div>';
+							unset($_SESSION['udanedanezamieszkania']);
+						}
+
+						$sql = "SELECT * FROM adres WHERE id_klienci='$id_klienci'";
+						if(@$result = $conn->query($sql))
+						{
+
+							$row = $result -> fetch_assoc();
+							$u = $row['ulica'];
+							$k = $row['kod_pocztowy'];
+							$m = $row['miasto'];
+							$d = $row['nr_domu'];
+							$l = $row['nr_lokalu'];
+		
+							
+							if($row['miasto']===NULL)
+							{
+								$u = "";
+								$k = "";
+								$m = "";
+								$d = "";
+								$l = "";
+							}											
+						}
+					?>
+					<form action="#" method="post">
+						<div class="login-popup-heading text-center">
+					    	<h4><i class="fa fa-lock" aria-hidden="true"></i> Dane do wysyłki </h4>                        
+					    </div>
+						<div class="form-group">
+							Ulica: <br/> <input type="text" class="form-control" name="ulica" id="ulica" value="<?php echo $u;?>"/>
+						</div>
+						<?php
+							if (isset($_SESSION['e_ulica']))
+							{
+								echo '<div class="error">'.$_SESSION['e_ulica'].'</div>';
+								unset($_SESSION['e_ulica']);
+							}
+						?>
+						<br>
+						<div class="form-group">
+							Numer domu: <br/> <input type="text" class="form-control" name="nr" id="nr_domu" value="<?php echo $d;?>"/>
+						</div>
+						<?php
+							if (isset($_SESSION['e_nr']))
+							{
+								echo '<div class="error">'.$_SESSION['e_nr'].'</div>';
+								unset($_SESSION['e_nr']);
+							}
+						?>
+						<br>
+						<div class="form-group">
+							Numer mieszkania: <br/> <input type="text" class="form-control" name="nrm" id="nr_lokalu" value="<?php echo $l;?>"/>
+						</div>
+						<?php
+							if (isset($_SESSION['e_nrm']))
+							{
+								echo '<div class="error">'.$_SESSION['e_nrm'].'</div>';
+								unset($_SESSION['e_nrm']);
+							}
+						?>
+						<br>
+						<div class="form-group">	
+							Kod pocztowy: <br/> <input type="text" class="form-control" name="zipcode" id="kod_pocztowy" value="<?php echo $k;?>"/>
+						</div>
+						<?php
+							if (isset($_SESSION['e_zipcode']))
+							{
+								echo '<div class="error">'.$_SESSION['e_zipcode'].'</div>';
+								unset($_SESSION['e_zipcode']);
+							}
+						?>
+						<br>
+						<div class="form-group">        
+								Miasto: <br/> <input type="text" class="form-control" name="miasto" id="miasto" value="<?php echo $m;?>"/>
+							</div>
+							<?php
+								if (isset($_SESSION['e_miasto']))
+								{
+									echo '<div class="error">'.$_SESSION['e_miasto'].'</div>';
+									unset($_SESSION['e_miasto']);
+								}
+							?>
+						<br>
+						<input type="hidden" name="ustawiono" id="ustawiono"/>
+						<button type="submit" class="btn btn-default login-popup-btn " id="ustaw_dane_btn" name="submit">Zapisz</button>
+					</form>
+				</div>
+			</div>		
 		</div>
 	</div>
 
     <div id="centeredmenu">
 	   <ul>
-	      <li><a href="#">FAQ</a></li>
-	      <li><a href="#">Kontakt</a></li>
-	      <li><a href="#">Regulamin</a></li>
+	      <li><a href="FAQ.php">FAQ</a></li>
+	      <li><a href="kontakt.php">Kontakt</a></li>
+	      <li><a href="regulamin.php">Regulamin</a></li>
 	   </ul>
 	</div>
 
 	<div id="footer">
 		Korzystanie z serwisu oznacza akceptację
-		<a href="#">
+		<a href="regulamin.php">
 			regulaminu
 		</a>
 	</div>	

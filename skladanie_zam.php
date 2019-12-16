@@ -4,23 +4,15 @@
 	{
 		$_SESSION['wyloguj'] = "Wyloguj";
 		unset($_SESSION['zaloguj']);
-		if((isset($_SESSION['uprawnienia'])) && ($_SESSION['uprawnienia']==0))
-		{
-			header('Location: index.php');
-			exit();
-		}
-
 	} else {
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
 		header('Location: index.php');
 		exit();
 	}
-?>
-
 
 	
-
+?>
 
 <!DOCTYPE HTML>
 <html lang="pl">
@@ -32,10 +24,9 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
-	<link rel="stylesheet" type="text/css" href="css/add_product.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Dodaj produkt</title>
+	<title>Twój koszyk</title>
 </head>
 
 <body>
@@ -110,43 +101,14 @@
 		
 
 		<!-- MIĘSO ARMATNIE -->
-		<div class="login-popup-wrap new_login_popup">
-			
-			<form action="addingProduct.php" method="post" enctype="multipart/form-data">
-				<div class="login-popup-heading text-center">
-					Nazwa:<input type="text" name="nazwa"><br><br>
-			
-					Opis:<br><textarea name="opis" cols="20" rows="5"></textarea><br><br>
-				
-					Cena:<input type="text" name="cena"><br><br>
-				
-					Dostępna ilość:<input type="text" name="dostepna_ilosc"><br><br>
-			
-					Producent:<input type="text" name="producent"><br><br>
+		<div id="koszyk_container">
+			<h2>Adres do wysyłki: </h2><br>
+			<?php
+				Show_address();
+			?>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-					Rozmiar:<input type="text" name="rozmiar"><br><br>
-
-					Cena dostawy:<input type="text" name="dostawa"><br><br>
-
-					Kategoria:
-					<select name="kategoria">
-						  <option value="1">Koszulki</option>
-						  <option value="2">Spodnie</option>
-						  <option value="3">Kubki</option>
-						  <option value="4">Długopisy</option>
-						  <option value="5">Bluzy</option>
-						  <option value="6">Naklejki</option>
-						  <option value="7">Ramki</option>
-						  <option value="8">RTV</option>
-						  <option value="9">AGD</option>
-						  <option value="10">Alkohol</option>
-						  <option value="11">Zabawki</option>
-					</select><br><br>
-
-			   			Wybierz zdjęcie do dodania: <br><input type="file" name="myfile"><br><br>
-					<input name="submit" class="btn btn-default login-popup-btn" type=submit value="Dodaj">
-				</div>
-			</form>
 		</div>
 	</div>
 
@@ -178,3 +140,51 @@
 </body>
 </html>
 
+
+<?php
+	
+
+	//Function to show products in categories
+	function Show_address()
+	{	
+		$id_klienci = $_SESSION['id_klienci'];
+		$suma = $_SESSION['suma'];
+		$max_dostawa = $_SESSION['max_dostawa'];
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "sklep";
+		// Create connection
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn -> query("SET NAMES 'utf8'");
+		// Check connection
+		if ($conn -> connect_error) {
+			    die("Nie połączono z bazą danych: " . $conn -> connect_error);
+			}
+		$sql = "SELECT * FROM adres WHERE id_klienci= '$id_klienci'";
+		$result = $conn -> query($sql);
+		//Czy jest adres
+		if ($result -> num_rows > 0)
+		{
+			$row = $result -> fetch_assoc();
+			if($row['miasto']===NULL)
+			{
+				echo '<div id="adres">Aktualnie nie masz ustawionego adresu wysyłki.<br>
+				Ustaw swój adres w <a class="ustawienia_link" href="profil.php">Ustawieniach</a>
+				</div>';
+			}
+			else
+			{
+			echo '<div id="adres">Paczka zostanie wysłana na adres: <br><br><b>'.$row['kod_pocztowy'].' '.$row['miasto'].'<br>ul. '.$row['ulica'].' '.$row['nr_domu'].'/'.$row['nr_lokalu'].'</b><br><br>
+			Jeśli chcesz aby paczka została wysłana na inny adres, zmień swój adres w <a class="ustawienia_link" href="profil.php">Ustawieniach</a>
+			<br><br><br><br>
+			<form method="post" action="skladanie_zam_next.php">
+				<input type="hidden" name="next" value="'.$suma.'"/>
+				<input type="hidden" name="next1" value="'.$max_dostawa.'"/>
+				<button type="submit" id="dalej_btn">Dalej</button>
+			</form></div>';
+			}
+			
+		}
+	}
+?>

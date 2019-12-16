@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 02 Gru 2019, 00:40
+-- Czas generowania: 13 Gru 2019, 17:57
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -30,13 +30,31 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `adres` (
   `id_adres` int(11) NOT NULL,
-  `wojewodztwo` varchar(45) NOT NULL,
-  `kod_pocztowy` varchar(6) NOT NULL,
-  `miasto` varchar(45) NOT NULL,
-  `ulica` varchar(45) NOT NULL,
-  `nr_domu` int(11) NOT NULL,
-  `nr_lokalu` int(11) DEFAULT NULL
+  `kod_pocztowy` varchar(6) DEFAULT NULL,
+  `miasto` varchar(45) DEFAULT NULL,
+  `ulica` varchar(45) DEFAULT NULL,
+  `nr_domu` int(11) DEFAULT NULL,
+  `nr_lokalu` int(11) DEFAULT NULL,
+  `id_klienci` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `adres`
+--
+
+INSERT INTO `adres` (`id_adres`, `kod_pocztowy`, `miasto`, `ulica`, `nr_domu`, `nr_lokalu`, `id_klienci`) VALUES
+(1, '58-533', 'Mysłakowice', 'Nowa', 12, 123, 5),
+(2, NULL, NULL, NULL, NULL, NULL, 6),
+(3, '66-666', 'Piekło', 'Piekielna', 666, 65, 7),
+(4, NULL, NULL, NULL, NULL, NULL, 8),
+(5, NULL, NULL, NULL, NULL, NULL, 9),
+(6, NULL, NULL, NULL, NULL, NULL, 10),
+(8, NULL, NULL, NULL, NULL, NULL, 13),
+(9, NULL, NULL, NULL, NULL, NULL, 14),
+(10, NULL, NULL, NULL, NULL, NULL, 15),
+(11, '50-111', 'Warszawa', 'Fajna', 51, 152, 16),
+(12, '58-533', 'Mysłakowic', 'Nowa', 12, 23, 17),
+(13, '02-200', 'Komikowo', 'Komikowa', 151, 1, 18);
 
 -- --------------------------------------------------------
 
@@ -87,12 +105,43 @@ CREATE TABLE `klienci` (
 --
 
 INSERT INTO `klienci` (`id_klienci`, `Imie`, `Nazwisko`, `haslo`, `email`, `id_adres`, `uprawnienia`) VALUES
-(5, 'Benek', 'Benek', '76678ce4ef2dc607104cf9955b502443', 'benek1@o2.pl', NULL, 0),
-(6, 'Test', 'Tescik', 'cc03e747a6afbbcbf8be7668acfebee5', 'test@gmail.com', NULL, 0),
-(7, 'Admin', 'Adminowski', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', NULL, 1),
-(8, 'Baltazar', 'KrÃ³l', 'f17f4b3e8e709cd3c89a6dbd949d7171', 'baltazar@123.pl', NULL, 0),
-(9, 'Robcio', 'Robertos', '6058d199135afa99b8446f246e7b5cec', 'robertos@o2.pl', NULL, 0),
-(10, 'Graf', 'Graf', '2c01010b99ef591baef2d11237937e54', 'Graf@Graf.pl', NULL, 0);
+(5, 'Benek', 'Benek', '76678ce4ef2dc607104cf9955b502443', 'benek1@o2.pl', 1, 0),
+(6, 'Test', 'Tescik', 'cc03e747a6afbbcbf8be7668acfebee5', 'test@gmail.com', 2, 0),
+(7, 'Admin', 'Adminowski', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', 3, 1),
+(8, 'Baltazar', 'KrÃ³l', 'f17f4b3e8e709cd3c89a6dbd949d7171', 'baltazar@123.pl', 4, 0),
+(9, 'Robcio', 'Robertos', '6058d199135afa99b8446f246e7b5cec', 'robertos@o2.pl', 5, 0),
+(10, 'Graf', 'Graf', '2c01010b99ef591baef2d11237937e54', 'Graf@Graf.pl', 6, 0),
+(13, 'Testownik', 'Testownik', 'e77ce99136875685f4ae312c4d45cf3b', 'testownik@gmail.com', 8, 0),
+(14, 'Macio', 'Macio', '4959fafb966d47348c32072ce6538d0b', 'macio@o2.pl', 9, 0),
+(15, 'Typek', 'Typek', 'b0a767234400dd537a97fe6c47b75172', 'typek@o2.pl', 10, 0),
+(16, 'Bartosz', 'Bartosz', 'c9006f26a2b48d3dd09eba5569244f6f', 'bartosz@o2.pl', 11, 0),
+(17, 'Wariat', 'Wariat', '027ca5a0d6c257aa627d3a4a9ea6f2e5', 'wariat@o2.pl', 12, 0),
+(18, 'Komik', 'Komik', '0bcb58d9edd19ebb002e5da7ac82ebd8', 'komik@o2.pl', 13, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `koszyk`
+--
+
+CREATE TABLE `koszyk` (
+  `id_koszyk` int(11) NOT NULL,
+  `ilosc` int(11) NOT NULL,
+  `cena` int(11) NOT NULL,
+  `id_produkty` int(11) NOT NULL,
+  `id_klienci` int(11) NOT NULL,
+  `zlozono` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `koszyk`
+--
+
+INSERT INTO `koszyk` (`id_koszyk`, `ilosc`, `cena`, `id_produkty`, `id_klienci`, `zlozono`) VALUES
+(21, 1, 100, 12, 15, 0),
+(22, 4, 15, 15, 15, 0),
+(25, 1, 30, 14, 7, 0),
+(28, 1, 1350, 54, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -115,7 +164,7 @@ CREATE TABLE `oferta_dnia` (
 
 CREATE TABLE `opinie` (
   `id_opinie` int(11) NOT NULL,
-  `id_produkty` int(11) NOT NULL,
+  `id_produkty` int(11) NOT NULL DEFAULT '0' COMMENT '0 - ocena sklepu',
   `id_klienci` int(11) NOT NULL,
   `gwiazdka` int(11) DEFAULT NULL,
   `opinia` text
@@ -128,7 +177,9 @@ CREATE TABLE `opinie` (
 INSERT INTO `opinie` (`id_opinie`, `id_produkty`, `id_klienci`, `gwiazdka`, `opinia`) VALUES
 (2, 8, 5, 5, 'Ta koszulka jest super, chodzę w niej codziennie! Jakość wykonania przerosła moje najśmielsze oczekiwania! Jak najbardziej polecam :)'),
 (4, 14, 7, 5, 'Kupiłem Kubek dla synka i był bardzo zadowolony! Bardzo szybka dostawa, polecam sklep alledrogo :D'),
-(5, 16, 6, 5, 'Nigdzie nie mogłem znaleźć bluzy z ziemniakiem, aż nagle natknąłem się na aukcje w sklepie alledrogo! Bluza doszła i jest świetna!');
+(5, 16, 6, 5, 'Nigdzie nie mogłem znaleźć bluzy z ziemniakiem, aż nagle natknąłem się na aukcje w sklepie alledrogo! Bluza doszła i jest świetna!'),
+(6, 0, 7, 1, 'Testowy komentarz o sklepie, jestem Adminem, to nie będę oceniał :)'),
+(7, 0, 5, 10, 'Najlepszy sklep jaki widziałem! Super ceny i szybka dostawa! Serdecznie polecam! :D ');
 
 -- --------------------------------------------------------
 
@@ -148,23 +199,26 @@ CREATE TABLE `produkty` (
   `rozmiar` varchar(100) DEFAULT NULL,
   `zdjecie` varchar(50) NOT NULL DEFAULT 'default_product.png',
   `id_kategorie` int(11) NOT NULL,
-  `id_klienci` int(11) DEFAULT NULL
+  `dostawa` int(11) NOT NULL DEFAULT '12'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `produkty`
 --
 
-INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena`, `dostepna_ilosc`, `producent`, `oceny`, `rozmiar`, `zdjecie`, `id_kategorie`, `id_klienci`) VALUES
-(8, 'Koszulka Mike Tyson', 'Koszulka zrobiona z pomysłem', '4', '50.00', 5, 'BenoCORP', NULL, 'XL', 'koszulka_mike.png', 1, NULL),
-(12, 'Spodnie Jeans Master', 'Wykonane z najlepszej jakości materiału Jeans, idealnie dopasowują się do ciała', '5', '100.00', 5, 'Jeans&Jeans', NULL, 'M', 'jeans_m.png', 2, NULL),
-(14, 'Kubek Studenta', 'Kubek wykonany z porcelany z nadrukowanym napisem, który odźwierciedla brutalną rzeczywistość studentów', '5', '30.00', 10, 'KubekKuba', NULL, NULL, 'kubek_student1.png', 3, NULL),
-(15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 150, 'DługiPisak sp. Z o.o', NULL, NULL, 'dlugopis_1.png', 4, NULL),
-(16, 'Bluza z ziemniakiem', 'Bluza wykonana z tworzywa sztucznego, idealna aby wyróżnić się z tłumu', '3', '70.00', 10, 'Bluzex sp. Z o.o', NULL, 'L', 'bluza_1.png', 5, NULL),
-(17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 10, 'Naklejkownia sp. Z o.o', NULL, '100cm x 150cm', 'naklejka_1.png', 6, NULL),
-(18, 'Koszulka biała KONSTYTUCJA', 'Biała koszulka doskonałej jakości z nadrukowanym napisem KONSTYTUCJA. Ulubiona koszulka Lecha Wałęsy', '5', '75.00', 100, 'LechWałęsaCompany', NULL, 'M', 'koszulka_otua.png', 1, NULL),
-(51, 'Ramka na zdjęcie', 'Zawieszki i fleksy sprowadzamy od włoskiego producenta. Metale te, są najwyższej jakości – nie wyginają się i nie wyłamują. Będą Ci służyć przez lata bez potrzeby wymiany!', NULL, '19.50', 50, 'RamkiToHajs', NULL, '10x15', 'ramka_15_10.png', 7, NULL),
-(52, 'Koszulka DESTYLACJA', 'Oryginalna koszulka męska DESTYLACJA z krótkim rękawem firmy S&S. Wykonana z najwyższej jakości bawełny, zapewniającej komfort i wygodę użytkowania.', NULL, '77.50', 50, 'S&S', NULL, 'M', 'koszulka_destylacja.png', 1, NULL);
+INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena`, `dostepna_ilosc`, `producent`, `oceny`, `rozmiar`, `zdjecie`, `id_kategorie`, `dostawa`) VALUES
+(8, 'Koszulka Mike Tyson', 'Koszulka zrobiona z pomysłem', '4', '50.00', 89, 'BenoCORP', NULL, 'XL', 'koszulka_mike.png', 1, 12),
+(12, 'Spodnie Jeans Master', 'Wykonane z najlepszej jakości materiału Jeans, idealnie dopasowują się do ciała', '5', '100.00', 79, 'Jeans&Jeans', NULL, 'M', 'jeans_m.png', 2, 12),
+(14, 'Kubek Studenta', 'Kubek wykonany z porcelany z nadrukowanym napisem, który odźwierciedla brutalną rzeczywistość studentów', '5', '30.00', 88, 'KubekKuba', NULL, NULL, 'kubek_student1.png', 3, 10),
+(15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 85, 'DługiPisak sp. Z o.o', NULL, NULL, 'dlugopis_1.png', 4, 6),
+(16, 'Bluza z ziemniakiem', 'Bluza wykonana z tworzywa sztucznego, idealna aby wyróżnić się z tłumu', '3', '70.00', 92, 'Bluzex sp. Z o.o', NULL, 'L', 'bluza_1.png', 5, 12),
+(17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 91, 'Naklejkownia sp. Z o.o', NULL, '100cm x 150cm', 'naklejka_1.png', 6, 15),
+(18, 'Koszulka biała KONSTYTUCJA', 'Biała koszulka doskonałej jakości z nadrukowanym napisem KONSTYTUCJA. Ulubiona koszulka Lecha Wałęsy', '5', '75.00', 92, 'LechWałęsaCompany', NULL, 'M', 'koszulka_otua.png', 1, 12),
+(51, 'Ramka na zdjęcie', 'Zawieszki i fleksy sprowadzamy od włoskiego producenta. Metale te, są najwyższej jakości – nie wyginają się i nie wyłamują. Będą Ci służyć przez lata bez potrzeby wymiany!', NULL, '19.50', 92, 'RamkiToHajs', NULL, '10x15', 'ramka_15_10.png', 7, 12),
+(52, 'Koszulka DESTYLACJA', 'Oryginalna koszulka męska DESTYLACJA z krótkim rękawem firmy S&S. Wykonana z najwyższej jakości bawełny, zapewniającej komfort i wygodę użytkowania.', NULL, '77.50', 92, 'S&S', NULL, 'M', 'koszulka_destylacja.png', 1, 12),
+(53, 'Whisky Jack Daniel\'s', 'Whisky Jack Daniel\'s to najpopularniejsza amerykańska whiskey produkowana od 1866 roku, kiedy to Jasper „Jack” Daniel zaufał swojej intuicji i postawił na stworzenie wysokiej jakości trunku. Jej unikalny smak zawdzięczany jest prawie dziesięcio- dniowej filtracji destylatu przez 3- metrową warstwę klonowego węgla drzewnego.', NULL, '100.00', 95, 'Jack Daniel\'s', NULL, '0,7L', 'whisky_jack.png', 10, 15),
+(54, 'Smart TV Samsung 55 cali', 'Jakość obrazu, która Cię poruszy, zapewniona przez pojedynczy chip, który zarządza kolorami, optymalizuje współczynnik kontrastu i nadzoruje HDR.', NULL, '1350.00', 4, 'Samsung', NULL, '55 cali', 'tv_samsung_55.png', 8, 30),
+(55, 'Smartfon Huawei Y5', 'Wyświetlacz: 5,45 cali\r\nAparat: 8 Mpix\r\nPamięć wewnętrzna [GB]: 16 GB\r\nBateria [mAh]: 3000', NULL, '299.00', 20, 'Huawei', NULL, '5,45 cali', 'huawei_1.png', 8, 15);
 
 -- --------------------------------------------------------
 
@@ -190,17 +244,23 @@ CREATE TABLE `zamowienia` (
   `data_wyslania` date NOT NULL,
   `zaplacono` tinyint(4) NOT NULL,
   `id_klienci` int(11) NOT NULL,
-  `id_zamowienie_produkty` int(11) NOT NULL
+  `suma` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `zamowienia`
 --
 
-INSERT INTO `zamowienia` (`id_zamowienia`, `data_zlozenia`, `data_wyslania`, `zaplacono`, `id_klienci`, `id_zamowienie_produkty`) VALUES
-(2, '2019-11-22 19:40:50', '3123-12-12', 1, 5, 1),
-(3, '2019-11-22 19:44:50', '2019-11-23', 1, 5, 2),
-(4, '2019-11-23 13:30:35', '2019-11-11', 1, 9, 3);
+INSERT INTO `zamowienia` (`id_zamowienia`, `data_zlozenia`, `data_wyslania`, `zaplacono`, `id_klienci`, `suma`) VALUES
+(5, '2019-12-05 18:45:49', '0000-00-00', 0, 7, 265),
+(6, '2019-12-05 18:50:26', '0000-00-00', 0, 5, 375),
+(7, '2019-12-05 20:06:51', '0000-00-00', 0, 5, 75),
+(8, '2019-12-05 22:18:42', '0000-00-00', 0, 7, 1550),
+(9, '2019-12-05 22:20:44', '2019-12-05', 1, 7, 588),
+(10, '2019-12-05 22:24:10', '0000-00-00', 0, 7, 1250),
+(11, '2019-12-06 20:59:09', '0000-00-00', 0, 5, 928),
+(12, '2019-12-13 15:26:07', '0000-00-00', 0, 5, 77),
+(13, '2019-12-13 16:10:28', '0000-00-00', 0, 5, 1480);
 
 -- --------------------------------------------------------
 
@@ -210,17 +270,42 @@ INSERT INTO `zamowienia` (`id_zamowienia`, `data_zlozenia`, `data_wyslania`, `za
 
 CREATE TABLE `zamowienie_produkty` (
   `id_zamowienie_produkty` int(11) NOT NULL,
-  `ile_sztuk` int(11) NOT NULL,
-  `id_produkty` int(11) NOT NULL
+  `ilosc` int(11) NOT NULL,
+  `cena` int(11) NOT NULL,
+  `id_produkty` int(11) NOT NULL,
+  `id_klienci` int(11) NOT NULL,
+  `id_zamowienia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `zamowienie_produkty`
 --
 
-INSERT INTO `zamowienie_produkty` (`id_zamowienie_produkty`, `ile_sztuk`, `id_produkty`) VALUES
-(1, 2, 14),
-(2, 1, 8);
+INSERT INTO `zamowienie_produkty` (`id_zamowienie_produkty`, `ilosc`, `cena`, `id_produkty`, `id_klienci`, `id_zamowienia`) VALUES
+(3, 5, 50, 8, 7, 5),
+(4, 1, 15, 15, 7, 5),
+(5, 2, 50, 8, 5, 6),
+(6, 5, 25, 14, 5, 6),
+(7, 2, 75, 18, 5, 6),
+(8, 5, 15, 15, 5, 7),
+(9, 6, 100, 12, 7, 8),
+(10, 4, 30, 14, 7, 8),
+(11, 2, 70, 16, 7, 8),
+(12, 14, 15, 15, 7, 8),
+(13, 16, 30, 14, 7, 8),
+(14, 6, 50, 8, 7, 9),
+(15, 3, 70, 16, 7, 9),
+(16, 2, 15, 15, 7, 9),
+(17, 6, 15, 15, 7, 10),
+(18, 11, 100, 12, 7, 10),
+(19, 5, 100, 53, 5, 11),
+(20, 4, 30, 14, 5, 11),
+(21, 2, 100, 12, 5, 11),
+(22, 1, 60, 17, 5, 11),
+(23, 1, 50, 8, 5, 12),
+(24, 1, 15, 15, 5, 12),
+(25, 2, 50, 8, 5, 13),
+(26, 1, 1350, 54, 5, 13);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -230,7 +315,8 @@ INSERT INTO `zamowienie_produkty` (`id_zamowienie_produkty`, `ile_sztuk`, `id_pr
 -- Indeksy dla tabeli `adres`
 --
 ALTER TABLE `adres`
-  ADD PRIMARY KEY (`id_adres`);
+  ADD PRIMARY KEY (`id_adres`),
+  ADD KEY `id_klienci` (`id_klienci`);
 
 --
 -- Indeksy dla tabeli `kategorie`
@@ -244,6 +330,14 @@ ALTER TABLE `kategorie`
 ALTER TABLE `klienci`
   ADD PRIMARY KEY (`id_klienci`),
   ADD KEY `fk_klienci_adres_idx` (`id_adres`);
+
+--
+-- Indeksy dla tabeli `koszyk`
+--
+ALTER TABLE `koszyk`
+  ADD PRIMARY KEY (`id_koszyk`),
+  ADD KEY `FK_Klient` (`id_klienci`),
+  ADD KEY `FK_Produkt` (`id_produkty`);
 
 --
 -- Indeksy dla tabeli `oferta_dnia`
@@ -265,8 +359,7 @@ ALTER TABLE `opinie`
 --
 ALTER TABLE `produkty`
   ADD PRIMARY KEY (`id_produkty`),
-  ADD KEY `fk_produkty_kategorie1_idx` (`id_kategorie`),
-  ADD KEY `fk_produkty_klienci1_idx` (`id_klienci`);
+  ADD KEY `fk_produkty_kategorie1_idx` (`id_kategorie`);
 
 --
 -- Indeksy dla tabeli `promocje`
@@ -280,15 +373,16 @@ ALTER TABLE `promocje`
 --
 ALTER TABLE `zamowienia`
   ADD PRIMARY KEY (`id_zamowienia`),
-  ADD KEY `fk_zamowienia_klienci1_idx` (`id_klienci`),
-  ADD KEY `fk_zamowienia_zamowienie_produkty1_idx` (`id_zamowienie_produkty`);
+  ADD KEY `fk_zamowienia_klienci1_idx` (`id_klienci`);
 
 --
 -- Indeksy dla tabeli `zamowienie_produkty`
 --
 ALTER TABLE `zamowienie_produkty`
   ADD PRIMARY KEY (`id_zamowienie_produkty`),
-  ADD KEY `fk_zamowienie_produkty_produkty1_idx` (`id_produkty`);
+  ADD KEY `id_klienci` (`id_klienci`),
+  ADD KEY `id_produkty` (`id_produkty`) USING BTREE,
+  ADD KEY `id_zamowienia` (`id_zamowienia`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -298,7 +392,7 @@ ALTER TABLE `zamowienie_produkty`
 -- AUTO_INCREMENT dla tabeli `adres`
 --
 ALTER TABLE `adres`
-  MODIFY `id_adres` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_adres` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT dla tabeli `kategorie`
@@ -310,7 +404,13 @@ ALTER TABLE `kategorie`
 -- AUTO_INCREMENT dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
-  MODIFY `id_klienci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_klienci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT dla tabeli `koszyk`
+--
+ALTER TABLE `koszyk`
+  MODIFY `id_koszyk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT dla tabeli `oferta_dnia`
@@ -322,13 +422,13 @@ ALTER TABLE `oferta_dnia`
 -- AUTO_INCREMENT dla tabeli `opinie`
 --
 ALTER TABLE `opinie`
-  MODIFY `id_opinie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_opinie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT dla tabeli `promocje`
@@ -340,13 +440,13 @@ ALTER TABLE `promocje`
 -- AUTO_INCREMENT dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienie_produkty`
 --
 ALTER TABLE `zamowienie_produkty`
-  MODIFY `id_zamowienie_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_zamowienie_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Ograniczenia dla zrzutów tabel
@@ -357,6 +457,13 @@ ALTER TABLE `zamowienie_produkty`
 --
 ALTER TABLE `klienci`
   ADD CONSTRAINT `fk_klienci_adres` FOREIGN KEY (`id_adres`) REFERENCES `mydb`.`adres` (`id_adres`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ograniczenia dla tabeli `koszyk`
+--
+ALTER TABLE `koszyk`
+  ADD CONSTRAINT `FK_Klient` FOREIGN KEY (`id_klienci`) REFERENCES `klienci` (`id_klienci`),
+  ADD CONSTRAINT `FK_Produkt` FOREIGN KEY (`id_produkty`) REFERENCES `produkty` (`id_produkty`);
 
 --
 -- Ograniczenia dla tabeli `oferta_dnia`
@@ -375,8 +482,7 @@ ALTER TABLE `opinie`
 -- Ograniczenia dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
-  ADD CONSTRAINT `fk_produkty_kategorie1` FOREIGN KEY (`id_kategorie`) REFERENCES `mydb`.`kategorie` (`id_kategorie`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_produkty_klienci1` FOREIGN KEY (`id_klienci`) REFERENCES `mydb`.`klienci` (`id_klienci`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_produkty_kategorie1` FOREIGN KEY (`id_kategorie`) REFERENCES `mydb`.`kategorie` (`id_kategorie`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `promocje`
@@ -388,8 +494,7 @@ ALTER TABLE `promocje`
 -- Ograniczenia dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  ADD CONSTRAINT `fk_zamowienia_klienci1` FOREIGN KEY (`id_klienci`) REFERENCES `mydb`.`klienci` (`id_klienci`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_zamowienia_zamowienie_produkty1` FOREIGN KEY (`id_zamowienie_produkty`) REFERENCES `mydb`.`zamowienie_produkty` (`id_zamowienie_produkty`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_zamowienia_klienci1` FOREIGN KEY (`id_klienci`) REFERENCES `mydb`.`klienci` (`id_klienci`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `zamowienie_produkty`

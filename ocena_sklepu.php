@@ -4,12 +4,6 @@
 	{
 		$_SESSION['wyloguj'] = "Wyloguj";
 		unset($_SESSION['zaloguj']);
-		if((isset($_SESSION['uprawnienia'])) && ($_SESSION['uprawnienia']==0))
-		{
-			header('Location: index.php');
-			exit();
-		}
-
 	} else {
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
@@ -18,10 +12,6 @@
 	}
 ?>
 
-
-	
-
-
 <!DOCTYPE HTML>
 <html lang="pl">
 
@@ -29,14 +19,21 @@
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
-	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
-	<link rel="stylesheet" type="text/css" href="css/add_product.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Dodaj produkt</title>
+	<title>Ocena sklepu</title>
 </head>
+<style>
+	.error
+		{
+			color:red;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+</style>
 
 <body>
 	<!-- STICKY MENU -->
@@ -108,45 +105,86 @@
 	<!-- GŁÓWNY CONTAINER -->
 	<div id="container_koszyk">
 		
+		<h1>Oceń nas</h1>
+
 
 		<!-- MIĘSO ARMATNIE -->
-		<div class="login-popup-wrap new_login_popup">
-			
-			<form action="addingProduct.php" method="post" enctype="multipart/form-data">
-				<div class="login-popup-heading text-center">
-					Nazwa:<input type="text" name="nazwa"><br><br>
-			
-					Opis:<br><textarea name="opis" cols="20" rows="5"></textarea><br><br>
-				
-					Cena:<input type="text" name="cena"><br><br>
-				
-					Dostępna ilość:<input type="text" name="dostepna_ilosc"><br><br>
-			
-					Producent:<input type="text" name="producent"><br><br>
-
-					Rozmiar:<input type="text" name="rozmiar"><br><br>
-
-					Cena dostawy:<input type="text" name="dostawa"><br><br>
-
-					Kategoria:
-					<select name="kategoria">
-						  <option value="1">Koszulki</option>
-						  <option value="2">Spodnie</option>
-						  <option value="3">Kubki</option>
-						  <option value="4">Długopisy</option>
-						  <option value="5">Bluzy</option>
-						  <option value="6">Naklejki</option>
-						  <option value="7">Ramki</option>
-						  <option value="8">RTV</option>
-						  <option value="9">AGD</option>
-						  <option value="10">Alkohol</option>
-						  <option value="11">Zabawki</option>
-					</select><br><br>
-
-			   			Wybierz zdjęcie do dodania: <br><input type="file" name="myfile"><br><br>
-					<input name="submit" class="btn btn-default login-popup-btn" type=submit value="Dodaj">
+		<div id="koszyk_container">
+				<div id="informacja1">
+					Każda pozostawiona opinia klienta jest dla nas bardzo cenna. <br>
+					Dzięki Waszym opiniom stale możemy ulepszać jakość naszych usług.
 				</div>
-			</form>
+			<br><br>
+
+			<?php
+				$servername = "localhost";
+				$username = "root";
+				$password = "";
+				$dbname = "sklep";
+				$conn = new mysqli($servername, $username, $password, $dbname);
+				$conn -> query("SET NAMES 'utf8'");
+				if ($conn -> connect_error) {die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+				$id_klienci = $_SESSION['id_klienci'];
+				$_SESSION['juz_oceniono'] = FALSE;
+				$sql = "SELECT * FROM opinie WHERE id_klienci=$id_klienci";
+				$result = $conn -> query($sql);
+				while($row = $result -> fetch_assoc())
+				{
+					if($row['id_produkty']==0)
+					{
+						$_SESSION['juz_oceniono'] = TRUE;
+					}
+				}
+
+				if((isset($_SESSION['juz_oceniono'])) && ($_SESSION['juz_oceniono']==TRUE))
+				{
+					$sql1 = "SELECT * FROM opinie WHERE id_klienci=$id_klienci and id_produkty=0";
+					$result1 = @$conn -> query($sql1);
+					if ($result -> num_rows > 0)
+					{
+						if($row1 = $result1 -> fetch_assoc())
+						{
+							echo '<h2>Już oceniłeś nasz sklep, dziękujemy!</h2><br>';
+							echo '<div id="dziekujemy">Twoja ocena: <b>'.$row1['gwiazdka'].'/10</b><br>';
+							echo 'Twoj komentarz: <b>'.$row1['opinia'].'</b></div>';
+						}
+					}
+				}
+				else
+				{
+					echo '<div id="formularz">
+							<form action="addingOcena.php" method="post">
+								Ocena: 
+								<select name="ocena">
+								  <option value="1">1</option>
+								  <option value="2">2</option>
+								  <option value="3">3</option>
+								  <option value="4">4</option>
+								  <option value="5">5</option>
+								  <option value="6">6</option>
+								  <option value="7">7</option>
+								  <option value="8">8</option>
+								  <option value="9">9</option>
+								  <option value="10">10</option>
+								</select>
+
+								<br><span id="koment">Komentarz:</span><br>
+								<textarea name="opis" cols="50" rows="3"></textarea><br><br>
+								<input name="submit" id="dalej_btn" type=submit value="Dodaj">
+							</form>
+						</div>';
+				}
+
+			?>
+
+			
+			
+
+
+
+			<br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 		</div>
 	</div>
 
@@ -163,7 +201,7 @@
 		<a href="regulamin.php">
 			regulaminu
 		</a>
-	</div>	
+	</div>
 
 	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -177,4 +215,3 @@
 	
 </body>
 </html>
-
