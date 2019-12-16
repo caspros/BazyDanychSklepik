@@ -1,3 +1,15 @@
+<?php
+	session_start();
+	if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
+	{
+		$_SESSION['wyloguj'] = "Wyloguj";
+		unset($_SESSION['zaloguj']);
+	} else {
+		$_SESSION['zaloguj'] = "Zaloguj";
+		unset($_SESSION['wyloguj']);
+	}
+?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 
@@ -93,8 +105,8 @@
 		
 		<h1>Alledrogo User Agreement:</h1>
 		
-		<div id="koszyk_container">
-				<div id="informacja1">
+		<div id="regulamin_container">
+				<div id="regulamin">
 				<br><br>
 					<h3>PRIVACY AND CONFIDENTIALITY</h3><br>
 
