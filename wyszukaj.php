@@ -170,47 +170,64 @@
 	//Function to show products in categories
 	function Searching()
 	{	
-		$szukane = $_GET['search_input'];
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "sklep";
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		$conn -> query("SET NAMES 'utf8'");
-		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-
-		echo '<h1>Znalezione produkty</h1>';
-		$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE nazwa LIKE '%$szukane%'";
-		$result = $conn -> query($sql);
-		if ($result -> num_rows > 0)
+		if(!$_GET['search_input'])
 		{
-	 		while($row = $result -> fetch_assoc())
-	 		{
-	       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
-			       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
-			       		<div class="zawartosc">
-			       			<table id="tabela">
-					       		<tr>
-					       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
-					       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
-					       		</tr>
-					       		<tr>
-						       		<td><div class="rozmiar">Rozmiar: ';
-						       		if(is_null($row["rozmiar"]))
-						       		{
-						       			echo 'Nie dotyczy';
-						       		}else echo $row["rozmiar"];
-						       		echo '</div></td>
-						       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
-						       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
-					       		</tr>
-				       		</table>
-			       		</div>
-	       			</div><a>';
-			}
-		echo "<br><br><br><br>";
+			echo "Brak znalezionych produktów";
+		}
+		else
+		{
+			$szukane = $_GET['search_input'];
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			$dbname = "sklep";
+			$conn = new mysqli($servername, $username, $password, $dbname);
+			$conn -> query("SET NAMES 'utf8'");
+			if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
 
-		} else { echo "Brak znalezionych produktów"; }
-	
+			$amout = 5;
+			if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+			$start_from = ($page-1) * $amout;
+			echo '<h1>Znalezione produkty</h1>';
+			$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE nazwa LIKE '%$szukane%' ORDER BY id_produkty ASC LIMIT $start_from, ".$amout;
+			$result = $conn -> query($sql);
+			if ($result -> num_rows > 0)
+			{
+		 		while($row = $result -> fetch_assoc())
+		 		{
+		       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
+				       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
+				       		<div class="zawartosc">
+				       			<table id="tabela">
+						       		<tr>
+						       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
+						       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
+						       		</tr>
+						       		<tr>
+							       		<td><div class="rozmiar">Rozmiar: ';
+							       		if(is_null($row["rozmiar"]))
+							       		{
+							       			echo 'Nie dotyczy';
+							       		}else echo $row["rozmiar"];
+							       		echo '</div></td>
+							       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+							       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
+						       		</tr>
+					       		</table>
+				       		</div>
+		       			</div><a>';
+				}
+			echo "<br><br><br><br>";
+			$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty";
+			$result5 = $conn->query($sql5);
+			$row5 = $result5 -> fetch_assoc();
+			$total_pages = ceil($row5["total"] / $amout);
+			for ($i=1; $i<=$total_pages; $i++)
+			{ 
+				echo "<div class='strona'><a href='wyszukaj.php?search_input=".$szukane."&search_button=SZUKAJ&page=".$i."'>".$i."</a></div>";
+			}
+
+			} else { echo "Brak znalezionych produktów"; }
+		}
 	}
 ?>
