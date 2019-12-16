@@ -32,7 +32,7 @@ text-align: center;
 }
 
 #main {
-	padding-top: 10px;
+
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
@@ -220,17 +220,6 @@ ol > li{
 	clear: both;
 }
 
-/* Logowanie.php -----------------*/
-.main{
-	text-align: center;
-}
-
-/* Rejestracja.php -----------------*/
-
-.g-recaptcha{
-	position: relative;
-	left: 42%;
-}
 
 /*why_us --------------------- */
 
@@ -259,174 +248,27 @@ ol > li{
 	transform: scale(1.05,1.05);
 }
 
-/* Zamowienia.php - WYŚWIETLANA TABELA ZAMÓWIEŃ */
+/* Skladanie_zam.php */
 
-table, th, td{
-	border: 1px solid black;
-	padding: 10px;
-}
-
-th{
-	background-color: #FF5A00;
-}
-
-table {
-	
-	width: 100%;
-	border-collapse: collapse;
-}
-
-#title3{
-	font-style: normal;
-	text-align: center;
-}
-
-#orders{
-	float: left;
-	width: 70%;
-	margin: 20px;
-	margin-left: 80px;
-	padding: 20px;
-}
-
-.order_table{
-	text-align: center;
-	font-style: normal;
-	border: 1px solid black;
-}
-
-.no_orders{
-	position: relative;
-	left: 43%;
-	text-align: center;
-}
-
-/* Zamowienia.php - WYŚWIETLANY PANEL ADMINA */
-
-#adm_panel{
-	background-color: #b0adac;
-	position: relative;
-	left: 20%;
-	width: 60%;
-	padding: 10px;
-	font-style: normal;
-	text-align: center;
-	border: 1px solid black;
-}
-
-/* Produkt.php */
-
-#container_produkt {
-	height: 2000px;
-	background: #FFFFFF;
-	margin: 2.5% auto;
-	width: 95%;
-	padding: 1rem;
-}
-
-#produkt_big{
-	font-style: normal;
-	border: 1px solid black;
-	text-align: center;
+#adres{
 	font-size: 25px;
-	position: relative;
-	left: 20%;
-	width: 60%;
-	height: 1000px;
-}
-
-#kup_teraz{
-	margin-left: 10px;
-	font-size: 29px;
-	background-color: #FF5A00;
-	color: white;
-	border: none;
-	padding: 10px;
-	text-align: center;
-  	text-decoration: none;
-}
-
-#kup_teraz:hover{
-	background-color: #ff8800;
-}
-
-#ile_sztuk{
-	text-align: center;
-	width: 10%;
-}
-
-#dane{
-	
-}
-
-/* Kategoria.php */
-
-.product_kat{
-	width: 82%;
-	background-color: #ECEFF1;
-	float: left;
-	margin: 20px;
-}
-
-#zdjecie{
-	float: left;
-	padding: 0px;
-	margin: 0px;
-}
-
-.zawartosc{
-	padding: 0px;
-	width: 82%;
-	height: 200px;
-	display: flex;
-  	flex-direction: column;
-	float: left;
 	text-align: center;
 }
 
-.nazwa{
-	font-style: normal;
-	font-size: 30px;
+.ustawienia_link{
+	color: #FF5A00;
+
 }
 
-.rozmiar{
-	float: left;
-	font-style: normal;
-	font-size: 25px;
-}
-
-#cena{
-	font-style: normal;
-	font-size: 30px;
+.ustawienia_link:hover{
 	color: red;
-}
-
-#tabela{
-	border: none;
-	flex-grow: 1;
-	padding: 5px;
-	height: 100%;
-	float: left;
-}
-
-#tabela table, tr, td, th{
-	border: none;
 	background-color: #ECEFF1;
 }
 
-#product_link{
-	color: black;
-}
-
-
-/* Profil.php */
-
-#container_dane{
-	text-align: center;
-}
-
-#ustaw_dane_btn{
-    margin-left: 10px;
+#dalej_btn{
+	width: 150px;
+	min-height: 40px;
+	margin-left: 10px;
     font-size: 25px;
     background-color: #FF5A00;
     color: white;
@@ -434,8 +276,50 @@ table {
     padding: 5px;
     text-align: center;
     text-decoration: none;
+    padding-bottom: 5px;
 }
 
-#ustaw_dane_btn:hover{
+#dalej_btn:hover{
     background-color: #ff8800;
+}
+
+/* Skladanie_zam_next.php */
+
+#podsumowanie_prod{
+	text-align: center;
+}
+
+#podsumowanie1{
+	text-align: center;
+}
+
+#uwaga{
+	font-style: italic;
+}
+
+#dostaw{
+	text-align: center;
+	color: green;
+}
+
+/* ocena_sklepu.php */
+
+#informacja1{
+	text-align: center;
+}
+
+#formularz{
+	position: relative;
+	left: 25%;
+	width: 50%;
+	text-align: center;
+}
+
+#koment{
+	position: relative;
+	right: 27%;
+}
+
+#dziekujemy{
+	text-align: center;
 }

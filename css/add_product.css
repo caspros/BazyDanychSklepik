@@ -9,7 +9,6 @@
     width: 300px;
     margin: 0px auto;
 }
-
 .login-popup-btn {
     background: #FF5A00;
     border: none;
@@ -27,37 +26,17 @@
     -o-transition: all 700ms ease;
 }
 
-/*a{
+a{
     text-decoration: none;
     color: #ff0000;
     font-size: 18px;
-}*/
+}
 
 #captcha{
     position: relative;
     left: 10%;
 }
 
-#container_dane{
-    font-size: 18px;
-    line-height: 30px;
-    height: 1000px;
+#add_product_container{
     text-align: center;
-}
-
-#ustaw_dane_btn{
-    position: relative;
-    left: 15%;
-    margin-left: 10px;
-    font-size: 25px;
-    background-color: #FF5A00;
-    color: white;
-    border: none;
-    padding: 5px;
-    text-align: center;
-    text-decoration: none;
-}
-
-#ustaw_dane_btn:hover{
-    background-color: #ff8800;
 }

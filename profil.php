@@ -7,16 +7,15 @@
 	} else {
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
+		header('Location: index.php');
+		exit();
 	}
 	$id_klienci = $_SESSION['id_klienci'];
 
 	
 
 	//Testowe do wyswietlania z bazy danych w polach
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "sklep";
+	require_once "connect.php";
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	$conn -> query("SET NAMES 'utf8'");
 	if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
@@ -32,15 +31,14 @@
 
 		if($row['miasto']===NULL)
 		{
-			$u = " ";
-			$k = " ";
-			$m = " ";
-			$d = " ";
-			$l = " ";
+			$u = "";
+			$k = "";
+			$m = "";
+			$d = "";
+			$l = "";
 		}
 	}
 
-	//na razie poprawnosc zakomentowana, trzeba poprawić, bo nie działa
 	if(isset($_POST['ustawiono']))
 	{	
 		$wszystko_OK=true;
@@ -153,11 +151,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/profil.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
-	<link rel="stylesheet" href="css/profil.css">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
@@ -191,17 +189,13 @@
 			</li>
 
 			<!-- wyszukiwanie -->
-			<form form action="#" method="get" class="form_inline">
+			<form action="wyszukaj.php" method="get" class="form_inline">
 				<li>
-					<a href="#">
-						<input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt...">
-					</a>
+					<input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt...">
 				</li>
 
 				<li>
-					<a href="#">
-						<input style="display: inline;" type="submit" name="search_button" class="search_button" value="SZUKAJ">
-					</a>
+					<input style="display: inline;" type="submit" name="search_button" class="search_button" value="SZUKAJ">
 				</li>
 			</form>
 
@@ -233,8 +227,9 @@
 
 				<!-- DROPDOWN CONTENT -->
 	  			<div id="myDropdown" class="dropdown-content">
-		    		<a href="zamowienia.php">Moje zamówienia</a>
-					<a href="#">Oceń produkt</a>
+		    		<a href="zamowienia.php">Zamówienia</a>
+					<a href="ocena_produktu.php">Oceń produkt</a>
+					<a href="ocena_sklepu.php">Oceń sklep</a>
 					<a href="profil.php">Ustawienia</a>
 					<?php
 						if (isset($_SESSION['zaloguj']))
@@ -278,11 +273,11 @@
 							
 							if($row['miasto']===NULL)
 							{
-								$u = " ";
-								$k = " ";
-								$m = " ";
-								$d = " ";
-								$l = " ";
+								$u = "";
+								$k = "";
+								$m = "";
+								$d = "";
+								$l = "";
 							}											
 						}
 					?>
@@ -345,7 +340,7 @@
 								}
 							?>
 						<br>
-						<input type="hidden" name="ustawiono"/>
+						<input type="hidden" name="ustawiono" id="ustawiono"/>
 						<button type="submit" class="btn btn-default login-popup-btn " id="ustaw_dane_btn" name="submit">Zapisz</button>
 					</form>
 				</div>

@@ -7,6 +7,8 @@
 	} else {
 		$_SESSION['zaloguj'] = "Zaloguj";
 		unset($_SESSION['wyloguj']);
+		header('Location: index.php');
+		exit();
 	}
 ?>
 
@@ -19,10 +21,10 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
-	<link rel="stylesheet" type="text/css" href="css/produkt.css">
+	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Produkt</title>
+	<title>Suma zamówienia</title>
 </head>
 
 <body>
@@ -93,31 +95,18 @@
 	</div>
 	
 	<!-- GŁÓWNY CONTAINER -->
-	<div id="container_produkt">
+	<div id="container_koszyk">
+		
 
 		<!-- MIĘSO ARMATNIE -->
-		<div id="main">
-			<?php 
-				$id_produktu = $_GET['id_produkty'];
-				$servername = "localhost";
-				$username = "root";
-				$password = "";
-				$dbname = "sklep";
-				// Create connection
-				$conn = new mysqli($servername, $username, $password, $dbname);
-				$conn -> query("SET NAMES 'utf8'");
-				// Check connection
-				if ($conn -> connect_error) {
-					    die("Nie połączono z bazą danych: " . $conn -> connect_error);
-					}
-
-				$sql = "SELECT nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_produkty=$id_produktu";
-				$result = $conn -> query($sql);
-				Show_product($id_produktu);
+		<div id="koszyk_container">
+			<h2>Podsumowanie zamówienia: </h2><br>
+			<?php
+				Show_summary();
 			?>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			
+
 		</div>
 	</div>
 
@@ -136,7 +125,6 @@
 		</a>
 	</div>	
 
-	<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
 	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<!-- STICKY MENU JS-->
@@ -146,84 +134,55 @@
 	<!-- SLIDER JS-->
 	<script src="js/slider.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<!-- PRICE CHANGING WHILE INCREASE AMOUT OF PRODUCT-->
-	<script type="text/javascript">
-			var cookies = document.cookie.split(";").
-   			map(function(el){ return el.split("="); }).
-    		reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
-			
-				$('#ile_sztuk').on('change paste', function () {
-				    $("#current").html($(this).val()*cookies["MyCookie"]);
-				});      
-	</script>
-
-<?php
-	//Function to show product on main site
-	function Show_product($id)
-	{	
-		$id_produktu = $_GET['id_produkty'];
-		require_once "connect.php";
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		$conn -> query("SET NAMES 'utf8'");
-		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-
-		$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_produkty=$id_produktu";
-		$result = $conn -> query($sql);
-		if ($result -> num_rows > 0)
-		{
-	 		while($row = $result -> fetch_assoc())
-	 		{	
-	 			$_SESSION['cena']=$row["cena"];
-	 			$_SESSION['produkt']=$row["id_produkty"];
-	 			setcookie("MyCookie", $row["cena"]);
-	       		echo '<div id="produkt_big"><img src="images/products/'.$row["zdjecie"].'" width="500" height="500" alt="product.png"><br><b>'
-			       		.$row["nazwa"].'</b><br><br>Specyfikacja produktu<br><br>
-			       		<div id="dane">Rozmiar: ';
-				       		if(is_null($row["rozmiar"]))
-				       		{
-				       			echo 'Nie dotyczy';
-				       		}else echo $row["rozmiar"];
-				       		echo '<br>Producent: '.$row["producent"].
-			       		'</div>
-			       		<br><br>Opis produktu: <br>'.$row["opis"].
-			       		'<br><br><form action="koszyk.php" method="post"><input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
-			       		'<input id="dostawa1" type="hidden" name="koszyk1" value='.$row['dostawa'].'/><br><br><button type="submit" id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button><br>
-			       			<span style="color:green;">+ Dostawa: <span id="dostawa">'.$row['dostawa'].'</span> PLN</span>
-			       		</form>
-	       			</div>';
-			}
-		} else { echo "No results"; }
-	}
-
 	
-				
-?>
-
-
-<script>
-	// do input dodac onchange="myFunction()
-//Funkcja na zliczanie dostawy 
-/*function myFunction()
-{
-	  var x = document.getElementById("ile_sztuk");
-	  //var dostawa = document.getElementById("dostawa1").value;
-
-	  var currentVal = x.value;
-	  if (currentVal % 5 == 1)
-	  {
-	    document.getElementById("dostawa").innerHTML = 12 + ((currentVal - 1) / 5) * 12;
-	    
-	  }
-
-	if (currentVal % 5 == 0)
-    {
-    	document.getElementById("dostawa").innerHTML = 12 + (((currentVal) / 5) -1) * 12;
-    }
-}*/
-</script>
-
 </body>
 </html>
 
 
+<?php
+	
+
+	//Function to show summary of order
+	function Show_summary()
+	{	
+		$max_dostawa = $_SESSION['max_dostawa'];
+		$suma = $_SESSION['suma'];
+		$id_klienci = $_SESSION['id_klienci'];
+		require_once "connect.php";
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn -> query("SET NAMES 'utf8'");
+		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+		$sql = "SELECT * FROM koszyk WHERE id_klienci=$id_klienci";
+		$result = $conn -> query($sql);
+		echo '<h1>Twoje zamówienie</h1>';
+		//Czy jest koszyk
+		if ($result -> num_rows > 0)
+		{
+			$wiersz = 1;
+	 		while($row = $result -> fetch_assoc())
+	 		{	
+	 			$id_kosz = $row['id_koszyk'];
+	 			$id_prod = $row['id_produkty'];
+	 			$sql1 = "SELECT id_produkty, nazwa, cena, zdjecie FROM produkty WHERE id_produkty=$id_prod";
+	 			$result1 = $conn -> query($sql1);
+	 			//Czy jest zamowienie_produkty
+	 			if ($result1 -> num_rows > 0)
+				{
+	 				while($row1 = $result1 -> fetch_assoc())
+	 				{
+	 					echo '<div id="podsumowanie_prod">'.$wiersz.'. '.$row1["nazwa"].' - ilość: '.$row['ilosc'].' cena: '.$row["cena"]*$row["ilosc"].' PLN ('.$row["cena"].'zł/szt)<br></div>';
+	 				}
+	 			}
+	 			$wiersz += 1;
+			}
+		} else { echo "Brak produktów w koszyku"; }
+		echo '<br><div id="dostaw">Dostawa: '.$max_dostawa.' PLN</div><br><br>
+		<div id="podsumowanie1"><b>Kwota całkowita zamówienia: '.$suma.' PLN</b><br><br>
+		<form action="zlozono.php" method="post">
+			<input type="hidden" name="suma" value="'.$suma.'" />
+			<input type="submit" id="kup_teraz" name="zlozono" value="Potwierdź zamówienie">
+		</form><br>
+			<div id="uwaga">Uwaga: Klikając przycisk "Potwierdź zamówienie" zobowiazujesz się do zapłacenia za zamówienie.</div>
+		</div>';
+	}
+?>
