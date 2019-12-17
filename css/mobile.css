@@ -1,0 +1,24 @@
+
+#why_us{
+	clear: both;
+}
+
+.why_us_content{
+	position: relative;
+	font-style: normal;
+	text-align: center;
+	border: 2px solid #FF5A00;
+	border-radius: 30px;
+	padding: 7px;
+	margin: 25px;
+	width: 90%;
+	height: 90%;
+	float: left;
+	background-color: #fcfeff;
+	transition-duration: 0.4s;
+}
+
+.why_us_content:hover{
+	transition-duration: 0.4s;
+	transform: scale(1.05,1.05);
+}

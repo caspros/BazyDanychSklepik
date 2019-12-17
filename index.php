@@ -16,13 +16,21 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
-	<link rel="stylesheet" type="text/css" href="mobile.css" media="max-width: 800px" />
+	<link rel="stylesheet" type="text/css" href="css/mobile.css" media="(max-width: 800px">
+
+
+  <link rel="stylesheet" href="css/responsiveslides.css">
+  <link rel="stylesheet" href="css/demo.css">
+
+  
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
 	<title>Alledrogo</title>
+
 </head>
 
 <body>
@@ -97,48 +105,35 @@
 
 		<!-- MIĘSO ARMATNIE -->
 		<div id="main">
-			
+
 			<!-- KATEGORIE -->
-			<div id="categories">
-				<br>
+			    <div id="centeredmenu">
+				   <ul>
+				   	<li><a href="kategoria.php?id_kategorie=1">Koszulki</a><br></li>
+					<li><a href="kategoria.php?id_kategorie=2">Spodnie</a><br></li>
+					<li><a href="kategoria.php?id_kategorie=3">Kubki</a><br></li>
+					<li><a href="kategoria.php?id_kategorie=4">Długopisy</a><br></li>
+					<li><a href="kategoria.php?id_kategorie=5">Bluzy</a><br></li>
+					<li><a href="kategoria.php?id_kategorie=6">Naklejki</a><br></li>
+					<li><a href="kategoria.php?id_kategorie=7">Ramki</a><br></li>
+					<li><a href="kategoria.php?id_kategorie=8">RTV</a><br></li>
+					<li><a href="kategoria.php?id_kategorie=9">AGD</a><br></li>
+					<li><a href="kategoria.php?id_kategorie=10">Alkohol</a><br></li>
+					<li><a href="kategoria.php?id_kategorie=11">Zabawki</a><br></li>
+					<li><a href="kategoria.php?id_kategorie=0">Wszystko</a><br></li>
+				   </ul>
+				</div>
 
-				<span class="kat"><b>Kategorie:</b></span>
-				<br><br>
-				<a href="kategoria.php?id_kategorie=1">Koszulki</a><br>
-				<a href="kategoria.php?id_kategorie=2">Spodnie</a><br>
-				<a href="kategoria.php?id_kategorie=3">Kubki</a><br>
-				<a href="kategoria.php?id_kategorie=4">Długopisy</a><br>
-				<a href="kategoria.php?id_kategorie=5">Bluzy</a><br>
-				<a href="kategoria.php?id_kategorie=6">Naklejki</a><br>
-				<a href="kategoria.php?id_kategorie=7">Ramki</a><br>
-				<a href="kategoria.php?id_kategorie=8">RTV</a><br>
-				<a href="kategoria.php?id_kategorie=9">AGD</a><br>
-				<a href="kategoria.php?id_kategorie=10">Alkohol</a><br>
-				<a href="kategoria.php?id_kategorie=11">Zabawki</a><br>
-				<a href="kategoria.php?id_kategorie=0">Wszystko</a><br>
-
+			<div id="wrapper">
+				<!-- Slideshow 2 -->
+			    <ul class="rslides" id="slider2">
+			      <li><a href="#"><img src="images/banners/black_friday.png" alt=""></a></li>
+			      <li><a href="#"><img src="images/banners/darmowa_dostawa.png" alt=""></a></li>
+			      <li><a href="#"><img src="images/banners/rabat_rtv.png" alt=""></a></li>
+			    </ul>
 			</div>
 
 			<br>
-
-			<!-- SLIDER Z OFERTAMI -->
-			<div class="daily_offers" id="offers1">
-			<i class="fas fa-arrow-left" id="prevBtn"></i>
-			<i class="fas fa-arrow-right" id="nextBtn"></i>
-				<div class="slider">
-
-					<img src="images/banners/promocja_swieta.png" id="lastClone" alt="" height="100%" width="100%">
-					<img src="images/banners/black_friday.png" alt="" height="100%" width="100%">
-					<img src="images/banners/darmowa_dostawa.png" alt="" height="100%" width="100%">
-					<img src="images/banners/rabat_rtv.png" alt="" height="100%" width="100%">
-					<img src="images/banners/promocja_swieta.png" alt="" height="100%" width="100%">
-					<img src="images/banners/black_friday.png" id="firstClone" alt="" height="100%" width="100%">
-				
-				</div>
-			</div>
-
-
-			<br><br><br>
 			<h1>WYRÓŻNIONE PRODUKTY:</h1>
 
 			<!-- PRODUKTY NA GŁÓWNEJ -->
@@ -154,35 +149,37 @@
 
 			</div>
 
-			<div id="why_us">
+
+			<div id="why_us" class="clearfix">
 				<br><br>
 				<h1>Dlaczego warto nam zaufać?</h1>
 
-				<div class="why_us_content">
-					<h3>Gwarancja jakości</h3>
-					<br>
-					Nasze produkty są bardzo dobre jakościowo, wykonane z dbałością o każdy szczegół. Podczas produkcji działamy zgodnie z ekologią. Robiąc u nas zakupy masz pewność, że zamówione produkty będą Ci służyły bardzo długo.
-					<br><br>
-					<img src="images/quality.png" alt="jakosc" height="35%" width="35%">
-				</div>
+				<div class="why_us_main_container">
+					<div class="why_us_content">
+						<h3>Gwarancja jakości</h3>
+						<br>
+						Nasze produkty są bardzo dobre jakościowo, wykonane z dbałością o każdy szczegół. Podczas produkcji działamy zgodnie z ekologią. Robiąc u nas zakupy masz pewność, że zamówione produkty będą Ci służyły bardzo długo.
+						<br><br>
+						<img src="images/quality.png" alt="jakosc" height="35%" width="35%">
+					</div>
 
-				<div class="why_us_content">
-					<h3>Darmowe zwroty do 14 dni</h3>
-					<br>
-					Nasza strona oferuje możliwość zwrotu zakupionego produktu do 14 dni od momentu otrzymania towaru bez potrzeby podania przyczyny zwrotu! Zwrot jest całkowicie darmowy, przesyłkę zwrotną pokrywamy my!
-					<br><br>
-					<img src="images/zwrot.png" alt="zwrot" height="35%" width="45%">
-				</div>
+					<div class="why_us_content">
+						<h3>Darmowe zwroty do 14 dni</h3>
+						<br>
+						Nasza strona oferuje możliwość zwrotu zakupionego produktu do 14 dni od momentu otrzymania towaru bez potrzeby podania przyczyny zwrotu! Zwrot jest całkowicie darmowy, przesyłkę zwrotną pokrywamy my!
+						<br><br>
+						<img src="images/zwrot.png" alt="zwrot" height="35%" width="45%">
+					</div>
 
-				<div class="why_us_content">
-					<h3>Opinie klientów</h3>
-					<br>
-					Jeśli jeszcze masz wątpliwości, zajrzyj do opinii naszych klientów, którzy zakupili już nasze produkty. Obiektywne opinie z pewnością pomogą Ci w podjęciu decyzji o opłacalności danych produktów. Dzięki opiniom jesteśmy w stanie dla Was stale ulepszać nasze produkty.
-					<br><br>
-					<img src="images/opinie.png" alt="zwrot" height="30%" width="75%">
+					<div class="why_us_content">
+						<h3>Opinie klientów</h3>
+						<br>
+						Jeśli jeszcze masz wątpliwości, zajrzyj do opinii naszych klientów, którzy zakupili już nasze produkty. Obiektywne opinie z pewnością pomogą Ci w podjęciu decyzji o opłacalności danych produktów. Dzięki opiniom jesteśmy w stanie dla Was stale ulepszać nasze produkty.
+						<br><br>
+						<img src="images/opinie.png" alt="zwrot" height="30%" width="75%">
+					</div>
 				</div>
 			</div>
-
 			<div id="comentaries">
 				<?php
 					Show_opinion(5);
@@ -217,9 +214,24 @@
 	<script src="js/sticky_menu.js"></script>
 	<!-- STICKY MENU WITAJ ZALOGUJ SIĘ JS-->
 	<script src="js/dropdown_sticky.js"></script>
-	<!-- SLIDER JS-->
-	<script src="js/slider.js"></script>
-	
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+  <script src="js/responsiveslides.min.js"></script>
+  <script>
+    // You can also use "$(window).load(function() {"
+    $(function () {
+
+      // Slideshow 2
+      $("#slider2").responsiveSlides({
+        auto: true,
+        pager: true,
+        speed: 300
+      });
+    });
+
+  </script>
+
+
 </body>
 </html>
 
