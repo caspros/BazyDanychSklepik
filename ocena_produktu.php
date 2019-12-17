@@ -201,7 +201,7 @@
 	       					</div>';
 	 			}
 			}
-		} else { echo "<br><br><span style='text-align:center;'>Brak produktów do oceny</span>"; }
+		} else { echo '<br><br><span class="no_products">Brak produktów do oceny</span>'; }
 	}
 
 	//Funkcja wyświetlająca ocenione produkty
@@ -252,7 +252,7 @@
 	 				}
 	 			}
 			}
-		} else { echo "<br><br><span style='text-align:center;'>Brak ocenionych produktów</span>"; }
+		} else { echo '<br><br><span class="no_products">Brak ocenionych produktów</span>'; }
 	}
 
 
