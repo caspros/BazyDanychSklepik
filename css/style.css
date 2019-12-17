@@ -323,3 +323,19 @@ ol > li{
 #dziekujemy{
 	text-align: center;
 }
+
+/* FAQ, regulaminy */
+
+#regulamin{
+	position: relative;
+	left: 17%;
+	width: 65%;
+	text-align: center;
+}
+
+#FAQ{
+	position: relative;
+	left: 13%;
+	width: 75%;
+	text-align: center;
+}

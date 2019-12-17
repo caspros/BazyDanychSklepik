@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Twój koszyk</title>
+	<title>Ocena sklepu</title>
 </head>
 <style>
 	.error
@@ -105,16 +105,23 @@
 	<!-- GŁÓWNY CONTAINER -->
 	<div id="container_koszyk">
 		
-
-		<!-- MIĘSO ARMATNIE -->
-		<div id="koszyk_container">
+		<h1>Członkowie projektu</h1>
 		
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+		<div id="koszyk_container">
+				<div id="informacja1">
+					<p><strong>Kierownik projektu:</strong></p>
+					<p>Kacper Śledzik</p>
+					<p><strong>Członkowie projektu:</strong></p>
+					<p>Marcin Fedor</p>
+					<p>Armand Gadecki</p>
+					<p>Mariusz Granda</p>
+					<p>Juliusz Jakubiec</p>
+					<p>Aleksander Szuba</p>
+				</div>
+			<br><br>
+			
 		</div>
 	</div>
-
     <div id="centeredmenu">
 	   <ul>
 	      <li><a href="FAQ.php">FAQ</a></li>
@@ -128,7 +135,7 @@
 		<a href="regulamin.php">
 			regulaminu
 		</a>
-	</div>	
+	</div>
 
 	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
