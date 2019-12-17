@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Wybierz do oceny</title>
+	<title>Ocena produktu</title>
 </head>
 <style>
 	.error
@@ -107,24 +107,99 @@
 	</div>
 	
 	<!-- GŁÓWNY CONTAINER -->
-	<div id="container_koszyk">
-			<h1>Oceń nasz produkt</h1>
-			
-			
+	<div id="container_produkt">
+		<h1>Oceń produkt</h1>
 
 		<!-- MIĘSO ARMATNIE -->
-		<div id="koszyk_container">
+		<div id="container_produkt">
 		
-			<div id="informacja1">
-					Wybierz z listy zakupionych produktów przedmiot który chcesz ocenić. <br>
-					Dzięki Waszym opiniom stale możemy ulepszać jakość naszych usług.
-				</div>
+		<?php
+			if(!$_GET['id_produkty'])
+			{
+				header('Location: ocena_produktu.php');
+				exit();
+			}
+			else
+			{
+               	$id_produktu = $_GET['id_produkty'];
+				$servername = "localhost";
+				$username = "root";
+				$password = "";
+				$dbname = "sklep";
+				$conn = new mysqli($servername, $username, $password, $dbname);
+				$conn -> query("SET NAMES 'utf8'");
+				if ($conn -> connect_error) {die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+				$id_klienci = $_SESSION['id_klienci'];
 				
-				<?php
-				Show_products();
+				$sql_sprawdzenie = "SELECT * FROM zamowienie_produkty z, zamowienia x WHERE z.id_klienci=$id_klienci and z.id_produkty=$id_produktu and x.data_wyslania > '1000-10-05'";
+				$result_s = $conn -> query($sql_sprawdzenie);
+				if ($result_s -> num_rows > 0)
+				{
+					if($row_s = $result_s -> fetch_assoc())
+					{
+						 $_SESSION['juz_oceniono'] = FALSE;
+						$sql = "SELECT * FROM opinie WHERE id_klienci=$id_klienci";
+						$result = $conn -> query($sql);
+						while($row = $result -> fetch_assoc())
+						{
+							if($row['id_produkty']==$id_produktu)
+							{
+								$_SESSION['juz_oceniono'] = TRUE;
+							}
+						}
+
+						if((isset($_SESSION['juz_oceniono'])) && ($_SESSION['juz_oceniono']==TRUE))
+						{
+							$sql1 = "SELECT * FROM opinie WHERE id_klienci=$id_klienci and id_produkty=$id_produktu";//tu trzeba odpowiednie id dac
+							$result1 = @$conn -> query($sql1);
+							if ($result -> num_rows > 0)
+							{
+								if($row1 = $result1 -> fetch_assoc())
+								{
+									echo '<h2>Już oceniłeś ten produkt, dziękujemy!</h2><br>';
+									echo '<div id="dziekujemy">Twoja ocena: <b>'.$row1['gwiazdka'].'/5</b><br>';
+									echo 'Twoj komentarz: <b>'.$row1['opinia'].'</b></div>';
+								}
+							}
+						}
+						else
+						{
+							echo '<div id="formularz">
+									<form action="addingOcenaProduktu.php" method="post">
+									
+										Ocena: 
+										<select name="ocena">
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										  <option value="4">4</option>
+										  <option value="5">5</option>
+										 
+										</select>
+										<input type="hidden" name="id_produktu" value="'.$id_produktu.'">
+										<br><span id="koment">Komentarz:</span><br>
+										<textarea name="opis" cols="50" rows="3"></textarea><br><br>
+										<input name="submit" id="dalej_btn" type=submit value="Dodaj">
+										
+									</form>
+								</div>';
+						}
+					}
+					
+				}
+				else
+					{
+						header('Location: ocena_produktu.php');
+						exit();
+					}
+				
+               
+			}
+
 			?>
-				
-				<br><br>
+		
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 		</div>
 	</div>
@@ -156,71 +231,3 @@
 	
 </body>
 </html>
-
-<?php
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "sklep";
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	$conn -> query("SET NAMES 'utf8'");
-	// Check connection
-	if ($conn -> connect_error) {
-		    die("Nie połączono z bazą danych: " . $conn -> connect_error);
-		}
-
-	//Function to show products in categories
-	function Show_products()
-	{	
-		//$id_kategorie = $_GET['id_kategorie'];
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "sklep";
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		$conn -> query("SET NAMES 'utf8'");
-		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-		
-        $id_klienci = $_SESSION['id_klienci'];
-		$sql = "SELECT  p.id_produkty, p.nazwa, p.opis, p.opinie_klientow, p.cena, p.dostepna_ilosc, p.producent, p.rozmiar, p.zdjecie, p.dostawa
-		FROM zamowienie_produkty z, produkty p, zamowienia x where z.id_klienci=$id_klienci and z.id_produkty=p.id_produkty and x.data_wyslania > '1000-10-05' and z.id_zamowienia=x.id_zamowienia";
-		
-		
-		$result = $conn -> query($sql);
-		
-		echo '</h1>';
-		if ($result -> num_rows > 0)
-		{
-	 		while($row = $result -> fetch_assoc())
-	 		{
-				
-	       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
-			       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
-			       		<div class="zawartosc">
-			       			<table id="tabela">
-					       		<tr>
-					       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
-					       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
-					       		</tr>
-					       		<tr>
-						       		<td><div class="rozmiar">Rozmiar: ';
-						       		if(is_null($row["rozmiar"]))
-						       		{
-						       			echo 'Nie dotyczy';
-						       		}else echo $row["rozmiar"];
-						       		echo '</div></td>
-						       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
-						       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
-									
-					       		</tr>
-				       		</table>
-
-			       		</div>
-					<a href="ocena_przedmiotu.php?id_produkty='.$row["id_produkty"].'">Oceń produkt</a>
-	       			</div><a>';
-					
-			}
-		} else { echo "Brak produktów do oceny"; }
-	}
-?>
