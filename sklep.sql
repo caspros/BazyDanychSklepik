@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 13 Gru 2019, 17:57
--- Wersja serwera: 10.1.31-MariaDB
--- Wersja PHP: 7.2.4
+-- Czas generowania: 17 Gru 2019, 14:48
+-- Wersja serwera: 10.1.38-MariaDB
+-- Wersja PHP: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -218,7 +218,17 @@ INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena
 (52, 'Koszulka DESTYLACJA', 'Oryginalna koszulka męska DESTYLACJA z krótkim rękawem firmy S&S. Wykonana z najwyższej jakości bawełny, zapewniającej komfort i wygodę użytkowania.', NULL, '77.50', 92, 'S&S', NULL, 'M', 'koszulka_destylacja.png', 1, 12),
 (53, 'Whisky Jack Daniel\'s', 'Whisky Jack Daniel\'s to najpopularniejsza amerykańska whiskey produkowana od 1866 roku, kiedy to Jasper „Jack” Daniel zaufał swojej intuicji i postawił na stworzenie wysokiej jakości trunku. Jej unikalny smak zawdzięczany jest prawie dziesięcio- dniowej filtracji destylatu przez 3- metrową warstwę klonowego węgla drzewnego.', NULL, '100.00', 95, 'Jack Daniel\'s', NULL, '0,7L', 'whisky_jack.png', 10, 15),
 (54, 'Smart TV Samsung 55 cali', 'Jakość obrazu, która Cię poruszy, zapewniona przez pojedynczy chip, który zarządza kolorami, optymalizuje współczynnik kontrastu i nadzoruje HDR.', NULL, '1350.00', 4, 'Samsung', NULL, '55 cali', 'tv_samsung_55.png', 8, 30),
-(55, 'Smartfon Huawei Y5', 'Wyświetlacz: 5,45 cali\r\nAparat: 8 Mpix\r\nPamięć wewnętrzna [GB]: 16 GB\r\nBateria [mAh]: 3000', NULL, '299.00', 20, 'Huawei', NULL, '5,45 cali', 'huawei_1.png', 8, 15);
+(55, 'Smartfon Huawei Y5', 'Wyświetlacz: 5,45 cali\r\nAparat: 8 Mpix\r\nPamięć wewnętrzna [GB]: 16 GB\r\nBateria [mAh]: 3000', NULL, '299.00', 20, 'Huawei', NULL, '5,45 cali', 'huawei_1.png', 8, 15),
+(56, 'Kubek Kapłan', 'Kubek idealny na prezent dla księdza, kapłana, ministranta.', NULL, '35.00', 100, 'PolskiKościół', NULL, '', 'kubek_kaplan.png', 3, 8),
+(57, 'Kubek niebieski', 'Niebieski kubek wykonany z porcelany, solidna jakość. Idealnie nadaje się do picia herbaty, kawy lub napojów.', NULL, '30.00', 100, 'KubkiPL', NULL, '', 'kubek_niebieski.png', 3, 8),
+(58, 'Kubek do kawy', 'Kubek do kawy z zabawnym opisem. Można w nim pić nie tylko kawę.', NULL, '32.00', 75, 'KubkiPL', NULL, '', 'kubek_kawa.png', 3, 8),
+(59, 'Kubek Ni ma lekko', 'Kubek Ni ma lekko jest to kubek nietuzinkowy, można w nim pić różnego rodzaju napoje.', NULL, '41.00', 50, 'KubkiPL', NULL, '', 'kubek_ni_ma_lekko.png', 3, 8),
+(60, 'Kubek czarny', 'Czarny kubek dla konesera kawy. Można w nim pić różne napoje.', NULL, '28.00', 100, 'KubkiPL', NULL, '', 'kubek_czarny.png', 3, 8),
+(61, 'Zabawka Lalka Martynka', 'Zabawka lalka Martynka z nowej serii zabawek Toys&Boys. Odpowiednia dla dzieci powyżej 3 lat.', NULL, '99.00', 100, 'Toys&Boys', NULL, 'mała, wysokość: 20cm', 'zabawka_lalka.png', 11, 10),
+(62, 'Zabawka Auto Taxi', 'Zabawka auto taxi, idealna dla dzieci powyżej 5 lat.', NULL, '35.00', 50, 'ZabawkiWorld', NULL, '', 'zabawka_autko_taxi.png', 11, 11),
+(63, 'Zabawka Samolot', 'Zabawka Samolot jest idealna dla dzieci, które bujają w obłokach. Samolot wykonany z plastiku, nie nadaje się dla dzieci poniżej 3 roku życia.', NULL, '55.00', 100, 'ZabawkiWorld', NULL, '', 'zabawka_samolot.png', 11, 10),
+(64, 'Zabawka kostka rubika', 'Zabawka kostka rubika 3x3, łamigłówka, idealna jako dodatek do prezentu. Zawiera małe elementy, nieodpowiednia dla dzieci poniżej 5 roku życia.', NULL, '20.00', 500, 'ZabawkiWorld', NULL, '3x3', 'kostka_rubika3x3.png', 11, 8),
+(65, 'Zabawka piłka kolorowa', 'Zabawka piłka kolorowa, miękka, wykonana z tworzywa sztucznego, w środku wypełniona puchem.', NULL, '25.00', 77, 'ZabawkiWorld', NULL, 'średnica: 30cm', 'zabawka_pilka.png', 11, 10);
 
 -- --------------------------------------------------------
 
@@ -428,7 +438,7 @@ ALTER TABLE `opinie`
 -- AUTO_INCREMENT dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT dla tabeli `promocje`
