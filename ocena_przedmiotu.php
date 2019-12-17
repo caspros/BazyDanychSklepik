@@ -19,7 +19,7 @@
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
-	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
+	<link rel="stylesheet" type="text/css" href="css/ocena.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
@@ -107,7 +107,7 @@
 	</div>
 	
 	<!-- GŁÓWNY CONTAINER -->
-	<div id="container_produkt">
+	<div id="container_glowny_ocena">
 		<h1>Oceń produkt</h1>
 
 		<!-- MIĘSO ARMATNIE -->
