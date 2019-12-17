@@ -213,15 +213,16 @@
 				       		</div>
 		       			</div><a>';
 				}
-			echo "<br><br><br><br>";
-			$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty";
-			$result5 = $conn->query($sql5);
-			$row5 = $result5 -> fetch_assoc();
-			$total_pages = ceil($row5["total"] / $amout);
-			for ($i=1; $i<=$total_pages; $i++)
-			{ 
-				echo "<div class='strona'><a href='kategoria.php?id_kategorie=0&page=".$i."'>".$i."</a></div>";
-			}
+
+				echo "<br><br><br><br>";
+				$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty";
+				$result5 = $conn->query($sql5);
+				$row5 = $result5 -> fetch_assoc();
+				$total_pages = ceil($row5["total"] / $amout);
+				for ($i=1; $i<=$total_pages; $i++)
+				{ 
+					echo "<div class='strona'><a href='kategoria.php?id_kategorie=0&page=".$i."'>".$i."</a></div>";
+				}
 
 			} else { echo "Brak produktów we wszystkich kategoriach"; }
 		}
@@ -236,11 +237,19 @@
 			$conn -> query("SET NAMES 'utf8'");
 			if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
 
-			$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_kategorie=$id_kategorie";
+
+			// ilośc wyswietlanych produktów na stronę
+			$amout = 5;
+			if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+			$start_from = ($page-1) * $amout;
+
+			$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_kategorie=$id_kategorie ORDER BY id_produkty ASC LIMIT $start_from, ".$amout;
 			$sql1 = "SELECT id_kategorie, kategoria FROM kategorie WHERE id_kategorie=$id_kategorie";
 			$result = $conn -> query($sql);
 			$result1 = $conn -> query($sql1);
 			$row1 = $result1 -> fetch_assoc();
+
+
 			echo '<h1>'.$row1['kategoria'].'</h1>';
 			if ($result -> num_rows > 0)
 			{
@@ -268,6 +277,20 @@
 				       		</div>
 		       			</div><a>';
 				}
+
+				echo "<br><br><br><br>";
+				$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty WHERE id_kategorie=$id_kategorie";
+				$result5 = $conn->query($sql5);
+				$row5 = $result5 -> fetch_assoc();
+				$total_pages = ceil($row5["total"] / $amout);
+				if($total_pages>1)
+				{
+					for ($i=1; $i<=$total_pages; $i++)
+					{ 
+						echo "<div class='strona'><a href='kategoria.php?id_kategorie=".$id_kategorie."&page=".$i."'>".$i."</a></div>";
+					}
+				}
+
 			} else { echo "Brak produktów w podanej kategorii"; }
 		}
 	}
