@@ -218,7 +218,7 @@
 		       			</div><a>';
 				}
 			echo "<br><br><br><br>";
-			$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty";
+			$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty WHERE nazwa LIKE '%$szukane%'";
 			$result5 = $conn->query($sql5);
 			$row5 = $result5 -> fetch_assoc();
 			$total_pages = ceil($row5["total"] / $amout);
