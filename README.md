@@ -8,7 +8,3 @@
 
 * Odznaczamy "Enable foreign key checks" i klikamy "Go"
 Import bazy danych powinien sie zakończyć sukcesem.
-
-
-Edit #1:
-Babcia mówiła ,że nie działa :/

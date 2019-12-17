@@ -19,21 +19,13 @@
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
-	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
+	<link rel="stylesheet" type="text/css" href="css/ocena.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="fontawesome/css/all.css" rel="stylesheet">
-	<title>Twój koszyk</title>
+	<title>Wybierz produkt do oceny</title>
 </head>
-<style>
-	.error
-		{
-			color:red;
-			margin-top: 10px;
-			margin-bottom: 10px;
-		}
-</style>
 
 <body>
 	<!-- STICKY MENU -->
@@ -47,7 +39,7 @@
 			</li>
 
 			<!-- wyszukiwanie -->
-			<form action="wyszukaj.php" method="get" class="form_inline">
+			<form action="wyszukaj.php" method="get" class="form_inline">                 
 				<li>
 					<input type="text" name="search_input" class="search_input" placeholder="Wyszukaj produkt...">
 				</li>
@@ -70,7 +62,7 @@
 			<div class="dropdown">
 				<span id="myBtn" class="dropbtn">Witaj, 
 					<?php 
-					if (isset($_SESSION['wyloguj']))
+						if (isset($_SESSION['wyloguj']))
 						{
 							echo $_SESSION['imie'];
 						} else {
@@ -103,23 +95,35 @@
 	</div>
 	
 	<!-- GŁÓWNY CONTAINER -->
-	<div id="container_koszyk">
+	<div id="container_glowny_ocena">
+
 		
 
 		<!-- MIĘSO ARMATNIE -->
-		<div id="koszyk_container">
-		
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<div id="ocena_container">
 
+			<h1>Oceń zakupione produkty</h1>
+
+			<div id="informacja1">
+				Wybierz z listy zakupionych produktów przedmiot który chcesz ocenić. <br>
+				Dzięki Waszym opiniom stale możemy ulepszać jakość naszych usług.<br><br>
+			</div>
+				<?php
+					Produkty_do_oceny();
+
+					echo '<h1 style="clear: both;"><br><br>Twoje ocenione produkty</h1><br><br>';
+
+					Moje_ocenione_produkty();
+				?>
+				<br><br>
 		</div>
 	</div>
 
     <div id="centeredmenu">
 	   <ul>
-	      <li><a href="#">FAQ</a></li>
+	      <li><a href="FAQ.php">FAQ</a></li>
 	      <li><a href="#">Kontakt</a></li>
-	      <li><a href="#">Regulamin</a></li>
+	      <li><a href="regulamin.php">Regulamin</a></li>
 	   </ul>
 	</div>
 
@@ -142,3 +146,114 @@
 	
 </body>
 </html>
+
+<?php
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "sklep";
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	$conn -> query("SET NAMES 'utf8'");
+	// Check connection
+	if ($conn -> connect_error) {
+		    die("Nie połączono z bazą danych: " . $conn -> connect_error);
+		}
+
+	//Funkcja wyświetlająca produkty do oceny
+	function Produkty_do_oceny()
+	{	
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "sklep";
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn -> query("SET NAMES 'utf8'");
+		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+		
+        $id_klienci = $_SESSION['id_klienci'];
+		$sql = "SELECT  p.id_produkty, p.nazwa, p.opis, p.opinie_klientow, p.cena, p.dostepna_ilosc, p.producent, p.rozmiar, p.zdjecie, p.dostawa, x.data_zlozenia
+		FROM zamowienie_produkty z, produkty p, zamowienia x WHERE z.id_klienci=$id_klienci AND z.id_produkty=p.id_produkty AND x.data_wyslania > '1000-10-05' AND z.id_zamowienia=x.id_zamowienia";
+		
+		
+		$result = $conn -> query($sql);
+		
+		if ($result -> num_rows > 0)
+		{
+	 		while($row = $result -> fetch_assoc())
+	 		{
+	 			$sql_sprawdzenie = "SELECT id_produkty, id_klienci FROM opinie WHERE id_klienci=$id_klienci AND id_produkty=".$row["id_produkty"];
+	 			$result_spr = $conn -> query($sql_sprawdzenie);
+	 			if ($result_spr -> num_rows > 0) { }
+	 			else
+				{
+	 			
+	 				echo '<div class="zawartosc">
+				       			<table id="tabela">
+						       		<tr>
+						       			<td><a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="120" height="120" alt="product.png"></div><a></td>
+						       			<td><div class="nazwa"><b>'.$row["nazwa"].'</b></div></td>
+						       			<td><div id="cena">Cena: '.$row["cena"].' PLN</b></div></td>
+						       			<td>Zakupiono: '.$row["data_zlozenia"].'</td>
+						       			<td><a href="ocena_przedmiotu.php?id_produkty='.$row["id_produkty"].'"><button id="ocen_produkt_btn" >Oceń produkt</button></a></td>
+						       		</tr>
+					       		</table>
+	       					</div>';
+	 			}
+			}
+		} else { echo "<br><br><span style='text-align:center;'>Brak produktów do oceny</span>"; }
+	}
+
+	//Funkcja wyświetlająca ocenione produkty
+	function Moje_ocenione_produkty()
+	{	
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "sklep";
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn -> query("SET NAMES 'utf8'");
+		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+		
+        $id_klienci = $_SESSION['id_klienci'];
+		$sql = "SELECT id_klienci, id_produkty, gwiazdka, opinia FROM opinie WHERE id_klienci=$id_klienci";
+		
+		$result = $conn -> query($sql);
+		
+		if ($result -> num_rows > 0)
+		{
+	 		while($row = $result -> fetch_assoc())
+	 		{
+	 			$sql2 = "SELECT id_produkty, nazwa, zdjecie, cena FROM produkty WHERE id_produkty=".$row["id_produkty"];
+
+	 			$result2 = $conn -> query($sql2);
+	 			if (!$result2) {
+					    trigger_error('Invalid query: ' . $conn->error);
+					}
+				if ($result2 -> num_rows > 0)
+				{
+			 		while($row2 = $result2 -> fetch_assoc())
+			 		{
+	 					echo '
+				       		<div class="zawartosc">
+				       			<table id="tabela">
+						       		<tr>
+						       			<td rowspan="2"><a href="produkt.php?id_produkty='.$row2["id_produkty"].'" id="product_link"><div id="zdjecie"><img src="images/products/'.$row2["zdjecie"].'" width="120" height="120" alt="product.png"></div></a></td>
+						       			<td colspan="2"><div class="nazwa"><b>'.$row2["nazwa"].'</b></div></td>
+						       			<td><div id="cena">Cena: '.$row2["cena"].' PLN</b></div></td>
+						       			
+						       		</tr>
+						       		<tr>
+						       			<td>Ocena: '.$row["gwiazdka"].'</td>
+						       			<td>Opinia: '.$row["opinia"].'</td>
+						       		</tr>
+					       		</table>
+	       					</div>';
+	 				}
+	 			}
+			}
+		} else { echo "<br><br><span style='text-align:center;'>Brak ocenionych produktów</span>"; }
+	}
+
+
+?>

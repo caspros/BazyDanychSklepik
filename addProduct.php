@@ -152,15 +152,15 @@
 
     <div id="centeredmenu">
 	   <ul>
-	      <li><a href="#">FAQ</a></li>
-	      <li><a href="#">Kontakt</a></li>
-	      <li><a href="#">Regulamin</a></li>
+	      <li><a href="FAQ.php">FAQ</a></li>
+	      <li><a href="kontakt.php">Kontakt</a></li>
+	      <li><a href="regulamin.php">Regulamin</a></li>
 	   </ul>
 	</div>
 
 	<div id="footer">
 		Korzystanie z serwisu oznacza akceptację
-		<a href="#">
+		<a href="regulamin.php">
 			regulaminu
 		</a>
 	</div>	
