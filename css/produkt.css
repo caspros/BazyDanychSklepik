@@ -38,3 +38,13 @@
     text-align: center;
     width: 10%;
 }
+
+.komentarze{
+    margin-left: 5%;
+    font-style: normal;
+    text-align: center;
+}
+
+.nie_oceniony{
+    text-align: center;
+}

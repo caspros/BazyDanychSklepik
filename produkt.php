@@ -192,6 +192,39 @@
 			       			<span style="color:green;">+ Dostawa: <span id="dostawa">'.$row['dostawa'].'</span> PLN</span>
 			       		</form>
 	       			</div>';
+
+	       		$sql_oceny = "SELECT id_produkty, gwiazdka, opinia FROM opinie WHERE id_produkty=$id_produktu";
+				$result_oceny = $conn -> query($sql_oceny);
+				if ($result_oceny -> num_rows > 0)
+				{
+					echo '<br><h1>Najnowsze opinie o produkcie</h1>';
+			 		while($row2 = $result_oceny -> fetch_assoc())
+			 		{	
+			 			echo '<table class="komentarze"><tr><td>Ocena: </td>';
+			 			switch($row2['gwiazdka'])
+			 			{
+						    case 5:
+						        echo '<td><img src="images/oceny/gwiazdki5.png" alt="5gwiazdek"></td>';
+						        break;
+						    case 4:
+						        echo '<td><img src="images/oceny/gwiazdki4.png" alt="4gwiazdek"></td>';
+						        break;
+						    case 3:
+						        echo '<td><img src="images/oceny/gwiazdki3.png" alt="3gwiazdek"></td>';
+						        break;
+						    case 2:
+						        echo '<td><img src="images/oceny/gwiazdki2.png" alt="2gwiazdek"></td>';
+						        break;
+						    case 1:
+						        echo '<td><img src="images/oceny/gwiazdki1.png" alt="1gwiazdek"></td>';
+						        break;
+						}
+			 		
+			 			echo ' <td>Komentarz: '.$row2['opinia'].' </td></tr></table>';
+			 		}
+			 		//echo '</div>';
+			 	}else { echo '<span class="nie_oceniony"><br><h1>Produkt nie został jeszcze oceniony</h1></span>'; }
+
 			}
 		} else { echo "No results"; }
 	}
@@ -199,29 +232,6 @@
 	
 				
 ?>
-
-
-<script>
-	// do input dodac onchange="myFunction()
-//Funkcja na zliczanie dostawy 
-/*function myFunction()
-{
-	  var x = document.getElementById("ile_sztuk");
-	  //var dostawa = document.getElementById("dostawa1").value;
-
-	  var currentVal = x.value;
-	  if (currentVal % 5 == 1)
-	  {
-	    document.getElementById("dostawa").innerHTML = 12 + ((currentVal - 1) / 5) * 12;
-	    
-	  }
-
-	if (currentVal % 5 == 0)
-    {
-    	document.getElementById("dostawa").innerHTML = 12 + (((currentVal) / 5) -1) * 12;
-    }
-}*/
-</script>
 
 </body>
 </html>
