@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 17 Gru 2019, 14:48
--- Wersja serwera: 10.1.38-MariaDB
--- Wersja PHP: 7.3.3
+-- Czas generowania: 17 Gru 2019, 16:58
+-- Wersja serwera: 10.4.8-MariaDB
+-- Wersja PHP: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -97,7 +97,7 @@ CREATE TABLE `klienci` (
   `haslo` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `id_adres` int(11) DEFAULT NULL,
-  `uprawnienia` tinyint(3) NOT NULL DEFAULT '0' COMMENT '0 - klient, 1 - administrator'
+  `uprawnienia` tinyint(3) NOT NULL DEFAULT 0 COMMENT '0 - klient, 1 - administrator'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `koszyk` (
   `cena` int(11) NOT NULL,
   `id_produkty` int(11) NOT NULL,
   `id_klienci` int(11) NOT NULL,
-  `zlozono` int(11) DEFAULT '0'
+  `zlozono` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -164,10 +164,10 @@ CREATE TABLE `oferta_dnia` (
 
 CREATE TABLE `opinie` (
   `id_opinie` int(11) NOT NULL,
-  `id_produkty` int(11) NOT NULL DEFAULT '0' COMMENT '0 - ocena sklepu',
+  `id_produkty` int(11) NOT NULL DEFAULT 0 COMMENT '0 - ocena sklepu',
   `id_klienci` int(11) NOT NULL,
   `gwiazdka` int(11) DEFAULT NULL,
-  `opinia` text
+  `opinia` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -191,7 +191,7 @@ CREATE TABLE `produkty` (
   `id_produkty` int(11) NOT NULL,
   `nazwa` varchar(45) NOT NULL,
   `opis` text NOT NULL,
-  `opinie_klientow` text,
+  `opinie_klientow` text DEFAULT NULL,
   `cena` decimal(10,2) NOT NULL,
   `dostepna_ilosc` int(11) NOT NULL,
   `producent` varchar(45) NOT NULL,
@@ -199,7 +199,7 @@ CREATE TABLE `produkty` (
   `rozmiar` varchar(100) DEFAULT NULL,
   `zdjecie` varchar(50) NOT NULL DEFAULT 'default_product.png',
   `id_kategorie` int(11) NOT NULL,
-  `dostawa` int(11) NOT NULL DEFAULT '12'
+  `dostawa` int(11) NOT NULL DEFAULT 12
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -228,7 +228,17 @@ INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena
 (62, 'Zabawka Auto Taxi', 'Zabawka auto taxi, idealna dla dzieci powyżej 5 lat.', NULL, '35.00', 50, 'ZabawkiWorld', NULL, '', 'zabawka_autko_taxi.png', 11, 11),
 (63, 'Zabawka Samolot', 'Zabawka Samolot jest idealna dla dzieci, które bujają w obłokach. Samolot wykonany z plastiku, nie nadaje się dla dzieci poniżej 3 roku życia.', NULL, '55.00', 100, 'ZabawkiWorld', NULL, '', 'zabawka_samolot.png', 11, 10),
 (64, 'Zabawka kostka rubika', 'Zabawka kostka rubika 3x3, łamigłówka, idealna jako dodatek do prezentu. Zawiera małe elementy, nieodpowiednia dla dzieci poniżej 5 roku życia.', NULL, '20.00', 500, 'ZabawkiWorld', NULL, '3x3', 'kostka_rubika3x3.png', 11, 8),
-(65, 'Zabawka piłka kolorowa', 'Zabawka piłka kolorowa, miękka, wykonana z tworzywa sztucznego, w środku wypełniona puchem.', NULL, '25.00', 77, 'ZabawkiWorld', NULL, 'średnica: 30cm', 'zabawka_pilka.png', 11, 10);
+(65, 'Zabawka piłka kolorowa', 'Zabawka piłka kolorowa, miękka, wykonana z tworzywa sztucznego, w środku wypełniona puchem.', NULL, '25.00', 77, 'ZabawkiWorld', NULL, 'średnica: 30cm', 'zabawka_pilka.png', 11, 10),
+(66, 'Długopis Parker', 'Długopis Parker\r\nUrban Classic Muted Black GT', NULL, '90.00', 100, 'Parker', NULL, 'Brak danych', 'dlugopisParker.jpg', 4, 8),
+(67, 'Klocki: Czołg Panther ', 'Klocki COBI 3035 PzKpfw. V Panther. Czołg powstańczy', NULL, '120.00', 40, 'COBI', NULL, 'Brak danych', 'czolgPanther.png', 11, 12),
+(68, 'Długopis Parker VECTOR', 'Długopis PARKER VECTOR', NULL, '70.00', 150, 'Parker', NULL, 'Brak danych', 'długopis vector czerwony.jpg', 4, 8),
+(69, 'Długopis żelowy Pentel ', 'Długopis żelowy PENTEL ENERGEL BLN105', NULL, '10.00', 200, 'Pentel ', NULL, 'Brak danych', 'dlugopisPentel.jpg', 4, 5),
+(70, 'Piłka Adidas UEFA', 'Piłka nożna ADIDAS UEFA 2020', NULL, '200.00', 100, 'Adidas', NULL, 'Brak danych', 'pilka.jpg', 11, 15),
+(71, 'RamkaMuno', 'Ramka do zdjęć 27x27 Muno', NULL, '20.00', 80, 'Muno', NULL, '27x27cm', 'ramkaMuno.jpg', 7, 5),
+(73, 'Ramka Ribba', 'IKEA RIBBA Ramka biały 21x30cm głęboka biała rama', NULL, '20.00', 60, 'Ribba', NULL, '21x30cm', 'ramkaRibba.png', 7, 10),
+(74, 'Rama aluminiowa', 'Rama aluminiowa firmy Ramkowski', NULL, '40.00', 150, 'Ramkowski', NULL, '50x60', 'ramkaAluminiowa.png', 7, 8),
+(75, 'Naklejka Kawa', 'Naklejka na ścianę Kawa', NULL, '20.00', 155, 'Kuchnix', NULL, '15x15', 'naklejkaKawa.jpg', 6, 8),
+(76, 'Naklejka ścienna 3D Dziura w ścianie', 'Naklejka ścienna 3D dziura w ścianie, wakacje na Karaibach', NULL, '23.55', 100, 'Scienny', NULL, '13x26cm', 'naklejka3dDziurajpg.jpg', 6, 8);
 
 -- --------------------------------------------------------
 
@@ -438,7 +448,7 @@ ALTER TABLE `opinie`
 -- AUTO_INCREMENT dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT dla tabeli `promocje`
