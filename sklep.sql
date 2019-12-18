@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 17 Gru 2019, 14:48
+-- Czas generowania: 17 Gru 2019, 19:58
 -- Wersja serwera: 10.1.38-MariaDB
--- Wersja PHP: 7.3.3
+-- Wersja PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -228,7 +228,34 @@ INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena
 (62, 'Zabawka Auto Taxi', 'Zabawka auto taxi, idealna dla dzieci powyżej 5 lat.', NULL, '35.00', 50, 'ZabawkiWorld', NULL, '', 'zabawka_autko_taxi.png', 11, 11),
 (63, 'Zabawka Samolot', 'Zabawka Samolot jest idealna dla dzieci, które bujają w obłokach. Samolot wykonany z plastiku, nie nadaje się dla dzieci poniżej 3 roku życia.', NULL, '55.00', 100, 'ZabawkiWorld', NULL, '', 'zabawka_samolot.png', 11, 10),
 (64, 'Zabawka kostka rubika', 'Zabawka kostka rubika 3x3, łamigłówka, idealna jako dodatek do prezentu. Zawiera małe elementy, nieodpowiednia dla dzieci poniżej 5 roku życia.', NULL, '20.00', 500, 'ZabawkiWorld', NULL, '3x3', 'kostka_rubika3x3.png', 11, 8),
-(65, 'Zabawka piłka kolorowa', 'Zabawka piłka kolorowa, miękka, wykonana z tworzywa sztucznego, w środku wypełniona puchem.', NULL, '25.00', 77, 'ZabawkiWorld', NULL, 'średnica: 30cm', 'zabawka_pilka.png', 11, 10);
+(65, 'Zabawka piłka kolorowa', 'Zabawka piłka kolorowa, miękka, wykonana z tworzywa sztucznego, w środku wypełniona puchem.', NULL, '25.00', 77, 'ZabawkiWorld', NULL, 'średnica: 30cm', 'zabawka_pilka.png', 11, 10),
+(66, 'Długopis Parker', 'Długopis Parker\r\nUrban Classic Muted Black GT', NULL, '90.00', 100, 'Parker', NULL, 'Brak danych', 'dlugopisParker.jpg', 4, 8),
+(67, 'Klocki: Czołg Panther ', 'Klocki COBI 3035 PzKpfw. V Panther. Czołg powstańczy', NULL, '120.00', 40, 'COBI', NULL, 'Brak danych', 'czolgPanther.png', 11, 12),
+(68, 'Długopis Parker VECTOR', 'Długopis PARKER VECTOR', NULL, '70.00', 150, 'Parker', NULL, 'Brak danych', 'długopis vector czerwony.jpg', 4, 8),
+(69, 'Długopis żelowy Pentel ', 'Długopis żelowy PENTEL ENERGEL BLN105', NULL, '10.00', 200, 'Pentel ', NULL, 'Brak danych', 'dlugopisPentel.jpg', 4, 5),
+(71, 'RamkaMuno', 'Ramka do zdjęć 27x27 Muno', NULL, '20.00', 80, 'Muno', NULL, '27x27cm', 'ramkaMuno.jpg', 7, 5),
+(73, 'Ramka Ribba', 'IKEA RIBBA Ramka biały 21x30cm głęboka biała rama', NULL, '20.00', 60, 'Ribba', NULL, '21x30cm', 'ramkaRibba.png', 7, 10),
+(74, 'Rama aluminiowa', 'Rama aluminiowa firmy Ramkowski', NULL, '40.00', 150, 'Ramkowski', NULL, '50x60', 'ramkaAluminiowa.png', 7, 8),
+(75, 'Naklejka Kawa', 'Naklejka na ścianę Kawa', NULL, '20.00', 155, 'Kuchnix', NULL, '15x15', 'naklejkaKawa.jpg', 6, 8),
+(76, 'Naklejka ścienna 3D Dziura w ścianie', 'Naklejka ścienna 3D dziura w ścianie, wakacje na Karaibach', NULL, '23.55', 100, 'Scienny', NULL, '13x26cm', 'naklejka3dDziurajpg.jpg', 6, 8),
+(77, 'koszulka mama teraz odpoczywa', 'cudowny materiał ', NULL, '1999.00', 100, 'Bocian', NULL, 'XD', '355_1.jpg', 1, 20),
+(79, 'Mikrofala Samsung', 'Typ: Wolnostojąca\r\nWykonanie wnętrza: Emalia ceramiczna\r\nPojemność [l]: 23\r\nKierunek otwierania: W lewo\r\nZabezpieczenie przed dziećmi: TAK\r\nInne: Waga [kg]: 13\r\nGrill: TAK\r\nZastosowane technologie: Przycisk +30s.\r\nInne: Minutnik do 99 min.Tryb Eco\r\nProgramy: Gotowanie kombinowane 1\r\nRozmrażanie: TAK\r\nInne: Automatyczne gotowanie\r\nSterowanie: Elektroniczne\r\nWyświetlacz elektroniczny: TAK\r\nMinutnik: TAK\r\nIlość poziomów mocy: 6\r\nZegar czasu rzeczywistego: TAK\r\nWysokość [cm]: 27.5\r\nSzerokość [cm]: 48.9\r\nGłębokość [cm]: 35.4\r\nKolor: Lustrzany', NULL, '349.00', 99, '', NULL, '27.5x48.9x35.4', 'Samsung-GE83X-kuchenka-mikrofalowa-23l-GRILL.jpg', 9, 20),
+(80, 'iRobot Roomba 604', '3-stopniowy system odkurzania, automatyczny dobór sposobu czyszczenia do rodzaju powierzchni, bateria litowo-jonowa, powrót do stacji dokującej na życzenie użytkownika, technologia AeroVac, technologia Dirt Detect, technologia iADAPT - adaptacja do warunków otoczenia, tryb Spot Clean', NULL, '799.00', 132, 'iRobot', NULL, '33,5 x 9,3 cm', 'irobot-roomba-604,41621629809_7.jpg', 9, 20),
+(81, 'Pendrive DR.MEMORY Kupa, 32 GB ', 'Potrzebujesz niezawodnej stylowej pamięci dyskowej mieć zawsze przy sobie? Pendrive o pojemności 32 GB, dzięki pracy w standardzie Plug and Play jest automatycznie wykrywany przez komputery wyposażone w porty USB bez konieczności instalowania dodatkowych sterowników ,super gadget w połączeniu z przydatną rzeczą tworzy właśnie ten oto produkt. Pendrive dzięki małym wymiarom i specjalnemu uchwytowi można przypiąć do kluczy czy też smyczy co zapewni bezpieczeństwo przed utratą, lub zniszczeniem.\r\n\r\nJuż ósmy raz pomylił Ci się pendrive z pendrivem Twojego współpracownika? Tak, znamy to, serio, kiedyś mieliśmy ten sam problem ale od wprowadzenia naszych produktów na rynek już nigdy moje dane nie zostały nieumyślnie wykradzione przez współpracownika. Nasz pendrive oprócz wielu programów był także poddany sprawdzeniu mojej rodziny i przyjaciołom, co takie testy wykazały?', NULL, '42.00', 99, 'Bocian', NULL, '', 'pendrive-dr-memory-kupa-32-gb-w-iext55360634.jpg', 8, 20),
+(82, 'TELEFON DLA SENIORÓW', 'Bardzo głośny telefon stacjonarny, łatwy w obsłudze. Głośność głośników do 40 dB, głośność dzwonka do 80 dB, sygnalizacja dzwonka przy pomocy światełek. Trzy kolorystycznie zróżnicowane przyciski wyboru bezpośredniego.', NULL, '349.00', 99, 'Bocian', NULL, '', 'nokia-3310-dual-sim-granatowy,18676706473_3.jpg', 9, 20),
+(83, ' SUSZARKA DO WŁOSÓW', '', NULL, '349.00', 99, 'VALERA', NULL, '', '109771_5.jpg', 8, 20),
+(84, 'Pralka ', 'Wyręcz swoja kobiete, żeby w rzece była czysta woda', NULL, '1999.00', 99, 'SHARP', NULL, '133,5 x 139,3 cm', 'Pralka-SHARP-ES-HFM6103W3-PL-front1.jpg', 9, 120),
+(86, 'Bluza hoodie czarna', 'Bluza Hoodie to nasz kultowy model goszczący na polskich i alpejskich stokach od lat. Klasyczna czerń to idealny kolor dla każdego, kto dba o wygodę i dobrą prezencję. :) \r\nZ łatwością dopasujesz ją do reszty stylówy!', NULL, '199.00', 123, 'ZIMNO', NULL, 'L', '414-2017_zimno-2869.jpg', 5, 20),
+(88, 'Koszulka dzik', 'Klasyczna, czarna koszulka z wysokiej jakości bawełny z białym nadrukiem DZIK® odpornym na ścieranie i rozciągnięcia.  ', NULL, '80.00', 100, 'Warszawski koks', NULL, 'XL', '14286-czarna-koszulka-klasyk-muscle.jpg', 1, 12),
+(89, 'Bluza dla informatyka', 'Bluzy wykonane w 80% z bawełny ring-spun i w 20% poliesteru - trójwarstwowa tkanina. Najwyższej jakości gruby materiał o gramaturze 280g jest wygodny i wytrzymały. Bluzy są ciepłe i miłe w dotyku.', NULL, '95.00', 60, 'Russell - Authentic Sweatshirt', NULL, 'S', 'bluza_2.png', 5, 12),
+(90, 'Spodnie męskie bawełniane', 'Casualowe spodnie bawełniane, doskonale dopasowują się do męskiej sylwetki.', NULL, '50.00', 40, 'CHINOSY', NULL, '32', 'spodnie_1.png', 2, 12),
+(91, 'ADIDAS dresy', 'Spodnie dresowe, treningowe z serii TIRO 19', NULL, '124.00', 100, 'ADIDAS', NULL, 'S', 'spodnie_2.png', 2, 12),
+(92, 'Spodnie męskie Wrangler ', 'Klasyczne amerykańskie jeansy ', NULL, '180.00', 75, 'Wrangler ARIZONA', NULL, '32', 'spodnie_3.png', 2, 12),
+(93, 'Koszulka nosacze', 'Koszulka ze śmiesznym nadrukiem', NULL, '58.00', 66, 'Janusz&Szwagier', NULL, 'S', 'koszulka_1.png', 1, 12),
+(94, 'Bluza męska NASA', 'Modna męska bluza: NASA z kapturem rozpinana', NULL, '72.00', 99, 'NASA ', NULL, 'XL', 'bluza_3.png', 5, 12),
+(95, 'Bluza ADIDAS', 'Bluza marki ADIDAS to znakomita propozycja na trening oraz do użytku na co dzień.', NULL, '107.00', 55, 'ADIDAS', NULL, 'XL', 'bluza_4.png', 5, 12),
+(96, 'Koszulka Gypsy King', 'Koszulka do treningu i na co dzień. ', NULL, '99.00', 50, 'Gypsy King', NULL, 'XL', '61yujBUJeUL._UX679_.jpg', 1, 12),
+(97, 'Bluza Olympia', 'Elegancka, sportowa bluza.', NULL, '120.00', 44, 'Joe Weider', NULL, 'XXL', 'olympia.jpg', 5, 12);
 
 -- --------------------------------------------------------
 
@@ -438,7 +465,7 @@ ALTER TABLE `opinie`
 -- AUTO_INCREMENT dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT dla tabeli `promocje`
@@ -463,54 +490,11 @@ ALTER TABLE `zamowienie_produkty`
 --
 
 --
--- Ograniczenia dla tabeli `klienci`
---
-ALTER TABLE `klienci`
-  ADD CONSTRAINT `fk_klienci_adres` FOREIGN KEY (`id_adres`) REFERENCES `mydb`.`adres` (`id_adres`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Ograniczenia dla tabeli `koszyk`
 --
 ALTER TABLE `koszyk`
   ADD CONSTRAINT `FK_Klient` FOREIGN KEY (`id_klienci`) REFERENCES `klienci` (`id_klienci`),
   ADD CONSTRAINT `FK_Produkt` FOREIGN KEY (`id_produkty`) REFERENCES `produkty` (`id_produkty`);
-
---
--- Ograniczenia dla tabeli `oferta_dnia`
---
-ALTER TABLE `oferta_dnia`
-  ADD CONSTRAINT `fk_oferta_dnia_produkty1` FOREIGN KEY (`id_produkty`) REFERENCES `mydb`.`produkty` (`id_produkty`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Ograniczenia dla tabeli `opinie`
---
-ALTER TABLE `opinie`
-  ADD CONSTRAINT `opinie_ibfk_1` FOREIGN KEY (`id_produkty`) REFERENCES `produkty` (`id_produkty`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `opinie_ibfk_2` FOREIGN KEY (`id_klienci`) REFERENCES `klient` (`id_klienci`) ON UPDATE CASCADE;
-
---
--- Ograniczenia dla tabeli `produkty`
---
-ALTER TABLE `produkty`
-  ADD CONSTRAINT `fk_produkty_kategorie1` FOREIGN KEY (`id_kategorie`) REFERENCES `mydb`.`kategorie` (`id_kategorie`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Ograniczenia dla tabeli `promocje`
---
-ALTER TABLE `promocje`
-  ADD CONSTRAINT `fk_promocje_produkty1` FOREIGN KEY (`id_produkty`) REFERENCES `mydb`.`produkty` (`id_produkty`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Ograniczenia dla tabeli `zamowienia`
---
-ALTER TABLE `zamowienia`
-  ADD CONSTRAINT `fk_zamowienia_klienci1` FOREIGN KEY (`id_klienci`) REFERENCES `mydb`.`klienci` (`id_klienci`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Ograniczenia dla tabeli `zamowienie_produkty`
---
-ALTER TABLE `zamowienie_produkty`
-  ADD CONSTRAINT `fk_zamowienie_produkty_produkty1` FOREIGN KEY (`id_produkty`) REFERENCES `mydb`.`produkty` (`id_produkty`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
