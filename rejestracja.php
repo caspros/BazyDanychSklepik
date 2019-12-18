@@ -148,6 +148,7 @@ if (isset($_POST['email']))
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/hamburger.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link rel="stylesheet" href="css/rejestracja.css">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -166,17 +167,35 @@ if (isset($_POST['email']))
 </head>
 
 <body>
-	<!-- logo alledrogo -->
-	<div id="sticky_menu">
-		<ol>
-				
-			<li>
-				<a href="index.php">
-					<img src="images/logo.png" alt="logo" class="nav_img">
-				</a>
-			</li>
-		</ol>
-	</div>
+		 <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	 <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<div class="topnav" id="myTopnav">
+
+	    <a href="index.php" class="active">alledrogo</a>
+	    
+		<?php
+						if (isset($_SESSION['zaloguj']))
+						{
+							echo '<a href="logowanie.php">'.$_SESSION['zaloguj'].'</a>';
+						} else{
+							echo '<a href="wyloguj.php">'.$_SESSION['wyloguj'].'</a>';
+						}
+		?>
+	    <a href="koszyk.php">Koszyk</a>
+		<a href="zamowienia.php">Zamówienia</a>
+		<a href="ocena_produktu.php">Oceń produkt</a>
+		<a href="ocena_sklepu.php">Oceń sklep</a>
+		<a href="profil.php">Ustawienia</a>
+		
+	   
+	  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+	    <i class="fa fa-bars"></i>
+	  </a>
+	</div> 
 
 	<!--Główny Container----->
 	<div class="login-popup-wrap new_login_popup"> 
@@ -256,6 +275,18 @@ if (isset($_POST['email']))
 	<div id="footer">
 		Copyright &copy; 2019
 	</div>
+	<script>
+	/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+	/* to ten słynny hamburger*/
+	function myFunction() {
+	  var x = document.getElementById("myTopnav");
+	  if (x.className === "topnav") {
+	    x.className += " responsive";
+	  } else {
+	    x.className = "topnav";
+	  }
+	} 
+	</script>
 
 </body>
 </html>
