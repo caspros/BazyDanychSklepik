@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 17 Gru 2019, 19:58
--- Wersja serwera: 10.1.38-MariaDB
--- Wersja PHP: 7.3.2
+-- Czas generowania: 18 Gru 2019, 16:27
+-- Wersja serwera: 10.1.31-MariaDB
+-- Wersja PHP: 7.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -53,7 +53,7 @@ INSERT INTO `adres` (`id_adres`, `kod_pocztowy`, `miasto`, `ulica`, `nr_domu`, `
 (9, NULL, NULL, NULL, NULL, NULL, 14),
 (10, NULL, NULL, NULL, NULL, NULL, 15),
 (11, '50-111', 'Warszawa', 'Fajna', 51, 152, 16),
-(12, '58-533', 'Mysłakowic', 'Nowa', 12, 23, 17),
+(12, '58-533', 'Mysłakowice', 'Nowa', 12, 23, 17),
 (13, '02-200', 'Komikowo', 'Komikowa', 151, 1, 18);
 
 -- --------------------------------------------------------
@@ -152,9 +152,17 @@ INSERT INTO `koszyk` (`id_koszyk`, `ilosc`, `cena`, `id_produkty`, `id_klienci`,
 CREATE TABLE `oferta_dnia` (
   `id_oferta_dnia` int(11) NOT NULL,
   `data` datetime NOT NULL,
-  `cena_w_dniu` decimal(10,2) NOT NULL,
+  `poprzednia` decimal(10,2) NOT NULL,
   `id_produkty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `oferta_dnia`
+--
+
+INSERT INTO `oferta_dnia` (`id_oferta_dnia`, `data`, `poprzednia`, `id_produkty`) VALUES
+(1, '2019-12-18 00:00:00', '59.00', 8),
+(2, '2019-12-28 00:00:00', '399.00', 79);
 
 -- --------------------------------------------------------
 
@@ -179,7 +187,9 @@ INSERT INTO `opinie` (`id_opinie`, `id_produkty`, `id_klienci`, `gwiazdka`, `opi
 (4, 14, 7, 5, 'Kupiłem Kubek dla synka i był bardzo zadowolony! Bardzo szybka dostawa, polecam sklep alledrogo :D'),
 (5, 16, 6, 5, 'Nigdzie nie mogłem znaleźć bluzy z ziemniakiem, aż nagle natknąłem się na aukcje w sklepie alledrogo! Bluza doszła i jest świetna!'),
 (6, 0, 7, 1, 'Testowy komentarz o sklepie, jestem Adminem, to nie będę oceniał :)'),
-(7, 0, 5, 10, 'Najlepszy sklep jaki widziałem! Super ceny i szybka dostawa! Serdecznie polecam! :D ');
+(7, 0, 5, 10, 'Najlepszy sklep jaki widziałem! Super ceny i szybka dostawa! Serdecznie polecam! :D '),
+(8, 8, 7, 5, 'Super fajne'),
+(9, 8, 17, 1, 'Słaba ta koszulka, lipny materiał');
 
 -- --------------------------------------------------------
 
@@ -207,7 +217,7 @@ CREATE TABLE `produkty` (
 --
 
 INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena`, `dostepna_ilosc`, `producent`, `oceny`, `rozmiar`, `zdjecie`, `id_kategorie`, `dostawa`) VALUES
-(8, 'Koszulka Mike Tyson', 'Koszulka zrobiona z pomysłem', '4', '50.00', 89, 'BenoCORP', NULL, 'XL', 'koszulka_mike.png', 1, 12),
+(8, 'Koszulka Mike Tyson', 'Koszulka zrobiona z pomysłem', '4', '50.00', 88, 'BenoCORP', NULL, 'XL', 'koszulka_mike.png', 1, 12),
 (12, 'Spodnie Jeans Master', 'Wykonane z najlepszej jakości materiału Jeans, idealnie dopasowują się do ciała', '5', '100.00', 79, 'Jeans&Jeans', NULL, 'M', 'jeans_m.png', 2, 12),
 (14, 'Kubek Studenta', 'Kubek wykonany z porcelany z nadrukowanym napisem, który odźwierciedla brutalną rzeczywistość studentów', '5', '30.00', 88, 'KubekKuba', NULL, NULL, 'kubek_student1.png', 3, 10),
 (15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 85, 'DługiPisak sp. Z o.o', NULL, NULL, 'dlugopis_1.png', 4, 6),
@@ -239,7 +249,7 @@ INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena
 (75, 'Naklejka Kawa', 'Naklejka na ścianę Kawa', NULL, '20.00', 155, 'Kuchnix', NULL, '15x15', 'naklejkaKawa.jpg', 6, 8),
 (76, 'Naklejka ścienna 3D Dziura w ścianie', 'Naklejka ścienna 3D dziura w ścianie, wakacje na Karaibach', NULL, '23.55', 100, 'Scienny', NULL, '13x26cm', 'naklejka3dDziurajpg.jpg', 6, 8),
 (77, 'koszulka mama teraz odpoczywa', 'cudowny materiał ', NULL, '1999.00', 100, 'Bocian', NULL, 'XD', '355_1.jpg', 1, 20),
-(79, 'Mikrofala Samsung', 'Typ: Wolnostojąca\r\nWykonanie wnętrza: Emalia ceramiczna\r\nPojemność [l]: 23\r\nKierunek otwierania: W lewo\r\nZabezpieczenie przed dziećmi: TAK\r\nInne: Waga [kg]: 13\r\nGrill: TAK\r\nZastosowane technologie: Przycisk +30s.\r\nInne: Minutnik do 99 min.Tryb Eco\r\nProgramy: Gotowanie kombinowane 1\r\nRozmrażanie: TAK\r\nInne: Automatyczne gotowanie\r\nSterowanie: Elektroniczne\r\nWyświetlacz elektroniczny: TAK\r\nMinutnik: TAK\r\nIlość poziomów mocy: 6\r\nZegar czasu rzeczywistego: TAK\r\nWysokość [cm]: 27.5\r\nSzerokość [cm]: 48.9\r\nGłębokość [cm]: 35.4\r\nKolor: Lustrzany', NULL, '349.00', 99, '', NULL, '27.5x48.9x35.4', 'Samsung-GE83X-kuchenka-mikrofalowa-23l-GRILL.jpg', 9, 20),
+(79, 'Mikrofala Samsung', 'Typ: Wolnostojąca\r\nWykonanie wnętrza: Emalia ceramiczna\r\nPojemność [l]: 23\r\nKierunek otwierania: W lewo\r\nZabezpieczenie przed dziećmi: TAK\r\nInne: Waga [kg]: 13\r\nWysokość [cm]: 27.5\r\nSzerokość [cm]: 48.9\r\nGłębokość [cm]: 35.4\r\nKolor: Lustrzany', NULL, '349.00', 99, 'Mikrofalix', NULL, '27.5x48.9x35.4', 'Samsung-GE83X-kuchenka-mikrofalowa-23l-GRILL.jpg', 9, 20),
 (80, 'iRobot Roomba 604', '3-stopniowy system odkurzania, automatyczny dobór sposobu czyszczenia do rodzaju powierzchni, bateria litowo-jonowa, powrót do stacji dokującej na życzenie użytkownika, technologia AeroVac, technologia Dirt Detect, technologia iADAPT - adaptacja do warunków otoczenia, tryb Spot Clean', NULL, '799.00', 132, 'iRobot', NULL, '33,5 x 9,3 cm', 'irobot-roomba-604,41621629809_7.jpg', 9, 20),
 (81, 'Pendrive DR.MEMORY Kupa, 32 GB ', 'Potrzebujesz niezawodnej stylowej pamięci dyskowej mieć zawsze przy sobie? Pendrive o pojemności 32 GB, dzięki pracy w standardzie Plug and Play jest automatycznie wykrywany przez komputery wyposażone w porty USB bez konieczności instalowania dodatkowych sterowników ,super gadget w połączeniu z przydatną rzeczą tworzy właśnie ten oto produkt. Pendrive dzięki małym wymiarom i specjalnemu uchwytowi można przypiąć do kluczy czy też smyczy co zapewni bezpieczeństwo przed utratą, lub zniszczeniem.\r\n\r\nJuż ósmy raz pomylił Ci się pendrive z pendrivem Twojego współpracownika? Tak, znamy to, serio, kiedyś mieliśmy ten sam problem ale od wprowadzenia naszych produktów na rynek już nigdy moje dane nie zostały nieumyślnie wykradzione przez współpracownika. Nasz pendrive oprócz wielu programów był także poddany sprawdzeniu mojej rodziny i przyjaciołom, co takie testy wykazały?', NULL, '42.00', 99, 'Bocian', NULL, '', 'pendrive-dr-memory-kupa-32-gb-w-iext55360634.jpg', 8, 20),
 (82, 'TELEFON DLA SENIORÓW', 'Bardzo głośny telefon stacjonarny, łatwy w obsłudze. Głośność głośników do 40 dB, głośność dzwonka do 80 dB, sygnalizacja dzwonka przy pomocy światełek. Trzy kolorystycznie zróżnicowane przyciski wyboru bezpośredniego.', NULL, '349.00', 99, 'Bocian', NULL, '', 'nokia-3310-dual-sim-granatowy,18676706473_3.jpg', 9, 20),
@@ -297,7 +307,8 @@ INSERT INTO `zamowienia` (`id_zamowienia`, `data_zlozenia`, `data_wyslania`, `za
 (10, '2019-12-05 22:24:10', '0000-00-00', 0, 7, 1250),
 (11, '2019-12-06 20:59:09', '0000-00-00', 0, 5, 928),
 (12, '2019-12-13 15:26:07', '0000-00-00', 0, 5, 77),
-(13, '2019-12-13 16:10:28', '0000-00-00', 0, 5, 1480);
+(13, '2019-12-13 16:10:28', '0000-00-00', 0, 5, 1480),
+(14, '2019-12-17 21:19:51', '2019-12-17', 1, 17, 62);
 
 -- --------------------------------------------------------
 
@@ -342,7 +353,8 @@ INSERT INTO `zamowienie_produkty` (`id_zamowienie_produkty`, `ilosc`, `cena`, `i
 (23, 1, 50, 8, 5, 12),
 (24, 1, 15, 15, 5, 12),
 (25, 2, 50, 8, 5, 13),
-(26, 1, 1350, 54, 5, 13);
+(26, 1, 1350, 54, 5, 13),
+(27, 1, 50, 8, 17, 14);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -447,19 +459,19 @@ ALTER TABLE `klienci`
 -- AUTO_INCREMENT dla tabeli `koszyk`
 --
 ALTER TABLE `koszyk`
-  MODIFY `id_koszyk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_koszyk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT dla tabeli `oferta_dnia`
 --
 ALTER TABLE `oferta_dnia`
-  MODIFY `id_oferta_dnia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_oferta_dnia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT dla tabeli `opinie`
 --
 ALTER TABLE `opinie`
-  MODIFY `id_opinie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_opinie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT dla tabeli `produkty`
@@ -477,13 +489,13 @@ ALTER TABLE `promocje`
 -- AUTO_INCREMENT dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienie_produkty`
 --
 ALTER TABLE `zamowienie_produkty`
-  MODIFY `id_zamowienie_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_zamowienie_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Ograniczenia dla zrzutów tabel

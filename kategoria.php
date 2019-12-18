@@ -191,27 +191,61 @@
 			{
 		 		while($row = $result -> fetch_assoc())
 		 		{
-		       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
-				       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
-				       		<div class="zawartosc">
-				       			<table id="tabela">
-						       		<tr>
-						       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
-						       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
-						       		</tr>
-						       		<tr>
-							       		<td><div class="rozmiar">Rozmiar: ';
-							       		if(is_null($row["rozmiar"]))
-							       		{
-							       			echo 'Nie dotyczy';
-							       		}else echo $row["rozmiar"];
-							       		echo '</div></td>
-							       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
-							       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
-						       		</tr>
-					       		</table>
-				       		</div>
-		       			</div><a>';
+		 			//oferta dnia
+					$sql_oferta_dnia = "SELECT poprzednia, id_produkty, data FROM oferta_dnia WHERE id_produkty=".$row["id_produkty"];
+					$result_oferta = $conn -> query($sql_oferta_dnia);
+					if ($result_oferta -> num_rows > 0)
+					{
+						while($row_oferta = $result_oferta -> fetch_assoc())
+		 				{
+				       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat oferta_dnia">
+					       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
+					       		<div class="zawartosc">
+					       			<table id="tabela">
+							       		<tr>
+							       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
+							       			<th><div id="stara_cena">Stara cena: <s>'.$row_oferta['poprzednia'].' PLN</s></div><br><div id="cena">Cena po rabacie: '.$row["cena"].' PLN<span id="gwiazdka">*</span></b></div><br>
+							       			*Oferta ważna do '.substr($row_oferta['data'], 0,10).' lub do wyczerpania zapasów</th>
+							       		</tr>
+							       		<tr>
+								       		<td><div class="rozmiar">Rozmiar: ';
+								       		if(is_null($row["rozmiar"]))
+								       		{
+								       			echo 'Nie dotyczy';
+								       		}else echo $row["rozmiar"];
+								       		echo '</div></td>
+								       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+								       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
+							       		</tr>
+						       		</table>
+					       		</div>
+			       			</div><a>';
+				       	}
+			       	}
+			       	else
+			       	{
+			       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
+						       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
+						       		<div class="zawartosc">
+						       			<table id="tabela">
+								       		<tr>
+								       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
+								       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
+								       		</tr>
+								       		<tr>
+									       		<td><div class="rozmiar">Rozmiar: ';
+									       		if(is_null($row["rozmiar"]))
+									       		{
+									       			echo 'Nie dotyczy';
+									       		}else echo $row["rozmiar"];
+									       		echo '</div></td>
+									       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+									       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
+								       		</tr>
+							       		</table>
+						       		</div>
+				       			</div><a>';
+			       	}
 				}
 
 				echo "<br><br><br><br>";
@@ -250,32 +284,71 @@
 			$row1 = $result1 -> fetch_assoc();
 
 
+
+
+
 			echo '<h1>'.$row1['kategoria'].'</h1>';
 			if ($result -> num_rows > 0)
 			{
 		 		while($row = $result -> fetch_assoc())
 		 		{
-		       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
-				       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
-				       		<div class="zawartosc">
-				       			<table id="tabela">
-						       		<tr>
-						       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
-						       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
-						       		</tr>
-						       		<tr>
-							       		<td><div class="rozmiar">Rozmiar: ';
-							       		if(is_null($row["rozmiar"]))
-							       		{
-							       			echo 'Nie dotyczy';
-							       		}else echo $row["rozmiar"];
-							       		echo '</div></td>
-							       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
-							       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
-						       		</tr>
-					       		</table>
-				       		</div>
-		       			</div><a>';
+		 			//oferta dnia
+					$sql_oferta_dnia = "SELECT poprzednia, id_produkty, data FROM oferta_dnia WHERE id_produkty=".$row["id_produkty"];
+					$result_oferta = $conn -> query($sql_oferta_dnia);
+					if ($result_oferta -> num_rows > 0)
+					{
+						while($row_oferta = $result_oferta -> fetch_assoc())
+		 				{
+							echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat oferta_dnia">
+					       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
+					       		<div class="zawartosc">
+					       			<table id="tabela">
+							       		<tr>
+							       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
+							       			<th><div id="stara_cena">Stara cena: <s>'.$row_oferta['poprzednia'].' PLN</s></div><br><div id="cena">Cena po rabacie: '.$row["cena"].' PLN<span id="gwiazdka">*</span></b></div><br>
+							       			*Oferta ważna do '.substr($row_oferta['data'], 0,10).' lub do wyczerpania zapasów</th>
+							       		</tr>
+							       		<tr>
+								       		<td><div class="rozmiar">Rozmiar: ';
+								       		if(is_null($row["rozmiar"]))
+								       		{
+								       			echo 'Nie dotyczy';
+								       		}else echo $row["rozmiar"];
+								       		echo '</div></td>
+								       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+								       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
+							       		</tr>
+						       		</table>
+					       		</div>
+			       			</div><a>';
+			       		}
+					}
+					else
+					{
+						echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
+					       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
+					       		<div class="zawartosc">
+					       			<table id="tabela">
+							       		<tr>
+							       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
+							       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
+							       		</tr>
+							       		<tr>
+								       		<td><div class="rozmiar">Rozmiar: ';
+								       		if(is_null($row["rozmiar"]))
+								       		{
+								       			echo 'Nie dotyczy';
+								       		}else echo $row["rozmiar"];
+								       		echo '</div></td>
+								       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+								       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
+							       		</tr>
+						       		</table>
+					       		</div>
+			       			</div><a>';
+					}
+
+		       		
 				}
 
 				echo "<br><br><br><br>";
