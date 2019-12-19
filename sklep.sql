@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 18 Gru 2019, 16:27
+-- Czas generowania: 20 Gru 2019, 00:03
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -223,7 +223,7 @@ INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena
 (15, 'Długopis ze ściągą', 'Długopis z miejscem na ściąge, idealny dla ucznia, studenta', '5', '15.00', 85, 'DługiPisak sp. Z o.o', NULL, NULL, 'dlugopis_1.png', 4, 6),
 (16, 'Bluza z ziemniakiem', 'Bluza wykonana z tworzywa sztucznego, idealna aby wyróżnić się z tłumu', '3', '70.00', 92, 'Bluzex sp. Z o.o', NULL, 'L', 'bluza_1.png', 5, 12),
 (17, 'Naklejka na podłogę Kosmos', 'Kosmiczna naklejka na podłogę, duże nasycenie barw, realistyczna', '5', '60.00', 91, 'Naklejkownia sp. Z o.o', NULL, '100cm x 150cm', 'naklejka_1.png', 6, 15),
-(18, 'Koszulka biała KONSTYTUCJA', 'Biała koszulka doskonałej jakości z nadrukowanym napisem KONSTYTUCJA. Ulubiona koszulka Lecha Wałęsy', '5', '75.00', 92, 'LechWałęsaCompany', NULL, 'M', 'koszulka_otua.png', 1, 12),
+(18, 'Koszulka biała KONSTYTUCJA', 'Biała koszulka doskonałej jakości z nadrukowanym napisem KONSTYTUCJA. Ulubiona koszulka Lecha Wałęsy', '5', '75.00', 92, 'LechCompany', NULL, 'M', 'koszulka_otua.png', 1, 12),
 (51, 'Ramka na zdjęcie', 'Zawieszki i fleksy sprowadzamy od włoskiego producenta. Metale te, są najwyższej jakości – nie wyginają się i nie wyłamują. Będą Ci służyć przez lata bez potrzeby wymiany!', NULL, '19.50', 92, 'RamkiToHajs', NULL, '10x15', 'ramka_15_10.png', 7, 12),
 (52, 'Koszulka DESTYLACJA', 'Oryginalna koszulka męska DESTYLACJA z krótkim rękawem firmy S&S. Wykonana z najwyższej jakości bawełny, zapewniającej komfort i wygodę użytkowania.', NULL, '77.50', 92, 'S&S', NULL, 'M', 'koszulka_destylacja.png', 1, 12),
 (53, 'Whisky Jack Daniel\'s', 'Whisky Jack Daniel\'s to najpopularniejsza amerykańska whiskey produkowana od 1866 roku, kiedy to Jasper „Jack” Daniel zaufał swojej intuicji i postawił na stworzenie wysokiej jakości trunku. Jej unikalny smak zawdzięczany jest prawie dziesięcio- dniowej filtracji destylatu przez 3- metrową warstwę klonowego węgla drzewnego.', NULL, '100.00', 95, 'Jack Daniel\'s', NULL, '0,7L', 'whisky_jack.png', 10, 15),
@@ -253,7 +253,7 @@ INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena
 (80, 'iRobot Roomba 604', '3-stopniowy system odkurzania, automatyczny dobór sposobu czyszczenia do rodzaju powierzchni, bateria litowo-jonowa, powrót do stacji dokującej na życzenie użytkownika, technologia AeroVac, technologia Dirt Detect, technologia iADAPT - adaptacja do warunków otoczenia, tryb Spot Clean', NULL, '799.00', 132, 'iRobot', NULL, '33,5 x 9,3 cm', 'irobot-roomba-604,41621629809_7.jpg', 9, 20),
 (81, 'Pendrive DR.MEMORY Kupa, 32 GB ', 'Potrzebujesz niezawodnej stylowej pamięci dyskowej mieć zawsze przy sobie? Pendrive o pojemności 32 GB, dzięki pracy w standardzie Plug and Play jest automatycznie wykrywany przez komputery wyposażone w porty USB bez konieczności instalowania dodatkowych sterowników ,super gadget w połączeniu z przydatną rzeczą tworzy właśnie ten oto produkt. Pendrive dzięki małym wymiarom i specjalnemu uchwytowi można przypiąć do kluczy czy też smyczy co zapewni bezpieczeństwo przed utratą, lub zniszczeniem.\r\n\r\nJuż ósmy raz pomylił Ci się pendrive z pendrivem Twojego współpracownika? Tak, znamy to, serio, kiedyś mieliśmy ten sam problem ale od wprowadzenia naszych produktów na rynek już nigdy moje dane nie zostały nieumyślnie wykradzione przez współpracownika. Nasz pendrive oprócz wielu programów był także poddany sprawdzeniu mojej rodziny i przyjaciołom, co takie testy wykazały?', NULL, '42.00', 99, 'Bocian', NULL, '', 'pendrive-dr-memory-kupa-32-gb-w-iext55360634.jpg', 8, 20),
 (82, 'TELEFON DLA SENIORÓW', 'Bardzo głośny telefon stacjonarny, łatwy w obsłudze. Głośność głośników do 40 dB, głośność dzwonka do 80 dB, sygnalizacja dzwonka przy pomocy światełek. Trzy kolorystycznie zróżnicowane przyciski wyboru bezpośredniego.', NULL, '349.00', 99, 'Bocian', NULL, '', 'nokia-3310-dual-sim-granatowy,18676706473_3.jpg', 9, 20),
-(83, ' SUSZARKA DO WŁOSÓW', '', NULL, '349.00', 99, 'VALERA', NULL, '', '109771_5.jpg', 8, 20),
+(83, ' SUSZARKA DO WŁOSÓW', 'Opis suszarki, suszarka suszy i działa', NULL, '349.00', 99, 'VALERA', NULL, '', '109771_5.jpg', 8, 20),
 (84, 'Pralka ', 'Wyręcz swoja kobiete, żeby w rzece była czysta woda', NULL, '1999.00', 99, 'SHARP', NULL, '133,5 x 139,3 cm', 'Pralka-SHARP-ES-HFM6103W3-PL-front1.jpg', 9, 120),
 (86, 'Bluza hoodie czarna', 'Bluza Hoodie to nasz kultowy model goszczący na polskich i alpejskich stokach od lat. Klasyczna czerń to idealny kolor dla każdego, kto dba o wygodę i dobrą prezencję. :) \r\nZ łatwością dopasujesz ją do reszty stylówy!', NULL, '199.00', 123, 'ZIMNO', NULL, 'L', '414-2017_zimno-2869.jpg', 5, 20),
 (88, 'Koszulka dzik', 'Klasyczna, czarna koszulka z wysokiej jakości bawełny z białym nadrukiem DZIK® odpornym na ścieranie i rozciągnięcia.  ', NULL, '80.00', 100, 'Warszawski koks', NULL, 'XL', '14286-czarna-koszulka-klasyk-muscle.jpg', 1, 12),
@@ -265,7 +265,11 @@ INSERT INTO `produkty` (`id_produkty`, `nazwa`, `opis`, `opinie_klientow`, `cena
 (94, 'Bluza męska NASA', 'Modna męska bluza: NASA z kapturem rozpinana', NULL, '72.00', 99, 'NASA ', NULL, 'XL', 'bluza_3.png', 5, 12),
 (95, 'Bluza ADIDAS', 'Bluza marki ADIDAS to znakomita propozycja na trening oraz do użytku na co dzień.', NULL, '107.00', 55, 'ADIDAS', NULL, 'XL', 'bluza_4.png', 5, 12),
 (96, 'Koszulka Gypsy King', 'Koszulka do treningu i na co dzień. ', NULL, '99.00', 50, 'Gypsy King', NULL, 'XL', '61yujBUJeUL._UX679_.jpg', 1, 12),
-(97, 'Bluza Olympia', 'Elegancka, sportowa bluza.', NULL, '120.00', 44, 'Joe Weider', NULL, 'XXL', 'olympia.jpg', 5, 12);
+(97, 'Bluza Olympia', 'Elegancka, sportowa bluza.', NULL, '120.00', 44, 'Joe Weider', NULL, 'XXL', 'olympia.jpg', 5, 12),
+(98, 'Szampan Moet', 'Wino musujące Moet & Chandon ', NULL, '399.00', 15, 'Moet & Chandon', NULL, '1L', 'moet.png', 10, 20),
+(99, 'Wino wytrawne', 'Wino wytrawne nie wiadomo jakiej marki, hehe', NULL, '15.00', 100, 'WinoMarkiWino', NULL, '0,75L', 'wino1.png', 10, 12),
+(100, 'Wino Słodkie', 'Wino słodkie marki Wino', NULL, '21.00', 100, 'WinoMarkiWino', NULL, '1 L', 'wino2.png', 10, 15),
+(101, 'Wino Półsłodkie', 'Wino Półsłodkie marki wino', NULL, '23.00', 100, 'WinoMarkiWino', NULL, '0,75L', 'wino3.png', 10, 12);
 
 -- --------------------------------------------------------
 
@@ -477,7 +481,7 @@ ALTER TABLE `opinie`
 -- AUTO_INCREMENT dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id_produkty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT dla tabeli `promocje`
