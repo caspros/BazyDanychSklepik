@@ -251,7 +251,7 @@
 						       		</tr>
 					       		</table>
 				       		</div>
-		       			</div><a>';
+		       			</div></a>';
 		    }
 		}
 		else { echo "Brak produktów w podanej kategorii"; }
