@@ -34,7 +34,6 @@
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 		<link rel="stylesheet" type="text/css" href="css/hamburger.css">
 	<link rel="stylesheet" type="text/css" href="css/mobile.css" media="(max-width: 800px">
-s
 	<link rel="stylesheet" type="text/css" href="css/koszyk.css">
 	<link rel="stylesheet" type="text/css" href="css/add_product.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">

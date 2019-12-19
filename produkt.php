@@ -159,9 +159,9 @@
 			       				<div class="nazwa_prod">
 			       					<b>'.$row["nazwa"].'</b>
 			       				</div>
-			       				<img class="zdj" src="images/products/'.$row["zdjecie"].'" width="50%" height="50%" alt="product.png"><br>
+			       				<img class="zdj" src="images/products/'.$row["zdjecie"].'"  alt="product.png"><br>
 					       		<div id="dane_boczne">
-					       			<br><br><br><b>Specyfikacja produktu</b><br><br><br>
+					       			<br><b>Specyfikacja produktu</b><br><br><br>
 						       		<div id="dane">Rozmiar: ';
 							       		if(is_null($row["rozmiar"]))
 							       		{
