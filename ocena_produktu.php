@@ -176,12 +176,18 @@
 	 			
 	 				echo '<div class="zawartosc">
 				       			<table id="tabela">
+						       		<td rowspan="2">
+						       			<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="120" height="120" alt="product.png"></div></a>					       			
+						       		</td>
+
+						       		<td colspan="2">
+							       			<div class="nazwa"><b>'.$row["nazwa"].'</b></div>
+						       		</td>
+
 						       		<tr>
-						       			<td><a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="120" height="120" alt="product.png"></div><a></td>
-						       			<td><div class="nazwa"><b>'.$row["nazwa"].'</b></div></td>
-						       			<td><div id="cena">Cena: '.$row["cena"].' PLN</b></div></td>
-						       			<td>Zakupiono: '.$row["data_zlozenia"].'</td>
-						       			<td><a href="ocena_przedmiotu.php?id_produkty='.$row["id_produkty"].'"><button id="ocen_produkt_btn" >Oceń produkt</button></a></td>
+							       		<td><div id="cena">Cena: '.$row["cena"].' PLN</b></div></td>
+							       		<td>Zakupiono: '.$row["data_zlozenia"].'</td>
+							       		<td><a href="ocena_przedmiotu.php?id_produkty='.$row["id_produkty"].'"><button id="ocen_produkt_btn" >Oceń produkt</button></a></td>
 						       		</tr>
 					       		</table>
 	       					</div>';
@@ -220,19 +226,34 @@
 				{
 			 		while($row2 = $result2 -> fetch_assoc())
 			 		{
-	 					echo '
-				       		<div class="zawartosc">
+	 					echo '<div class="zawartosc">
 				       			<table id="tabela">
 						       		<tr>
-						       			<td rowspan="2"><a href="produkt.php?id_produkty='.$row2["id_produkty"].'" id="product_link"><div id="zdjecie"><img src="images/products/'.$row2["zdjecie"].'" width="120" height="120" alt="product.png"></div></a></td>
-						       			<td colspan="2"><div class="nazwa"><b>'.$row2["nazwa"].'</b></div></td>
-						       			<td><div id="cena">Cena: '.$row2["cena"].' PLN</b></div></td>
+						       			<td rowspan="2">
+							       			<a href="produkt.php?id_produkty='.$row2["id_produkty"].'" id="product_link"><div id="zdjecie"><img src="images/products/'.$row2["zdjecie"].'" width="120" height="120" alt="product.png"></div>
+							       			</a>
+						       			</td>
+
+						       			<td colspan="2">
+							       			<div class="nazwa">
+							       				<b>'.$row2["nazwa"].'</b>
+							       			</div>
+						       			</td>
+
+						       			<tr>
+						       			<td><div id="cena">
+							       				Cena: '.$row2["cena"].' PLN</b>
+							       			</div>						       			
+							       		</td>
+							       		</tr>
 						       			
 						       		</tr>
+
 						       		<tr>
 						       			<td>Ocena: '.$row["gwiazdka"].'</td>
 						       			<td>Opinia: '.$row["opinia"].'</td>
 						       		</tr>
+
 					       		</table>
 	       					</div>';
 	 				}
