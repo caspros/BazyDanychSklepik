@@ -1,17 +1,24 @@
 /* rendering well on different browsers */
-* {
-     -moz-box-sizing: border-box; /* Firexfox */
+* {     -moz-box-sizing: border-box; /* Firexfox */
      -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
      box-sizing: border-box; /* IE */
 }
 
-/* SEKCJA CSS DO <div> -----------------*/
-#container {
-	width: 100%;
-
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
-#nav {
+/* SEKCJA CSS DO <div> -----------------*/
+#container {
+	background: #FFFFFF;
+	margin: 2.5% auto;
+	width: 95%;
+	padding: 1rem;
+}
+
+#sticky_menu {
 	width: 100%;
 	padding: 10px 0;
 	background-color: #FFFFFF;
@@ -25,23 +32,22 @@ text-align: center;
 }
 
 #main {
-	padding-top: 10px;
-	width: 1000px;
+
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: justify;
 	font-style: italic;
 }
 
-#sidebar {
-
-}
-
 #footer {
+	color: white;
+	width: 100%;
 	text-align: center;
-	background-color: #FFFFFF;
-	padding: 30px;
+	background-color: #444;
+	padding: 2rem 2rem 2rem 2rem;
 }
+
 
 /* ELEMENTY STRONY -----------------*/
 body {
@@ -53,8 +59,10 @@ body {
 }
 
 h1 {
+	font-style: normal;
 	text-align: center;
 	height: 20 px;
+	color: #FF5A00;
 }
 
 h2 {
@@ -98,189 +106,236 @@ ol > li{
 	height: 40px;
 }
 
-/* NOWE MENU */
-#menu ul {
-  z-index: 1;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #444;
+/* Div categories -----------------*/
+
+.kat{
+	color: #FF5A00;
 }
 
-#menu li {
-  float: left;
-  position: relative;
-  left: 30%;
-}
-
-#menu li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-#menu li a:hover {
-  background-color: #111;
-}
-
-/* STICKY MENU */
-.sticky {
-	width: 100%;
-	position: fixed;
-	left: 0;
-	top: 0;
-	z-index: 100;
-}
-
-.nav_img {
-	position: relative;
-	right: 200px;
-	padding-top: 6px;
-	width: 80%;
-	height: 70%;
-	background-color: white;
-}
-
-
-.search_button {
-	margin-left: 10px;
-	float: left;
-	background-color: #FF5A00;
-	color: white;
-	border: none;
-	padding: 5px;
+#categories{
+	margin-left: 40px;
+	background-color: #FFFFFF;
 	text-align: center;
-  	text-decoration: none;
-  	font-size: 16px;
+	font-style: normal;
+	width: 12%;
+	float: left;
+	line-height: 15px;
+	height: inherit;
 }
 
-.search_button:hover{
-	background-color: #ff8800;
+#categories a{
+	padding-top: 5px;
+	display: block;
+	height: 28px;
+	text-decoration: none;
+	border: 1px solid #c8d3db;
+	border-radius: 15px;
+	color: black;
 }
 
-.search_input{
-	width: 320px;
+#categories a:hover{
+	background-color: #ECEFF1; 
+	color: red;
 }
 
-.form_inline{
+/* Div daily_offer -----------------*/
+
+.daily_offers{
+	width: 80%;
+	margin: auto;
+	border: 2px solid #ECEFF1;
+	overflow: hidden;
+	position: relative;
+
+}
+
+.slider{
+	display: flex;
+	width: 100%;
+	height: 400px;
+}
+
+#prevBtn{
 	position: absolute;
-  	align-items: center;
-  	display: flex;
-  }
-
-.koszyk{
-	margin-left: 290px;
-	padding: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
+	top: 50%;
+	z-index: 10;
+	left: 2%;
+	font-size: 30px;
+	color: #FF5A00;
+	cursor: pointer;
 }
 
-.koszyk:hover{
-	background-color: #f1f1f1;
+#nextBtn{
+	position: absolute;
+	top: 50%;
+	z-index: 10;
+	right: 2%;
+	font-size: 30px;
+	color: #FF5A00;
+	cursor: pointer;
 }
 
+/* Products main site-----------------*/
 
-/* DROPDOWN MENU PROFILE */
-.profil{
+#products{
 	position: relative;
-	left: 200px;
+	left: 12%;
+	text-align: center;
+ 	width: 90%;
+ 	background-color: #grey;
 }
 
-
-
-#dropmenu{
-	display: none;
+.product{
+	color: black;
 	position: relative;
-	left: 200px;
-	margin: 0px;
-	padding: 0px;
+	left: 5%;
+	text-align: center;
+	padding: 1px;
+	margin: 8px;
+	min-width: 190px;
+	min-height: 190px;
+	border: solid 1px #FF5A00;
+	float: left;
+	font-size: 13px;
+	font-style: normal;
+	background-color: #ECEFF1;
+}
+
+.product:hover{
+	transition-duration: 0.4s;
+	transform: scale(1.05,1.05);
+	background-color: #e4f0e7;
+	cursor: pointer;
 }
 
 
-.dropbtn {
-  background-color: #ffffff;
-  color: black;
-  padding: 8px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
 
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #f1f1f1;
-}
+/* Div promo -----------------*/
 
-.dropdown {
-  position: relative;
-  left: 200px;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.show {
-	display:block;
-}
-
-#p1{
-	 display: inline-block;
+#comentaries{
+	border: 3px solid grey;
+	
+	margin: 10px;
+	padding: 10px;
+	clear: both;
 }
 
 
-/* DROPDOWN MENU KATEGORIES */
-.dropbtn_kat {
-  background-color: #444;
-  color: white;
-  padding: 14px 16px;
-  border: none;
-  cursor: pointer;
-  height: 50px;
-  text-align: center;
+/*why_us --------------------- */
+
+#why_us{
+	clear: both;
 }
 
-.dropbtn_kat:hover, .dropbtn:focus {
-  background-color: #111;
+.why_us_content{
+	position: relative;
+	left: 12%;
+	font-style: normal;
+	text-align: center;
+	border: 2px solid #FF5A00;
+	border-radius: 30px;
+	padding: 7px;
+	margin: 25px;
+	width: 415px;
+	height: 415px;
+	float: left;
+	background-color: #fcfeff;
+	transition-duration: 0.4s;
 }
 
-.dropdown-content_kat {
-  display: none;
-  position: absolute;
-  left: 360px;
-  top: 107px;
-  background-color: #444;
-  min-width: 160px;
-  overflow: auto;
-  text-align: center;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+.why_us_content:hover{
+	transition-duration: 0.4s;
+	transform: scale(1.05,1.05);
 }
 
-.dropdown-content_kat a {
-  color: white;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  background-color: #4d4d4d;
+/* Skladanie_zam.php */
+
+#adres{
+	font-size: 25px;
+	text-align: center;
 }
 
-.dropdown-content_kat a:hover {background-color: #111}
+.ustawienia_link{
+	color: #FF5A00;
 
-.show1 {display:block;}
+}
+
+.ustawienia_link:hover{
+	color: red;
+	background-color: #ECEFF1;
+}
+
+#dalej_btn{
+	width: 150px;
+	min-height: 40px;
+	margin-left: 10px;
+    font-size: 25px;
+    background-color: #FF5A00;
+    color: white;
+    border: none;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    padding-bottom: 5px;
+}
+
+#dalej_btn:hover{
+    background-color: #ff8800;
+}
+
+/* Skladanie_zam_next.php */
+
+#podsumowanie_prod{
+	text-align: center;
+}
+
+#podsumowanie1{
+	text-align: center;
+}
+
+#uwaga{
+	font-style: italic;
+}
+
+#dostaw{
+	text-align: center;
+	color: green;
+}
+
+/* ocena_sklepu.php */
+
+#informacja1{
+	text-align: center;
+}
+
+#formularz{
+	position: relative;
+	left: 25%;
+	width: 50%;
+	text-align: center;
+}
+
+#koment{
+	position: relative;
+	right: 27%;
+}
+
+#dziekujemy{
+	text-align: center;
+}
+
+/* FAQ, regulaminy */
+
+#regulamin{
+	position: relative;
+	left: 17%;
+	width: 65%;
+	text-align: center;
+}
+
+#FAQ{
+	position: relative;
+	left: 13%;
+	width: 75%;
+	text-align: center;
+}

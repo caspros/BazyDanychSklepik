@@ -1,0 +1,262 @@
+<----------------------------------------------------------------------------------------------------------------------->
+
+Nazwa: Dodawanie komentarzy pod konkretnym produktem
+
+Aktorzy: Klient (zalogowany, który chce dodać komentarz)
+
+Cel: Dodanie komentarza
+
+Warunki wstępne:
+	1) zalogowany klient
+	2) dany produkt został wcześniej zakupiony przez danego klienta
+
+Przepływ główny:
+	1) użytkownik na stronie głównej klika przycisk "Witaj, zaloguj się" i z rozwijanej listy wybiera opcję "Oceń produkt"
+	2) klient wybiera produkt klika w "Dodaj komentarz"
+	3) klient przyznaje ocenę od 1 do 5 gwiazdek i pisze słowną opinię
+	4) klient potwierdza kometarz wciskając przycisk "Dodaj komentarz"
+
+Warunki końcowe:
+	1) komentarz został dodany pod konkretnym produktem
+
+Wyjątki: 
+	długość komentarza przekracza 255 znaków - komentarza nie dodajemy i wyświetlamy komunikat o za długim komentarzu
+
+<----------------------------------------------------------------------------------------------------------------------->
+
+Nazwa: Dodawanie oceny sklepu
+
+Aktorzy: Klient (zalogowany, który chce dodać ocenę)
+
+Cel: Dodanie oceny
+
+Warunki wstępne:
+	1) zalogowany klient
+	2) zamówienie klienta zostało wcześniej zrealizowane
+	
+Przepływ główny: 
+	1) Klient klika "Dodaj ocenę" na stronie głównej
+	2) Klient przyznaje ocenę od 1 do 5 gwiazdek i pisze słowną opinię
+	3) Klient zatwierdza komentarz
+
+Warunki końcowe:
+	1) ocena sklepu została dodana
+
+Wyjątki: 
+	długość komentarza przekracza 255 znaków - komentarza nie dodajemy i wyświetlamy komunikat o za długim komentarzu
+
+<----------------------------------------------------------------------------------------------------------------------->
+
+Nazwa: Logowanie
+
+Aktorzy: Administrator / klient 
+
+Cel: Zalogowanie się do strony sklepu
+
+Warunki wstępne: 
+	1) niezalogowany użytkownik
+	2) użytkownik posiada już konto na stronie
+	
+Przepływ główny:
+	1) użytkownik na stronie głównej klika przycisk "Witaj, zaloguj się" i z rozwijanej listy wybiera opcję "Zaloguj"
+	2) użytkownik zostaje przeniesiony na stronę logowania
+	3) użytkownik wypełnia formularz logowania się
+	4) użytkownik po wypełnieniu formularza klika przycisk "Zaloguj się"
+	5) użytkownik zostaje zalogowany i przeniesiony na stronę główną
+
+Warunki końcowe:
+	1) użytkownik został zalogowany
+
+Wyjątki: 
+	1) Błędne dane logowania: pusty formularz lub złe dane logowania - zostaje wyświetlony komunikat "Nieprawidłowy email lub hasło!"
+	
+<----------------------------------------------------------------------------------------------------------------------->
+
+Nazwa: Rejestracja
+
+Aktorzy: Klient 
+
+Cel: Utworzenie konta na stronie sklepu
+
+Warunki wstępne:
+	1) klient nie jest zalogowany
+	2) klient nie posiada konta na stronie
+	
+Przepływ główny:
+	1) użytkownik na stronie głównej klika przycisk "Witaj, zaloguj się" i z rozwijanej listy wybiera opcję "Zaloguj"
+	2) użytkownik zostaje przeniesiony na stronę logowania
+	3) użytkownik klika odnośnik "Nie posiadasz konta? Zarejestruj się!"
+	4) użytkownik zostaje przeniesiony na stronę rejestracji
+	5) użytkownik wypełnia wszystkie dane w formularzu i zaznacza checkbox "Akceptuje regulamin"
+	6) użytkownik otrzymuje komunikat: "Dziękujemy za rejestrację!" i może wrócić do strony głównej i zalogować się
+
+Warunki końcowe:
+	1) użytkownik został zarejestrowany
+
+Wyjątki: 
+	Następujące warunki muszą zostać spełnione, inaczej użytkownik dostaje stosowny komunikat:
+
+	1) Hasło musi mieć długość od 5 do 20 znaków
+	2) Hasła powinny być takie same w formularzach "Hasło" i "Powtórz hasło"
+	3) Imie i nazwisko musi zaczynać się z dużej litery
+	4) Email powinien zawierać prawidłowy sufiks np. "@gmail.com"
+	5) Pole "Akceptuje regulamin" musi być zaznaczone
+
+	
+<----------------------------------------------------------------------------------------------------------------------->
+
+Nazwa: Dodawanie produktów
+
+Aktorzy: Administrator
+
+Cel: Dodanie produktów do sklepu
+
+Warunki wstępne: 
+	1) użytkownik jest administratorem
+	
+Przepływ główny:
+	1) użytkownik na stronie głównej klika przycisk "Witaj, zaloguj się" i z rozwijanej listy wybiera opcję "Dodaj produkt"
+	2) użytkownik zostaje przeniesiony na stronę dodawania produktów
+	3) użytkownik wypełnia wszystkie dane w formularzu
+	4) użytkownik klika przycisk "Dodaj produkt"
+
+Warunki końcowe:
+	1) produkt został dodany
+
+Wyjątki: 
+	1) użytkownik wpisał błędne lub niepełne dane - otrzymuje komunikat o błędzie
+	2) produkt już istnieje - użytkownik otrzymuje komunikat o duplikacie produktu
+	
+<----------------------------------------------------------------------------------------------------------------------->
+
+Nazwa: Panel zamówień
+
+Aktorzy: Administrator
+
+Cel: Zmiana statusu zamówienia (zapłacone / wysłane)
+
+Warunki wstępne: 
+	1) Klient złożył zamówienie i nie zapłacił
+
+	lub
+
+	2) Klient złożył zamówienie i zapłacił za zamówienie
+
+Przepływ główny:
+	1) użytkownik na stronie głównej klika przycisk "Witaj, zaloguj się" i z rozwijanej listy wybiera opcję "Panel zamówień"
+	2) użytkownik zostaje przeniesiony na stronę z panelem
+	3) w panelu użytkownik otrzymuje liste złożonych zamówień przez klientów
+	3) użytkownik wypełnia formularz:
+		3.1) wpisuje ID zamówienia którego status chce zmienić
+		3.2) zaznacza pozycje "Zapłacono" lub "Wysłano" w checkboxie
+		3.3) wprowadza datę wysłania
+		3.4) zatwierdza zmianę statusu klikając przycisk "Zmień status"
+
+Warunki końcowe:
+	1) status został zmieniony 
+
+Wyjątki: 
+Użytkownik dostaje stosowny komunikat o błędzie gdy:
+	1) nie wpisano ID zamówienia lub ID nie istnieje
+	2) nie zaznaczono pozycji "Zapłacono" lub "Wysłano"
+	3) nie wprowadzono daty wysłania lub data jest w błędnym formacie 
+	4) jeżeli użytkownik zaznaczył "Wysłano" a zamówienie nie zostało opłacone
+
+<----------------------------------------------------------------------------------------------------------------------->
+
+Nazwa: Zakup produktu
+
+Aktorzy: Klient
+
+Cel: Zakup produktu
+
+Warunki wstępne: 
+	1) użytkownik jest zalogowany
+	2) produkt jest dostępny w sklepie
+	
+Przepływ główny:
+	1) użytkownik klika na dany produkt
+	2) użytkownik wybiera ilość i klika na kup teraz
+	
+Warunki końcowe:
+	1) produkt zostaje przeniesiony do koszyka
+
+Wyjątki: 
+	1) użytkownik dostaje komunikat o błędzie gdy nie jest zalogowany
+	2) użytkownik dostaje komunikat o braku produktu gdy jego stan magazynowy jest niewystarczający
+
+<----------------------------------------------------------------------------------------------------------------------->
+
+Nazwa: Usuwanie produków z koszyka
+
+Aktorzy: Klient
+
+Cel: Usunięcie produktów z koszyka
+
+Warunki wstępne: 
+	1) użytkownik jest zalogowany
+	2) produkty są w koszyku
+
+Przepływ główny:
+	1) użytkownik klika na ikonę koszyka na pasku
+	2) użytkownik usuwa produkt z koszyka naciskając przycisk "Usuń"
+	
+Warunki końcowe:
+	1) produkt zostaje usunięty z koszyka
+
+Wyjątki: 
+
+<----------------------------------------------------------------------------------------------------------------------->
+
+Nazwa: Złożenie zamówienia
+
+Aktorzy: Klient
+
+Cel: Złożenie zamówienia
+
+Warunki wstępne: 
+	1) użytkownik jest zalogowany
+	2) produkty są w koszyku
+
+Przepływ główny:
+	1) użytkownik klika na ikonę koszyka na pasku
+	2) użytkownik klika na przycisk "Złóż zamówienie"
+	3) użytkownik zostaje przeniesiony na stronę dotyczącą danych dotyczących wysyłki
+	4) dane użytkownika do wysyłki zostaną pobrane z bazy
+	5) użytkownik ma możliwość zmiany swoich danych do wysyłki korzystając z formularza
+	6) użytkownik potwierdza zamówienie
+	7) wyświetlają się dane do przelewu
+
+Warunki końcowe:
+	1) zamówienie zostaje zlecone
+	2) produkt zostaje usunięty z koszyka
+	3) ilość produktu w bazie danych zostaje odpowiednio zmniejszona
+
+Wyjątki: 
+	1) wystarczająca ilość produktu musi być dostępna na sklepie
+	2) użytkownik dostaje komunikat o błędzie gdy formularz nie będzie poprawnie wypełniony
+
+<----------------------------------------------------------------------------------------------------------------------->
+
+Nazwa: Ustawienie danych dotyczących wysyłki
+
+Aktorzy: Klient
+
+Cel: Ustawienie danych dotyczących wysyłki
+
+Warunki wstępne: 
+	1) użytkownik jest zalogowany
+
+Przepływ główny:
+	1) użytkownik na stronie głównej klika przycisk "Witaj, (Imię)" i z rozwijanej listy wybiera opcję "Moje konto"
+	2) użytkownik zostaje przeniesiony na stronę z ustawieniami konta
+	3) użytkownik wypełnia formularz dotyczący danych wysyłki
+
+Warunki końcowe:
+	1) użytkownik zmienił swoje dane dotyczące wysyłki 
+
+Wyjątki: 
+	1) użytkownik dostaje komunikat o błędzie gdy pola są puste
+
+<----------------------------------------------------------------------------------------------------------------------->
+

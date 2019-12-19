@@ -1,0 +1,106 @@
+/* Kategoria.php */
+#container_produkt {
+    height: 1300px;
+    background: #FFFFFF;
+    margin: 2.5% auto;
+    width: 95%;
+    padding: 1rem;
+}
+
+#main{
+    height: 1200px;
+}
+
+#categories{
+    height: 1200px;
+}
+
+.product_kat{
+    width: 82%;
+    background-color: #ECEFF1;
+    float: left;
+    margin: 5px;
+    margin-left: 30px;
+}
+
+#zdjecie{
+    float: left;
+    padding: 0px;
+    margin: 0px;
+}
+
+.zawartosc{
+    padding: 0px;
+    width: 82%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    text-align: center;
+}
+
+.nazwa{
+    font-style: normal;
+    font-size: 30px;
+}
+
+.rozmiar{
+    float: left;
+    font-style: normal;
+    font-size: 25px;
+}
+
+#cena{
+    font-style: normal;
+    font-size: 30px;
+    color: red;
+}
+
+#tabela{
+    border: none;
+    flex-grow: 1;
+    padding: 5px;
+    height: 100%;
+    float: left;
+}
+
+#tabela table, tr, td, th{
+    border: none;
+    background-color: #ECEFF1;
+}
+
+#product_link{
+    color: black;
+}
+
+.strona{
+    margin-top: 55px;
+    font-size: 25px;
+    position: relative;
+    left: 25%;
+    text-align: center;
+    width: 100px;
+    float: left;
+}
+
+.strona a{
+    font-style: none;
+    text-decoration: none;
+    color: #FF5A00;
+}
+
+.oferta_dnia{
+        border: solid 4px #FF5A00;
+}
+
+#stara_cena
+{
+    font-style: normal;
+    font-size: 25px;
+    color: black;
+}
+
+#gwiazdka{
+    font-size: 25px;
+    color: black;
+}
