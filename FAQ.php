@@ -76,21 +76,21 @@
 					<br><br>
 					<details>
 					    <summary><strong>Pytanie 1:</strong> Jestem tutaj nowy/(a), gdzie mogę stworzyć sobie konto?</summary>
-					    <br><strong>Odpowiedź 1:</strong> W prawym górnym rogu strony, znajduje się opcja nazwana "Witaj, zaloguj się". Jej kliknięcie spowoduje rozwinięcie menu, które posiada kilka opcji wyboru. Na samym dole listy wyboru znajduje się opcja nazwana "Zaloguj". Po jej wybraniu zostaniesz przeniesiony na nowe okno w którym widnieje formularz "Logowanie". Pod nim natomiast widnieje opcja "Nie posiadasz konta? Zarejestruj się!". Po kilknięciu na nią, zostajesz przeniesiony do formularza "Rejestracja", gdzie po podaniu Imienia, Nazwiska, Emailu, Hasła, akcpetacji regulaminu oraz przyciśnięciu guzika "Zarejestruj", utworzysz nowe konto w naszym serwisie. Otrzymasz komunikat o powodzeniu operacji i możliwość powrotu na stronę główną, gdzie możesz się już zalogować jako użytkownik serwisu i korzystać z naszych bogatych ofert. W razie problemów z zalogowaniem, zalecamy przeczytanie Pytania Nr. 2. 
+					    <br><strong>Odpowiedź 1:</strong> W prawym górnym rogu strony, znajduje się opcja nazwana "Zaloguj się". Po jej wybraniu zostaniesz przeniesiony na nowe okno w którym widnieje formularz "Logowanie". Pod nim natomiast widnieje opcja "Nie posiadasz konta? Zarejestruj się!". Po kilknięciu na nią, zostajesz przeniesiony do formularza "Rejestracja", gdzie po podaniu Imienia, Nazwiska, Emailu, Hasła, akcpetacji regulaminu oraz przyciśnięciu guzika "Zarejestruj", utworzysz nowe konto w naszym serwisie. Otrzymasz komunikat o powodzeniu operacji i możliwość powrotu na stronę główną, gdzie możesz się już zalogować jako użytkownik serwisu i korzystać z naszych bogatych ofert. W razie problemów z zalogowaniem, zalecamy przeczytanie Pytania Nr. 2. 
 					</details>
 
 					<br><br>
 					
 					<details>
 					    <summary><strong>Pytanie 2:</strong> Jak się zalogować do Alledrogo?</summary>
-					<br><strong>Odpowiedź 2:</strong> W prawym górnym rogu strony, znajduje się opcja nazwana "Witaj, zaloguj się". Jej kliknięcie spowoduje rozwinięcie menu, które posiada kilka opcji wyboru. Na samym dole listy wyboru znajduje się opcja nazwana "Zaloguj". Zostaniesz przeniesiony na nowe okno w którym widnieje formularz "Logowanie". Po wpisaniu swojego emaila, hasła i kliknięciu guzika "Zaloguj", strona przeładuje  się i powrócimy na stronę główną Alledrogo. Wówczas będziemy już zalogowani o czym świadczy nas opis w prawym górnym rogu strony "Witaj,"Twoja_nazwa_konta".
+					<br><strong>Odpowiedź 2:</strong> W prawym górnym rogu strony, znajduje się opcja nazwana "Zaloguj się". Jej kliknięcie spowoduje przeniesienie na nowe okno w którym widnieje formularz "Logowanie". Po wpisaniu swojego emaila, hasła i kliknięciu guzika "Zaloguj", strona przeładuje się i powrócimy na stronę główną Alledrogo. Wówczas będziesz już zalogowany o czym świadczy opis w prawym górnym rogu strony "Wyloguj".
 					</details>
 
 					<br><br>
 
 					<details>
 					    <summary><strong>Pytanie 3:</strong> Czy istnieje możliwość zmiany adresu dostawy?</summary>
-					<br><strong>Odpowiedź 3:</strong> Oczywiście. Jako zalogowany użytkownik serwisu Alledrogo, dysponujesz możliwością zmiany adresu na który przyjedzie dostawa. Znajduje się ono w Ustawieniach, które jest w ukryte menu wyboru "Witaj,"Twoja_nazwa_konta", które można znaleść w prawym górnym rogu strony. Po wybraniu zakładki "Ustawienia" pojawi sie formularz z naszymi danymi dostawy. Prosimy mieć na uwadze, aby podać dokładną lokalizacje dostawy, aby nie było problemów z brakiem dostawy.
+					<br><strong>Odpowiedź 3:</strong> Oczywiście. Jako zalogowany użytkownik serwisu Alledrogo, dysponujesz możliwością zmiany adresu na który przyjedzie dostawa. Znajduje się ono w Ustawieniach, które można znaleść w górnej części strony. Po wybraniu zakładki "Ustawienia" pojawi sie formularz z naszymi danymi dostawy. Prosimy mieć na uwadze, aby podać dokładną lokalizacje dostawy, aby nie było problemów z brakiem dostawy.
 					</details>
 
 					<br><br>
@@ -98,14 +98,14 @@
 
 					<details>
 					    <summary><strong>Pytanie 4:</strong> Gdzie mogę zobaczyć listę produktów, które dodałem/(am) do koszyka?</summary>
-					<br><strong>Odpowiedź 4:</strong> Wszystkie produkty, które zostały dodane do koszyka, można zobaczyć po kliknięciu w ikonę koszyka w górnej części strony, koło wyszukiwarki produktów. Dla wygody naszych użytkowników, możliwość wejścia w koszyk, jest dostępna z każdego miejsca naszej strony. Gdy jesteś przekonany/(na) o doborze wybranych produktów i chęci ich nabycia, kliknij przycisk "Załóż zamówienie".
+					<br><strong>Odpowiedź 4:</strong> Wszystkie produkty, które zostały dodane do koszyka, można zobaczyć po kliknięciu w opcję "Koszyk" w górnej części strony, koło opcji "Wyloguj". Dla wygody naszych użytkowników, możliwość wejścia w koszyk, jest dostępna z każdego miejsca naszej strony. Gdy jesteś przekonany/(na) o doborze wybranych produktów i chęci ich nabycia, kliknij przycisk "Załóż zamówienie".
 					</details>
 
 					<br><br>
 
 					<details>
 					    <summary><strong>Pytanie 5:</strong> Chcę ocenić wasz serwis, jest taka możliwość?</summary>
-					<br><strong>Odpowiedź 5:</strong> Naturalnie. Zalogowani użytkownicy mogą oceniać i zakupione produkty, jak i nasz sklep. Opcję służące do tego znajdują się w menu "Witaj, "Twoja_nazwa_konta". Po kliknięciu interesującej nasz opcji, pojawia się formularz oceny. Będziemy wdzięczni za opinie i komenarze. Najlepsze z nich wyświetlimy na stronie głównej.
+					<br><strong>Odpowiedź 5:</strong> Naturalnie. Zalogowani użytkownicy mogą oceniać i zakupione produkty, jak i nasz sklep. Opcję służące do tego znajdują się w menu w górnej części strony. Po kliknięciu interesującej nasz opcji, pojawia się formularz oceny. Będziemy wdzięczni za opinie i komenarze. Najlepsze z nich wyświetlimy na stronie głównej.
 					</details>
 
 				</div>
