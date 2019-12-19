@@ -52,6 +52,7 @@ table{
 }
 
 table, tr, td, th{
+    padding-bottom: 1rem;
     border: none;
     background-color: #ECEFF1;
     border-collapse: collapse;
