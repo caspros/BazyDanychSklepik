@@ -110,12 +110,12 @@
 			<div id="products">
 				<br>
 
-				<a href="produkt.php?id_produkty=12"><div class="product"><?php Show_product(12);?></div></a>
-				<a href="produkt.php?id_produkty=14"><div class="product"><?php Show_product(14);?></div></a>
-				<a href="produkt.php?id_produkty=8"><div class="product"><?php Show_product(8);?></div></a>
-				<a href="produkt.php?id_produkty=15"><div class="product"><?php Show_product(15);?></div></a>
-				<a href="produkt.php?id_produkty=16"><div class="product"><?php Show_product(16);?></div></a>
-				<a href="produkt.php?id_produkty=17"><div class="product"><?php Show_product(17);?></div></a>
+				<a href="produkt.php?id_produkty=12"><div class="product"><?php Show_product(53);?></div></a>
+				<a href="produkt.php?id_produkty=14"><div class="product"><?php Show_product(52);?></div></a>
+				<a href="produkt.php?id_produkty=8"><div class="product"><?php Show_product(84);?></div></a>
+				<a href="produkt.php?id_produkty=15"><div class="product"><?php Show_product(93);?></div></a>
+				<a href="produkt.php?id_produkty=16"><div class="product"><?php Show_product(56);?></div></a>
+				<a href="produkt.php?id_produkty=17"><div class="product"><?php Show_product(94);?></div></a>
 
 			</div>
 

@@ -45,6 +45,7 @@
 
 .zawartosc{
     padding: 0px;
+    width: 82%;
     display: flex;
     flex-direction: column;
     float: left;
@@ -53,19 +54,18 @@
 
 .nazwa{
     font-style: normal;
-    font-size: 1.2rem;
+    font-size: 30px;
 }
 
 .rozmiar{
     float: left;
     font-style: normal;
-    font-size: 1.2rem;
-    padding-right: 0.5rem;
+    font-size: 25px;
 }
 
 #cena{
     font-style: normal;
-    font-size: 1.4rem;
+    font-size: 30px;
     color: red;
 }
 
