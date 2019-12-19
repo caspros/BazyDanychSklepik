@@ -240,8 +240,16 @@
 				       					</details>';
 				       			}
 					       		echo '<input id="dostawa1" type="hidden" name="koszyk1" value='.$row['dostawa'].'/><br><br>
-					       		<br><br><button type="submit" id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button><br>
-					       			<span style="color:green;">+ Dostawa: <span id="dostawa">'.$row['dostawa'].'</span> PLN</span>
+					       		<br><br>';
+					       		if($row["dostepna_ilosc"]==0)
+					       		{
+					       			echo '<button type="submit" id="kup_teraz_d" disabled><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button><br>';
+					       		}
+					       		else
+					       		{
+					       			echo '<button type="submit" id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button><br>';
+					       		}
+					       		echo '<span style="color:green;">+ Dostawa: <span id="dostawa">'.$row['dostawa'].'</span> PLN</span>
 					       		</form>
 				       		</div>
 		       			</div>';

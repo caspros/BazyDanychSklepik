@@ -44,6 +44,17 @@
     background-color: #ff8800;
 }
 
+#kup_teraz_d{
+    margin-left: 10px;
+    font-size: 29px;
+    background-color: grey;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
 #ile_sztuk{
     text-align: center;
     width: 10%;
