@@ -88,13 +88,10 @@
 				</div>
 
 		<!-- MIĘSO ARMATNIE -->
-		
 		<div id="main">
 			<?php
 				Show_products();
 			?>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</div>
 	</div>
 
@@ -182,40 +179,24 @@
 					{
 						while($row_oferta = $result_oferta -> fetch_assoc())
 		 				{
-				       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link">
-				       		<div class="product_kat oferta_dnia">
-					       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png">
-					       		</div>
-
+				       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat oferta_dnia">
+					       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
 					       		<div class="zawartosc">
-						       		<table id="tabela">
-								       	<tr>
-								       		<th colspan="2">
-									       		
-									       		<div class="nazwa"><b>'.$row["nazwa"].'</b>
-									       		</div>
-									       	</th>
-
-								       		<th>
-									       		<div id="stara_cena">Stara cena: <s>'.$row_oferta['poprzednia'].' PLN</s>
-									       		</div><br>
-
-									       		<div id="cena">Cena po rabacie: '.$row["cena"].' PLN<span id="gwiazdka">*</span></b>
-									       		</div><br>
-								       			*Oferta ważna do '.substr($row_oferta['data'], 0,10).' lub do wyczerpania zapasów</th>
-								       	</tr>
-								       		<tr>
-									       		<td>
-									       		<div class="rozmiar">Rozmiar: ';
-									       		if(is_null($row["rozmiar"]))
-									       		{
-									       			echo 'Nie dotyczy';
-									       		}else echo $row["rozmiar"];
-									       		echo '
-									       		</div></td>
-
-								       		<td><div class="producent">Producent: '.$row['producent'].'</td>
-								       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td></div>
+					       			<table id="tabela">
+							       		<tr>
+							       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
+							       			<th><div id="stara_cena">Stara cena: <s>'.$row_oferta['poprzednia'].' PLN</s></div><br><div id="cena">Cena po rabacie: '.$row["cena"].' PLN<span id="gwiazdka">*</span></b></div><br>
+							       			*Oferta ważna do '.substr($row_oferta['data'], 0,10).' lub do wyczerpania zapasów</th>
+							       		</tr>
+							       		<tr>
+								       		<td><div class="rozmiar">Rozmiar: ';
+								       		if(is_null($row["rozmiar"]))
+								       		{
+								       			echo 'Nie dotyczy';
+								       		}else echo $row["rozmiar"];
+								       		echo '</div></td>
+								       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+								       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
 							       		</tr>
 						       		</table>
 					       		</div>
@@ -255,7 +236,7 @@
 				$total_pages = ceil($row5["total"] / $amout);
 				for ($i=1; $i<=$total_pages; $i++)
 				{ 
-					echo "<div class='strona'><a href='kategoria.php?id_kategorie=0&page=".$i."'>".$i."</a></div>";
+					echo "<br><div class='strona'><a href='kategoria.php?id_kategorie=0&page=".$i."'>".$i."</a></div>";
 				}
 
 			} else { echo "Brak produktów we wszystkich kategoriach"; }
@@ -351,7 +332,6 @@
 		       		
 				}
 
-				echo "<br><br><br><br>";
 				$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty WHERE id_kategorie=$id_kategorie";
 				$result5 = $conn->query($sql5);
 				$row5 = $result5 -> fetch_assoc();

@@ -47,7 +47,6 @@
 .zawartosc{
     padding: 0px;
     width: 82%;
-    height: 200px;
     display: flex;
     flex-direction: column;
     float: left;
@@ -92,7 +91,6 @@
     margin-top: 55px;
     font-size: 25px;
     position: relative;
-    left: 25%;
     text-align: center;
     width: 100px;
     float: left;
