@@ -1,3 +1,10 @@
+#container_dane{
+    font-size: 18px;
+    line-height: 30px;
+    height: 100%;
+    text-align: center;
+}
+
 .login-popup-heading>h4 {
     color: #FF5A00;
     font-size: 18px;
@@ -38,12 +45,6 @@
     left: 10%;
 }
 
-#container_dane{
-    font-size: 18px;
-    line-height: 30px;
-    height: 1000px;
-    text-align: center;
-}
 
 #ustaw_dane_btn{
     position: relative;
