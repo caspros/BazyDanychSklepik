@@ -89,9 +89,6 @@
 				$result = $conn -> query($sql);
 				Show_product($id_produktu);
 			?>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			
 		</div>
 	</div>
 
@@ -162,7 +159,7 @@
 			       				<div class="nazwa_prod">
 			       					<b>'.$row["nazwa"].'</b>
 			       				</div>
-			       				<img class="zdj" src="images/products/'.$row["zdjecie"].'" width="500" height="500" alt="product.png"><br>
+			       				<img class="zdj" src="images/products/'.$row["zdjecie"].'" width="50%" height="50%" alt="product.png"><br>
 					       		<div id="dane_boczne">
 					       			<br><br><br><b>Specyfikacja produktu</b><br><br><br>
 						       		<div id="dane">Rozmiar: ';
@@ -174,7 +171,9 @@
 							       		<div class="promocyjny">
 							       			<b>PRODUKT PROMOCYJNY</b>
 							       		</div>
+
 						       		</div>
+
 						       	</div>
 						       	<div id="zawartosc">
 						       		Opis produktu: <br>'.$row["opis"].'<br><br>
@@ -209,9 +208,9 @@
 	 				$_SESSION['cena']=$row["cena"];
 		 			$_SESSION['produkt']=$row["id_produkty"];
 		 			setcookie("MyCookie", $row["cena"]);
-		       		echo '<div id="produkt_big"><br><div id="nazwa"><b>'.$row["nazwa"].'</b></div>
-		       				<img class="zdj" src="images/products/'.$row["zdjecie"].'" width="500" height="500" alt="product.png"><br>
-				       		<div id="dane_boczne"><br><br><br><b>Specyfikacja produktu</b><br><br><br>
+		       		echo '<div id="produkt_big"><br><b>'.$row["nazwa"].'</b>
+		       				<img class="zdj" src="images/products/'.$row["zdjecie"].'" width="50%" alt="product.png"><br>
+				       		<div id="dane_boczne"><br><br><b>Specyfikacja produktu</b><br><br><br>
 					       		<div id="dane">Rozmiar: ';
 						       		if(is_null($row["rozmiar"]))
 						       		{
