@@ -78,9 +78,7 @@
 			<?php
 				Show_summary();
 			?>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+			<br><br><br><br>
 		</div>
 	</div>
 

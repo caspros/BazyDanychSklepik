@@ -78,8 +78,7 @@
 			<?php
 				Zloz_zamowienie();
 			?>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br>
 
 		</div>
 	</div>
