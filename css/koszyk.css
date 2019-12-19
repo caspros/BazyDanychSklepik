@@ -26,8 +26,8 @@
 }
 
 #podsumowanie{
-    float: right;
     font-size: 30px;
+    text-align: center;
 }
 
 #zloz_zam_btn{
@@ -50,14 +50,12 @@
     text-align: center;
     color: black;
     background-color: #ECEFF1;
-    padding: 2px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 90%;
-    margin: 2px auto;
+    margin: 1rem auto;
     position: relative;
-    text-align:center;
 }
 
 #info
@@ -78,19 +76,35 @@ table, tr, td, th{
 
 .nazwa{
     font-style: normal;
-    font-size: 30px;
+    font-size: 2rem;
+}
+
+#skreslenie {
+    color:green; 
+    float: right; 
+    font-size: 2rem;
+    padding:1rem;
 }
 
 #cena{
+    padding: 1rem;
+    float: left;
     font-style: normal;
-    font-size: 30px;
+    font-size: 2rem;
     color: red;
 }
 
 #zdjecie{
     float: left;
-    padding: 0px;
+    padding-top: 1rem;
+    padding-left: 1rem;
     margin: 0px;
+
+}
+
+#zdjecie img{
+    width: 50%;
+    float: left;
 }
 
 #kup_teraz{

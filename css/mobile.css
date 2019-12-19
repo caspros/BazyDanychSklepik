@@ -40,3 +40,37 @@
     float: left;
     width: 96% !important;
 }
+
+#zdjecie{
+    float: left;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    margin: 0px;
+    width: 95%;
+}
+
+#zdjecie img{
+    float: left;
+    width: 100%;
+}
+
+
+.nazwa{
+    font-style: normal;
+    font-size: 1.2rem;
+}
+
+#skreslenie {
+    color:green; 
+    float: right; 
+    font-size: 1.2rem;
+    padding:1rem;
+}
+
+#cena{
+    padding: 1rem;
+    float: left;
+    font-style: normal;
+    font-size: 1.2rem;
+    color: red;
+}

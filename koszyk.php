@@ -136,10 +136,8 @@
 					unset($_SESSION['pusty_koszyk']);
 				}
 			?>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
 		</div>
+		<br>
 	</div>
 
     <div id="centeredmenu">
@@ -238,7 +236,7 @@
 			       					<td>
 			       						<a href="produkt.php?id_produkty='.$row1["id_produkty"].'" id="product_link">
 			       							<div id="zdjecie">
-			       								<img src="images/products/'.$row1["zdjecie"].'" width="100" height="100" alt="product.png">
+			       								<img src="images/products/'.$row1["zdjecie"].'" alt="product.png">
 			       							</div>
 			       						<a>
 			       					</td>
@@ -259,7 +257,7 @@
 						       					Cena: '.$row["cena"]*$row["ilosc"].' PLN</b>
 						       				</div>
 						       			</td>
-							       		<td id="skreslenie" style="color:green;';
+							       		<td id="skreslenie" style="';
 								       		if($result -> num_rows > 1)	
 								       		{
 								       			echo 'text-decoration: line-through">';
@@ -278,6 +276,7 @@
 			echo '<br>
 				<div id="podsumowanie">
 					<div id="dostawa1" style="color:green;">
+					<br><br><br>
 						Koszt dostawy: '.$max_dostawa.' PLN
 					</div>
 					Kwota całkowita: '.$suma.' PLN<br><br>';
