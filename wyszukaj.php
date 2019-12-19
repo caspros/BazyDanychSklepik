@@ -68,24 +68,21 @@
 	
 	<!-- GŁÓWNY CONTAINER -->
 	<div id="container_produkt">
-		<div id="categories">
-			<br>
-
-			<span class="kat"><b>Kategorie:</b></span>
-			<br><br>
-			<a href="kategoria.php?id_kategorie=1">Koszulki</a><br>
-			<a href="kategoria.php?id_kategorie=2">Spodnie</a><br>
-			<a href="kategoria.php?id_kategorie=3">Kubki</a><br>
-			<a href="kategoria.php?id_kategorie=4">Długopisy</a><br>
-			<a href="kategoria.php?id_kategorie=5">Bluzy</a><br>
-			<a href="kategoria.php?id_kategorie=6">Naklejki</a><br>
-			<a href="kategoria.php?id_kategorie=7">Ramki</a><br>
-			<a href="kategoria.php?id_kategorie=8">RTV</a><br>
-			<a href="kategoria.php?id_kategorie=9">AGD</a><br>
-			<a href="kategoria.php?id_kategorie=10">Alkohol</a><br>
-			<a href="kategoria.php?id_kategorie=11">Zabawki</a><br>
-			<a href="kategoria.php?id_kategorie=0">Wszystko</a><br>
-
+	    <div id="centeredmenu">
+		   <ul>
+		   	<li><a href="kategoria.php?id_kategorie=1">Koszulki</a><br></li>
+			<li><a href="kategoria.php?id_kategorie=2">Spodnie</a><br></li>
+			<li><a href="kategoria.php?id_kategorie=3">Kubki</a><br></li>
+			<li><a href="kategoria.php?id_kategorie=4">Długopisy</a><br></li>
+			<li><a href="kategoria.php?id_kategorie=5">Bluzy</a><br></li>
+			<li><a href="kategoria.php?id_kategorie=6">Naklejki</a><br></li>
+			<li><a href="kategoria.php?id_kategorie=7">Ramki</a><br></li>
+			<li><a href="kategoria.php?id_kategorie=8">RTV</a><br></li>
+			<li><a href="kategoria.php?id_kategorie=9">AGD</a><br></li>
+			<li><a href="kategoria.php?id_kategorie=10">Alkohol</a><br></li>
+			<li><a href="kategoria.php?id_kategorie=11">Zabawki</a><br></li>
+			<li><a href="kategoria.php?id_kategorie=0">Wszystko</a><br></li>
+		   </ul>
 		</div>
 
 		<!-- MIĘSO ARMATNIE -->
