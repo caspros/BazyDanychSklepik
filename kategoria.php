@@ -136,215 +136,152 @@
 
 
 <?php
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "sklep";
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	$conn -> query("SET NAMES 'utf8'");
-	// Check connection
-	if ($conn -> connect_error) {
-		    die("Nie połączono z bazą danych: " . $conn -> connect_error);
-		}
-
 	//Function to show products in categories
 	function Show_products()
 	{	
-		if($_GET['id_kategorie']==0)
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "sklep";
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		$conn -> query("SET NAMES 'utf8'");
+		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
+
+
+		// ilośc wyswietlanych produktów na stronę
+		$amout = 5;
+		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+		$start_from = ($page-1) * $amout;
+
+		// sprawdzamy czy jest ustawiona kategoria
+		if(isset($_GET['id_kategorie']))
 		{
-			$servername = "localhost";
-			$username = "root";
-			$password = "";
-			$dbname = "sklep";
-			$conn = new mysqli($servername, $username, $password, $dbname);
-			$conn -> query("SET NAMES 'utf8'");
-			if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-
-			// ilośc wyswietlanych produktów na stronę
-			$amout = 5;
-			if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-			$start_from = ($page-1) * $amout;
-			echo '<h1>Wszystkie produkty</h1>';
-			$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty ORDER BY id_produkty ASC LIMIT $start_from, ".$amout;
-			$result = $conn -> query($sql);
-			if ($result -> num_rows > 0)
+			$id_kategorie = $_GET['id_kategorie'];
+			if($id_kategorie==0)
 			{
-		 		while($row = $result -> fetch_assoc())
-		 		{
-		 			//oferta dnia
-					$sql_oferta_dnia = "SELECT poprzednia, id_produkty, data FROM oferta_dnia WHERE id_produkty=".$row["id_produkty"];
-					$result_oferta = $conn -> query($sql_oferta_dnia);
-					if ($result_oferta -> num_rows > 0)
-					{
-						while($row_oferta = $result_oferta -> fetch_assoc())
-		 				{
-				       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat oferta_dnia">
-					       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
-					       		<div class="zawartosc">
-					       			<table id="tabela">
-							       		<tr>
-							       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
-							       			<th><div id="stara_cena">Stara cena: <s>'.$row_oferta['poprzednia'].' PLN</s></div><br><div id="cena">Cena po rabacie: '.$row["cena"].' PLN<span id="gwiazdka">*</span></b></div><br>
-							       			*Oferta ważna do '.substr($row_oferta['data'], 0,10).' lub do wyczerpania zapasów</th>
-							       		</tr>
-							       		<tr>
-								       		<td><div class="rozmiar">Rozmiar: ';
-								       		if(is_null($row["rozmiar"]))
-								       		{
-								       			echo 'Nie dotyczy';
-								       		}else echo $row["rozmiar"];
-								       		echo '</div></td>
-								       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
-								       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
-							       		</tr>
-						       		</table>
-					       		</div>
-			       			</div><a>';
-				       	}
-			       	}
-			       	else
-			       	{
-			       		echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
-						       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
-						       		<div class="zawartosc">
-						       			<table id="tabela">
-								       		<tr>
-								       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
-								       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
-								       		</tr>
-								       		<tr>
-									       		<td><div class="rozmiar">Rozmiar: ';
-									       		if(is_null($row["rozmiar"]))
-									       		{
-									       			echo 'Nie dotyczy';
-									       		}else echo $row["rozmiar"];
-									       		echo '</div></td>
-									       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
-									       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
-								       		</tr>
-							       		</table>
-						       		</div>
-				       			</div><a>';
-			       	}
-				}
-
-				echo "<br><br><br><br>";
-				$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty";
-				$result5 = $conn->query($sql5);
-				$row5 = $result5 -> fetch_assoc();
-				$total_pages = ceil($row5["total"] / $amout);
-				for ($i=1; $i<=$total_pages; $i++)
-				{ 
-					echo "<br><div class='strona'><a href='kategoria.php?id_kategorie=0&page=".$i."'>".$i."</a></div>";
-				}
-
-			} else { echo "Brak produktów we wszystkich kategoriach"; }
+				$sql = "SELECT * FROM produkty ORDER BY id_produkty ASC LIMIT $start_from, ".$amout;
+				echo '<h1>Wszystkie produkty</h1>';
+			}
+			else
+			{
+				$sql = "SELECT * FROM produkty WHERE id_kategorie=$id_kategorie ORDER BY id_produkty ASC LIMIT $start_from, ".$amout;
+			}
+			$sql1 = "SELECT id_kategorie, kategoria FROM kategorie WHERE id_kategorie=$id_kategorie";
+			$result1 = $conn -> query($sql1);
+			$row1 = $result1 -> fetch_assoc();
+			echo '<h1>'.$row1['kategoria'].'</h1>';
 		}
 		else
 		{
-			$id_kategorie = $_GET['id_kategorie'];
-			$servername = "localhost";
-			$username = "root";
-			$password = "";
-			$dbname = "sklep";
-			$conn = new mysqli($servername, $username, $password, $dbname);
-			$conn -> query("SET NAMES 'utf8'");
-			if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-
-
-			// ilośc wyswietlanych produktów na stronę
-			$amout = 5;
-			if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-			$start_from = ($page-1) * $amout;
-
-			$sql = "SELECT id_produkty, nazwa, opis, opinie_klientow, cena, dostepna_ilosc, producent, rozmiar, zdjecie, dostawa FROM produkty WHERE id_kategorie=$id_kategorie ORDER BY id_produkty ASC LIMIT $start_from, ".$amout;
-			$sql1 = "SELECT id_kategorie, kategoria FROM kategorie WHERE id_kategorie=$id_kategorie";
-			$result = $conn -> query($sql);
-			$result1 = $conn -> query($sql1);
-			$row1 = $result1 -> fetch_assoc();
-
-
-
-
-
-			echo '<h1>'.$row1['kategoria'].'</h1>';
-			if ($result -> num_rows > 0)
-			{
-		 		while($row = $result -> fetch_assoc())
-		 		{
-		 			//oferta dnia
-					$sql_oferta_dnia = "SELECT poprzednia, id_produkty, data FROM oferta_dnia WHERE id_produkty=".$row["id_produkty"];
-					$result_oferta = $conn -> query($sql_oferta_dnia);
-					if ($result_oferta -> num_rows > 0)
-					{
-						while($row_oferta = $result_oferta -> fetch_assoc())
-		 				{
-							echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat oferta_dnia">
-					       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
-					       		<div class="zawartosc">
-					       			<table id="tabela">
-							       		<tr>
-							       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
-							       			<th><div id="stara_cena">Stara cena: <s>'.$row_oferta['poprzednia'].' PLN</s></div><br><div id="cena">Cena po rabacie: '.$row["cena"].' PLN<span id="gwiazdka">*</span></b></div><br>
-							       			*Oferta ważna do '.substr($row_oferta['data'], 0,10).' lub do wyczerpania zapasów</th>
-							       		</tr>
-							       		<tr>
-								       		<td><div class="rozmiar">Rozmiar: ';
-								       		if(is_null($row["rozmiar"]))
-								       		{
-								       			echo 'Nie dotyczy';
-								       		}else echo $row["rozmiar"];
-								       		echo '</div></td>
-								       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
-								       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
-							       		</tr>
-						       		</table>
-					       		</div>
-			       			</div><a>';
-			       		}
-					}
-					else
-					{
-						echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div class="product_kat">
-					       		<div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div>
-					       		<div class="zawartosc">
-					       			<table id="tabela">
-							       		<tr>
-							       			<th colspan="2"><div class="nazwa"><b>'.$row["nazwa"].'</b></div></th>
-							       			<th><div id="cena">Cena: '.$row["cena"].' PLN</b></div></th>
-							       		</tr>
-							       		<tr>
-								       		<td><div class="rozmiar">Rozmiar: ';
-								       		if(is_null($row["rozmiar"]))
-								       		{
-								       			echo 'Nie dotyczy';
-								       		}else echo $row["rozmiar"];
-								       		echo '</div></td>
-								       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
-								       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
-							       		</tr>
-						       		</table>
-					       		</div>
-			       			</div><a>';
-					}
-
-		       		
-				}
-
-				$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty WHERE id_kategorie=$id_kategorie";
-				$result5 = $conn->query($sql5);
-				$row5 = $result5 -> fetch_assoc();
-				$total_pages = ceil($row5["total"] / $amout);
-				if($total_pages>1)
-				{
-					for ($i=1; $i<=$total_pages; $i++)
-					{ 
-						echo "<div class='strona'><a href='kategoria.php?id_kategorie=".$id_kategorie."&page=".$i."'>".$i."</a></div>";
-					}
-				}
-
-			} else { echo "Brak produktów w podanej kategorii"; }
+			header('Location: index.php');
+			exit();
 		}
+		
+		
+		$result = $conn -> query($sql);
+
+		if ($result -> num_rows > 0)
+		{
+	 		while($row = $result -> fetch_assoc())
+	 		{
+	 			//oferta dnia
+				$sql_oferta_dnia = "SELECT poprzednia, id_produkty, data FROM oferta_dnia WHERE id_produkty=".$row["id_produkty"];
+				$result_oferta = $conn -> query($sql_oferta_dnia);
+				if ($result_oferta -> num_rows > 0)
+				{
+					while($row_oferta = $result_oferta -> fetch_assoc())
+	 				{
+	 					$_SESSION['poprzednia'] = $row_oferta['poprzednia'];
+	 					$_SESSION['data'] = $row_oferta['data'];
+		       		}
+				}
+
+				echo '<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link">
+						<div class="product_kat ';
+						if(isset($_SESSION['poprzednia']))
+						{
+							echo 'oferta_dnia">';
+						}
+						else
+						{
+							echo '">';
+						}
+						echo'<div id="zdjecie">
+				       			<img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png">
+				       		</div>
+				       		<div class="zawartosc">
+				       			<table id="tabela">
+						       		<tr>
+						       			<th colspan="2">
+						       				<div class="nazwa">
+						       					<b>'.$row["nazwa"].'</b>
+						       				</div>
+						       			</th>
+						       			<th>';
+						       			if(isset($_SESSION['poprzednia']))
+					       				{
+						       				echo '<div id="stara_cena">
+						       					Stara cena: <s>'.$_SESSION['poprzednia'].' PLN</s>
+						       				</div><br>';
+						       			}
+					       				echo '<div id="cena">';
+					       				if(isset($_SESSION['poprzednia']))
+				       					{
+				       						echo 'Cena po rabacie: '.$row["cena"].' PLN<span id="gwiazdka">*</span></b>';
+				       					} else { echo '<b>Cena: '.$row["cena"].' PLN</b>' ;}
+					       					
+					       				echo '</div><br>';
+					       				if(isset($_SESSION['data']))
+				       					{
+				       						echo '*Oferta ważna do '.substr($_SESSION['data'], 0,10).' lub do wyczerpania zapasów';
+				       						unset($_SESSION['poprzednia']);
+				       						unset($_SESSION['data']);
+				       					}
+						       			echo '</th>
+						       		</tr>
+						       		<tr>
+							       		<td><div class="rozmiar">Rozmiar: ';
+							       		if(is_null($row["rozmiar"]))
+							       		{
+							       			echo 'Nie dotyczy';
+							       		}else echo $row["rozmiar"];
+							       		echo '</div></td>
+							       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+							       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
+						       		</tr>
+					       		</table>
+				       		</div>
+		       			</div><a>';
+		    }
+		}
+		else { echo "Brak produktów w podanej kategorii"; }
+
+			if(isset($_GET['id_kategorie']))
+			{
+				if($id_kategorie==0)
+				{
+					$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty";
+				}
+				else
+				{
+					$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty WHERE id_kategorie=$id_kategorie";
+				}
+				
+			}
+			else
+			{
+				$sql5 = "SELECT COUNT(id_produkty) AS total FROM produkty";
+			}
+
+			$result5 = $conn->query($sql5);
+			$row5 = $result5 -> fetch_assoc();
+			$total_pages = ceil($row5["total"] / $amout);
+			if($total_pages>1)
+			{
+				for ($i=1; $i<=$total_pages; $i++)
+				{ 
+					echo "<div class='strona'><a href='kategoria.php?id_kategorie=".$id_kategorie."&page=".$i."'>".$i."</a></div>";
+				}
+			}
 	}
 ?>
