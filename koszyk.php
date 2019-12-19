@@ -248,7 +248,10 @@
 					       				</div>
 					       			</td>
 						       		<td>
-						       			Producent: '.$row1['producent'].'
+						       			<form action="#" method="post">
+								       			<input type="hidden" name="id_k" value="'.$row["id_koszyk"].'" />
+								       			<input type="submit" name="delete" class="deleteBtn" value="Usuń">
+							       			</form>
 						       		</td>
 						       		<tr>
 						       			<td colspan="2">
@@ -262,12 +265,6 @@
 								       			echo 'text-decoration: line-through">';
 								       		}else { echo '">';}
 								       		echo 'Dostawa: '.$row1['dostawa'].' PLN
-							       		</td>
-										<td>
-											<form action="#" method="post">
-								       			<input type="hidden" name="id_k" value="'.$row["id_koszyk"].'" />
-								       			<input type="submit" name="delete" class="deleteBtn" value="Usuń">
-							       			</form>
 							       		</td>
 						       		</tr>
 					       		</table>
