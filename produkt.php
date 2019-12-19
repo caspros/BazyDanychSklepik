@@ -178,8 +178,17 @@
 						       	<div id="zawartosc">
 						       		Opis produktu: <br>'.$row["opis"].'<br><br>
 						       		<form action="koszyk.php" method="post">
-						       			<input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
-						       			'<input id="dostawa1" type="hidden" name="koszyk1" value='.$row['dostawa'].'/><br><br>
+						       			<input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>';
+						       			if($row["dostepna_ilosc"]==0)
+						       			{
+						       				echo '<details>
+						       						<summary>
+						       							<strong>Zapytaj o dostępność</strong>
+						       						</summary>
+						       						Produkt niedostępny do odwołania.
+						       					</details>';
+						       			}
+						       			echo '<input id="dostawa1" type="hidden" name="koszyk1" value='.$row['dostawa'].'/><br><br>
 						       			<div id="stara_cena">
 						       				<b>Stara cena: <s>'.$row_oferta['poprzednia'].' PLN/szt</s></b>
 						       			</div>
@@ -220,8 +229,17 @@
 					       		'</div>
 					       		</div>
 					       		<div id="zawartosc">Opis produktu: <br>'.$row["opis"].
-					       		'<br><br><form action="koszyk.php" method="post"><input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
-					       		'<input id="dostawa1" type="hidden" name="koszyk1" value='.$row['dostawa'].'/><br><br>
+					       		'<br><br><form action="koszyk.php" method="post"><input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>';
+					       		if($row["dostepna_ilosc"]==0)
+				       			{
+				       				echo '<details>
+				       						<summary>
+				       							<strong>Zapytaj o dostępność</strong>
+				       						</summary>
+				       						Produkt niedostępny do odwołania.
+				       					</details>';
+				       			}
+					       		echo '<input id="dostawa1" type="hidden" name="koszyk1" value='.$row['dostawa'].'/><br><br>
 					       		<br><br><button type="submit" id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button><br>
 					       			<span style="color:green;">+ Dostawa: <span id="dostawa">'.$row['dostawa'].'</span> PLN</span>
 					       		</form>
