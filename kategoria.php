@@ -162,6 +162,11 @@
 				$sql = "SELECT * FROM produkty ORDER BY id_produkty ASC LIMIT $start_from, ".$amout;
 				echo '<h1>Wszystkie produkty</h1>';
 			}
+			else if($id_kategorie>11)
+			{
+				header('Location: kategoria.php?id_kategorie=0');
+				exit();
+			}
 			else
 			{
 				$sql = "SELECT * FROM produkty WHERE id_kategorie=$id_kategorie ORDER BY id_produkty ASC LIMIT $start_from, ".$amout;
