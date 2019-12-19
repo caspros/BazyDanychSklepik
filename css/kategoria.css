@@ -88,3 +88,19 @@
     text-decoration: none;
     color: #FF5A00;
 }
+
+.oferta_dnia{
+        border: solid 4px #FF5A00;
+}
+
+#stara_cena
+{
+    font-style: normal;
+    font-size: 25px;
+    color: black;
+}
+
+#gwiazdka{
+    font-size: 25px;
+    color: black;
+}

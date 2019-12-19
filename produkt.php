@@ -148,24 +148,123 @@
 		{
 	 		while($row = $result -> fetch_assoc())
 	 		{	
-	 			$_SESSION['cena']=$row["cena"];
-	 			$_SESSION['produkt']=$row["id_produkty"];
-	 			setcookie("MyCookie", $row["cena"]);
-	       		echo '<div id="produkt_big"><img src="images/products/'.$row["zdjecie"].'" width="500" height="500" alt="product.png"><br><b>'
-			       		.$row["nazwa"].'</b><br><br>Specyfikacja produktu<br><br>
-			       		<div id="dane">Rozmiar: ';
-				       		if(is_null($row["rozmiar"]))
-				       		{
-				       			echo 'Nie dotyczy';
-				       		}else echo $row["rozmiar"];
-				       		echo '<br>Producent: '.$row["producent"].
-			       		'</div>
-			       		<br><br>Opis produktu: <br>'.$row["opis"].
-			       		'<br><br><form action="koszyk.php" method="post"><input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
-			       		'<input id="dostawa1" type="hidden" name="koszyk1" value='.$row['dostawa'].'/><br><br><button type="submit" id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button><br>
-			       			<span style="color:green;">+ Dostawa: <span id="dostawa">'.$row['dostawa'].'</span> PLN</span>
-			       		</form>
-	       			</div>';
+	 			//oferta dnia
+				$sql_oferta_dnia = "SELECT poprzednia, id_produkty, data FROM oferta_dnia WHERE id_produkty=".$row["id_produkty"];
+				$result_oferta = $conn -> query($sql_oferta_dnia);
+				if ($result_oferta -> num_rows > 0)
+				{
+					while($row_oferta = $result_oferta -> fetch_assoc())
+	 				{
+	 					$_SESSION['cena']=$row["cena"];
+			 			$_SESSION['produkt']=$row["id_produkty"];
+			 			setcookie("MyCookie", $row["cena"]);
+			       		echo '<div id="produkt_big_promo">
+			       				<div class="nazwa_prod">
+			       					<b>'.$row["nazwa"].'</b>
+			       				</div>
+			       				<img class="zdj" src="images/products/'.$row["zdjecie"].'" width="500" height="500" alt="product.png"><br>
+					       		<div id="dane_boczne">
+					       			<br><br><br><b>Specyfikacja produktu</b><br><br><br>
+						       		<div id="dane">Rozmiar: ';
+							       		if(is_null($row["rozmiar"]))
+							       		{
+							       			echo 'Nie dotyczy';
+							       		}else echo $row["rozmiar"];
+							       		echo '<br><br>Producent: '.$row["producent"].'<br><br>
+							       		<div class="promocyjny">
+							       			<b>PRODUKT PROMOCYJNY</b>
+							       		</div>
+						       		</div>
+						       	</div>
+						       	<div id="zawartosc">
+						       		Opis produktu: <br>'.$row["opis"].'<br><br>
+						       		<form action="koszyk.php" method="post">
+						       			<input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
+						       			'<input id="dostawa1" type="hidden" name="koszyk1" value='.$row['dostawa'].'/><br><br>
+						       			<div id="stara_cena">
+						       				<b>Stara cena: <s>'.$row_oferta['poprzednia'].' PLN/szt</s></b>
+						       			</div>
+						       			<div id="nowa_cena">
+						       				<b>Cena po rabacie: </b><br><br>
+						       			</div>
+						       			<button type="submit" id="kup_teraz">
+						       				<span style="color:white">
+						       					<b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN*</b>
+						       				</span>
+						       			</button><br>
+						       			<span style="color:green;">
+							       			+ Dostawa: 
+							       			<span id="dostawa">'
+							       				.$row['dostawa'].
+							       			'</span> PLN
+						       			</span>
+						       		</form>
+						       		<br>*Oferta ważna do '.substr($row_oferta['data'], 0,10).' lub do wyczerpania zapasów
+					       		</div>
+			       			</div>';
+	 				}
+	 			}
+	 			else
+	 			{
+	 				$_SESSION['cena']=$row["cena"];
+		 			$_SESSION['produkt']=$row["id_produkty"];
+		 			setcookie("MyCookie", $row["cena"]);
+		       		echo '<div id="produkt_big"><br><div id="nazwa"><b>'.$row["nazwa"].'</b></div>
+		       				<img class="zdj" src="images/products/'.$row["zdjecie"].'" width="500" height="500" alt="product.png"><br>
+				       		<div id="dane_boczne"><br><br><br><b>Specyfikacja produktu</b><br><br><br>
+					       		<div id="dane">Rozmiar: ';
+						       		if(is_null($row["rozmiar"]))
+						       		{
+						       			echo 'Nie dotyczy';
+						       		}else echo $row["rozmiar"];
+						       		echo '<br><br>Producent: '.$row["producent"].
+					       		'</div>
+					       		</div>
+					       		<div id="zawartosc">Opis produktu: <br>'.$row["opis"].
+					       		'<br><br><form action="koszyk.php" method="post"><input type="number" id="ile_sztuk" name="ile_sztuk" value="1" min="1" max='.$row["dostepna_ilosc"].'> z <b>'.$row["dostepna_ilosc"].' sztuk</b>'.
+					       		'<input id="dostawa1" type="hidden" name="koszyk1" value='.$row['dostawa'].'/><br><br>
+					       		<br><br><button type="submit" id="kup_teraz"><span style="color:white"><b>KUP TERAZ:  <span id="current">'.$row["cena"].'</span> PLN</b></span></button><br>
+					       			<span style="color:green;">+ Dostawa: <span id="dostawa">'.$row['dostawa'].'</span> PLN</span>
+					       		</form>
+				       		</div>
+		       			</div>';
+	 			}
+
+	 			
+
+	       		//Najnowsze opinie o produkcie
+	       		$sql_oceny = "SELECT id_produkty, gwiazdka, opinia FROM opinie WHERE id_produkty=$id_produktu";
+				$result_oceny = $conn -> query($sql_oceny);
+				if ($result_oceny -> num_rows > 0)
+				{
+					echo '<br><h1>Najnowsze opinie o produkcie</h1>';
+			 		while($row2 = $result_oceny -> fetch_assoc())
+			 		{	
+			 			echo '<table class="komentarze"><tr><td>Ocena: </td>';
+			 			switch($row2['gwiazdka'])
+			 			{
+						    case 5:
+						        echo '<td><img src="images/oceny/gwiazdki5.png" alt="5gwiazdek"></td>';
+						        break;
+						    case 4:
+						        echo '<td><img src="images/oceny/gwiazdki4.png" alt="4gwiazdek"></td>';
+						        break;
+						    case 3:
+						        echo '<td><img src="images/oceny/gwiazdki3.png" alt="3gwiazdek"></td>';
+						        break;
+						    case 2:
+						        echo '<td><img src="images/oceny/gwiazdki2.png" alt="2gwiazdek"></td>';
+						        break;
+						    case 1:
+						        echo '<td><img src="images/oceny/gwiazdki1.png" alt="1gwiazdek"></td>';
+						        break;
+						}
+			 		
+			 			echo ' <td>Komentarz: '.$row2['opinia'].' </td></tr></table>';
+			 		}
+			 		//echo '</div>';
+			 	}else { echo '<span class="nie_oceniony"><br><h1>Produkt nie został jeszcze oceniony</h1></span>'; }
+
 			}
 		} else { echo "No results"; }
 	}
@@ -173,29 +272,7 @@
 	
 				
 ?>
-
-
-<script>
-	// do input dodac onchange="myFunction()
-//Funkcja na zliczanie dostawy 
-/*function myFunction()
-{
-	  var x = document.getElementById("ile_sztuk");
-	  //var dostawa = document.getElementById("dostawa1").value;
-
-	  var currentVal = x.value;
-	  if (currentVal % 5 == 1)
-	  {
-	    document.getElementById("dostawa").innerHTML = 12 + ((currentVal - 1) / 5) * 12;
-	    
-	  }
-
-	if (currentVal % 5 == 0)
-    {
-    	document.getElementById("dostawa").innerHTML = 12 + (((currentVal) / 5) -1) * 12;
-    }
-}*/
-</script>
+  
 <script>
 	/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 	/* to ten słynny hamburger*/

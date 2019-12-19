@@ -128,19 +128,15 @@
 				{
 					echo '<div id="formularz">
 							<form action="addingOcena.php" method="post">
-								Ocena: 
-								<select name="ocena">
-								  <option value="1">1</option>
-								  <option value="2">2</option>
-								  <option value="3">3</option>
-								  <option value="4">4</option>
-								  <option value="5">5</option>
-								  <option value="6">6</option>
-								  <option value="7">7</option>
-								  <option value="8">8</option>
-								  <option value="9">9</option>
-								  <option value="10">10</option>
-								</select>
+
+								Ocena:<br>
+									<div id="gwiazdki">
+										<input type="radio" name="ocena" value="5"><img src="images/oceny/gwiazdki5.png" alt="5gwiazdek"><br>
+										<input type="radio" name="ocena" value="4"><img src="images/oceny/gwiazdki4.png" alt="4gwiazdek"><br>
+										<input type="radio" name="ocena" value="3"><img src="images/oceny/gwiazdki3.png" alt="3gwiazdek"><br>
+										<input type="radio" name="ocena" value="2"><img src="images/oceny/gwiazdki2.png" alt="2gwiazdek"><br>
+										<input type="radio" name="ocena" value="1"><img src="images/oceny/gwiazdki1.png" alt="1gwiazdek"><br>
+									</div>
 
 								<br><span id="koment">Komentarz:</span><br>
 								<textarea name="opis" cols="50" rows="3"></textarea><br><br>

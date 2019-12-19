@@ -120,7 +120,7 @@
 
 						if((isset($_SESSION['juz_oceniono'])) && ($_SESSION['juz_oceniono']==TRUE))
 						{
-							$sql1 = "SELECT * FROM opinie WHERE id_klienci=$id_klienci and id_produkty=$id_produktu";//tu trzeba odpowiednie id dac
+							$sql1 = "SELECT * FROM opinie WHERE id_klienci=$id_klienci and id_produkty=$id_produktu";
 							$result1 = @$conn -> query($sql1);
 							if ($result -> num_rows > 0)
 							{
@@ -136,16 +136,16 @@
 						{
 							echo '<div id="formularz">
 									<form action="addingOcenaProduktu.php" method="post">
-									
-										Ocena: 
-										<select name="ocena">
-										  <option value="1">1</option>
-										  <option value="2">2</option>
-										  <option value="3">3</option>
-										  <option value="4">4</option>
-										  <option value="5">5</option>
-										 
-										</select>
+										
+										<br><br>Ocena:<br>
+										<div id="gwiazdki">
+											<input type="radio" name="ocena" value="5"><img src="images/oceny/gwiazdki5.png" alt="5gwiazdek"><br>
+											<input type="radio" name="ocena" value="4"><img src="images/oceny/gwiazdki4.png" alt="5gwiazdek"><br>
+											<input type="radio" name="ocena" value="3"><img src="images/oceny/gwiazdki3.png" alt="5gwiazdek"><br>
+											<input type="radio" name="ocena" value="2"><img src="images/oceny/gwiazdki2.png" alt="5gwiazdek"><br>
+											<input type="radio" name="ocena" value="1"><img src="images/oceny/gwiazdki1.png" alt="5gwiazdek"><br>
+										</div>
+
 										<input type="hidden" name="id_produktu" value="'.$id_produktu.'">
 										<br><span id="koment">Komentarz:</span><br>
 										<textarea name="opis" cols="50" rows="3"></textarea><br><br>
