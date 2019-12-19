@@ -42,6 +42,11 @@
   font-size: 17px;
 }
 
+.topnav a.forma:hover {
+  background-color: rgba(0,0,0,0);
+  color: black;
+}
+
 /* Hide the link that should open and close the topnav on small screens */
 .topnav .icon {
   display: none;
