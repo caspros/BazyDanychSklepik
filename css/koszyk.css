@@ -1,7 +1,15 @@
+#container_koszyk {
+    height: 100%;
+    background: #FFFFFF;
+    margin: 2.5% auto;
+    width: 90%;
+    padding: 1rem;
+}
+
 #koszyk_container
 {
     width: 100%;
-    height: 2000px;
+    height: 100%;
 }
 
 #koszyk_container a
@@ -53,13 +61,7 @@
     background-color: #FF5A00;
 }
 
-#container_koszyk {
-    height: 1800px;
-    background: #FFFFFF;
-    margin: 2.5% auto;
-    width: 90%;
-    padding: 1rem;
-}
+
 
 #info
 {
