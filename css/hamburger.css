@@ -2,7 +2,7 @@
 
 
 .topnav {
-  background-color: #333;
+  background-color: #FFF;
   overflow: hidden;
 }
 
@@ -10,7 +10,7 @@
 .topnav a {
   float: right;
   display: block;
-  color: #f2f2f2;
+  color: black;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -19,15 +19,15 @@
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #FF5A00;
+  color: white;
 }
 
 /* Add an active class to highlight the current page */
 .topnav a.active {
   outline: none; 
   float: left;
-  background-color: rgba(247,93,7,1);
+  background-color: #FF5A00;
   color: white;
 }
 
@@ -35,7 +35,7 @@
   height: 100%;
   float: left;
   display: block;
-  color: #f2f2f2;
+  color: black;
   text-align: center;
   padding:7px;
   text-decoration: none;
