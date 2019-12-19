@@ -232,28 +232,46 @@
 	 					{
 	 						$max_dostawa = $row1['dostawa'];
 	 					}
-	 					echo '<a href="produkt.php?id_produkty='.$row1["id_produkty"].'" id="product_link">
+	 					echo '
 				       		<div class="koszyk1">
 				       			<table id="koszyk_t">
-				       				<tr>
-				       					<td><div id="zdjecie"><img src="images/products/'.$row1["zdjecie"].'" width="100" height="100" alt="product.png"></div></td>
-						       			<td><div class="nazwa">'.$row['ilosc'].'x <b>'.$row1["nazwa"].'</b></div></td>
-							       		<td>Producent: '.$row1['producent'].'</td>
-							       		<td colspan="2"><div id="cena">Cena: '.$row["cena"]*$row["ilosc"].' PLN</b></div></td>
+			       					<td>
+			       						<a href="produkt.php?id_produkty='.$row1["id_produkty"].'" id="product_link">
+			       							<div id="zdjecie">
+			       								<img src="images/products/'.$row1["zdjecie"].'" width="100" height="100" alt="product.png">
+			       							</div>
+			       						<a>
+			       					</td>
+					       			<td>
+					       				<div class="nazwa">
+					       					'.$row['ilosc'].'x <b>'.$row1["nazwa"].'</b>
+					       				</div>
+					       			</td>
+						       		<td>
+						       			Producent: '.$row1['producent'].'
+						       		</td>
+						       		<tr>
+						       			<td colspan="2">
+						       				<div id="cena">
+						       					Cena: '.$row["cena"]*$row["ilosc"].' PLN</b>
+						       				</div>
+						       			</td>
 							       		<td id="skreslenie" style="color:green;';
-							       		if($result -> num_rows > 1)	
-							       		{
-							       			echo 'text-decoration: line-through">';
-							       		}else { echo '">';}
-							       		echo 'Dostawa: '.$row1['dostawa'].' PLN</td>
-										<td><form action="#" method="post">
-							       			<input type="hidden" name="id_k" value="'.$row["id_koszyk"].'" />
-							       			<input type="submit" name="delete" value="Usuń">
-							       		</form></td>
+								       		if($result -> num_rows > 1)	
+								       		{
+								       			echo 'text-decoration: line-through">';
+								       		}else { echo '">';}
+								       		echo 'Dostawa: '.$row1['dostawa'].' PLN
+							       		</td>
+										<td>
+											<form action="#" method="post">
+								       			<input type="hidden" name="id_k" value="'.$row["id_koszyk"].'" />
+								       			<input type="submit" name="delete" class="deleteBtn" value="Usuń">
+							       			</form>
+							       		</td>
 						       		</tr>
 					       		</table>
-				       		</div>
-	       				<a>';	
+				       		</div>';	
 	 				}
 	 			}
 			}
@@ -262,34 +280,26 @@
 	       	$_SESSION['max_dostawa'] = $max_dostawa;
 			echo '<br>
 				<div id="podsumowanie">
-				<div id="dostawa1" style="color:green;">Koszt dostawy: '.$max_dostawa.' PLN</div>
-				Kwota całkowita: '.$suma.' PLN<br><br>';
-	       		echo '<form action="skladanie_zam.php" method="post">
-						<input type="hidden" name="suma" value="'.$suma.'" />
-						<input type="hidden" name="max_dostawa" value="'.$max_dostawa.'" />
-						<input type="submit" id="kup_teraz" name="zloz_zam" value="Złóż zamówienie">
-					</form>
+					<div id="dostawa1" style="color:green;">
+						Koszt dostawy: '.$max_dostawa.' PLN
+					</div>
+					Kwota całkowita: '.$suma.' PLN<br><br>';
+		       		echo '<form action="skladanie_zam.php" method="post">
+							<input type="hidden" name="suma" value="'.$suma.'" />
+							<input type="hidden" name="max_dostawa" value="'.$max_dostawa.'" />
+							<input type="submit" id="kup_teraz" name="zloz_zam" value="Złóż zamówienie">
+						</form>
 				</div>';
 		} else { echo '<div class="error" style="text-align:center;">Brak produktów w koszyku</div>'; }
 		
 	}
 
 	//Usuwanie z koszyka
-	if(isset($_POST['id_k'])) {
+	if(isset($_POST['id_k']))
+	{
 		$id = $_POST['id_k'];
 		$sql_d= "DELETE FROM koszyk WHERE id_koszyk = '$id'";
 		$result = $conn -> query($sql_d);
 		echo "<meta http-equiv='refresh' content='0'>";
 	}
-
-	/*function Skresl_dostawe()
-	{
-		$id_klienci = $_SESSION['id_klienci'];
-		require_once "connect.php";
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		$conn -> query("SET NAMES 'utf8'");
-		if ($conn -> connect_error) { die("Nie połączono z bazą danych: " . $conn -> connect_error);}
-		$sql = "SELECT * FROM koszyk WHERE id_klienci=$id_klienci";
-		$result = $conn -> query($sql);
-	}*/
 ?>
