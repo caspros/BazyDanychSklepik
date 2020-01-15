@@ -97,9 +97,40 @@ table, tr, td, th{
     margin: 10px 0 ;
 }
 
+.zawartosc3{
+    width: 100%;
+    float: left;
+    text-align: center;
+    margin: 10px 0 ;
+}
+
 .no_products{
     position: relative;
-    left: 43%;
     text-align: center;
 }
 
+
+.produktocena{
+    padding: 1rem 1rem 1rem 1rem;
+        background-color: #DCDFE1;
+        margin: 10px auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    float: left;
+    text-align: center;
+}
+
+.zawartoscocena{
+    width: 100%;
+    float: left;
+    text-align: center;
+    margin: 10px 0 ;
+}
+
+.zawartoscocena2{
+    width: 100%;
+    float: left;
+    text-align: right;
+    margin: 10px 0 ;
+}

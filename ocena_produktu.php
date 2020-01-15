@@ -84,9 +84,7 @@
 			</div>
 				<?php
 					Produkty_do_oceny();
-
 					echo '<h1 style="clear: both;"><br><br>Twoje ocenione produkty</h1><br><br>';
-
 					Moje_ocenione_produkty();
 				?>
 				<br><br>
@@ -96,14 +94,14 @@
     <div id="centeredmenu">
 	   <ul>
 	      <li><a href="FAQ.php">FAQ</a></li>
-	      <li><a href="#">Kontakt</a></li>
+	      <li><a href="kontakt.php">Kontakt</a></li>
 	      <li><a href="regulamin.php">Regulamin</a></li>
 	   </ul>
 	</div>
 
 	<div id="footer">
 		Korzystanie z serwisu oznacza akceptację
-		<a href="#">
+		<a href="regulamin.php">
 			regulaminu
 		</a>
 	</div>	
@@ -174,23 +172,22 @@
 	 			else
 				{
 	 			
-	 				echo '<div class="zawartosc">
-				       			<table id="tabela">
-						       		<td rowspan="2">
-						       			<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="120" height="120" alt="product.png"></div></a>					       			
-						       		</td>
+	 				echo '
 
-						       		<td colspan="2">
-							       			<div class="nazwa"><b>'.$row["nazwa"].'</b></div>
-						       		</td>
+						    <div class="produktocena">
+						       			
+							       			<a href="produkt.php?id_produkty='.$row["id_produkty"].'" id="product_link"><div id="zdjecie"><img src="images/products/'.$row["zdjecie"].'" width="200" height="200" alt="product.png"></div></a>	
+							       			<div class="zawartoscocena">
+												<div class="nazwa"><b>'.$row["nazwa"].'</b></div>	     
+									       		<div id="cena">Cena: '.$row["cena"].' PLN</b></div>
+									       	</div>
+									       	<div class="zawartoscocena2">
+								       		Zakupiono: '.$row["data_zlozenia"].'<br>
+								       		<a href="ocena_przedmiotu.php?id_produkty='.$row["id_produkty"].'"><br><button id="ocen_produkt_btn" >Oceń produkt</button></a><br>
+								       		</div>
+							  </div>     
 
-						       		<tr>
-							       		<td><div id="cena">Cena: '.$row["cena"].' PLN</b></div></td>
-							       		<td>Zakupiono: '.$row["data_zlozenia"].'</td>
-							       		<td><a href="ocena_przedmiotu.php?id_produkty='.$row["id_produkty"].'"><button id="ocen_produkt_btn" >Oceń produkt</button></a></td>
-						       		</tr>
-					       		</table>
-	       					</div>';
+	       					';
 	 			}
 			}
 		} else { echo '<br><br><span class="no_products">Brak produktów do oceny</span>'; }
@@ -226,36 +223,28 @@
 				{
 			 		while($row2 = $result2 -> fetch_assoc())
 			 		{
-	 					echo '<div class="zawartosc">
-				       			<table id="tabela">
-						       		<tr>
-						       			<td rowspan="2">
-							       			<a href="produkt.php?id_produkty='.$row2["id_produkty"].'" id="product_link"><div id="zdjecie"><img src="images/products/'.$row2["zdjecie"].'" width="120" height="120" alt="product.png"></div>
+	 					echo '
+ <div class="produktocena">
+							       			<a href="produkt.php?id_produkty='.$row2["id_produkty"].'" id="product_link">
+							       			<div id="zdjecie"><img src="images/products/'.$row2["zdjecie"].'" width="200" height="200" alt="product.png"></div>
 							       			</a>
-						       			</td>
-
-						       			<td colspan="2">
+<div class="zawartoscocena">
 							       			<div class="nazwa">
 							       				<b>'.$row2["nazwa"].'</b>
 							       			</div>
-						       			</td>
 
-						       			<tr>
-						       			<td><div id="cena">
+						       			<div id="cena">
 							       				Cena: '.$row2["cena"].' PLN</b>
-							       			</div>						       			
-							       		</td>
-							       		</tr>
-						       			
-						       		</tr>
+							       			</div>		</div>				       			
+<div class="zawartoscocena">							       	
+			      
+						       			Ocena: '.$row["gwiazdka"].'
+						       			<br>
+						       			Opinia: '.$row["opinia"].'
+</div>						    
+</div>
 
-						       		<tr>
-						       			<td>Ocena: '.$row["gwiazdka"].'</td>
-						       			<td>Opinia: '.$row["opinia"].'</td>
-						       		</tr>
-
-					       		</table>
-	       					</div>';
+								';
 	 				}
 	 			}
 			}

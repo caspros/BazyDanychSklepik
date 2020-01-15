@@ -20,11 +20,12 @@
 
 
 .product_kat{
-
     flex-direction: column !important;
-
 }
 
+.produktocena{
+    flex-direction: column !important;
+}
 .zawartosc{
     width: 100% !important;
 }
@@ -32,6 +33,13 @@
 .zawartosc2{
 
     width: 100% !important;
+
+}
+
+.zawartoscocena2{
+
+    width: 100% !important;
+    text-align: center;
 
 }
 
@@ -84,7 +92,6 @@
 
 #cena{
     padding: 1rem;
-    float: left;
     font-style: normal;
     font-size: 1.2rem;
     color: red;
