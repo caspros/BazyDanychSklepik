@@ -148,7 +148,10 @@
 
 										<input type="hidden" name="id_produktu" value="'.$id_produktu.'">
 										<br><span id="koment">Komentarz:</span><br>
-										<textarea name="opis" cols="50" rows="3"></textarea><br><br>
+
+										<div class="input1">
+										<textarea name="opis" class="xD" rows="4"></textarea><br><br>
+										</div>
 										<input name="submit" id="dalej_btn" type=submit value="Dodaj">
 										
 									</form>
@@ -167,9 +170,6 @@
 			}
 
 			?>
-		
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 		</div>
 	</div>

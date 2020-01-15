@@ -223,6 +223,7 @@ ol > li{
 	clear: both;
 }
 
+/*testastedaetdates*/
 
 /*why_us --------------------- */
 
@@ -295,6 +296,13 @@ ol > li{
     background-color: #ff8800;
 }
 
+
+textarea {
+	width: 60%;
+	height: 100%;
+}
+
+
 /* Skladanie_zam_next.php */
 
 #podsumowanie_prod{
@@ -321,15 +329,11 @@ ol > li{
 }
 
 #formularz{
-	position: relative;
-	left: 25%;
-	width: 50%;
 	text-align: center;
 }
 
 #koment{
 	position: relative;
-	right: 27%;
 }
 
 #dziekujemy{
