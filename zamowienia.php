@@ -94,7 +94,7 @@
 						<label><input type="checkbox" name="sent" value="1">  Wysłano</label><br><br>
 
 						<label><input type="checkbox" name="paid" value="1">  Zapłacono</label>
-						<input type="hidden" name="sent" value="0" /><br><br>
+						<br><br>
 
 						<input class="s_inp" type="submit" name="change_status">
 						</form>
@@ -105,14 +105,13 @@
 							$id_zam=$_POST['id_zam'];
 							$status=$_POST['paid'];
 							$data=$_POST['data_wysl'];
-							$status_wysyl=$_POST['sent'];
 							require_once "connect.php";
 							$conn = new mysqli($servername, $username, $password, $dbname);
 							$conn -> query("SET NAMES 'utf8'");
 							if ($conn -> connect_error) {die("Nie połączono z bazą danych: " . $conn -> connect_error);}
 							$sql = "UPDATE zamowienia SET zaplacono=$status WHERE id_zamowienia=$id_zam";
 							$result = $conn -> query($sql);
-							if($status_wysyl)
+							if(isset($_POST['sent']))
 							{
 								$sql = "UPDATE zamowienia SET data_wyslania='$data' WHERE id_zamowienia=$id_zam";
 								$result = $conn -> query($sql);
