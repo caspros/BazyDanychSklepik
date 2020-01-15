@@ -18,6 +18,23 @@
 	transition-duration: 0.4s;
 }
 
+
+.product_kat{
+
+    flex-direction: column !important;
+
+}
+
+.zawartosc{
+    width: 100% !important;
+}
+
+.zawartosc2{
+
+    width: 100% !important;
+
+}
+
 .why_us_content:hover{
 	transition-duration: 0.4s;
 	transform: scale(1.05,1.05);

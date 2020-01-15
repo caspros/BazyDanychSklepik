@@ -249,18 +249,16 @@
 				       						unset($_SESSION['data']);
 				       					}
 						       			echo '</th>
-						    </div>
-						    <div class="zawartosc2">
+
 						       		<tr>
-							       		<td>
-							       		<div class="rozmiar">Rozmiar: ';
+							       		<td><div class="rozmiar">Rozmiar: ';
 							       		if(is_null($row["rozmiar"]))
 							       		{
 							       			echo 'Nie dotyczy';
 							       		}else echo $row["rozmiar"];
 							       		echo '</div></td>
-							       		<td><div class="producent">Producent: '.$row['producent'].'</div>
-							       		</td><td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
+							       		<td><div class="producent">Producent: '.$row['producent'].'</div></td>
+							       		<td><span style="color:green;font-style:normal;">Dostawa: '.$row['dostawa'].' PLN</span></td>
 						       		</tr>
 					       		</table>
 				       		</div>				     

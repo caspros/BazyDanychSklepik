@@ -23,7 +23,7 @@
     height: 100%;
 }
 
-.product_kat{
+.product_kat_backup{
     width: 100%;
     background-color: #ECEFF1;
     float: left;
@@ -37,6 +37,17 @@
     text-align:center;
 }
 
+.product_kat{
+    padding: 0px;
+        background-color: #ECEFF1;
+        margin: 10px auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    float: left;
+    text-align: center;
+}
+
 #zdjecie{
     float: left;
     padding: 0px;
@@ -44,12 +55,22 @@
 }
 
 .zawartosc{
-    padding: 0px;
-    width: 82%;
+    padding: 1rem  1rem 1rem 1rem;
+    width: 40%;
     display: flex;
     flex-direction: column;
     float: left;
     text-align: center;
+}
+
+.zawartosc2{
+    padding: 1rem  1rem 1rem 1rem;
+
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    text-align: right;
 }
 
 .nazwa{
