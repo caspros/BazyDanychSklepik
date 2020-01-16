@@ -119,7 +119,7 @@
 						if($row1 = $result1 -> fetch_assoc())
 						{
 							echo '<h2>Już oceniłeś nasz sklep, dziękujemy!</h2><br>';
-							echo '<div id="dziekujemy">Twoja ocena: <b>'.$row1['gwiazdka'].'/10</b><br>';
+							echo '<div id="dziekujemy">Twoja ocena: <b>'.$row1['gwiazdka'].'/5</b><br>';
 							echo 'Twoj komentarz: <b>'.$row1['opinia'].'</b></div>';
 						}
 					}
