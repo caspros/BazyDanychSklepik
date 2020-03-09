@@ -1,5 +1,3 @@
-# BazyDanychSklepik
-
 # Podgląd
 ![Screen1](screen2.png)
 
