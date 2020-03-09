@@ -2,7 +2,6 @@
 
 # Podgląd
 ![Screen1](screen2.png)
-![Screen2](screen1.png)
 
 # Importowanie Bazy Danych
 
