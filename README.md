@@ -1,5 +1,9 @@
 # BazyDanychSklepik
 
+# Podgląd
+![Screen1](screen2.png)
+![Screen2](screen1.png)
+
 # Importowanie Bazy Danych
 
 * Wchodzimy w phpMyAdmin, w drzewie baz danych po lewej tworzymy nową baze: klikamy "New", następnie pod "Create database" wpisujemy sklep i kodowanie utf8_polish_ci i klikamy przycisk "Create"
